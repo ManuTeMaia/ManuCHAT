@@ -10,7 +10,7 @@
         "postcss-url": "^10.1.3"
     },
     "scripts": {
-        "dev": "parcel static/*.html",
+        "dev": "rm -rf dist/* && parcel static/*.html -p 3000",
         "build": "parcel build dist/*html"
     }
 }
