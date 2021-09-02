@@ -1,4 +1,3 @@
 import Handlebars from "handlebars/dist/handlebars.runtime";
-//import "./buttons.pcss";
-import template from "./button-submit.hbs";
+import template from "./submit-button.hbs";
 Handlebars.registerPartial("submit", template);

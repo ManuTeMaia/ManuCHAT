@@ -11,6 +11,7 @@
             "legacy": false
         },
         "postcss-import": true,
-        "postcss-url": true
+        "postcss-url": true,
+        "postcss-normalize": true
     }
 }

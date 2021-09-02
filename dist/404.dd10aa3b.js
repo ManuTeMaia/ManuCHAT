@@ -2233,7 +2233,7 @@ var templateFunction = _handlebars.default.template({
       return undefined;
     };
 
-    return "<div class=\"error--block\">\n    <div class=\"error--block-letter letter-1st\">" + alias4((helper = (helper = lookupProperty(helpers, "letter1st") || (depth0 != null ? lookupProperty(depth0, "letter1st") : depth0)) != null ? helper : alias2, _typeof(helper) === alias3 ? helper.call(alias1, {
+    return "<div class=\"wrapper  error--block\">\n    <div class=\"error--block-letter letter-1st\">" + alias4((helper = (helper = lookupProperty(helpers, "letter1st") || (depth0 != null ? lookupProperty(depth0, "letter1st") : depth0)) != null ? helper : alias2, _typeof(helper) === alias3 ? helper.call(alias1, {
       "name": "letter1st",
       "hash": {},
       "data": data,
@@ -2289,7 +2289,7 @@ var templateFunction = _handlebars.default.template({
           "column": 51
         }
       }
-    }) : helper)) + "</h3>\n    <a href=\"/\" class=\"error--block-link-back\">Назад к чатам</a>\n    <div>";
+    }) : helper)) + "</h3>\n    <a href=\"/index.html\" class=\"error--block-link-back\">Назад к чатам</a>\n    <div>";
   },
   "useData": true
 });
@@ -2362,7 +2362,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "59809" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "62909" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
