@@ -1,0 +1,149 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,600;0,700;0,900;1,400&display=swap');
+:root {
+    --global--font: 'Nunito', sans-serif;
+    --global--font-size-base: 14px;
+    --global--font-size-xs: .85rem;
+    --global--font-size-sm: .9rem;
+    --global--font-size-md: 1.1rem;
+    --global--font-size-lg: 1.25rem;
+    --global--font-size-xl: 2.25rem;
+    --global--font-size-xxl: 6rem;
+    --global--font-size-xxxl: 10rem;
+    --global--font-size-page-title: var(--global--font-size-xxl);
+    --global--letter-spacing: normal;
+    --global--line-height-body: 1.7;
+    --global--line-height-heading: 1.3;
+    --global--line-height-page-title: 1.1;
+    --global--transition: all .25s ease;
+    --heading--font-family: var(--global--font-primary);
+    --heading--font-size-h4: var(--global--font-size-lg);
+    --heading--font-size-h3: calc(1.25 * var(--global--font-size-lg));
+    --heading--font-size-h2: var(--global--font-size-xl);
+    --heading--font-size-h1: var(--global--font-size-page-title);
+    --heading--letter-spacing-h4: var(--global--letter-spacing);
+    --heading--letter-spacing-h3: var(--global--letter-spacing);
+    --heading--letter-spacing-h2: var(--global--letter-spacing);
+    --heading--letter-spacing-h1: var(--global--letter-spacing);
+    --heading--line-height-h4: var(--global--line-height-heading);
+    --heading--line-height-h3: var(--global--line-height-heading);
+    --heading--line-height-h2: var(--global--line-height-heading);
+    --heading--line-height-h1: var(--global--line-height-page-title);
+    --heading--font-weight: normal;
+    --heading--font-weight-strong: 600;
+    --heading--font-weight-black:900;
+    --global--color-white: #fafafa;
+    --global--color-black: #475361;
+    --global--color-dark-gray: #999;
+    --global--color-light-gray: #f1f1f1;
+    --global--color-primary: #128175;
+    --global--color-primary-80: #419B91;
+    --global--color-primary-60: #71B4AC;
+    --global--color-primary-40: #A0CDC8;
+    --global--color-primary-20: #CCE0DE;
+    --global--color-secondary: #09417D;
+    --global--color-secondary-80: #3A6797;
+    --global--color-secondary-60: #6B8DB1;
+    --global--color-secondary-40: #9DB3CB;
+    --global--color-secondary-20: #DBE6F1;
+    --global--color-accent: #E6B9A4;
+    --global--color-accent-80: #EBC7B6;
+    --global--color-accent-60: #F0D5C8;
+    --global--color-accent-40: #F5E3DB;
+    --global--color-accent-20: #F6E9E3;
+    --global--color-white-80: rgba(255, 255, 255, 0.8);
+    --global--color-primary-hover: var(--global--color-primary);
+    --global--color-background: var(--global--color-white);
+    --global--color-border: var(--global--color-primary);
+    --global--spacing-unit: 20px;
+    --global--spacing-measure: unset;
+    --global--spacing-horizontal: 25px;
+    --global--spacing-vertical: 30px;
+    --global--elevation: 1px 1px 3px 0 rgba(0, 0, 0, 0.2);
+    --form--font-family: var(--global--font);
+    --form--font-size: var(--global--font-size-sm);
+    --form--line-height: var(--global--line-height-body);
+    --form--color-text: var(--global--color-black);
+    --form--color-ranged: var(--global--color-primary);
+    --form--label-weight: var(--heading--font-weight-strong);
+    --form--border-color: var(--global--color-primary);
+    --form--border-width: 1px;
+    --form--border-radius: 10px;
+    --form--spacing-unit: calc(0.5 * var(--global--spacing-unit));
+    --form--box-shadow: rgba(0, 0, 0, 0.15) 0px 4px 4px 0px;
+    --button--color-text: var(--global--color-white);
+    --button--color-text-hover: var(--global--color-dark-gray);
+    --button--color-text-active: var(--global--color-dark-gray);
+    --button--color-background: var(--global--color-primary);
+    --button--color-background-active: var(--global--color-background);
+    --button--font-family: var(--global--font-secondary);
+    --button--font-size: var(--global--font-size-base);
+    --button--font-weight: 300;
+    --button--line-height: 1.5;
+    --button--border-width: 0;
+    --button--border-radius: 50px;
+    --button--padding-vertical: 10px;
+    --button--padding-horizontal: calc(2 * var(--button--padding-vertical));
+}
+html {
+
+	box-sizing: border-box;
+	font-family: var(--global--font);
+	line-height: var(--global--line-height-body);
+}
+body {
+    font-size: var(--global--font-size-base);
+	font-weight: normal;
+	color: var(--global--color-black);
+	text-align: left;
+    background: url("/background.09622968.svg") center center no-repeat var(--global--color-background);
+    background-size: contain;
+}
+
+a {
+	cursor: pointer;
+	color: var(--global--color-primary);
+	text-underline-offset: 3px;
+	text-decoration-skip-ink: all;
+    transition: var(--global--transition);
+}
+
+a:hover, a:focus {
+    color: var(--global--color-secondary);
+	text-decoration-style: dotted;
+	text-decoration-skip-ink: none;
+    transition: var(--global--transition);
+}
+h1{
+	font-size: var(--heading--font-size-h1);
+	letter-spacing: var(--heading--letter-spacing-h1);
+	line-height: var(--heading--line-height-h1);
+}
+
+h2 {
+	font-size: var(--heading--font-size-h2);
+	letter-spacing: var(--heading--letter-spacing-h2);
+	line-height: var(--heading--line-height-h2);
+}
+
+h3{
+	font-size: var(--heading--font-size-h3);
+	letter-spacing: var(--heading--letter-spacing-h3);
+	line-height: var(--heading--line-height-h3);
+}
+
+h4 {
+	font-size: var(--heading--font-size-h4);
+	font-weight: var(--heading--font-weight-strong);
+	letter-spacing: var(--heading--letter-spacing-h4);
+	line-height: var(--heading--line-height-h4);
+}
+
+.root {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+}
+
+/*# sourceMappingURL=/src.7ed060e2.css.map */
