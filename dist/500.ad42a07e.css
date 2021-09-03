@@ -1,3 +1,82 @@
+@font-face {
+  font-family: 'manu-chat';
+  src:  url('/manu-chat.adaf73ac.eot?8aia3f');
+  src:  url('/manu-chat.adaf73ac.eot?8aia3f#iefix') format('embedded-opentype'),
+    url('/manu-chat.a924c81e.ttf?8aia3f') format('truetype'),
+    url('/manu-chat.94d6d32d.woff?8aia3f') format('woff'),
+    url('/manu-chat.069feb62.svg?8aia3f#manu-chat') format('svg');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+
+i {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'manu-chat' !important;
+  speak: never;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.ch-add_user:before {
+  content: "\e900";
+}
+
+.ch-attachment:before {
+  content: "\e901";
+}
+
+.ch-chat:before {
+  content: "\e902";
+}
+
+.ch-compass:before {
+  content: "\e903";
+}
+
+.ch-delete_user:before {
+  content: "\e904";
+}
+
+.ch-duplicate:before {
+  content: "\e905";
+}
+
+.ch-gallery:before {
+  content: "\e906";
+}
+
+.ch-more:before {
+  content: "\e907";
+}
+
+.ch-pin:before {
+  content: "\e908";
+}
+
+.ch-search:before {
+  content: "\e909";
+}
+
+.ch-send:before {
+  content: "\e90a";
+}
+
+.ch-settings:before {
+  content: "\e90b";
+}
+
+.ch-trash:before {
+  content: "\e90c";
+}
+
 
 
 @import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,600;0,700;0,900;1,400&display=swap');
@@ -414,6 +493,7 @@ body {
     background: url("/background.09622968.svg") center center no-repeat transparent;
     background: url("/background.09622968.svg") center center no-repeat var(--global--color-background);
     background-size: contain;
+    background-attachment: fixed;
 }
 a {
     cursor: pointer;
@@ -440,18 +520,9 @@ a:focus {
     transition: all .35s ease;
     transition: var(--global--transition);
 }
-.root {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-pack: center;
-        -ms-flex-pack: center;
-            justify-content: center;
-    -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
-    width: 100vw;
-    height: 100vh;
+i {
+    color:#128175;
+    color:var(--global--color-primary)
 }
 .wrapper {
     display: -webkit-box;
@@ -464,9 +535,8 @@ a:focus {
             justify-content: center;
     -ms-flex-line-pack: center;
         align-content: center;
-    -ms-flex-item-align: center;
-        -ms-grid-row-align: center;
-        align-self: center;
+    width: 100vw;
+    height: 100vh;
 }
 .error--block {
     -ms-grid-column: 1;

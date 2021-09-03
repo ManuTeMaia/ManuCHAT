@@ -1,13 +1,7 @@
-import "../src/common/common.pcss";
-import "../src/components/buttons/buttons.pcss";
-import "../src/components/inputs/inputs.pcss";
-import "../src/components/headings/headings.pcss"
-import "../src/components/avatar/avatar.pcss"
-import "../src/pages/chats/login/login.pcss";
-import "../src/pages/chats/register/register.pcss";
-
+import "./style.pcss";
 import { addLoginPage } from "../src/pages/chats/login/login";
 import { addRegisterPage } from "../src/pages/chats/register/register";
+import { addMainPage } from "../src/pages/chats/main/main";
 document.addEventListener('DOMContentLoaded', () => {
     addLoginPage();
     const regLink = document.querySelector('.form--login-register-link');
@@ -15,5 +9,9 @@ document.addEventListener('DOMContentLoaded', () => {
         e.preventDefault();
         addRegisterPage();
     });
-
+    const form = document.querySelector('form');
+    form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        addMainPage();
+    });
 });

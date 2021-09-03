@@ -13,7 +13,14 @@ input[type=tel]{
 	margin: 0 2px;
 	max-width: 100%;
 }
-
+input[type=search] {
+	border:var(--form--border-width) solid var(--form--border-color);
+	border-radius:var(--global--border-radius);
+	text-align:center;
+}
+input[type=search]::before{
+	content: "\e909";
+}
 input[type=text]:focus,
 input[type=email]:focus,
 input[type=url]:focus,
