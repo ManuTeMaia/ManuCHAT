@@ -194,7 +194,27 @@ var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
 module.hot.accept(reloadCSS);
+},{"_css_loader":"../node_modules/parcel-bundler/src/builtins/css-loader.js"}],"../src/components/inputs/inputs.pcss":[function(require,module,exports) {
+var reloadCSS = require('_css_loader');
+
+module.hot.dispose(reloadCSS);
+module.hot.accept(reloadCSS);
+},{"_css_loader":"../node_modules/parcel-bundler/src/builtins/css-loader.js"}],"../src/components/headings/headings.pcss":[function(require,module,exports) {
+var reloadCSS = require('_css_loader');
+
+module.hot.dispose(reloadCSS);
+module.hot.accept(reloadCSS);
+},{"_css_loader":"../node_modules/parcel-bundler/src/builtins/css-loader.js"}],"../src/components/avatar/avatar.pcss":[function(require,module,exports) {
+var reloadCSS = require('_css_loader');
+
+module.hot.dispose(reloadCSS);
+module.hot.accept(reloadCSS);
 },{"_css_loader":"../node_modules/parcel-bundler/src/builtins/css-loader.js"}],"../src/pages/chats/login/login.pcss":[function(require,module,exports) {
+var reloadCSS = require('_css_loader');
+
+module.hot.dispose(reloadCSS);
+module.hot.accept(reloadCSS);
+},{"_css_loader":"../node_modules/parcel-bundler/src/builtins/css-loader.js"}],"../src/pages/chats/register/register.pcss":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
@@ -2430,18 +2450,18 @@ var templateFunction = _handlebars.default.template({
       return undefined;
     };
 
-    return "<label for=\"" + alias4((helper = (helper = lookupProperty(helpers, "name") || (depth0 != null ? lookupProperty(depth0, "name") : depth0)) != null ? helper : alias2, _typeof(helper) === alias3 ? helper.call(alias1, {
+    return "<div class=\"input-wrapper\">\n    <label for=\"" + alias4((helper = (helper = lookupProperty(helpers, "name") || (depth0 != null ? lookupProperty(depth0, "name") : depth0)) != null ? helper : alias2, _typeof(helper) === alias3 ? helper.call(alias1, {
       "name": "name",
       "hash": {},
       "data": data,
       "loc": {
         "start": {
-          "line": 1,
-          "column": 12
+          "line": 2,
+          "column": 16
         },
         "end": {
-          "line": 1,
-          "column": 20
+          "line": 2,
+          "column": 24
         }
       }
     }) : helper)) + "\">" + alias4((helper = (helper = lookupProperty(helpers, "label") || (depth0 != null ? lookupProperty(depth0, "label") : depth0)) != null ? helper : alias2, _typeof(helper) === alias3 ? helper.call(alias1, {
@@ -2450,26 +2470,40 @@ var templateFunction = _handlebars.default.template({
       "data": data,
       "loc": {
         "start": {
-          "line": 1,
-          "column": 22
+          "line": 2,
+          "column": 26
         },
         "end": {
-          "line": 1,
-          "column": 31
+          "line": 2,
+          "column": 35
         }
       }
-    }) : helper)) + "</label><input type=\"" + alias4((helper = (helper = lookupProperty(helpers, "type") || (depth0 != null ? lookupProperty(depth0, "type") : depth0)) != null ? helper : alias2, _typeof(helper) === alias3 ? helper.call(alias1, {
+    }) : helper)) + "</label>\n    <input type=\"" + alias4((helper = (helper = lookupProperty(helpers, "type") || (depth0 != null ? lookupProperty(depth0, "type") : depth0)) != null ? helper : alias2, _typeof(helper) === alias3 ? helper.call(alias1, {
       "name": "type",
       "hash": {},
       "data": data,
       "loc": {
         "start": {
-          "line": 1,
-          "column": 52
+          "line": 3,
+          "column": 17
         },
         "end": {
-          "line": 1,
-          "column": 60
+          "line": 3,
+          "column": 25
+        }
+      }
+    }) : helper)) + "\" class=\"" + alias4((helper = (helper = lookupProperty(helpers, "class") || (depth0 != null ? lookupProperty(depth0, "class") : depth0)) != null ? helper : alias2, _typeof(helper) === alias3 ? helper.call(alias1, {
+      "name": "class",
+      "hash": {},
+      "data": data,
+      "loc": {
+        "start": {
+          "line": 3,
+          "column": 34
+        },
+        "end": {
+          "line": 3,
+          "column": 43
         }
       }
     }) : helper)) + "\" name=\"" + alias4((helper = (helper = lookupProperty(helpers, "name") || (depth0 != null ? lookupProperty(depth0, "name") : depth0)) != null ? helper : alias2, _typeof(helper) === alias3 ? helper.call(alias1, {
@@ -2478,12 +2512,12 @@ var templateFunction = _handlebars.default.template({
       "data": data,
       "loc": {
         "start": {
-          "line": 1,
-          "column": 68
+          "line": 3,
+          "column": 51
         },
         "end": {
-          "line": 1,
-          "column": 76
+          "line": 3,
+          "column": 59
         }
       }
     }) : helper)) + "\" placeholder=\"" + alias4((helper = (helper = lookupProperty(helpers, "placeholder") || (depth0 != null ? lookupProperty(depth0, "placeholder") : depth0)) != null ? helper : alias2, _typeof(helper) === alias3 ? helper.call(alias1, {
@@ -2492,12 +2526,12 @@ var templateFunction = _handlebars.default.template({
       "data": data,
       "loc": {
         "start": {
-          "line": 1,
-          "column": 91
+          "line": 3,
+          "column": 74
         },
         "end": {
-          "line": 1,
-          "column": 106
+          "line": 3,
+          "column": 89
         }
       }
     }) : helper)) + "\" value=\"" + alias4((helper = (helper = lookupProperty(helpers, "value") || (depth0 != null ? lookupProperty(depth0, "value") : depth0)) != null ? helper : alias2, _typeof(helper) === alias3 ? helper.call(alias1, {
@@ -2506,12 +2540,12 @@ var templateFunction = _handlebars.default.template({
       "data": data,
       "loc": {
         "start": {
-          "line": 1,
-          "column": 115
+          "line": 3,
+          "column": 98
         },
         "end": {
-          "line": 1,
-          "column": 124
+          "line": 3,
+          "column": 107
         }
       }
     }) : helper)) + "\" " + alias4((helper = (helper = lookupProperty(helpers, "req") || (depth0 != null ? lookupProperty(depth0, "req") : depth0)) != null ? helper : alias2, _typeof(helper) === alias3 ? helper.call(alias1, {
@@ -2520,15 +2554,15 @@ var templateFunction = _handlebars.default.template({
       "data": data,
       "loc": {
         "start": {
-          "line": 1,
-          "column": 126
+          "line": 3,
+          "column": 109
         },
         "end": {
-          "line": 1,
-          "column": 133
+          "line": 3,
+          "column": 116
         }
       }
-    }) : helper)) + ">";
+    }) : helper)) + ">\n</div>";
   },
   "useData": true
 });
@@ -2618,7 +2652,7 @@ var templateFunction = _handlebars.default.template({
       "helpers": helpers,
       "partials": partials,
       "decorators": container.decorators
-    })) != null ? stack1 : "") + "    </form>\n    <a href=\"\" class=\"form--login-register\">Нет аккаунта?</a>\n</div>";
+    })) != null ? stack1 : "") + "    </form>\n    <a href=\"\" class=\"form--login-register-link\">Нет аккаунта?</a>\n</div>";
   },
   "usePartial": true,
   "useData": true
@@ -2628,6 +2662,11 @@ var _default = templateFunction;
 exports.default = _default;
 },{"handlebars/dist/handlebars.runtime":"../node_modules/handlebars/dist/handlebars.runtime.js"}],"../src/pages/chats/login/login.js":[function(require,module,exports) {
 "use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.addLoginPage = addLoginPage;
 
 require("../../../components/buttons/submit-button");
 
@@ -2639,8 +2678,8 @@ var _login = _interopRequireDefault(require("./login.hbs"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-document.addEventListener('DOMContentLoaded', function () {
-  var formData = {
+function addLoginPage() {
+  var loginFormData = {
     heading: {
       level: '3',
       class: "",
@@ -2663,24 +2702,209 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     },
     submit: {
-      сlass: "form--login-submit",
+      class: "form--login-submit",
       name: "login-submit",
       title: "Авторизоваться"
     }
   };
-  document.querySelector('.root').innerHTML = (0, _login.default)(formData);
+  return document.querySelector('.root').innerHTML = (0, _login.default)(loginFormData);
+}
+},{"../../../components/buttons/submit-button":"../src/components/buttons/submit-button.js","../../../components/headings/headings":"../src/components/headings/headings.js","../../../components/inputs/text-input":"../src/components/inputs/text-input.js","./login.hbs":"../src/pages/chats/login/login.hbs"}],"../src/pages/chats/register/register.hbs":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
 });
-},{"../../../components/buttons/submit-button":"../src/components/buttons/submit-button.js","../../../components/headings/headings":"../src/components/headings/headings.js","../../../components/inputs/text-input":"../src/components/inputs/text-input.js","./login.hbs":"../src/pages/chats/login/login.hbs"}],"../src/index.js":[function(require,module,exports) {
+exports.default = void 0;
+
+var _handlebars = _interopRequireDefault(require("handlebars/dist/handlebars.runtime"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var templateFunction = _handlebars.default.template({
+  "1": function _(container, depth0, helpers, partials, data) {
+    var stack1,
+        lookupProperty = container.lookupProperty || function (parent, propertyName) {
+      if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
+        return parent[propertyName];
+      }
+
+      return undefined;
+    };
+
+    return (stack1 = container.invokePartial(lookupProperty(partials, "textInput"), depth0, {
+      "name": "textInput",
+      "data": data,
+      "indent": "      ",
+      "helpers": helpers,
+      "partials": partials,
+      "decorators": container.decorators
+    })) != null ? stack1 : "";
+  },
+  "compiler": [8, ">= 4.3.0"],
+  "main": function main(container, depth0, helpers, partials, data) {
+    var stack1,
+        lookupProperty = container.lookupProperty || function (parent, propertyName) {
+      if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
+        return parent[propertyName];
+      }
+
+      return undefined;
+    };
+
+    return "<div class=\"wrapper form--register-wrap\">\n" + ((stack1 = container.invokePartial(lookupProperty(partials, "heading"), depth0 != null ? lookupProperty(depth0, "heading") : depth0, {
+      "name": "heading",
+      "data": data,
+      "indent": "  ",
+      "helpers": helpers,
+      "partials": partials,
+      "decorators": container.decorators
+    })) != null ? stack1 : "") + "    <form action=\"\" class=\"form--register\" enctype=\"multipart/form-data\">\n" + ((stack1 = lookupProperty(helpers, "each").call(depth0 != null ? depth0 : container.nullContext || {}, depth0 != null ? lookupProperty(depth0, "textInputs") : depth0, {
+      "name": "each",
+      "hash": {},
+      "fn": container.program(1, data, 0),
+      "inverse": container.noop,
+      "data": data,
+      "loc": {
+        "start": {
+          "line": 4,
+          "column": 4
+        },
+        "end": {
+          "line": 6,
+          "column": 13
+        }
+      }
+    })) != null ? stack1 : "") + ((stack1 = container.invokePartial(lookupProperty(partials, "submit"), depth0 != null ? lookupProperty(depth0, "submit") : depth0, {
+      "name": "submit",
+      "data": data,
+      "indent": "    ",
+      "helpers": helpers,
+      "partials": partials,
+      "decorators": container.decorators
+    })) != null ? stack1 : "") + "    </form>\n    <a href=\"\" class=\"form--register-login-link\">Авторизоваться</a>\n</div>";
+  },
+  "usePartial": true,
+  "useData": true
+});
+
+var _default = templateFunction;
+exports.default = _default;
+},{"handlebars/dist/handlebars.runtime":"../node_modules/handlebars/dist/handlebars.runtime.js"}],"../src/pages/chats/register/register.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.addRegisterPage = addRegisterPage;
+
+require("../../../components/buttons/submit-button");
+
+require("../../../components/headings/headings");
+
+require("../../../components/inputs/text-input");
+
+var _register = _interopRequireDefault(require("./register.hbs"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function addRegisterPage() {
+  var regFormData = (0, _register.default)({
+    heading: {
+      level: '3',
+      class: "",
+      text: "Регистрация"
+    },
+    textInputs: {
+      email: {
+        label: "E-mail",
+        type: "email",
+        name: "user-email",
+        placeholder: "email",
+        req: "reqiured"
+      },
+      login: {
+        label: "Логин",
+        type: "text",
+        name: "user-login",
+        placeholder: "Имя пользователя",
+        req: "reqiured"
+      },
+      firstname: {
+        label: "Имя",
+        type: "text",
+        name: "user-login",
+        placeholder: "Ваше имя",
+        req: "reqiured"
+      },
+      secondname: {
+        label: "Фамилия",
+        type: "text",
+        name: "user-login",
+        placeholder: "Ваша фамилия"
+      },
+      phone: {
+        label: "Телефон",
+        type: "tel",
+        name: "user-phone",
+        placeholder: "+7 (000)-000-00-00",
+        req: "reqiured"
+      },
+      password: {
+        label: "Пароль",
+        type: "password",
+        name: "user-password",
+        placeholder: "***********",
+        req: "required"
+      },
+      passwordrepeat: {
+        label: "Повторите пароль",
+        type: "password",
+        name: "user-password",
+        placeholder: "***********",
+        req: "required"
+      }
+    },
+    submit: {
+      class: "form--register-submit",
+      name: "registration-submit",
+      title: "Зарегистрироваться"
+    }
+  });
+  document.querySelector('.root').innerHTML = regFormData;
+}
+
+;
+},{"../../../components/buttons/submit-button":"../src/components/buttons/submit-button.js","../../../components/headings/headings":"../src/components/headings/headings.js","../../../components/inputs/text-input":"../src/components/inputs/text-input.js","./register.hbs":"../src/pages/chats/register/register.hbs"}],"../src/index.js":[function(require,module,exports) {
 "use strict";
 
 require("../src/common/common.pcss");
 
 require("../src/components/buttons/buttons.pcss");
 
+require("../src/components/inputs/inputs.pcss");
+
+require("../src/components/headings/headings.pcss");
+
+require("../src/components/avatar/avatar.pcss");
+
 require("../src/pages/chats/login/login.pcss");
 
-require("../src/pages/chats/login/login.js");
-},{"../src/common/common.pcss":"../src/common/common.pcss","../src/components/buttons/buttons.pcss":"../src/components/buttons/buttons.pcss","../src/pages/chats/login/login.pcss":"../src/pages/chats/login/login.pcss","../src/pages/chats/login/login.js":"../src/pages/chats/login/login.js"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+require("../src/pages/chats/register/register.pcss");
+
+var _login2 = require("../src/pages/chats/login/login");
+
+var _register2 = require("../src/pages/chats/register/register");
+
+document.addEventListener('DOMContentLoaded', function () {
+  (0, _login2.addLoginPage)();
+  var regLink = document.querySelector('.form--login-register-link');
+  regLink.addEventListener("click", function (e) {
+    e.preventDefault();
+    (0, _register2.addRegisterPage)();
+  });
+});
+},{"../src/common/common.pcss":"../src/common/common.pcss","../src/components/buttons/buttons.pcss":"../src/components/buttons/buttons.pcss","../src/components/inputs/inputs.pcss":"../src/components/inputs/inputs.pcss","../src/components/headings/headings.pcss":"../src/components/headings/headings.pcss","../src/components/avatar/avatar.pcss":"../src/components/avatar/avatar.pcss","../src/pages/chats/login/login.pcss":"../src/pages/chats/login/login.pcss","../src/pages/chats/register/register.pcss":"../src/pages/chats/register/register.pcss","../src/pages/chats/login/login":"../src/pages/chats/login/login.js","../src/pages/chats/register/register":"../src/pages/chats/register/register.js"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -2708,7 +2932,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "62909" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "57190" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
