@@ -5,7 +5,7 @@ import template from "./register.hbs";
 
 export function addRegisterPage() {
 
-    const regFormData = template({
+    const regFormData = {
         heading: {
             level: '3',
             class: "",
@@ -29,14 +29,14 @@ export function addRegisterPage() {
             firstname: {
                 label: "Имя",
                 type: "text",
-                name: "user-login",
+                name: "user-firstname",
                 placeholder: "Ваше имя",
                 req: "reqiured"
             },
-            secondname: {
+            lastname: {
                 label: "Фамилия",
                 type: "text",
-                name: "user-login",
+                name: "user-lastname",
                 placeholder: "Ваша фамилия",
             },
             phone: {
@@ -67,6 +67,6 @@ export function addRegisterPage() {
             name: "registration-submit",
             title: "Зарегистрироваться"
         }
-    });
-    document.querySelector('.root').innerHTML = regFormData;
+    }
+    document.querySelector('.root').innerHTML = template(regFormData);
 };

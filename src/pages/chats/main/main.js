@@ -1,20 +1,20 @@
-import "../../../components/headings/headings";
 import "../../../modules/chat-list-profile-card/chat-list-profile-card";
 import template from "./main.hbs";
 
 export function addMainPage() {
 
-    const mainPage = template({
-        profileCard: {
+    const mainPageData = {
+        card: {
             avatar: {
-                src: "",
-                class: "",
+                imagesrc: "../../../../static/img/noimage.png",
+                imageclass: "chat-list-profile-card profile-card-avatar",
             },
-            searchInput: {
+            search: {
                 name: "search",
                 placeholder: "Поиск",
             }
         }
-    });
-    document.querySelector('.root').innerHTML = mainPage;
+
+    }
+    document.querySelector('.root').innerHTML = template(mainPageData);
 };
