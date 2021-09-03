@@ -6,7 +6,7 @@ export function addMainPage() {
     const mainPageData = {
         card: {
             avatar: {
-                imagesrc: "../../../../static/img/noimage.png",
+                imagesrc: "/noimage.png",
                 imageclass: "chat-list-profile-card profile-card-avatar",
             },
             search: {

@@ -184,12 +184,17 @@ function reloadCSS() {
 }
 
 module.exports = reloadCSS;
-},{"./bundle-url":"../node_modules/parcel-bundler/src/builtins/bundle-url.js"}],"../src/common/common.pcss":[function(require,module,exports) {
+},{"./bundle-url":"../node_modules/parcel-bundler/src/builtins/bundle-url.js"}],"../src/common/fonts.pcss":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
 module.hot.accept(reloadCSS);
-},{"./../../static/img/background.svg":[["background.09622968.svg","img/background.svg"],"img/background.svg"],"_css_loader":"../node_modules/parcel-bundler/src/builtins/css-loader.js"}],"../src/components/buttons/buttons.pcss":[function(require,module,exports) {
+},{"./../../static/fonts/manu-chat.eot":[["manu-chat.adaf73ac.eot","fonts/manu-chat.eot"],"fonts/manu-chat.eot"],"./../../static/fonts/manu-chat.ttf":[["manu-chat.a924c81e.ttf","fonts/manu-chat.ttf"],"fonts/manu-chat.ttf"],"./../../static/fonts/manu-chat.woff":[["manu-chat.94d6d32d.woff","fonts/manu-chat.woff"],"fonts/manu-chat.woff"],"./../../static/fonts/manu-chat.svg":[["manu-chat.069feb62.svg","fonts/manu-chat.svg"],"fonts/manu-chat.svg"],"_css_loader":"../node_modules/parcel-bundler/src/builtins/css-loader.js"}],"../src/common/common.pcss":[function(require,module,exports) {
+var reloadCSS = require('_css_loader');
+
+module.hot.dispose(reloadCSS);
+module.hot.accept(reloadCSS);
+},{"./fonts.pcss":"../src/common/fonts.pcss","./../../static/img/background.svg":[["background.09622968.svg","img/background.svg"],"img/background.svg"],"_css_loader":"../node_modules/parcel-bundler/src/builtins/css-loader.js"}],"../src/components/buttons/buttons.pcss":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
@@ -219,7 +224,17 @@ var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
 module.hot.accept(reloadCSS);
-},{"_css_loader":"../node_modules/parcel-bundler/src/builtins/css-loader.js"}],"../node_modules/handlebars/dist/handlebars.runtime.js":[function(require,module,exports) {
+},{"_css_loader":"../node_modules/parcel-bundler/src/builtins/css-loader.js"}],"../src/pages/chats/main/main.pcss":[function(require,module,exports) {
+var reloadCSS = require('_css_loader');
+
+module.hot.dispose(reloadCSS);
+module.hot.accept(reloadCSS);
+},{"_css_loader":"../node_modules/parcel-bundler/src/builtins/css-loader.js"}],"../src/style.pcss":[function(require,module,exports) {
+var reloadCSS = require('_css_loader');
+
+module.hot.dispose(reloadCSS);
+module.hot.accept(reloadCSS);
+},{"../src/common/common.pcss":"../src/common/common.pcss","../src/components/buttons/buttons.pcss":"../src/components/buttons/buttons.pcss","../src/components/inputs/inputs.pcss":"../src/components/inputs/inputs.pcss","../src/components/headings/headings.pcss":"../src/components/headings/headings.pcss","../src/components/avatar/avatar.pcss":"../src/components/avatar/avatar.pcss","../src/pages/chats/login/login.pcss":"../src/pages/chats/login/login.pcss","../src/pages/chats/register/register.pcss":"../src/pages/chats/register/register.pcss","../src/pages/chats/main/main.pcss":"../src/pages/chats/main/main.pcss","_css_loader":"../node_modules/parcel-bundler/src/builtins/css-loader.js"}],"../node_modules/handlebars/dist/handlebars.runtime.js":[function(require,module,exports) {
 var define;
 var global = arguments[3];
 /**!
@@ -2622,7 +2637,7 @@ var templateFunction = _handlebars.default.template({
       return undefined;
     };
 
-    return "<div class=\"wrapper form--login-wrap\">\n" + ((stack1 = container.invokePartial(lookupProperty(partials, "heading"), depth0 != null ? lookupProperty(depth0, "heading") : depth0, {
+    return "<section class=\"wrapper\">\n  <div class=\"form--login-wrap\">\n" + ((stack1 = container.invokePartial(lookupProperty(partials, "heading"), depth0 != null ? lookupProperty(depth0, "heading") : depth0, {
       "name": "heading",
       "data": data,
       "indent": "  ",
@@ -2637,11 +2652,11 @@ var templateFunction = _handlebars.default.template({
       "data": data,
       "loc": {
         "start": {
-          "line": 4,
+          "line": 5,
           "column": 4
         },
         "end": {
-          "line": 6,
+          "line": 7,
           "column": 13
         }
       }
@@ -2652,7 +2667,7 @@ var templateFunction = _handlebars.default.template({
       "helpers": helpers,
       "partials": partials,
       "decorators": container.decorators
-    })) != null ? stack1 : "") + "    </form>\n    <a href=\"\" class=\"form--login-register-link\">Нет аккаунта?</a>\n</div>";
+    })) != null ? stack1 : "") + "    </form>\n    <a href=\"\" class=\"form--login-register-link\">Нет аккаунта?</a>\n  </div>\n</section>";
   },
   "usePartial": true,
   "useData": true
@@ -2752,7 +2767,7 @@ var templateFunction = _handlebars.default.template({
       return undefined;
     };
 
-    return "<div class=\"wrapper form--register-wrap\">\n" + ((stack1 = container.invokePartial(lookupProperty(partials, "heading"), depth0 != null ? lookupProperty(depth0, "heading") : depth0, {
+    return "<section class=\"wrapper\">\n  <div class=\"form--register-wrap\">\n" + ((stack1 = container.invokePartial(lookupProperty(partials, "heading"), depth0 != null ? lookupProperty(depth0, "heading") : depth0, {
       "name": "heading",
       "data": data,
       "indent": "  ",
@@ -2767,11 +2782,11 @@ var templateFunction = _handlebars.default.template({
       "data": data,
       "loc": {
         "start": {
-          "line": 4,
+          "line": 5,
           "column": 4
         },
         "end": {
-          "line": 6,
+          "line": 7,
           "column": 13
         }
       }
@@ -2782,7 +2797,7 @@ var templateFunction = _handlebars.default.template({
       "helpers": helpers,
       "partials": partials,
       "decorators": container.decorators
-    })) != null ? stack1 : "") + "    </form>\n    <a href=\"\" class=\"form--register-login-link\">Авторизоваться</a>\n</div>";
+    })) != null ? stack1 : "") + "    </form>\n    <a href=\"\" class=\"form--register-login-link\">Авторизоваться</a>\n</div>\n</section>";
   },
   "usePartial": true,
   "useData": true
@@ -2809,7 +2824,7 @@ var _register = _interopRequireDefault(require("./register.hbs"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function addRegisterPage() {
-  var regFormData = (0, _register.default)({
+  var regFormData = {
     heading: {
       level: '3',
       class: "",
@@ -2833,14 +2848,14 @@ function addRegisterPage() {
       firstname: {
         label: "Имя",
         type: "text",
-        name: "user-login",
+        name: "user-firstname",
         placeholder: "Ваше имя",
         req: "reqiured"
       },
-      secondname: {
+      lastname: {
         label: "Фамилия",
         type: "text",
-        name: "user-login",
+        name: "user-lastname",
         placeholder: "Ваша фамилия"
       },
       phone: {
@@ -2870,41 +2885,329 @@ function addRegisterPage() {
       name: "registration-submit",
       title: "Зарегистрироваться"
     }
-  });
-  document.querySelector('.root').innerHTML = regFormData;
+  };
+  document.querySelector('.root').innerHTML = (0, _register.default)(regFormData);
 }
 
 ;
-},{"../../../components/buttons/submit-button":"../src/components/buttons/submit-button.js","../../../components/headings/headings":"../src/components/headings/headings.js","../../../components/inputs/text-input":"../src/components/inputs/text-input.js","./register.hbs":"../src/pages/chats/register/register.hbs"}],"../src/index.js":[function(require,module,exports) {
+},{"../../../components/buttons/submit-button":"../src/components/buttons/submit-button.js","../../../components/headings/headings":"../src/components/headings/headings.js","../../../components/inputs/text-input":"../src/components/inputs/text-input.js","./register.hbs":"../src/pages/chats/register/register.hbs"}],"../src/components/inputs/search-input.hbs":[function(require,module,exports) {
 "use strict";
 
-require("../src/common/common.pcss");
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
 
-require("../src/components/buttons/buttons.pcss");
+var _handlebars = _interopRequireDefault(require("handlebars/dist/handlebars.runtime"));
 
-require("../src/components/inputs/inputs.pcss");
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-require("../src/components/headings/headings.pcss");
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
-require("../src/components/avatar/avatar.pcss");
+var templateFunction = _handlebars.default.template({
+  "compiler": [8, ">= 4.3.0"],
+  "main": function main(container, depth0, helpers, partials, data) {
+    var helper,
+        alias1 = depth0 != null ? depth0 : container.nullContext || {},
+        alias2 = container.hooks.helperMissing,
+        alias3 = "function",
+        alias4 = container.escapeExpression,
+        lookupProperty = container.lookupProperty || function (parent, propertyName) {
+      if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
+        return parent[propertyName];
+      }
 
-require("../src/pages/chats/login/login.pcss");
+      return undefined;
+    };
 
-require("../src/pages/chats/register/register.pcss");
+    return "<div class=\"input-wrapper\">\n    <input type=\"search\" class=\"" + alias4((helper = (helper = lookupProperty(helpers, "class") || (depth0 != null ? lookupProperty(depth0, "class") : depth0)) != null ? helper : alias2, _typeof(helper) === alias3 ? helper.call(alias1, {
+      "name": "class",
+      "hash": {},
+      "data": data,
+      "loc": {
+        "start": {
+          "line": 2,
+          "column": 32
+        },
+        "end": {
+          "line": 2,
+          "column": 41
+        }
+      }
+    }) : helper)) + "\" name=\"" + alias4((helper = (helper = lookupProperty(helpers, "name") || (depth0 != null ? lookupProperty(depth0, "name") : depth0)) != null ? helper : alias2, _typeof(helper) === alias3 ? helper.call(alias1, {
+      "name": "name",
+      "hash": {},
+      "data": data,
+      "loc": {
+        "start": {
+          "line": 2,
+          "column": 49
+        },
+        "end": {
+          "line": 2,
+          "column": 57
+        }
+      }
+    }) : helper)) + "\" placeholder=\"Поиск\" value=\"\">\n</div>";
+  },
+  "useData": true
+});
 
-var _login2 = require("../src/pages/chats/login/login");
+var _default = templateFunction;
+exports.default = _default;
+},{"handlebars/dist/handlebars.runtime":"../node_modules/handlebars/dist/handlebars.runtime.js"}],"../src/components/inputs/search-input.js":[function(require,module,exports) {
+"use strict";
 
-var _register2 = require("../src/pages/chats/register/register");
+var _handlebars = _interopRequireDefault(require("handlebars/dist/handlebars.runtime"));
+
+var _searchInput = _interopRequireDefault(require("./search-input.hbs"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+_handlebars.default.registerPartial("searchInput", _searchInput.default);
+},{"handlebars/dist/handlebars.runtime":"../node_modules/handlebars/dist/handlebars.runtime.js","./search-input.hbs":"../src/components/inputs/search-input.hbs"}],"../src/components/avatar/avatar.hbs":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _handlebars = _interopRequireDefault(require("handlebars/dist/handlebars.runtime"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+var templateFunction = _handlebars.default.template({
+  "compiler": [8, ">= 4.3.0"],
+  "main": function main(container, depth0, helpers, partials, data) {
+    var helper,
+        alias1 = depth0 != null ? depth0 : container.nullContext || {},
+        alias2 = container.hooks.helperMissing,
+        alias3 = "function",
+        alias4 = container.escapeExpression,
+        lookupProperty = container.lookupProperty || function (parent, propertyName) {
+      if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
+        return parent[propertyName];
+      }
+
+      return undefined;
+    };
+
+    return "<div class=\"avatar-wrap " + alias4((helper = (helper = lookupProperty(helpers, "divclass") || (depth0 != null ? lookupProperty(depth0, "divclass") : depth0)) != null ? helper : alias2, _typeof(helper) === alias3 ? helper.call(alias1, {
+      "name": "divclass",
+      "hash": {},
+      "data": data,
+      "loc": {
+        "start": {
+          "line": 1,
+          "column": 24
+        },
+        "end": {
+          "line": 1,
+          "column": 36
+        }
+      }
+    }) : helper)) + "\">\n    <img src=\"" + alias4((helper = (helper = lookupProperty(helpers, "imagesrc") || (depth0 != null ? lookupProperty(depth0, "imagesrc") : depth0)) != null ? helper : alias2, _typeof(helper) === alias3 ? helper.call(alias1, {
+      "name": "imagesrc",
+      "hash": {},
+      "data": data,
+      "loc": {
+        "start": {
+          "line": 2,
+          "column": 14
+        },
+        "end": {
+          "line": 2,
+          "column": 26
+        }
+      }
+    }) : helper)) + "\" class=\"" + alias4((helper = (helper = lookupProperty(helpers, "imageclass") || (depth0 != null ? lookupProperty(depth0, "imageclass") : depth0)) != null ? helper : alias2, _typeof(helper) === alias3 ? helper.call(alias1, {
+      "name": "imageclass",
+      "hash": {},
+      "data": data,
+      "loc": {
+        "start": {
+          "line": 2,
+          "column": 35
+        },
+        "end": {
+          "line": 2,
+          "column": 49
+        }
+      }
+    }) : helper)) + "\">\n</div>";
+  },
+  "useData": true
+});
+
+var _default = templateFunction;
+exports.default = _default;
+},{"handlebars/dist/handlebars.runtime":"../node_modules/handlebars/dist/handlebars.runtime.js"}],"../src/components/avatar/avatar.js":[function(require,module,exports) {
+"use strict";
+
+var _handlebars = _interopRequireDefault(require("handlebars/dist/handlebars.runtime"));
+
+var _avatar = _interopRequireDefault(require("./avatar.hbs"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+_handlebars.default.registerPartial("avatar", _avatar.default);
+},{"handlebars/dist/handlebars.runtime":"../node_modules/handlebars/dist/handlebars.runtime.js","./avatar.hbs":"../src/components/avatar/avatar.hbs"}],"../src/modules/chat-list-profile-card/chat-list-profile-card.hbs":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _handlebars = _interopRequireDefault(require("handlebars/dist/handlebars.runtime"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var templateFunction = _handlebars.default.template({
+  "compiler": [8, ">= 4.3.0"],
+  "main": function main(container, depth0, helpers, partials, data) {
+    var stack1,
+        lookupProperty = container.lookupProperty || function (parent, propertyName) {
+      if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
+        return parent[propertyName];
+      }
+
+      return undefined;
+    };
+
+    return "<div class=\"chat--list-profile-card-wrap\">\n    <div class=\"chat--list-profile-card-actions\">" + ((stack1 = container.invokePartial(lookupProperty(partials, "avatar"), depth0 != null ? lookupProperty(depth0, "avatar") : depth0, {
+      "name": "avatar",
+      "data": data,
+      "helpers": helpers,
+      "partials": partials,
+      "decorators": container.decorators
+    })) != null ? stack1 : "") + "</div>\n" + ((stack1 = container.invokePartial(lookupProperty(partials, "searchInput"), depth0 != null ? lookupProperty(depth0, "search") : depth0, {
+      "name": "searchInput",
+      "data": data,
+      "indent": "    ",
+      "helpers": helpers,
+      "partials": partials,
+      "decorators": container.decorators
+    })) != null ? stack1 : "") + "</div>";
+  },
+  "usePartial": true,
+  "useData": true
+});
+
+var _default = templateFunction;
+exports.default = _default;
+},{"handlebars/dist/handlebars.runtime":"../node_modules/handlebars/dist/handlebars.runtime.js"}],"../src/modules/chat-list-profile-card/chat-list-profile-card.js":[function(require,module,exports) {
+"use strict";
+
+var _handlebars = _interopRequireDefault(require("handlebars/dist/handlebars.runtime"));
+
+require("../../components/inputs/search-input");
+
+require("../../components/avatar/avatar");
+
+var _chatListProfileCard = _interopRequireDefault(require("./chat-list-profile-card.hbs"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+_handlebars.default.registerPartial("profileCard", _chatListProfileCard.default);
+},{"handlebars/dist/handlebars.runtime":"../node_modules/handlebars/dist/handlebars.runtime.js","../../components/inputs/search-input":"../src/components/inputs/search-input.js","../../components/avatar/avatar":"../src/components/avatar/avatar.js","./chat-list-profile-card.hbs":"../src/modules/chat-list-profile-card/chat-list-profile-card.hbs"}],"../src/pages/chats/main/main.hbs":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _handlebars = _interopRequireDefault(require("handlebars/dist/handlebars.runtime"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var templateFunction = _handlebars.default.template({
+  "compiler": [8, ">= 4.3.0"],
+  "main": function main(container, depth0, helpers, partials, data) {
+    var stack1,
+        lookupProperty = container.lookupProperty || function (parent, propertyName) {
+      if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
+        return parent[propertyName];
+      }
+
+      return undefined;
+    };
+
+    return "<div class=\"main--page-wrap\">\n  <div class=\"chat--list-wrap\">\n" + ((stack1 = container.invokePartial(lookupProperty(partials, "profileCard"), depth0 != null ? lookupProperty(depth0, "card") : depth0, {
+      "name": "profileCard",
+      "data": data,
+      "indent": "    ",
+      "helpers": helpers,
+      "partials": partials,
+      "decorators": container.decorators
+    })) != null ? stack1 : "") + "  </div>\n  <div class=\"chat--wrap\">Выберите чат чтобы отправить сообщение</div>\n    \n</div>";
+  },
+  "usePartial": true,
+  "useData": true
+});
+
+var _default = templateFunction;
+exports.default = _default;
+},{"handlebars/dist/handlebars.runtime":"../node_modules/handlebars/dist/handlebars.runtime.js"}],"../src/pages/chats/main/main.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.addMainPage = addMainPage;
+
+require("../../../modules/chat-list-profile-card/chat-list-profile-card");
+
+var _main = _interopRequireDefault(require("./main.hbs"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function addMainPage() {
+  var mainPageData = {
+    card: {
+      avatar: {
+        imagesrc: "/noimage.png",
+        imageclass: "chat-list-profile-card profile-card-avatar"
+      },
+      search: {
+        name: "search",
+        placeholder: "Поиск"
+      }
+    }
+  };
+  document.querySelector('.root').innerHTML = (0, _main.default)(mainPageData);
+}
+
+;
+},{"../../../modules/chat-list-profile-card/chat-list-profile-card":"../src/modules/chat-list-profile-card/chat-list-profile-card.js","./main.hbs":"../src/pages/chats/main/main.hbs"}],"../src/index.js":[function(require,module,exports) {
+"use strict";
+
+require("./style.pcss");
+
+var _login = require("../src/pages/chats/login/login");
+
+var _register = require("../src/pages/chats/register/register");
+
+var _main = require("../src/pages/chats/main/main");
 
 document.addEventListener('DOMContentLoaded', function () {
-  (0, _login2.addLoginPage)();
+  (0, _login.addLoginPage)();
   var regLink = document.querySelector('.form--login-register-link');
   regLink.addEventListener("click", function (e) {
     e.preventDefault();
-    (0, _register2.addRegisterPage)();
+    (0, _register.addRegisterPage)();
+  });
+  var form = document.querySelector('form');
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+    (0, _main.addMainPage)();
   });
 });
-},{"../src/common/common.pcss":"../src/common/common.pcss","../src/components/buttons/buttons.pcss":"../src/components/buttons/buttons.pcss","../src/components/inputs/inputs.pcss":"../src/components/inputs/inputs.pcss","../src/components/headings/headings.pcss":"../src/components/headings/headings.pcss","../src/components/avatar/avatar.pcss":"../src/components/avatar/avatar.pcss","../src/pages/chats/login/login.pcss":"../src/pages/chats/login/login.pcss","../src/pages/chats/register/register.pcss":"../src/pages/chats/register/register.pcss","../src/pages/chats/login/login":"../src/pages/chats/login/login.js","../src/pages/chats/register/register":"../src/pages/chats/register/register.js"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"./style.pcss":"../src/style.pcss","../src/pages/chats/login/login":"../src/pages/chats/login/login.js","../src/pages/chats/register/register":"../src/pages/chats/register/register.js","../src/pages/chats/main/main":"../src/pages/chats/main/main.js"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -2932,7 +3235,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "57190" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "64804" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

@@ -576,6 +576,8 @@ input[type=tel]{
 	padding: var(--form--spacing-unit);
 	margin: 0 2px;
 	max-width: 100%;
+	-webkit-box-shadow: var(--form--box-shadow);
+	        box-shadow: var(--form--box-shadow);
 }
 input[type=search] {
 	border:var(--form--border-width) solid var(--form--border-color);
@@ -630,7 +632,6 @@ h4 {
 	line-height: var(--heading--line-height-h4);
 }
 .avatar-wrap {
-	display:inline;
 	overflow:hidden;
 	border: 1px solid var(--global--color-primary);
 	border-radius:50%;

@@ -20,6 +20,7 @@
         "handlebars": "^4.7.7",
         "parcel-bundler": "^1.12.5",
         "parcel-plugin-handlebars-precompile": "^1.0.2",
+        "parcel-plugin-static-files-copy": "^2.6.0",
         "postcss": "^8.3.6",
         "postcss-custom-properties": "^10.0.0",
         "postcss-grid": "^2.0.0",
@@ -28,11 +29,16 @@
         "postcss-url": "^9.0.0"
     },
     "scripts": {
-        "dev": "rm -rf dist/* && parcel static/*.html -p 3000",
+        "start": "rm -rf dist/* && parcel static/*.html -p 3000",
         "build": "rm -rf dist/* && parcel build dist/*html"
     },
     "dependencies": {
         "normalize.css": "^8.0.1"
     },
-    "browserslist": "last 2 versions"
+    "browserslist": "last 2 versions",
+    "staticFiles": {
+        "staticPath": "static/img/png",
+        "staticOutDir": "dist/img",
+        "watcherGlob": "**"
+    }
 }
