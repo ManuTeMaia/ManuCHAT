@@ -111,7 +111,7 @@ i {
     --heading--line-height-h2: var(--global--line-height-heading);
     --heading--line-height-h1: var(--global--line-height-page-title);
     --heading--font-weight: normal;
-    --heading--font-weight-strong: 600;
+    --heading--font-weight-strong: 700;
     --heading--font-weight-black: 900;
     --global--color-white: #fafafa;
     --global--color-black: #475361;
@@ -133,6 +133,7 @@ i {
     --global--color-accent-40: #F5E3DB;
     --global--color-accent-20: #F6E9E3;
     --global--color-white-50: rgba(255, 255, 255, 0.5);
+    --global--color-error: #DA0F0F;
     --global--color-primary-hover: var(--global--color-primary);
     --global--color-background: transparent;
     --global--color-border: var(--global--color-primary);
@@ -490,8 +491,8 @@ body {
     color: #475361;
     color: var(--global--color-black);
     text-align: left;
-    background: url("/background.09622968.svg") center center no-repeat transparent;
-    background: url("/background.09622968.svg") center center no-repeat var(--global--color-background);
+    background: url("/background.1afa1296.svg") center center no-repeat transparent;
+    background: url("/background.1afa1296.svg") center center no-repeat var(--global--color-background);
     background-size: contain;
     background-attachment: fixed;
 }

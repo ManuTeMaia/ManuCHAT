@@ -37,8 +37,7 @@
     },
     "browserslist": "last 2 versions",
     "staticFiles": {
-        "staticPath": "static/img/png",
-        "staticOutDir": "dist/img",
-        "watcherGlob": "**"
+        "staticPath": "static/images/png",
+        "staticOutDir": "dist/img"
     }
 }

@@ -194,7 +194,7 @@ var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
 module.hot.accept(reloadCSS);
-},{"./fonts.pcss":"../src/common/fonts.pcss","./../../static/img/background.svg":[["background.09622968.svg","img/background.svg"],"img/background.svg"],"_css_loader":"../node_modules/parcel-bundler/src/builtins/css-loader.js"}],"../src/components/buttons/buttons.pcss":[function(require,module,exports) {
+},{"./fonts.pcss":"../src/common/fonts.pcss","./../../static/images/background.svg":[["background.1afa1296.svg","images/background.svg"],"images/background.svg"],"_css_loader":"../node_modules/parcel-bundler/src/builtins/css-loader.js"}],"../src/components/buttons/buttons.pcss":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
@@ -214,6 +214,11 @@ var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
 module.hot.accept(reloadCSS);
+},{"_css_loader":"../node_modules/parcel-bundler/src/builtins/css-loader.js"}],"../src/components/profile-field/profile-field.pcss":[function(require,module,exports) {
+var reloadCSS = require('_css_loader');
+
+module.hot.dispose(reloadCSS);
+module.hot.accept(reloadCSS);
 },{"_css_loader":"../node_modules/parcel-bundler/src/builtins/css-loader.js"}],"../src/pages/chats/login/login.pcss":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
 
@@ -224,7 +229,17 @@ var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
 module.hot.accept(reloadCSS);
+},{"_css_loader":"../node_modules/parcel-bundler/src/builtins/css-loader.js"}],"../src/modules/chat-list-profile-card/chat-list-profile-card.pcss":[function(require,module,exports) {
+var reloadCSS = require('_css_loader');
+
+module.hot.dispose(reloadCSS);
+module.hot.accept(reloadCSS);
 },{"_css_loader":"../node_modules/parcel-bundler/src/builtins/css-loader.js"}],"../src/pages/chats/main/main.pcss":[function(require,module,exports) {
+var reloadCSS = require('_css_loader');
+
+module.hot.dispose(reloadCSS);
+module.hot.accept(reloadCSS);
+},{"_css_loader":"../node_modules/parcel-bundler/src/builtins/css-loader.js"}],"../src/pages/chats/user_profile/user-profile.pcss":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
@@ -234,7 +249,7 @@ var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
 module.hot.accept(reloadCSS);
-},{"../src/common/common.pcss":"../src/common/common.pcss","../src/components/buttons/buttons.pcss":"../src/components/buttons/buttons.pcss","../src/components/inputs/inputs.pcss":"../src/components/inputs/inputs.pcss","../src/components/headings/headings.pcss":"../src/components/headings/headings.pcss","../src/components/avatar/avatar.pcss":"../src/components/avatar/avatar.pcss","../src/pages/chats/login/login.pcss":"../src/pages/chats/login/login.pcss","../src/pages/chats/register/register.pcss":"../src/pages/chats/register/register.pcss","../src/pages/chats/main/main.pcss":"../src/pages/chats/main/main.pcss","_css_loader":"../node_modules/parcel-bundler/src/builtins/css-loader.js"}],"../node_modules/handlebars/dist/handlebars.runtime.js":[function(require,module,exports) {
+},{"../src/common/common.pcss":"../src/common/common.pcss","../src/components/buttons/buttons.pcss":"../src/components/buttons/buttons.pcss","../src/components/inputs/inputs.pcss":"../src/components/inputs/inputs.pcss","../src/components/headings/headings.pcss":"../src/components/headings/headings.pcss","../src/components/avatar/avatar.pcss":"../src/components/avatar/avatar.pcss","../src/components/profile-field/profile-field.pcss":"../src/components/profile-field/profile-field.pcss","../src/pages/chats/login/login.pcss":"../src/pages/chats/login/login.pcss","../src/pages/chats/register/register.pcss":"../src/pages/chats/register/register.pcss","../src/modules/chat-list-profile-card/chat-list-profile-card.pcss":"../src/modules/chat-list-profile-card/chat-list-profile-card.pcss","../src/pages/chats/main/main.pcss":"../src/pages/chats/main/main.pcss","../src/pages/chats/user_profile/user-profile.pcss":"../src/pages/chats/user_profile/user-profile.pcss","_css_loader":"../node_modules/parcel-bundler/src/builtins/css-loader.js"}],"../node_modules/handlebars/dist/handlebars.runtime.js":[function(require,module,exports) {
 var define;
 var global = arguments[3];
 /**!
@@ -2948,7 +2963,21 @@ var templateFunction = _handlebars.default.template({
           "column": 57
         }
       }
-    }) : helper)) + "\" placeholder=\"Поиск\" value=\"\">\n</div>";
+    }) : helper)) + "\" placeholder=\"" + alias4((helper = (helper = lookupProperty(helpers, "placeholder") || (depth0 != null ? lookupProperty(depth0, "placeholder") : depth0)) != null ? helper : alias2, _typeof(helper) === alias3 ? helper.call(alias1, {
+      "name": "placeholder",
+      "hash": {},
+      "data": data,
+      "loc": {
+        "start": {
+          "line": 2,
+          "column": 72
+        },
+        "end": {
+          "line": 2,
+          "column": 87
+        }
+      }
+    }) : helper)) + "\">\n</div>";
   },
   "useData": true
 });
@@ -3021,20 +3050,6 @@ var templateFunction = _handlebars.default.template({
         "end": {
           "line": 2,
           "column": 26
-        }
-      }
-    }) : helper)) + "\" class=\"" + alias4((helper = (helper = lookupProperty(helpers, "imageclass") || (depth0 != null ? lookupProperty(depth0, "imageclass") : depth0)) != null ? helper : alias2, _typeof(helper) === alias3 ? helper.call(alias1, {
-      "name": "imageclass",
-      "hash": {},
-      "data": data,
-      "loc": {
-        "start": {
-          "line": 2,
-          "column": 35
-        },
-        "end": {
-          "line": 2,
-          "column": 49
         }
       }
     }) : helper)) + "\">\n</div>";
@@ -3171,9 +3186,10 @@ function addMainPage() {
     card: {
       avatar: {
         imagesrc: "/noimage.png",
-        imageclass: "chat-list-profile-card profile-card-avatar"
+        divclass: "chat-list-profile-card profile-card-avatar"
       },
       search: {
+        class: "chat-list-profile-card profile-card-search",
         name: "search",
         placeholder: "Поиск"
       }
@@ -3183,7 +3199,219 @@ function addMainPage() {
 }
 
 ;
-},{"../../../modules/chat-list-profile-card/chat-list-profile-card":"../src/modules/chat-list-profile-card/chat-list-profile-card.js","./main.hbs":"../src/pages/chats/main/main.hbs"}],"../src/index.js":[function(require,module,exports) {
+},{"../../../modules/chat-list-profile-card/chat-list-profile-card":"../src/modules/chat-list-profile-card/chat-list-profile-card.js","./main.hbs":"../src/pages/chats/main/main.hbs"}],"../src/components/profile-field/profile-field.hbs":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _handlebars = _interopRequireDefault(require("handlebars/dist/handlebars.runtime"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+var templateFunction = _handlebars.default.template({
+  "compiler": [8, ">= 4.3.0"],
+  "main": function main(container, depth0, helpers, partials, data) {
+    var helper,
+        alias1 = depth0 != null ? depth0 : container.nullContext || {},
+        alias2 = container.hooks.helperMissing,
+        alias3 = "function",
+        alias4 = container.escapeExpression,
+        lookupProperty = container.lookupProperty || function (parent, propertyName) {
+      if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
+        return parent[propertyName];
+      }
+
+      return undefined;
+    };
+
+    return "<div class=\"profile-field-wrap\">\n    <div class=\"profile-field-label\">" + alias4((helper = (helper = lookupProperty(helpers, "label") || (depth0 != null ? lookupProperty(depth0, "label") : depth0)) != null ? helper : alias2, _typeof(helper) === alias3 ? helper.call(alias1, {
+      "name": "label",
+      "hash": {},
+      "data": data,
+      "loc": {
+        "start": {
+          "line": 2,
+          "column": 37
+        },
+        "end": {
+          "line": 2,
+          "column": 46
+        }
+      }
+    }) : helper)) + "</div>\n    <div class=\"profile-field-data\">" + alias4((helper = (helper = lookupProperty(helpers, "data") || (depth0 != null ? lookupProperty(depth0, "data") : depth0)) != null ? helper : alias2, _typeof(helper) === alias3 ? helper.call(alias1, {
+      "name": "data",
+      "hash": {},
+      "data": data,
+      "loc": {
+        "start": {
+          "line": 3,
+          "column": 36
+        },
+        "end": {
+          "line": 3,
+          "column": 44
+        }
+      }
+    }) : helper)) + "</div>\n</div>";
+  },
+  "useData": true
+});
+
+var _default = templateFunction;
+exports.default = _default;
+},{"handlebars/dist/handlebars.runtime":"../node_modules/handlebars/dist/handlebars.runtime.js"}],"../src/components/profile-field/profile-field.js":[function(require,module,exports) {
+"use strict";
+
+var _handlebars = _interopRequireDefault(require("handlebars/dist/handlebars.runtime"));
+
+var _profileField = _interopRequireDefault(require("./profile-field.hbs"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+_handlebars.default.registerPartial("profileField", _profileField.default);
+},{"handlebars/dist/handlebars.runtime":"../node_modules/handlebars/dist/handlebars.runtime.js","./profile-field.hbs":"../src/components/profile-field/profile-field.hbs"}],"../src/pages/chats/user_profile/user-profile.hbs":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _handlebars = _interopRequireDefault(require("handlebars/dist/handlebars.runtime"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var templateFunction = _handlebars.default.template({
+  "1": function _(container, depth0, helpers, partials, data) {
+    var stack1,
+        lookupProperty = container.lookupProperty || function (parent, propertyName) {
+      if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
+        return parent[propertyName];
+      }
+
+      return undefined;
+    };
+
+    return (stack1 = container.invokePartial(lookupProperty(partials, "profileField"), depth0, {
+      "name": "profileField",
+      "data": data,
+      "indent": "      ",
+      "helpers": helpers,
+      "partials": partials,
+      "decorators": container.decorators
+    })) != null ? stack1 : "";
+  },
+  "compiler": [8, ">= 4.3.0"],
+  "main": function main(container, depth0, helpers, partials, data) {
+    var stack1,
+        lookupProperty = container.lookupProperty || function (parent, propertyName) {
+      if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
+        return parent[propertyName];
+      }
+
+      return undefined;
+    };
+
+    return "<div class=\"main--page-user-profile-wrap\">\n" + ((stack1 = container.invokePartial(lookupProperty(partials, "avatar"), depth0 != null ? lookupProperty(depth0, "userpic") : depth0, {
+      "name": "avatar",
+      "data": data,
+      "indent": "    ",
+      "helpers": helpers,
+      "partials": partials,
+      "decorators": container.decorators
+    })) != null ? stack1 : "") + ((stack1 = container.invokePartial(lookupProperty(partials, "heading"), depth0 != null ? lookupProperty(depth0, "username") : depth0, {
+      "name": "heading",
+      "data": data,
+      "indent": "    ",
+      "helpers": helpers,
+      "partials": partials,
+      "decorators": container.decorators
+    })) != null ? stack1 : "") + "  <div class=\"main--page-user-profile-fields\">\n" + ((stack1 = lookupProperty(helpers, "each").call(depth0 != null ? depth0 : container.nullContext || {}, depth0 != null ? lookupProperty(depth0, "profileFields") : depth0, {
+      "name": "each",
+      "hash": {},
+      "fn": container.program(1, data, 0),
+      "inverse": container.noop,
+      "data": data,
+      "loc": {
+        "start": {
+          "line": 5,
+          "column": 4
+        },
+        "end": {
+          "line": 7,
+          "column": 13
+        }
+      }
+    })) != null ? stack1 : "") + "  </div> \n  <a href=\"\" class=\"main--page-user-profile user-profile-link link-change-data\">Изменить данные</a>\n  <a href=\"\" class=\"main--page-user-profile user-profile-link link-change-pass\">Изменить пароль</a>\n  <a href=\"\" class=\"main--page-user-profile user-profile-link link-logout\">Выйти</a>\n  \n    \n</div>";
+  },
+  "usePartial": true,
+  "useData": true
+});
+
+var _default = templateFunction;
+exports.default = _default;
+},{"handlebars/dist/handlebars.runtime":"../node_modules/handlebars/dist/handlebars.runtime.js"}],"../src/pages/chats/user_profile/user-profile.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.addProfilePage = addProfilePage;
+
+require("../../../components/profile-field/profile-field");
+
+require("../../../components/avatar/avatar");
+
+require("../../../components/headings/headings");
+
+var _userProfile = _interopRequireDefault(require("./user-profile.hbs"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function addProfilePage() {
+  var profilePageData = {
+    userpic: {
+      imagesrc: "/noimage.png",
+      divclass: "main--page-user-profile user-profile-avatar"
+    },
+    username: {
+      level: '3',
+      class: "main--page-user-profile user-profile-heading",
+      text: "Иветта Сидорова"
+    },
+    profileFields: {
+      email: {
+        label: "E-mail",
+        data: "dragonfly@123.com"
+      },
+      login: {
+        label: "Логин",
+        data: "dragonfly"
+      },
+      firstname: {
+        label: "Имя",
+        data: "Иветта"
+      },
+      lastname: {
+        label: "Фамилия",
+        data: "Сидорова"
+      },
+      phone: {
+        label: "Телефон",
+        data: "+7 (000)-000-00-00"
+      }
+    }
+  };
+  document.querySelector('.chat--wrap').innerHTML = (0, _userProfile.default)(profilePageData);
+}
+
+;
+},{"../../../components/profile-field/profile-field":"../src/components/profile-field/profile-field.js","../../../components/avatar/avatar":"../src/components/avatar/avatar.js","../../../components/headings/headings":"../src/components/headings/headings.js","./user-profile.hbs":"../src/pages/chats/user_profile/user-profile.hbs"}],"../src/index.js":[function(require,module,exports) {
 "use strict";
 
 require("./style.pcss");
@@ -3194,6 +3422,8 @@ var _register = require("../src/pages/chats/register/register");
 
 var _main = require("../src/pages/chats/main/main");
 
+var _userProfile = require("../src/pages/chats/user_profile/user-profile");
+
 document.addEventListener('DOMContentLoaded', function () {
   (0, _login.addLoginPage)();
   var regLink = document.querySelector('.form--login-register-link');
@@ -3201,13 +3431,29 @@ document.addEventListener('DOMContentLoaded', function () {
     e.preventDefault();
     (0, _register.addRegisterPage)();
   });
-  var form = document.querySelector('form');
-  form.addEventListener("submit", function (e) {
+  document.addEventListener("submit", function (e) {
     e.preventDefault();
-    (0, _main.addMainPage)();
+    var target = e.target;
+    console.log(target);
+    var loginForm = document.querySelector('.form--login');
+    var regForm = document.querySelector('.form--register');
+
+    if (target == loginForm || target == regForm) {
+      (0, _main.addMainPage)();
+      document.addEventListener("click", function (e) {
+        e.preventDefault();
+        var target = e.target;
+        console.log(target);
+        var userAvatar = document.querySelector('.profile-card-avatar img');
+
+        if (target == userAvatar) {
+          (0, _userProfile.addProfilePage)();
+        }
+      });
+    }
   });
 });
-},{"./style.pcss":"../src/style.pcss","../src/pages/chats/login/login":"../src/pages/chats/login/login.js","../src/pages/chats/register/register":"../src/pages/chats/register/register.js","../src/pages/chats/main/main":"../src/pages/chats/main/main.js"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"./style.pcss":"../src/style.pcss","../src/pages/chats/login/login":"../src/pages/chats/login/login.js","../src/pages/chats/register/register":"../src/pages/chats/register/register.js","../src/pages/chats/main/main":"../src/pages/chats/main/main.js","../src/pages/chats/user_profile/user-profile":"../src/pages/chats/user_profile/user-profile.js"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -3235,7 +3481,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "64804" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "63834" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

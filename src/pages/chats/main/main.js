@@ -7,11 +7,13 @@ export function addMainPage() {
         card: {
             avatar: {
                 imagesrc: "/noimage.png",
-                imageclass: "chat-list-profile-card profile-card-avatar",
+                divclass: "chat-list-profile-card profile-card-avatar",
             },
             search: {
+                class: "chat-list-profile-card profile-card-search",
                 name: "search",
-                placeholder: "Поиск",
+                placeholder: "Поиск"
+
             }
         }
 

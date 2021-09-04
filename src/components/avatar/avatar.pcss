@@ -1,8 +1,14 @@
 .avatar-wrap {
+	position:relative;
 	overflow:hidden;
 	border: 1px solid var(--global--color-primary);
 	border-radius:50%;
 	box-shadow: var(--form--box-shadow);
-	width:80px;
-	height:80px
+	cursor:pointer;
+	width:60px;
+	height:60px;
+	transition:var(--global--transition);
+}
+.avatar-wrap:hover img{
+	filter:blur(2px);
 }

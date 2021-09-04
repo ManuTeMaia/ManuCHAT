@@ -12,16 +12,17 @@ input[type=tel]{
 	padding: var(--form--spacing-unit);
 	margin: 0 2px;
 	max-width: 100%;
-	box-shadow: var(--form--box-shadow);
 }
 input[type=search] {
 	border:var(--form--border-width) solid var(--form--border-color);
 	border-radius:var(--global--border-radius);
 	text-align:center;
+	box-shadow: var(--form--box-shadow);
+	width:100%;
+	background:var(--global--color-white);
+	margin: var(--global--spacing-unit) 0;
 }
-input[type=search]::before{
-	content: "\e909";
-}
+
 input[type=text]:focus,
 input[type=email]:focus,
 input[type=url]:focus,
@@ -31,7 +32,10 @@ input[type=tel]:focus {
 	color: var(--form--color-text);
 	outline: 0
 }
-
+input:focus::placeholder {
+	color: transparent;
+	transition:var(--global--transition);
+}
 input[type=text]:disabled,
 input[type=email]:disabled,
 input[type=url]:disabled,
