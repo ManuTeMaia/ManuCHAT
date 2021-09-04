@@ -10,11 +10,7 @@ Manutemaia Chat
 ### Под капотом: 
 1. NodeJs 14.17.5
 
-2. Parcel 1.12.5 
-
-⋅⋅⋅- parcel-plugin-handlebars-precompile 1.0.2
-
-⋅⋅⋅-  parcel-plugin-static-files-copy 2.6.0
+2. Parcel 1.12.5 c плагинами (parcel-plugin-handlebars-precompile, parcel-plugin-static-files-copy)
 
 3. Handlebars 4.7.7
 
