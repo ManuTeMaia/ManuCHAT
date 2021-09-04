@@ -30,8 +30,9 @@
         "postcss-url": "^9.0.0"
     },
     "scripts": {
-        "start": "rm -rf dist/* && parcel static/*.html -p 3000",
-        "build": "rm -rf dist/* && parcel build dist/*html"
+        "dev": "rm -rf dist/* && parcel static/*.html -p 3000",
+        "build": "rm -rf dist/* && parcel build static/*html",
+        "start": "node ./server.js"
     },
     "dependencies": {
         "express": "^4.17.1",
