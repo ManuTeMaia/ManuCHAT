@@ -3,6 +3,13 @@
         "autoprefixer": {
             "grid": true
         },
+        "cssnano": {
+            preset: ['default', {
+                discardComments: {
+                    removeAll: true,
+                }
+                }]
+        },
         "postcss-custom-properties": true,
         "postcss-grid": {
             "columns": 12,
