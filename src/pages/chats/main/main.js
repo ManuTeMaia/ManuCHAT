@@ -8,6 +8,7 @@ export function addMainPage() {
             avatar: {
                 imagesrc: "/noimage.png",
                 divclass: "chat-list-profile-card profile-card-avatar",
+                imagetitle: "Изменить данные профиля"
             },
             search: {
                 class: "chat-list-profile-card profile-card-search",
