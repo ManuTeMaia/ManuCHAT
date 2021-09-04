@@ -18,8 +18,6 @@ Manutemaia Chat
 
 5. Express 4.17.1
 
-
-
 ### Информация для ревью:
 
 1. Не удержалась и попыталась сделать что-то вроде SPA, хотя это задача второго спринта. Получилось крипово, но работает в рамках этой сборки.
@@ -33,5 +31,4 @@ Manutemaia Chat
 3. Страница профиля пользователя доступна при нажатии на аватар в боковой панели.
 
 ### Pull Request
-[Pull Request](https://github.com/ManuTeMaia/middle.messenger.praktikum.yandex/pull/1)
-https://github.com/ManuTeMaia/middle.messenger.praktikum.yandex/pull/1
+pull request https://github.com/ManuTeMaia/middle.messenger.praktikum.yandex/pull/1
