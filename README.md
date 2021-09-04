@@ -34,3 +34,4 @@ Manutemaia Chat
 
 ### Pull Request
 [Pull Request](https://github.com/ManuTeMaia/middle.messenger.praktikum.yandex/pull/1)
+https://github.com/ManuTeMaia/middle.messenger.praktikum.yandex/pull/1
