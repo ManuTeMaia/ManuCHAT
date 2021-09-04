@@ -31,3 +31,6 @@ Manutemaia Chat
 [Ошибка 404](https://quirky-lumiere-db1dd9.netlify.app/404.html) 
 
 3. Страница профиля пользователя доступна при нажатии на аватар в боковой панели.
+
+### Pull Request
+[Pull Request](https://github.com/ManuTeMaia/middle.messenger.praktikum.yandex/pull/1)
