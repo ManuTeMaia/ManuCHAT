@@ -56,7 +56,7 @@ export function addRegisterPage() {
             passwordrepeat: {
                 label: "Повторите пароль",
                 type: "password",
-                name: "password",
+                name: "repeat-password",
                 placeholder: "***********",
                 req: "required"
             }

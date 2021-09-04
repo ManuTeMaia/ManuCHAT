@@ -3,7 +3,8 @@ import { addLoginPage } from "../src/pages/chats/login/login";
 import { addRegisterPage } from "../src/pages/chats/register/register";
 import { addMainPage } from "../src/pages/chats/main/main";
 import { addProfilePage } from "./pages/chats/user-profile/user-profile";
-import { addProfileFormPage } from "./pages/chats/user-profile-form/user-profile-form";
+import * as profile from "../src/modules/user-profile-form/user-profile-form";
+
 
 document.addEventListener('DOMContentLoaded', () => {
     addLoginPage();
@@ -33,10 +34,10 @@ document.addEventListener('DOMContentLoaded', () => {
                         const changePassw = document.querySelector('.link-change-pass');
                         const logOut = document.querySelector('.link-logout');
                         if (target == changeData) {
-                            addProfileFormPage();
+                            profile.addProfileFormPage();
 
                         } else if (target == changePassw) {
-                            addProfileFormPage();
+                            profile.addProfileFormPasswordPage();
 
                         } else if (target == logOut) {
                             addMainPage();

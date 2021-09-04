@@ -649,6 +649,9 @@ h3{
 	font-size: var(--heading--font-size-h3);
 	letter-spacing: var(--heading--letter-spacing-h3);
 	line-height: var(--heading--line-height-h3);
+	width:100%;
+	text-align:center
+
 }
 
 h4 {
@@ -705,6 +708,39 @@ h4 {
 	float:left;
 	width:44.54545%;
 }
+.chat--list-profile-card-wrap {
+	padding:var(--global--spacing-unit);
+	background:var(--global--color-primary-20);
+}
+.profile-card-avatar img {width:60px;}
+.main--page-user-profile-form{
+    display:-webkit-box;
+    display:-ms-flexbox;
+    display:flex;
+    -webkit-box-pack:center;
+        -ms-flex-pack:center;
+            justify-content:center;
+    -ms-grid-column: 2;
+    -ms-grid-column-span: 1;
+	float:left;
+	width:64.32749%;
+	margin-right:7.01754%;
+	margin-left:17.23164%;
+	margin-right:17.23164%;
+}
+.main--page-user-profile-form form {width:100%;text-align:center}
+.main--page-user-profile-form .input-wrapper {
+    display:-webkit-box;
+    display:-ms-flexbox;
+    display:flex;
+	-webkit-box-pack:justify;
+	    -ms-flex-pack:justify;
+	        justify-content:space-between;
+	border-bottom: 1px dotted var(--global--color-primary-40);
+	padding: var(--global--spacing-vertical) 0 0;
+}
+.main--page-user-profile-form input{border:0;text-align:right;padding-right: 25px;}
+.main--page-user-profile-form button {margin:calc(2*var(--global--spacing-vertical)) 0;}
 .form--login-wrap {
     -ms-grid-column: 1;
     -ms-grid-column-span: 2;
@@ -763,11 +799,6 @@ h4 {
 .form--register-submit {
     margin: calc(2* var(--global--spacing-vertical)) auto;
 }
-.chat--list-profile-card-wrap {
-	padding:var(--global--spacing-unit);
-	background:var(--global--color-primary-20);
-}
-.profile-card-avatar img {width:60px;}
 .main--page-wrap{
     display:-webkit-box;
     display:-ms-flexbox;
@@ -816,7 +847,8 @@ h4 {
     height: 100%;
 
 }
-.main--page-user-profile-fields {padding: var(--global--spacing-vertical) 0;width:100%;}
+.main--page-user-profile-fields {width:100%;}
+.main--page-user-profile-actions {padding: var(--global--spacing-vertical) 0;width:100%;}
 .user-profile-avatar, .user-profile-avatar img {width:100px;height:100px}
 .user-profile-avatar:hover::after{
     content:"Загрузить аватар";
@@ -833,7 +865,6 @@ h4 {
     top:0;
     left:0;
 }
-.user-profile-heading {width:100%;text-align:center}
 .user-profile-link{
 	padding: var(--global--spacing-vertical) 0 0;
     -ms-grid-column: 2;
