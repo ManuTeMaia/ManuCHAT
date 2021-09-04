@@ -239,7 +239,7 @@ var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
 module.hot.accept(reloadCSS);
-},{"_css_loader":"../node_modules/parcel-bundler/src/builtins/css-loader.js"}],"../src/pages/chats/user_profile/user-profile.pcss":[function(require,module,exports) {
+},{"_css_loader":"../node_modules/parcel-bundler/src/builtins/css-loader.js"}],"../src/pages/chats/user-profile/user-profile.pcss":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
@@ -249,7 +249,7 @@ var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
 module.hot.accept(reloadCSS);
-},{"../src/common/common.pcss":"../src/common/common.pcss","../src/components/buttons/buttons.pcss":"../src/components/buttons/buttons.pcss","../src/components/inputs/inputs.pcss":"../src/components/inputs/inputs.pcss","../src/components/headings/headings.pcss":"../src/components/headings/headings.pcss","../src/components/avatar/avatar.pcss":"../src/components/avatar/avatar.pcss","../src/components/profile-field/profile-field.pcss":"../src/components/profile-field/profile-field.pcss","../src/pages/chats/login/login.pcss":"../src/pages/chats/login/login.pcss","../src/pages/chats/register/register.pcss":"../src/pages/chats/register/register.pcss","../src/modules/chat-list-profile-card/chat-list-profile-card.pcss":"../src/modules/chat-list-profile-card/chat-list-profile-card.pcss","../src/pages/chats/main/main.pcss":"../src/pages/chats/main/main.pcss","../src/pages/chats/user_profile/user-profile.pcss":"../src/pages/chats/user_profile/user-profile.pcss","_css_loader":"../node_modules/parcel-bundler/src/builtins/css-loader.js"}],"../node_modules/handlebars/dist/handlebars.runtime.js":[function(require,module,exports) {
+},{"../src/common/common.pcss":"../src/common/common.pcss","../src/components/buttons/buttons.pcss":"../src/components/buttons/buttons.pcss","../src/components/inputs/inputs.pcss":"../src/components/inputs/inputs.pcss","../src/components/headings/headings.pcss":"../src/components/headings/headings.pcss","../src/components/avatar/avatar.pcss":"../src/components/avatar/avatar.pcss","../src/components/profile-field/profile-field.pcss":"../src/components/profile-field/profile-field.pcss","../src/pages/chats/login/login.pcss":"../src/pages/chats/login/login.pcss","../src/pages/chats/register/register.pcss":"../src/pages/chats/register/register.pcss","../src/modules/chat-list-profile-card/chat-list-profile-card.pcss":"../src/modules/chat-list-profile-card/chat-list-profile-card.pcss","../src/pages/chats/main/main.pcss":"../src/pages/chats/main/main.pcss","../src/pages/chats/user-profile/user-profile.pcss":"../src/pages/chats/user-profile/user-profile.pcss","_css_loader":"../node_modules/parcel-bundler/src/builtins/css-loader.js"}],"../node_modules/handlebars/dist/handlebars.runtime.js":[function(require,module,exports) {
 var define;
 var global = arguments[3];
 /**!
@@ -2719,14 +2719,14 @@ function addLoginPage() {
       login: {
         label: "Логин",
         type: "text",
-        name: "user-login",
+        name: "login",
         placeholder: "Имя пользователя",
         req: "reqiured"
       },
       password: {
         label: "Пароль",
         type: "password",
-        name: "user-password",
+        name: "password",
         placeholder: "***********",
         req: "required"
       }
@@ -2782,7 +2782,7 @@ var templateFunction = _handlebars.default.template({
       return undefined;
     };
 
-    return "<section class=\"wrapper\">\n  <div class=\"form--register-wrap\">\n" + ((stack1 = container.invokePartial(lookupProperty(partials, "heading"), depth0 != null ? lookupProperty(depth0, "heading") : depth0, {
+    return "<div class=\"wrapper\">\n  <div class=\"form--register-wrap\">\n" + ((stack1 = container.invokePartial(lookupProperty(partials, "heading"), depth0 != null ? lookupProperty(depth0, "heading") : depth0, {
       "name": "heading",
       "data": data,
       "indent": "  ",
@@ -2812,7 +2812,7 @@ var templateFunction = _handlebars.default.template({
       "helpers": helpers,
       "partials": partials,
       "decorators": container.decorators
-    })) != null ? stack1 : "") + "    </form>\n    <a href=\"\" class=\"form--register-login-link\">Авторизоваться</a>\n</div>\n</section>";
+    })) != null ? stack1 : "") + "    </form>\n    <a href=\"\" class=\"form--register-login-link\">Авторизоваться</a>\n</div>\n</div>";
   },
   "usePartial": true,
   "useData": true
@@ -2849,48 +2849,48 @@ function addRegisterPage() {
       email: {
         label: "E-mail",
         type: "email",
-        name: "user-email",
+        name: "email",
         placeholder: "email",
         req: "reqiured"
       },
       login: {
         label: "Логин",
         type: "text",
-        name: "user-login",
+        name: "login",
         placeholder: "Имя пользователя",
         req: "reqiured"
       },
       firstname: {
         label: "Имя",
         type: "text",
-        name: "user-firstname",
+        name: "first_name",
         placeholder: "Ваше имя",
         req: "reqiured"
       },
       lastname: {
         label: "Фамилия",
         type: "text",
-        name: "user-lastname",
+        name: "second_name",
         placeholder: "Ваша фамилия"
       },
       phone: {
         label: "Телефон",
         type: "tel",
-        name: "user-phone",
+        name: "phone",
         placeholder: "+7 (000)-000-00-00",
         req: "reqiured"
       },
       password: {
         label: "Пароль",
         type: "password",
-        name: "user-password",
+        name: "password",
         placeholder: "***********",
         req: "required"
       },
       passwordrepeat: {
         label: "Повторите пароль",
         type: "password",
-        name: "user-password",
+        name: "password",
         placeholder: "***********",
         req: "required"
       }
@@ -3274,7 +3274,7 @@ var _profileField = _interopRequireDefault(require("./profile-field.hbs"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 _handlebars.default.registerPartial("profileField", _profileField.default);
-},{"handlebars/dist/handlebars.runtime":"../node_modules/handlebars/dist/handlebars.runtime.js","./profile-field.hbs":"../src/components/profile-field/profile-field.hbs"}],"../src/pages/chats/user_profile/user-profile.hbs":[function(require,module,exports) {
+},{"handlebars/dist/handlebars.runtime":"../node_modules/handlebars/dist/handlebars.runtime.js","./profile-field.hbs":"../src/components/profile-field/profile-field.hbs"}],"../src/pages/chats/user-profile/user-profile.hbs":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -3355,7 +3355,7 @@ var templateFunction = _handlebars.default.template({
 
 var _default = templateFunction;
 exports.default = _default;
-},{"handlebars/dist/handlebars.runtime":"../node_modules/handlebars/dist/handlebars.runtime.js"}],"../src/pages/chats/user_profile/user-profile.js":[function(require,module,exports) {
+},{"handlebars/dist/handlebars.runtime":"../node_modules/handlebars/dist/handlebars.runtime.js"}],"../src/pages/chats/user-profile/user-profile.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -3411,7 +3411,214 @@ function addProfilePage() {
 }
 
 ;
-},{"../../../components/profile-field/profile-field":"../src/components/profile-field/profile-field.js","../../../components/avatar/avatar":"../src/components/avatar/avatar.js","../../../components/headings/headings":"../src/components/headings/headings.js","./user-profile.hbs":"../src/pages/chats/user_profile/user-profile.hbs"}],"../src/index.js":[function(require,module,exports) {
+},{"../../../components/profile-field/profile-field":"../src/components/profile-field/profile-field.js","../../../components/avatar/avatar":"../src/components/avatar/avatar.js","../../../components/headings/headings":"../src/components/headings/headings.js","./user-profile.hbs":"../src/pages/chats/user-profile/user-profile.hbs"}],"../src/modules/user-profile-form-fields/user-profile-form-fields.hbs":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _handlebars = _interopRequireDefault(require("handlebars/dist/handlebars.runtime"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var templateFunction = _handlebars.default.template({
+  "1": function _(container, depth0, helpers, partials, data) {
+    var stack1,
+        lookupProperty = container.lookupProperty || function (parent, propertyName) {
+      if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
+        return parent[propertyName];
+      }
+
+      return undefined;
+    };
+
+    return (stack1 = container.invokePartial(lookupProperty(partials, "textInput"), depth0, {
+      "name": "textInput",
+      "data": data,
+      "indent": "      ",
+      "helpers": helpers,
+      "partials": partials,
+      "decorators": container.decorators
+    })) != null ? stack1 : "";
+  },
+  "compiler": [8, ">= 4.3.0"],
+  "main": function main(container, depth0, helpers, partials, data) {
+    var stack1,
+        lookupProperty = container.lookupProperty || function (parent, propertyName) {
+      if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
+        return parent[propertyName];
+      }
+
+      return undefined;
+    };
+
+    return "<form action=\"\" class=\"form--register\" enctype=\"multipart/form-data\">\n" + ((stack1 = lookupProperty(helpers, "each").call(depth0 != null ? depth0 : container.nullContext || {}, depth0 != null ? lookupProperty(depth0, "textInputs") : depth0, {
+      "name": "each",
+      "hash": {},
+      "fn": container.program(1, data, 0),
+      "inverse": container.noop,
+      "data": data,
+      "loc": {
+        "start": {
+          "line": 2,
+          "column": 4
+        },
+        "end": {
+          "line": 4,
+          "column": 13
+        }
+      }
+    })) != null ? stack1 : "") + ((stack1 = container.invokePartial(lookupProperty(partials, "submit"), depth0 != null ? lookupProperty(depth0, "submit") : depth0, {
+      "name": "submit",
+      "data": data,
+      "indent": "    ",
+      "helpers": helpers,
+      "partials": partials,
+      "decorators": container.decorators
+    })) != null ? stack1 : "") + "    </form>";
+  },
+  "usePartial": true,
+  "useData": true
+});
+
+var _default = templateFunction;
+exports.default = _default;
+},{"handlebars/dist/handlebars.runtime":"../node_modules/handlebars/dist/handlebars.runtime.js"}],"../src/modules/user-profile-form-fields/user-profile-form-fields.js":[function(require,module,exports) {
+"use strict";
+
+var _handlebars = _interopRequireDefault(require("handlebars/dist/handlebars.runtime"));
+
+require("../../components/buttons/submit-button");
+
+require("../../components/headings/headings");
+
+require("../../components/inputs/text-input");
+
+var _userProfileFormFields = _interopRequireDefault(require("./user-profile-form-fields.hbs"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+_handlebars.default.registerPartial("profileForm", _userProfileFormFields.default);
+},{"handlebars/dist/handlebars.runtime":"../node_modules/handlebars/dist/handlebars.runtime.js","../../components/buttons/submit-button":"../src/components/buttons/submit-button.js","../../components/headings/headings":"../src/components/headings/headings.js","../../components/inputs/text-input":"../src/components/inputs/text-input.js","./user-profile-form-fields.hbs":"../src/modules/user-profile-form-fields/user-profile-form-fields.hbs"}],"../src/pages/chats/user-profile-form/user-profile-form.hbs":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _handlebars = _interopRequireDefault(require("handlebars/dist/handlebars.runtime"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var templateFunction = _handlebars.default.template({
+  "compiler": [8, ">= 4.3.0"],
+  "main": function main(container, depth0, helpers, partials, data) {
+    var stack1,
+        lookupProperty = container.lookupProperty || function (parent, propertyName) {
+      if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
+        return parent[propertyName];
+      }
+
+      return undefined;
+    };
+
+    return "\n  <div class=\"main--page-user-profile-form\">\n" + ((stack1 = container.invokePartial(lookupProperty(partials, "heading"), depth0 != null ? lookupProperty(depth0, "heading") : depth0, {
+      "name": "heading",
+      "data": data,
+      "indent": "  ",
+      "helpers": helpers,
+      "partials": partials,
+      "decorators": container.decorators
+    })) != null ? stack1 : "") + ((stack1 = container.invokePartial(lookupProperty(partials, "profileForm"), depth0 != null ? lookupProperty(depth0, "form") : depth0, {
+      "name": "profileForm",
+      "data": data,
+      "indent": "  ",
+      "helpers": helpers,
+      "partials": partials,
+      "decorators": container.decorators
+    })) != null ? stack1 : "") + "</div>\n";
+  },
+  "usePartial": true,
+  "useData": true
+});
+
+var _default = templateFunction;
+exports.default = _default;
+},{"handlebars/dist/handlebars.runtime":"../node_modules/handlebars/dist/handlebars.runtime.js"}],"../src/pages/chats/user-profile-form/user-profile-form.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.addProfileFormPage = addProfileFormPage;
+
+require("../../../modules/user-profile-form-fields/user-profile-form-fields");
+
+var _userProfileForm = _interopRequireDefault(require("./user-profile-form.hbs"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function addProfileFormPage() {
+  var profileFormData = {
+    heading: {
+      level: '3',
+      class: "",
+      text: "Изменить данные"
+    },
+    form: {
+      textInputs: {
+        email: {
+          label: "E-mail",
+          type: "email",
+          name: "email",
+          placeholder: "dragonfly@123.com"
+        },
+        login: {
+          label: "Логин",
+          type: "text",
+          name: "login",
+          placeholder: "dragonfly"
+        },
+        firstname: {
+          label: "Имя",
+          type: "text",
+          name: "first_name",
+          placeholder: "Иветта"
+        },
+        lastname: {
+          label: "Фамилия",
+          type: "text",
+          name: "second_name",
+          placeholder: "Сидорова"
+        },
+        displayname: {
+          label: "Имя в чате",
+          type: "text",
+          name: "display_name",
+          placeholder: "Сидорова"
+        },
+        phone: {
+          label: "Телефон",
+          type: "tel",
+          name: "phone",
+          placeholder: "+7 (000)-000-00-00"
+        }
+      },
+      submit: {
+        class: "form--user-profile-submit",
+        name: "user-profile-submit",
+        title: "Cохранить"
+      }
+    }
+  };
+  document.querySelector('.chat--wrap').innerHTML = (0, _userProfileForm.default)(profileFormData);
+}
+
+;
+},{"../../../modules/user-profile-form-fields/user-profile-form-fields":"../src/modules/user-profile-form-fields/user-profile-form-fields.js","./user-profile-form.hbs":"../src/pages/chats/user-profile-form/user-profile-form.hbs"}],"../src/index.js":[function(require,module,exports) {
 "use strict";
 
 require("./style.pcss");
@@ -3422,7 +3629,9 @@ var _register = require("../src/pages/chats/register/register");
 
 var _main = require("../src/pages/chats/main/main");
 
-var _userProfile = require("../src/pages/chats/user_profile/user-profile");
+var _userProfile = require("./pages/chats/user-profile/user-profile");
+
+var _userProfileForm = require("./pages/chats/user-profile-form/user-profile-form");
 
 document.addEventListener('DOMContentLoaded', function () {
   (0, _login.addLoginPage)();
@@ -3434,7 +3643,6 @@ document.addEventListener('DOMContentLoaded', function () {
   document.addEventListener("submit", function (e) {
     e.preventDefault();
     var target = e.target;
-    console.log(target);
     var loginForm = document.querySelector('.form--login');
     var regForm = document.querySelector('.form--register');
 
@@ -3443,17 +3651,32 @@ document.addEventListener('DOMContentLoaded', function () {
       document.addEventListener("click", function (e) {
         e.preventDefault();
         var target = e.target;
-        console.log(target);
         var userAvatar = document.querySelector('.profile-card-avatar img');
 
         if (target == userAvatar) {
           (0, _userProfile.addProfilePage)();
+          document.addEventListener("click", function (e) {
+            e.preventDefault();
+            var target = e.target;
+            console.log(target);
+            var changeData = document.querySelector('.link-change-data');
+            var changePassw = document.querySelector('.link-change-pass');
+            var logOut = document.querySelector('.link-logout');
+
+            if (target == changeData) {
+              (0, _userProfileForm.addProfileFormPage)();
+            } else if (target == changePassw) {
+              (0, _userProfileForm.addProfileFormPage)();
+            } else if (target == logOut) {
+              (0, _main.addMainPage)();
+            }
+          });
         }
       });
     }
   });
 });
-},{"./style.pcss":"../src/style.pcss","../src/pages/chats/login/login":"../src/pages/chats/login/login.js","../src/pages/chats/register/register":"../src/pages/chats/register/register.js","../src/pages/chats/main/main":"../src/pages/chats/main/main.js","../src/pages/chats/user_profile/user-profile":"../src/pages/chats/user_profile/user-profile.js"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"./style.pcss":"../src/style.pcss","../src/pages/chats/login/login":"../src/pages/chats/login/login.js","../src/pages/chats/register/register":"../src/pages/chats/register/register.js","../src/pages/chats/main/main":"../src/pages/chats/main/main.js","./pages/chats/user-profile/user-profile":"../src/pages/chats/user-profile/user-profile.js","./pages/chats/user-profile-form/user-profile-form":"../src/pages/chats/user-profile-form/user-profile-form.js"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -3481,7 +3704,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "63834" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "64706" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

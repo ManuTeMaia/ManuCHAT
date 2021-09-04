@@ -818,10 +818,8 @@ h4 {
 }
 .main--page-user-profile-fields {padding: var(--global--spacing-vertical) 0;width:100%;}
 .user-profile-avatar, .user-profile-avatar img {width:100px;height:100px}
-.user-profile-avatar::after{opacity:0;}
 .user-profile-avatar:hover::after{
     content:"Загрузить аватар";
-    opacity:1;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -834,9 +832,6 @@ h4 {
     height:100px;
     top:0;
     left:0;
-    -webkit-transition:var(--global--transition);
-    transition:var(--global--transition);
-
 }
 .user-profile-heading {width:100%;text-align:center}
 .user-profile-link{

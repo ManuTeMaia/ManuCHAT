@@ -15,14 +15,14 @@ export function addLoginPage() {
             login: {
                 label: "Логин",
                 type: "text",
-                name: "user-login",
+                name: "login",
                 placeholder: "Имя пользователя",
                 req: "reqiured"
             },
             password: {
                 label: "Пароль",
                 type: "password",
-                name: "user-password",
+                name: "password",
                 placeholder: "***********",
                 req: "required"
             }

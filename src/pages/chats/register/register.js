@@ -15,48 +15,48 @@ export function addRegisterPage() {
             email: {
                 label: "E-mail",
                 type: "email",
-                name: "user-email",
+                name: "email",
                 placeholder: "email",
                 req: "reqiured"
             },
             login: {
                 label: "Логин",
                 type: "text",
-                name: "user-login",
+                name: "login",
                 placeholder: "Имя пользователя",
                 req: "reqiured"
             },
             firstname: {
                 label: "Имя",
                 type: "text",
-                name: "user-firstname",
+                name: "first_name",
                 placeholder: "Ваше имя",
                 req: "reqiured"
             },
             lastname: {
                 label: "Фамилия",
                 type: "text",
-                name: "user-lastname",
+                name: "second_name",
                 placeholder: "Ваша фамилия",
             },
             phone: {
                 label: "Телефон",
                 type: "tel",
-                name: "user-phone",
+                name: "phone",
                 placeholder: "+7 (000)-000-00-00",
                 req: "reqiured"
             },
             password: {
                 label: "Пароль",
                 type: "password",
-                name: "user-password",
+                name: "password",
                 placeholder: "***********",
                 req: "required"
             },
             passwordrepeat: {
                 label: "Повторите пароль",
                 type: "password",
-                name: "user-password",
+                name: "password",
                 placeholder: "***********",
                 req: "required"
             }
