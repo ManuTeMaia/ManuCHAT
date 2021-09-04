@@ -7,6 +7,8 @@ Manutemaia Chat
 
 [Веб-хостинг в Netify](https://quirky-lumiere-db1dd9.netlify.app)
 
+pull request https://github.com/ManuTeMaia/middle.messenger.praktikum.yandex/pull/1
+
 ### Под капотом: 
 1. NodeJs 14.17.5
 
@@ -29,6 +31,3 @@ Manutemaia Chat
 [Ошибка 404](https://quirky-lumiere-db1dd9.netlify.app/404.html) 
 
 3. Страница профиля пользователя доступна при нажатии на аватар в боковой панели.
-
-### Pull Request
-pull request https://github.com/ManuTeMaia/middle.messenger.praktikum.yandex/pull/1
