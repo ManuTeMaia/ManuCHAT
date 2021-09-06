@@ -1,0 +1,24 @@
+{
+    "plugins": {
+        "autoprefixer": {
+            "grid": true
+        },
+        "cssnano": {
+            preset: ['default', {
+                discardComments: {
+                    removeAll: true,
+                }
+                }]
+        },
+        "postcss-custom-properties": true,
+        "postcss-grid": {
+            "columns": 12,
+            "maxWidth": 1200,
+            "gutter": 20,
+            "legacy": false
+        },
+        "postcss-import": true,
+        "postcss-url": true,
+        "postcss-normalize": true
+    }
+}
