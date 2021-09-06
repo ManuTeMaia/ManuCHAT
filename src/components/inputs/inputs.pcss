@@ -1,50 +1,50 @@
-input[type=text],
 input[type=email],
-input[type=url],
 input[type=password],
 input[type=search],
-input[type=tel]{
-    border:0 solid;
-    background:var(--global--color-background);
-	border-bottom: var(--form--border-width) solid var(--form--border-color);
-	color: var(--form--color-text);
-	line-height: var(--global--line-height-body);
-	padding: var(--form--spacing-unit);
-	margin: 0 2px;
-	max-width: 100%;
+input[type=tel],
+input[type=text],
+input[type=url] {
+    border: 0 solid;
+    background: var(--global--color-background);
+    border-bottom: var(--form--border-width) solid var(--form--border-color);
+    color: var(--form--color-text);
+    line-height: var(--global--line-height-body);
+    padding: var(--form--spacing-unit);
+    margin: 0 2px;
+    max-width: 100%;
 }
 input[type=search] {
-	border:var(--form--border-width) solid var(--form--border-color);
-	border-radius:var(--global--border-radius);
-	text-align:center;
-	box-shadow: var(--form--box-shadow);
-	width:100%;
-	background:var(--global--color-white);
-	margin: var(--global--spacing-unit) 0;
+    border: var(--form--border-width) solid var(--form--border-color);
+    border-radius: var(--global--border-radius);
+    text-align: center;
+    box-shadow: var(--form--box-shadow);
+    width: 100%;
+    background: var(--global--color-white);
+    margin: var(--global--spacing-unit) 0;
 }
 
-input[type=text]:focus,
 input[type=email]:focus,
-input[type=url]:focus,
 input[type=password]:focus,
 input[type=search]:focus,
-input[type=tel]:focus {
-	color: var(--form--color-text);
-	outline: 0
+input[type=tel]:focus,
+input[type=text]:focus,
+input[type=url]:focus {
+    color: var(--form--color-text);
+    outline: 0;
 }
 input:focus::placeholder {
-	color: transparent;
-	transition:var(--global--transition);
+    color: transparent;
+    transition: var(--global--transition);
 }
-input[type=text]:disabled,
 input[type=email]:disabled,
-input[type=url]:disabled,
 input[type=password]:disabled,
 input[type=search]:disabled,
-input[type=tel]:disabled{
-	opacity: 0.7;
+input[type=tel]:disabled,
+input[type=text]:disabled,
+input[type=url]:disabled {
+    opacity: 0.7;
 }
 
-.input-wrapper{
-    padding:var(--global--spacing-vertical) 0;
+.input-wrapper {
+    padding: var(--global--spacing-vertical) 0;
 }

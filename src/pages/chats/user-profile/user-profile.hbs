@@ -1,14 +1,14 @@
 <div class="main--page-user-profile-wrap">
     {{>avatar userpic}}
-  <div class="main--page-user-profile-fields">
-    {{>heading username}}
-    {{#each profileFields}}  
-      {{>profileField}}
-    {{/each}}
-  <div class="main--page-user-profile-actions">
-  <a href="" class="main--page-user-profile user-profile-link link-change-data">Изменить данные</a>
-  <a href="" class="main--page-user-profile user-profile-link link-change-pass">Изменить пароль</a>
-  <a href="" class="main--page-user-profile user-profile-link link-logout">Выйти</a>
-  </div>
-    </div> 
+    <div class="main--page-user-profile-fields">
+        {{>heading username}}
+        {{#each profileFields}}
+            {{>profileField}}
+        {{/each}}
+        <div class="main--page-user-profile-actions">
+            <a href="" class="main--page-user-profile user-profile-link link-change-data">Изменить данные</a>
+            <a href="" class="main--page-user-profile user-profile-link link-change-pass">Изменить пароль</a>
+            <a href="" class="main--page-user-profile user-profile-link link-logout">Выйти</a>
+        </div>
+    </div>
 </div>

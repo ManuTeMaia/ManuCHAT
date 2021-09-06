@@ -8,10 +8,10 @@ export function addProfilePage() {
     const profilePageData = {
         userpic: {
             imagesrc: "/noimage.png",
-            divclass: "main--page-user-profile user-profile-avatar",
+            divclass: "main--page-user-profile user-profile-avatar"
         },
         username: {
-            level: '3',
+            level: "3",
             class: "main--page-user-profile user-profile-heading",
             text: "Иветта Сидорова"
         },
@@ -35,9 +35,9 @@ export function addProfilePage() {
             phone: {
                 label: "Телефон",
                 data: "+7 (000)-000-00-00"
-            },
+            }
         }
-
     }
-    document.querySelector('.chat--wrap').innerHTML = template(profilePageData);
+
+    document.querySelector(".chat--wrap").innerHTML = template(profilePageData);
 };

@@ -7,7 +7,7 @@ function addProfileFormPage() {
 
     const profileFormData = {
         heading: {
-            level: '3',
+            level: "3",
             class: "",
             text: "Изменить данные"
         },
@@ -57,14 +57,14 @@ function addProfileFormPage() {
         }
 
     }
-    document.querySelector('.main--page-user-profile-fields').innerHTML = template(profileFormData);
+    document.querySelector(".main--page-user-profile-fields").innerHTML = template(profileFormData);
 }
 
 function addProfileFormPasswordPage() {
 
     const profileFormData = {
         heading: {
-            level: '3',
+            level: "3",
             class: "",
             text: "Изменить пароль"
         },
@@ -75,21 +75,21 @@ function addProfileFormPasswordPage() {
                 type: "password",
                 name: "current-password",
                 placeholder: "***********",
-                req: "required"
+                required: "required"
             },
             password: {
                 label: "Пароль",
                 type: "password",
                 name: "password",
                 placeholder: "***********",
-                req: "required"
+                required: "required"
             },
             passwordrepeat: {
                 label: "Повторите пароль",
                 type: "password",
                 name: "repeat-password",
                 placeholder: "***********",
-                req: "required"
+                required: "required"
             }
         },
         submit: {
@@ -99,6 +99,7 @@ function addProfileFormPasswordPage() {
         }
 
     }
-    document.querySelector('.main--page-user-profile-fields').innerHTML = template(profileFormData);
+    document.querySelector(".main--page-user-profile-fields").innerHTML = template(profileFormData);
 }
+
 export { addProfileFormPage, addProfileFormPasswordPage };

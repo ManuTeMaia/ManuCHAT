@@ -7,7 +7,7 @@ export function addRegisterPage() {
 
     const regFormData = {
         heading: {
-            level: '3',
+            level: "3",
             class: "",
             text: "Регистрация"
         },
@@ -17,48 +17,48 @@ export function addRegisterPage() {
                 type: "email",
                 name: "email",
                 placeholder: "email",
-                req: "reqiured"
+                required: "reqiured"
             },
             login: {
                 label: "Логин",
                 type: "text",
                 name: "login",
                 placeholder: "Имя пользователя",
-                req: "reqiured"
+                required: "reqiured"
             },
             firstname: {
                 label: "Имя",
                 type: "text",
                 name: "first_name",
                 placeholder: "Ваше имя",
-                req: "reqiured"
+                required: "reqiured"
             },
             lastname: {
                 label: "Фамилия",
                 type: "text",
                 name: "second_name",
-                placeholder: "Ваша фамилия",
+                placeholder: "Ваша фамилия"
             },
             phone: {
                 label: "Телефон",
                 type: "tel",
                 name: "phone",
                 placeholder: "+7 (000)-000-00-00",
-                req: "reqiured"
+                required: "reqiured"
             },
             password: {
                 label: "Пароль",
                 type: "password",
                 name: "password",
                 placeholder: "***********",
-                req: "required"
+                required: "required"
             },
             passwordrepeat: {
                 label: "Повторите пароль",
                 type: "password",
                 name: "repeat-password",
                 placeholder: "***********",
-                req: "required"
+                required: "required"
             }
 
         },
@@ -68,5 +68,5 @@ export function addRegisterPage() {
             title: "Зарегистрироваться"
         }
     }
-    document.querySelector('.root').innerHTML = template(regFormData);
+    document.querySelector(".root").innerHTML = template(regFormData);
 };

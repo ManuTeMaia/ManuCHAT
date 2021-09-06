@@ -7,7 +7,7 @@ export function addLoginPage() {
 
     const loginFormData = {
         heading: {
-            level: '3',
+            level: "3",
             class: "",
             text: "Вход"
         },
@@ -17,16 +17,15 @@ export function addLoginPage() {
                 type: "text",
                 name: "login",
                 placeholder: "Имя пользователя",
-                req: "reqiured"
+                required: "reqiured"
             },
             password: {
                 label: "Пароль",
                 type: "password",
                 name: "password",
                 placeholder: "***********",
-                req: "required"
+                required: "required"
             }
-
         },
         submit: {
             class: "form--login-submit",
@@ -34,6 +33,5 @@ export function addLoginPage() {
             title: "Авторизоваться"
         }
     }
-    return document.querySelector('.root').innerHTML = template(loginFormData);
-
+    return document.querySelector(".root").innerHTML = template(loginFormData);
 }
