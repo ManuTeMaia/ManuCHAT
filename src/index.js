@@ -1,9 +1,9 @@
 import "./style.pcss";
-import { addLoginPage } from "./pages/chats/login/login";
-import { addRegisterPage } from "./pages/chats/register/register";
-import { addMainPage } from "./pages/chats/main/main";
+import { addLoginPage } from "../src/pages/chats/login/login";
+import { addRegisterPage } from "../src/pages/chats/register/register";
+import { addMainPage } from "../src/pages/chats/main/main";
 import { addProfilePage } from "./pages/chats/user-profile/user-profile";
-import * as profile from "./modules/user-profile-form/user-profile-form";
+import * as profile from "../src/modules/user-profile-form/user-profile-form";
 
 document.addEventListener("DOMContentLoaded", () => {
     addLoginPage();

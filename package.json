@@ -16,11 +16,8 @@
     },
     "homepage": "https://github.com/yandex-praktikum/middle.messenger.praktikum.yandex#readme",
     "devDependencies": {
-        "@typescript-eslint/eslint-plugin": "^4.31.0",
-        "@typescript-eslint/parser": "^4.31.0",
         "autoprefixer": "^9.8.6",
         "cssnano": "^4.1.10",
-        "eslint": "^7.32.0",
         "handlebars": "^4.7.7",
         "parcel-bundler": "^1.12.5",
         "parcel-plugin-handlebars-precompile": "^1.0.2",
@@ -30,9 +27,7 @@
         "postcss-grid": "^2.0.0",
         "postcss-import": "^12.0.0",
         "postcss-normalize": "^9.0.0",
-        "postcss-url": "^9.0.0",
-        "ts-node": "^10.2.1",
-        "typescript": "^4.4.2"
+        "postcss-url": "^9.0.0"
     },
     "scripts": {
         "dev": "rm -rf dist/* && parcel static/*.html -p 3000",
