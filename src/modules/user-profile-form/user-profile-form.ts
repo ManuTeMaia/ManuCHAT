@@ -2,6 +2,7 @@ import "../../components/buttons/submit-button";
 import "../../components/headings/headings";
 import "../../components/inputs/text-input";
 import template from "./user-profile-form.hbs";
+import "./user-profile-form.pcss";
 
 function addProfileFormPage():string {
 
@@ -57,7 +58,8 @@ function addProfileFormPage():string {
 		}
 
 	};
-	return document.querySelector(".main--page-user-profile-fields").innerHTML = template(profileFormData);
+	const ProfileFormPageElement = document.querySelector(".main--page-user-profile-fields") as HTMLElement;
+	return ProfileFormPageElement.innerHTML = template(profileFormData);
 }
 
 function addProfileFormPasswordPage():string {
@@ -99,7 +101,8 @@ function addProfileFormPasswordPage():string {
 		}
 
 	};
-	return document.querySelector(".main--page-user-profile-fields").innerHTML = template(profileFormData);
+	const ProfileFormPasswordPageElement = document.querySelector(".main--page-user-profile-fields") as HTMLElement;
+	return ProfileFormPasswordPageElement.innerHTML = template(profileFormData);
 }
 
 export { addProfileFormPage, addProfileFormPasswordPage };

@@ -2,6 +2,7 @@ import "../../../components/buttons/submit-button";
 import "../../../components/headings/headings";
 import "../../../components/inputs/text-input";
 import template from "./register.hbs";
+import "./register.pcss";
 
 export function addRegisterPage():string {
 
@@ -68,5 +69,7 @@ export function addRegisterPage():string {
 			title: "Зарегистрироваться"
 		}
 	};
-	return document.querySelector(".root").innerHTML = template(regFormData);
+
+	const WrapElement = document.querySelector(".root") as HTMLElement;
+	return WrapElement.innerHTML = template(regFormData);
 }

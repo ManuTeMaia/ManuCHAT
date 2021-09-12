@@ -1,5 +1,6 @@
 import "../../../modules/chat-list-profile-card/chat-list-profile-card";
 import template from "./main.hbs";
+import "./main.pcss";
 
 export function addMainPage():string {
 
@@ -19,5 +20,6 @@ export function addMainPage():string {
 		}
 
 	};
-	return document.querySelector(".root").innerHTML = template(mainPageData);
+	const WrapElement = document.querySelector(".root") as HTMLElement;
+	return WrapElement.innerHTML = template(mainPageData);
 }

@@ -2,6 +2,7 @@ import "../../../components/profile-field/profile-field";
 import "../../../components/avatar/avatar";
 import "../../../components/headings/headings";
 import template from "./user-profile.hbs";
+import "./user-profile.pcss";
 
 export function addProfilePage():string {
 
@@ -39,5 +40,6 @@ export function addProfilePage():string {
 		}
 	};
 
-	return document.querySelector(".chat--wrap").innerHTML = template(profilePageData);
+	const WrapElement = document.querySelector(".chat--wrap") as HTMLElement;
+	return WrapElement.innerHTML = template(profilePageData);
 }

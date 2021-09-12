@@ -2,6 +2,7 @@ import "../../../components/buttons/submit-button";
 import "../../../components/headings/headings";
 import "../../../components/inputs/text-input";
 import template from "./login.hbs";
+import "./login.pcss";
 
 export function addLoginPage():string {
 
@@ -33,5 +34,6 @@ export function addLoginPage():string {
 			title: "Авторизоваться"
 		}
 	};
-	return document.querySelector(".root").innerHTML = template(loginFormData);
+	const WrapElement = document.querySelector(".root") as HTMLElement;
+	return WrapElement.innerHTML = template(loginFormData);
 }

@@ -3,5 +3,6 @@ import "../../components/error/error.pcss";
 import { err500Block } from "../../components/error/error";
 
 document.addEventListener("DOMContentLoaded", () => {
-	document.querySelector(".root").innerHTML = err500Block;
+	const  WrapElement = document.querySelector(".root") as HTMLElement;
+	WrapElement.innerHTML = err500Block;
 });
