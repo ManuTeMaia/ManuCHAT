@@ -43,7 +43,6 @@
         "eslint": "eslint ./src",
         "stylelint": "stylelint ./src",
         "types": "tsc"
-
     },
     "dependencies": {
         "express": "^4.17.1",

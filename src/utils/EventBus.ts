@@ -1,7 +1,8 @@
-class EventBus{
-    listeners:{
-        [key: string]: Array<(...args: []) => void>;
-    }
+type Listeners = Record<string, Array<() => void>>;
+
+export default class EventBus{
+    
+    listeners: Listeners;
     
     constructor() {
         this.listeners = {};
@@ -21,7 +22,7 @@ class EventBus{
         this.listeners[event] = this.listeners[event].filter((listener) => listener !== callback);
     }
 
-    emit(event: string, ...args: []) {
+    emit(event: string, ...args: []):void {
         if (!this.listeners[event]) {
             throw new Error(`Нет события: ${event}`);
         }
@@ -30,5 +31,3 @@ class EventBus{
         });
     }
 }
-
-export const eventBus = new EventBus();
