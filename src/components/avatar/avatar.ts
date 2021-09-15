@@ -7,8 +7,8 @@ class Avatar extends Block {
         super("avatar", props);
     }
     render():DocumentFragment{
-    return template(this.props);
-}
+        return template(this.props);
+    }
 
 }
 export default Avatar;

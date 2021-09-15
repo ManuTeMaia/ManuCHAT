@@ -1,7 +1,7 @@
 import EventBus from "./EventBus";
 import { nanoid } from "nanoid";
 
-export default class Block {
+export default class Block<P = any> {
 	static EVENTS = {
 		INIT: "init",
 		FLOW_CDM: "flow:component-did-mount",
@@ -18,7 +18,7 @@ export default class Block {
 		props: Record<string, unknown>;
 	};
 
-	props: Record<string, unknown>;
+	props: P;
 
 	constructor(tagName = "div", props = {}) {
 		const eventBus = new EventBus();
