@@ -5,7 +5,7 @@ import { addMainPage } from "./pages/chats/main/main";
 import { addProfilePage } from "./pages/chats/user-profile/user-profile";
 import * as profile from "./modules/user-profile-form/user-profile-form";
 
-document.addEventListener("DOMContentLoaded", () => {
+/* document.addEventListener("DOMContentLoaded", () => {
 	addLoginPage();
 	const regLink = document.querySelector(".form--login-register-link") as HTMLElement;
 	regLink.addEventListener("click", (e) => {
@@ -44,4 +44,5 @@ document.addEventListener("DOMContentLoaded", () => {
 			});
 		}
 	});
-});
+}); */
+
