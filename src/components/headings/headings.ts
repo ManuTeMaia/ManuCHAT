@@ -4,7 +4,7 @@ import "./headings.pcss";
 
 class Heading extends Block {
     constructor(props:{class:string; text:string;}) {
-        super("avatar", props);
+        super("div", props);
     }
     render():DocumentFragment {
         return this.compile(template, {...this.props});

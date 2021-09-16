@@ -11,7 +11,7 @@ class LoginPage extends Block {
 	}
 	render(): DocumentFragment {
 		const heading = new Heading({
-			class: "",
+			class: "heading3",
 			text: "Вход"
 		});
 		const login = new TextInput({
@@ -19,21 +19,22 @@ class LoginPage extends Block {
 			type: "text",
 			name: "login",
 			placeholder: "Имя пользователя",
-			required: "reqiured"
+			events: {
+				focus: () => console.log("focused"),
+			}
 		});
 		const password = new TextInput({
 			label: "Пароль",
 			type: "password",
 			name: "password",
 			placeholder: "***********",
-			required: "required"
 		});
         const submit = new Button({
 			class: "form--login-submit",
 			name: "login-submit",
 			title: "Авторизоваться",
 			events: {
-				click: (e:Event) => {
+				click: (e) => {
 					e.preventDefault();
 					alert("EventClick");
 					}
@@ -44,7 +45,7 @@ class LoginPage extends Block {
 			name: "submit",
 			title: "eventtest",
 			events: {
-				click: (e:Event) => {
+				click: (e) => {
 					e.preventDefault();
 					alert("EventClick");
 					}

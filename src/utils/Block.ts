@@ -10,7 +10,7 @@ export default class Block {
 	};
 
 	eventBus: () => EventBus;
-	_element: HTMLElement;
+	_element: Element;
 	_meta: {
 		tagName: string;
 		props: any;
@@ -78,15 +78,16 @@ export default class Block {
 	};
 
 	_addEvents():void {
-		const {events = {}} = this.props;
+		const events:Record<string, () => void> = this.props.events;
 
 		if (!events) {
-			console.warn("Can't find any event");
+			console.warn("Can't find any event here");
 			return;
 		}
 		
-		Object.keys(events).forEach(eventName => {
-			this._element.addEventListener(eventName, events[eventName]);
+		Object.keys(events).forEach((event) => {
+			console.warn(`event: ${event}`);
+			this._element.addEventListener(event, events[event]);
 		});
 	}
 
@@ -102,7 +103,7 @@ export default class Block {
 		});
 	}
 
-	get element(): HTMLElement {
+	get element(): Element | null {
 		return this._element;
 	}
 	
@@ -124,7 +125,7 @@ export default class Block {
 			const stub = fragment.content.querySelector(`#id-${id}`);
 	
 			if(stub) {
-				stub.replaceWith(component.render());
+				stub.replaceWith(component.getContent());
 			} else {
 				return;
 			}
@@ -134,10 +135,14 @@ export default class Block {
 	}
 
 	_render():void{
+		const fragment = this.render().firstElementChild as Element;
+		console.log(fragment);
+		console.log(this.render());
+
 		this._removeEvents();
 		this._element.innerHTML = "";
 
-		this._element.appendChild(this.render());
+		this._element = fragment;
 		this._addEvents();
 	}
 
@@ -146,8 +151,8 @@ export default class Block {
   }
 
 
-	getContent(): HTMLElement {
-		return this.element;
+	getContent(): Element {
+		return this._element;
 	}
 
 	_makePropsProxy(props: Record<string, unknown>): Record<string, unknown> {
