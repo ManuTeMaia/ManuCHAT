@@ -33,12 +33,27 @@ class LoginPage extends Block {
 			name: "login-submit",
 			title: "Авторизоваться",
 			events: {
-				click: (e:Event) => {e.preventDefault(); console.log("clicked");},
-			}
+				click: (e:Event) => {
+					e.preventDefault();
+					alert("EventClick");
+					}
+				}
+		});
+		const somebutton = new Button({
+			class: "submit",
+			name: "submit",
+			title: "eventtest",
+			events: {
+				click: (e:Event) => {
+					e.preventDefault();
+					alert("EventClick");
+					}
+				}
 		});
 
 		return this.compile(template, {
 			heading:heading,
+			somebutton:somebutton,
 			login:login,
 			password:password,
 			submit:submit,

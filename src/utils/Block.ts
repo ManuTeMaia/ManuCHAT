@@ -78,25 +78,27 @@ export default class Block {
 	};
 
 	_addEvents():void {
-		const events:Record<string, () => void> = this.props;
-		
+		const {events = {}} = this.props;
+
 		if (!events) {
-			console.log("Can't find any events here...");
+			console.warn("Can't find any event");
 			return;
 		}
-		Object.entries(events).forEach((eventName) => {
-			this._element.addEventListener(eventName, event[eventName]);
+		
+		Object.keys(events).forEach(eventName => {
+			this._element.addEventListener(eventName, events[eventName]);
 		});
 	}
 
 	_removeEvents():void {
-		const events:Record<string, () => void> = this.props.events;
+		const {events = {}} = this.props;
 		
 		if (!events) {
+			console.warn("Can't find any event");
 			return;
 		}
-		Object.entries(events).forEach(([event, listener]) => {
-			this._element.removeEventListener(event, listener);
+		Object.keys(events).forEach(eventName => {
+			this._element.removeEventListener(eventName, events[eventName]);
 		});
 	}
 
@@ -155,16 +157,10 @@ export default class Block {
 					throw new Error("Нет прав");
 				} else {
 					const value: unknown = target[prop];
-					return typeof value === "function"
-						? value.bind(target)
-						: value;
+					return typeof value === "function"? value.bind(target) : value;
 				}
 			},
-			set(
-				target: Record<string, unknown>,
-				prop: string,
-				value: unknown,
-			): boolean {
+			set(target: Record<string, unknown>,prop: string,value: unknown): boolean {
 				if (prop.indexOf("_") === 0) {
 					throw new Error("Нет прав");
 				} else {
@@ -172,10 +168,7 @@ export default class Block {
 					return true;
 				}
 			},
-			deleteProperty(
-				target: Record<string, unknown>,
-				prop: string,
-			): boolean {
+			deleteProperty(target: Record<string, unknown>, prop: string): boolean {
 				if (prop.indexOf("_") === 0) {
 					throw new Error("Нет прав");
 				} else {
@@ -187,7 +180,6 @@ export default class Block {
 	}
 
 	_createDocumentElement(tagName: string): HTMLElement {
-		// Можно сделать метод, который через фрагменты в цикле создает сразу несколько блоков
 		return document.createElement(tagName);
 	}
 }
