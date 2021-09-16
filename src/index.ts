@@ -1,9 +1,11 @@
 import "./common/common";
-import { addLoginPage } from "./pages/chats/login/login";
+import Block from "./utils/Block";
+import LoginPage from "./pages/chats/login/login";
+/*
 import { addRegisterPage } from "./pages/chats/register/register";
 import { addMainPage } from "./pages/chats/main/main";
 import { addProfilePage } from "./pages/chats/user-profile/user-profile";
-import * as profile from "./modules/user-profile-form/user-profile-form";
+import * as profile from "./modules/user-profile-form/user-profile-form"; */
 
 /* document.addEventListener("DOMContentLoaded", () => {
 	addLoginPage();
@@ -46,3 +48,18 @@ import * as profile from "./modules/user-profile-form/user-profile-form";
 	});
 }); */
 
+
+function render (query:string, block:Block) {
+	const root = document.querySelector(query);
+	
+	if(!root) {
+		throw new Error("Root not found");
+	}
+
+	const newblock  = block.getContent();
+	root.appendChild(newblock);
+	
+	return root;
+}
+
+render(".root",new LoginPage());

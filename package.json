@@ -45,6 +45,7 @@
         "types": "tsc"
     },
     "dependencies": {
+        "components": "^0.1.0",
         "express": "^4.17.1",
         "nanoid": "^3.1.25",
         "normalize.css": "^8.0.1",

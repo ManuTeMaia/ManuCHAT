@@ -47,11 +47,11 @@ type ValidationElem = {
           pattern: /(.|\s)*\S(.|\s)*/,
           error: "Message error (should not be empty)",
         },
-      }
+      };
     }
   
-    _getValidationType(elem: HTMLElement): ValidationElem | null {
-      const type = elem.getAttribute("validation-type");
+    _getValidationType(element: HTMLElement): ValidationElem | null {
+      const type:string | null = element.getAttribute("validation-type");
       if (type) {
         return this.validationTypes[type];
       }
@@ -69,7 +69,7 @@ type ValidationElem = {
       return {
         isValid: vtype.pattern.test(elem.value),
         error: vtype.error,
-      }
+      };
     }
   
     validate(): void {
@@ -88,7 +88,7 @@ type ValidationElem = {
             }
           }
         }
-      })
+      });
     }
   
   }

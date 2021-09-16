@@ -1,7 +1,7 @@
 import EventBus from "./EventBus";
 import { nanoid } from "nanoid";
 
-export default class Block<P = any> {
+export default class Block {
 	static EVENTS = {
 		INIT: "init",
 		FLOW_CDM: "flow:component-did-mount",
@@ -10,15 +10,13 @@ export default class Block<P = any> {
 	};
 
 	eventBus: () => EventBus;
-
 	_element: HTMLElement;
-
 	_meta: {
 		tagName: string;
-		props: Record<string, unknown>;
+		props: any;
 	};
-
-	props: P;
+	props: any;
+	id =  nanoid(6);
 
 	constructor(tagName = "div", props = {}) {
 		const eventBus = new EventBus();
@@ -32,6 +30,7 @@ export default class Block<P = any> {
 		this.eventBus = () => eventBus;
 
 		this._registerEvents(eventBus);
+		eventBus.emit(Block.EVENTS.INIT);
 	}
 
 	_registerEvents(eventBus: EventBus): void {
@@ -55,13 +54,10 @@ export default class Block<P = any> {
 		this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
 	}
 
-	_componentDidUpdate(
-		oldProps: Record<string, unknown>,
-		newProps: Record<string, unknown>,
-	): void {
+	_componentDidUpdate(oldProps: Record<string, unknown>, newProps: Record<string, unknown>): void {
 		const response = this.componentDidUpdate(oldProps, newProps);
 		if (response) {
-			this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
+			this._render;
 		}
 	}
 
@@ -82,17 +78,20 @@ export default class Block<P = any> {
 	};
 
 	_addEvents():void {
-		const events: Record<string, () => void> = this.props.events;
+		const events:Record<string, () => void> = this.props;
+		
 		if (!events) {
+			console.log("Can't find any events here...");
 			return;
 		}
-		Object.entries(events).forEach(([event, listener]) => {
-			this._element.addEventListener(event, listener);
+		Object.entries(events).forEach((eventName) => {
+			this._element.addEventListener(eventName, event[eventName]);
 		});
 	}
 
 	_removeEvents():void {
-		const events: Record<string, () => void> = this.props.events;
+		const events:Record<string, () => void> = this.props.events;
+		
 		if (!events) {
 			return;
 		}
@@ -101,14 +100,42 @@ export default class Block<P = any> {
 		});
 	}
 
-	get element(): HTMLElement | Record<string, unknown>{
+	get element(): HTMLElement {
 		return this._element;
+	}
+	
+	compile(tmpl: (ctx: Record<string, unknown>) => string, props: Record<string, unknown>): DocumentFragment {
+    
+		const fragment = document.createElement("template");
+		const components: Record<string, Block> = {};
+
+		Object.entries(props).forEach(([name, value]) => {
+			if (value instanceof Block) {
+			components[value.id] = value; 
+			props[name] = `<div id="id-${value.id}"></div>`;
+		}
+		});
+
+		fragment.innerHTML = tmpl(props); 
+		
+		Object.entries(components).forEach(([id, component]) => {
+			const stub = fragment.content.querySelector(`#id-${id}`);
+	
+			if(stub) {
+				stub.replaceWith(component.render());
+			} else {
+				return;
+			}
+		});
+		
+		return fragment.content;
 	}
 
 	_render():void{
-		this.element.innerHTML = "";
 		this._removeEvents();
-		this._element.appendChild = this.render();
+		this._element.innerHTML = "";
+
+		this._element.appendChild(this.render());
 		this._addEvents();
 	}
 
@@ -116,31 +143,8 @@ export default class Block<P = any> {
     return new DocumentFragment;
   }
 
-	compile(
-		template: (hbsTemplate: string) => Record<string, unknown>, context: Record<string, unknown>): DocumentFragment {
-		const fragment = document.createElement("template");
-		const components: Record<string, Block> = {};
-		const id = nanoid(6);
 
-		Object.entries(context).forEach(([key, value]) => {
-			if (value instanceof Block) {
-				components[id] = value;
-				context[key] = `<div id="id-${id}"></div>`;
-			}
-		});
-
-		fragment.innerHTML = template(context);
-
-		Object.entries(components).forEach(([id, component]) => {
-			const stub = fragment.content.querySelector(`#id-${id}`);
-
-			stub?.replaceWith(component.render());
-		});
-
-		return fragment.content;
-	}
-
-	getContent(): HTMLElement | Record<string, unknown> {
+	getContent(): HTMLElement {
 		return this.element;
 	}
 

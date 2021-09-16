@@ -1,5 +1,14 @@
-import Handlebars from "handlebars/dist/handlebars.runtime";
+import Block from "../../utils/Block";
 import template from "./headings.hbs";
 import "./headings.pcss";
 
-Handlebars.registerPartial("heading", template);
+class Heading extends Block {
+    constructor(props:{class:string; text:string;}) {
+        super("avatar", props);
+    }
+    render():DocumentFragment {
+        return this.compile(template, {...this.props});
+    }
+
+}
+export default Heading;

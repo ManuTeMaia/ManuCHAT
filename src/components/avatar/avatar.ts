@@ -3,11 +3,11 @@ import template from "./avatar.hbs";
 import "./avatar.pcss";
 
 class Avatar extends Block {
-    constructor(props:{divclass:string, imagesrc:string,imagetitle:string }) {
+    constructor(props:{divclass:string; imagesrc:string; imagetitle:string; }) {
         super("avatar", props);
     }
-    render():DocumentFragment{
-        return template(this.props);
+    render():DocumentFragment {
+        return this.compile(template, {...this.props});
     }
 
 }
