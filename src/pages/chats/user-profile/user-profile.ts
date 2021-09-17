@@ -18,6 +18,10 @@ class ProfilePage extends Block{
 				click: () => alert("Позже тут можно будет загрузить аватар")
 			}
 		});
+		const heading = new Heading({
+			class: "main--page-user-profile user-profile-heading",
+			text: "Джейн Доу"
+		});
 		const email = new ProfileField({
 			label: "Email",
 			data: "dragonfly@123.com"
@@ -38,14 +42,10 @@ class ProfilePage extends Block{
 			label: "Телефон",
 			data: "+7 (000)-000-00-00"
 		});
-		const heading = new Heading({
-			class: "main--page-user-profile user-profile-heading",
-			text: `${firstname.data} ${lastname.data}`
-		});
 
         return this.compile(template, {
 			avatar:avatar,
-			headung:heading,
+			heading:heading,
 			email:email,
 			login:login,
 			firstname:firstname,
