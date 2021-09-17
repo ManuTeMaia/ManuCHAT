@@ -1,5 +1,5 @@
 import Block from "../../../utils/Block";
-import TextInput from  "../../../components/inputs/text-input";
+import InputWrapper from  "../../../modules/inputs-wrapper/inputs-wrapper";
 import Button from "../../../components/buttons/submit-button";
 import Heading from "../../../components/headings/headings";
 import template from "./login.hbs";
@@ -14,20 +14,23 @@ class LoginPage extends Block {
 			class: "heading3",
 			text: "Вход"
 		});
-		const login = new TextInput({
+		const login = new InputWrapper({
 			label: "Логин",
-			type: "text",
 			name: "login",
+			type: "text",
 			placeholder: "Имя пользователя",
 			events: {
 				focus: () => console.log("focused"),
 			}
 		});
-		const password = new TextInput({
+		const password = new InputWrapper({
 			label: "Пароль",
-			type: "password",
 			name: "password",
+			type: "password",
 			placeholder: "***********",
+			events: {
+				focus: () => console.log("focused"),
+			}
 		});
         const submit = new Button({
 			class: "form--login-submit",
@@ -36,25 +39,13 @@ class LoginPage extends Block {
 			events: {
 				click: (e) => {
 					e.preventDefault();
-					alert("EventClick");
-					}
-				}
-		});
-		const somebutton = new Button({
-			class: "submit",
-			name: "submit",
-			title: "eventtest",
-			events: {
-				click: (e) => {
-					e.preventDefault();
-					alert("EventClick");
+					console.log("EventClick");
 					}
 				}
 		});
 
 		return this.compile(template, {
 			heading:heading,
-			somebutton:somebutton,
 			login:login,
 			password:password,
 			submit:submit,

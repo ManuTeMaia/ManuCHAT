@@ -65,7 +65,6 @@ export default class Block {
 		oldProps: Record<string, unknown>,
 		newProps: Record<string, unknown>,
 	): boolean {
-		// TODO: Правильно сравнить объекты
 		return oldProps === newProps || true;
 	}
 
@@ -81,12 +80,10 @@ export default class Block {
 		const events:Record<string, () => void> = this.props.events;
 
 		if (!events) {
-			console.warn("Can't find any event here");
 			return;
 		}
 		
 		Object.keys(events).forEach((event) => {
-			console.warn(`event: ${event}`);
 			this._element.addEventListener(event, events[event]);
 		});
 	}
@@ -95,7 +92,6 @@ export default class Block {
 		const {events = {}} = this.props;
 		
 		if (!events) {
-			console.warn("Can't find any event");
 			return;
 		}
 		Object.keys(events).forEach(eventName => {
@@ -136,8 +132,6 @@ export default class Block {
 
 	_render():void{
 		const fragment = this.render().firstElementChild as Element;
-		console.log(fragment);
-		console.log(this.render());
 
 		this._removeEvents();
 		this._element.innerHTML = "";

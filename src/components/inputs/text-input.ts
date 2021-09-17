@@ -3,7 +3,7 @@ import template from "./text-input.hbs";
 import "./inputs.pcss";
 
 class TextInput extends Block {
-    constructor(props:Record<string,unknown>) {
+    constructor(props:Props) {
         super("div", props);
     }
     render():DocumentFragment{

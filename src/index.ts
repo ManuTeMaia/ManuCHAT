@@ -1,6 +1,7 @@
 import "./common/common";
 import Block from "./utils/Block";
 import LoginPage from "./pages/chats/login/login";
+//import ChatPage from "./pages/chats/chat/chat";
 /*
 import { addRegisterPage } from "./pages/chats/register/register";
 import { addMainPage } from "./pages/chats/main/main";
