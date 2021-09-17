@@ -9,6 +9,10 @@ type Props = {
     value?: string,
     label?: string,
     type?: string,
+    imagesrc?: string,
+    divclass?: string,
+    imagetitle?: string,
+    data?: string,
     textinput?: any,
     avatar?: any,
     events?: {

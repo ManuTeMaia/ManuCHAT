@@ -1,45 +1,58 @@
-import "../../../components/profile-field/profile-field";
-import "../../../components/avatar/avatar";
-import "../../../components/headings/headings";
+import Block from "../../../utils/Block";
+import ProfileField from "../../../components/profile-field/profile-field";
+import Avatar from "../../../components/avatar/avatar";
+import Heading from  "../../../components/headings/headings";
 import template from "./user-profile.hbs";
 import "./user-profile.pcss";
 
-export function addProfilePage():string {
-
-	const profilePageData = {
-		userpic: {
+class ProfilePage extends Block{
+	constructor() {
+        super("div");
+    }
+    render():DocumentFragment {
+		const avatar = new Avatar({
+			divclass: "main--page-user-profile user-profile-avatar",
 			imagesrc: "/noimage.png",
-			divclass: "main--page-user-profile user-profile-avatar"
-		},
-		username: {
-			level: "3",
-			class: "main--page-user-profile user-profile-heading",
-			text: "Иветта Сидорова"
-		},
-		profileFields: {
-			email: {
-				label: "E-mail",
-				data: "dragonfly@123.com"
-			},
-			login: {
-				label: "Логин",
-				data: "dragonfly"
-			},
-			firstname: {
-				label: "Имя",
-				data: "Иветта"
-			},
-			lastname: {
-				label: "Фамилия",
-				data: "Сидорова"
-			},
-			phone: {
-				label: "Телефон",
-				data: "+7 (000)-000-00-00"
+			imagetitle: "Avatar",
+			events: {
+				click: () => alert("Позже тут можно будет загрузить аватар")
 			}
-		}
-	};
+		});
+		const email = new ProfileField({
+			label: "Email",
+			data: "dragonfly@123.com"
+		});
+		const login = new ProfileField({
+			label: "Логин",
+			data: "dragonfly"
+		});
+		const firstname = new ProfileField({
+			label: "Имя",
+			data: "Джейн"
+		});
+		const lastname = new ProfileField({
+			label: "Фамилияя",
+			data: "Доу"
+		});
+		const phone = new ProfileField({
+			label: "Телефон",
+			data: "+7 (000)-000-00-00"
+		});
+		const heading = new Heading({
+			class: "main--page-user-profile user-profile-heading",
+			text: `${firstname.data} ${lastname.data}`
+		});
 
-	const WrapElement = document.querySelector(".chat--wrap") as HTMLElement;
-	return WrapElement.innerHTML = template(profilePageData);
+        return this.compile(template, {
+			avatar:avatar,
+			headung:heading,
+			email:email,
+			login:login,
+			firstname:firstname,
+			lastname:lastname,
+			phone:phone
+		});
+    }
+
 }
+export default ProfilePage;

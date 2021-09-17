@@ -3,7 +3,7 @@ import template from "./avatar.hbs";
 import "./avatar.pcss";
 
 class Avatar extends Block {
-    constructor(props:{divclass:string; imagesrc:string; imagetitle:string;events?: {click: (e:Event) =>void};}) {
+    constructor(props:Props) {
         super("avatar", props);
     }
     render():DocumentFragment {

@@ -1,10 +1,12 @@
 <div class="main--page-user-profile-wrap">
-    {{>avatar userpic}}
+    {{{avatar}}}
     <div class="main--page-user-profile-fields">
-        {{>heading username}}
-        {{#each profileFields}}
-            {{>profileField}}
-        {{/each}}
+        {{{heading}}}
+        {{{email}}}
+        {{{login}}}
+        {{{firstname}}}
+        {{{lastname}}}
+        {{{phone}}}
         <div class="main--page-user-profile-actions">
             <a href="" class="main--page-user-profile user-profile-link link-change-data">Изменить данные</a>
             <a href="" class="main--page-user-profile user-profile-link link-change-pass">Изменить пароль</a>

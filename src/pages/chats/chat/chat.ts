@@ -1,7 +1,7 @@
 import Block from "../../../utils/Block";
-import SearchInput from "../../../components/inputs/search-input";
-import Avatar from "../../../components/avatar/avatar";
+import pageRender from "../../../utils/pageRender";
 import ChatProfileCard from "../../../modules/chat-list-profile-card/chat-list-profile-card";
+import ProfilePage from "../user-profile/user-profile";
 import template from "./chat.hbs";
 import "./chat.pcss";
 
@@ -10,22 +10,17 @@ class ChatPage extends Block {
 		super("div");
 	}
 	render(): DocumentFragment {
-		const avatar =  new Avatar({
+		
+		const profilecard = new ChatProfileCard({
 			imagesrc: "/noimage.png",
 			divclass: "chat-list-profile-card profile-card-avatar",
 			imagetitle: "Изменить данные профиля",
 			events: {
-				click: () => console.log("clicked")
-			}
-		});
-		const search = new SearchInput({
+				click: () => pageRender(".chat--wrap",new ProfilePage())
+			},
 			class: "chat-list-profile-card profile-card-search",
 			name: "search",
 			placeholder: "Поиск"
-		});
-		const profilecard = new ChatProfileCard({
-			avatar:avatar,
-			textinput:search,
 		});
 
 		return this.compile(template, {
