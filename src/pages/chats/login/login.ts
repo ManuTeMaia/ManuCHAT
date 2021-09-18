@@ -1,7 +1,11 @@
 import Block from "../../../utils/Block";
+import pageRender from "../../../utils/pageRender";
+import ChatPage from "../chat/chat";
+import RegistrationPage from "../register/register";
 import InputWrapper from  "../../../modules/inputs-wrapper/inputs-wrapper";
 import Button from "../../../components/buttons/submit-button";
 import Heading from "../../../components/headings/headings";
+import Link from "../../../components/links/links";
 import template from "./login.hbs";
 import "./login.pcss";
 
@@ -11,7 +15,6 @@ class LoginPage extends Block {
 	}
 	render(): DocumentFragment {
 		const heading = new Heading({
-			class: "heading3",
 			text: "Вход"
 		});
 		const login = new InputWrapper({
@@ -39,7 +42,18 @@ class LoginPage extends Block {
 			events: {
 				click: (e) => {
 					e.preventDefault();
-					console.log("EventClick");
+					pageRender(".root",new ChatPage());
+					}
+				}
+		});
+		const link = new Link({
+			url:"",
+			class:"form--login-register-link",
+			text:"Нет аккаунта?",
+			events: {
+				click: (e) => {
+					e.preventDefault();
+					pageRender(".root",new RegistrationPage());
 					}
 				}
 		});
@@ -49,8 +63,7 @@ class LoginPage extends Block {
 			login:login,
 			password:password,
 			submit:submit,
-
-			
+			link:link
 		});
     }
 }

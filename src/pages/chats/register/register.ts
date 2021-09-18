@@ -1,60 +1,65 @@
-import "../../../components/buttons/submit-button";
-import "../../../components/headings/headings";
-import "../../../components/inputs/text-input";
+import Block from "../../../utils/Block";
+import pageRender from "../../../utils/pageRender";
+import ChatPage from "../chat/chat";
+import InputWrapper from  "../../../modules/inputs-wrapper/inputs-wrapper";
+import Button from "../../../components/buttons/submit-button";
+import Heading from "../../../components/headings/headings";
 import template from "./register.hbs";
 import "./register.pcss";
 
-export function addRegisterPage():string {
-
-	const regFormData = {
-		heading: {
-			level: "3",
-			class: "",
+class RegistrationPage extends Block {
+	constructor(){
+		super("div");
+	}
+	render(): DocumentFragment {
+		const heading = new Heading({
+			class: "heading3",
 			text: "Регистрация"
-		},
-		textInputs: {
-			email: {
+		});
+		const textInputs = [
+			{
 				label: "E-mail",
 				type: "email",
 				name: "email",
 				placeholder: "email",
 				required: "reqiured"
 			},
-			login: {
+			{
 				label: "Логин",
 				type: "text",
 				name: "login",
 				placeholder: "Имя пользователя",
 				required: "reqiured"
 			},
-			firstname: {
+			{
 				label: "Имя",
 				type: "text",
 				name: "first_name",
 				placeholder: "Ваше имя",
 				required: "reqiured"
 			},
-			lastname: {
+			{
 				label: "Фамилия",
 				type: "text",
 				name: "second_name",
-				placeholder: "Ваша фамилия"
+				placeholder: "Ваша фамилия",
+				required: ""
 			},
-			phone: {
+			{
 				label: "Телефон",
 				type: "tel",
 				name: "phone",
 				placeholder: "+7 (000)-000-00-00",
 				required: "reqiured"
 			},
-			password: {
+			{
 				label: "Пароль",
 				type: "password",
 				name: "password",
 				placeholder: "***********",
 				required: "required"
 			},
-			passwordrepeat: {
+			{
 				label: "Повторите пароль",
 				type: "password",
 				name: "repeat-password",
@@ -62,14 +67,39 @@ export function addRegisterPage():string {
 				required: "required"
 			}
 
-		},
-		submit: {
+		];
+		
+		textInputs.map(
+			textInput => new InputWrapper({
+				label: textInput.label,
+				type: textInput.type,
+				name: textInput.name,
+				placeholder: textInput.placeholder,
+				required:  textInput.required
+				//events: obj.event
+			})
+		);
+		
+        const submit = new Button({
 			class: "form--register-submit",
 			name: "registration-submit",
-			title: "Зарегистрироваться"
-		}
-	};
+			title: "Зарегистрироваться",
+			events: {
+				click: (e) => {
+					e.preventDefault();
+					pageRender(".root",new ChatPage());
+					}
+				}
+		});
 
-	const WrapElement = document.querySelector(".root") as HTMLElement;
-	return WrapElement.innerHTML = template(regFormData);
+		return this.compile(template, {
+			heading:heading,
+			textInputs:textInputs,
+			submit:submit,
+
+			
+		});
+    }
 }
+
+export default RegistrationPage;

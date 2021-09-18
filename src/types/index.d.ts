@@ -6,6 +6,7 @@ type Props = {
     title?: string,
     class?: string,
     placeholder?: string,
+    required?: string,
     value?: string,
     label?: string,
     type?: string,
@@ -13,11 +14,13 @@ type Props = {
     divclass?: string,
     imagetitle?: string,
     data?: string,
+    text?: string,
+    url?: string,
     textinput?: any,
     avatar?: any,
     events?: {
-        click?: () => void,
-        submit?: () => void,
+        click?: (e:Event) => void,
+        submit?: (e:Event) => void,
         focus?: () => void,
         blur?: () => void
     }

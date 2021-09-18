@@ -1,14 +1,14 @@
 import Block from "../../utils/Block";
-import template from "./headings.hbs";
-import "./headings.pcss";
+import template from "./links.hbs";
+import "./links.pcss";
 
-class Heading extends Block {
+class Link extends Block {
     constructor(props:Props) {
-        super("div", props);
+        super("divr", props);
     }
     render():DocumentFragment {
         return this.compile(template, {...this.props});
     }
 
 }
-export default Heading;
+export default Link;
