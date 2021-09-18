@@ -108,15 +108,27 @@ export default class Block {
 		const fragment = document.createElement("template");
 		const components: Record<string, Block> = {};
 
-		Object.entries(props).forEach(([name, value]) => {
-			if (value instanceof Block) {
-			components[value.id] = value; 
-			props[name] = `<div id="id-${value.id}"></div>`;
-		}
-		});
+			Object.entries(props).forEach(([name, value]) => {
+				if(Array.isArray(value)) {
+					const objArr = value;
+					objArr.forEach((obj) => {
+						if (obj instanceof Block) {
+							console.log(obj);
+							components[obj.id] = obj; 
+							props[name] = `<div id="id-${obj.id}"></div>`;
+						}
+					});
+					
+				} 
+				if (value instanceof Block) {
+				components[value.id] = value; 
+				props[name] = `<div id="id-${value.id}"></div>`;
+				}
+			});
 
-		fragment.innerHTML = tmpl(props); 
-		
+			fragment.innerHTML = tmpl(props); 
+			
+
 		Object.entries(components).forEach(([id, component]) => {
 			const stub = fragment.content.querySelector(`#id-${id}`);
 	
@@ -126,8 +138,8 @@ export default class Block {
 				return;
 			}
 		});
-		
 		return fragment.content;
+	
 	}
 
 	_render():void{

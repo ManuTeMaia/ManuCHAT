@@ -1,9 +1,11 @@
 import Block from "../../../utils/Block";
 import pageRender from "../../../utils/pageRender";
 import ChatPage from "../chat/chat";
+import LoginPage from "../login/login";
 import InputWrapper from  "../../../modules/inputs-wrapper/inputs-wrapper";
 import Button from "../../../components/buttons/submit-button";
 import Heading from "../../../components/headings/headings";
+import Link from "../../../components/links/links";
 import template from "./register.hbs";
 import "./register.pcss";
 
@@ -68,16 +70,8 @@ class RegistrationPage extends Block {
 			}
 
 		];
-		
-		textInputs.map(
-			textInput => new InputWrapper({
-				label: textInput.label,
-				type: textInput.type,
-				name: textInput.name,
-				placeholder: textInput.placeholder,
-				required:  textInput.required
-				//events: obj.event
-			})
+		const textInput = textInputs.map(
+			(textInput) => new InputWrapper(textInput)
 		);
 		
         const submit = new Button({
@@ -91,11 +85,22 @@ class RegistrationPage extends Block {
 					}
 				}
 		});
-
+		const link = new Link({
+			url:"",
+			class:"form--register-login-link",
+			text:"Войти",
+			events: {
+				click: (e) => {
+					e.preventDefault();
+					pageRender(".root",new LoginPage());
+					}
+				}
+		});
 		return this.compile(template, {
 			heading:heading,
-			textInputs:textInputs,
+			textinput:textInput,
 			submit:submit,
+			link:link
 
 			
 		});
