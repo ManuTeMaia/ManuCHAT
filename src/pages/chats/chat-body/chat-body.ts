@@ -1,5 +1,6 @@
 import Block from "../../../utils/Block";
 import Avatar from "../../../components/avatar/avatar";
+import ChatMessage from "../../../components/chat-message/chat-message";
 import TextInput from "../../../components/inputs/text-input";
 import Button from "../../../components/buttons/submit-button";
 import template from "./chat-body.hbs";
@@ -18,12 +19,12 @@ class ChatBodyPage extends Block{
 		const textinput = new TextInput({
 				type: "text",
 				name: "message",
+				class: "message-input-form-input",
 				placeholder: "Пишите..."
 		});
         const send = new Button({
 			class: "main--page-chat-send",
 			name: "send-submit",
-			title: "Send",
 			events: {
 				click: (e) => {
 					e.preventDefault();
@@ -37,6 +38,7 @@ class ChatBodyPage extends Block{
 
         return this.compile(template, {
 			avatar:avatar,
+			chatmessages:chatmessages,
 			textinput:textinput,
 			send:send,
 			

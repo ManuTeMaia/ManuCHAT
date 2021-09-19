@@ -70,8 +70,8 @@ class ChatPage extends Block {
 				lastmessage: "Что-то непонятное",
 				unread: "2",
 				events: {
-					click: () => {
-						document.querySelector(".chat--list-card-wrap")?.classList.add("active");
+					click: (e:Event) => {
+						(<HTMLElement> e.currentTarget).classList.add("active");
 						pageRender(".chat--wrap",new ChatBodyPage());
 					}
 				}

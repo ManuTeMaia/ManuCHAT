@@ -1,14 +1,14 @@
 import Block from "../../utils/Block";
-import template from "./submit-button.hbs";
-import "./buttons.pcss";
+import template from "./chat-message.hbs";
+import "./chat-message.pcss";
 
-class Button extends Block {
+class ChatMessage extends Block {
     constructor(props:Props) {
-        super("button", props);
+        super("avatar", props);
     }
     render():DocumentFragment {
         return this.compile(template, {...this.props});
     }
 
 }
-export default Button;
+export default ChatMessage;

@@ -103,7 +103,7 @@ export default class Block {
 		return this._element;
 	}
 	
-	compile(tmpl: (ctx: Record<string, unknown>) => string, props: Record<string, unknown>): DocumentFragment {
+	compile(tmpl: (ctx: Record<string, unknown>) => string, props: Record<string, any>): DocumentFragment {
     
 		const fragment = document.createElement("template");
 		const components: Record<string, Block> = {};
@@ -111,11 +111,14 @@ export default class Block {
 			Object.entries(props).forEach(([name, value]) => {
 				if(Array.isArray(value)) {
 					const objArr = value;
+					let i = 0;
 					objArr.forEach((obj) => {
 						if (obj instanceof Block) {
 							console.log(obj);
 							components[obj.id] = obj; 
-							props[name] = `<div id="id-${obj.id}"></div>`;
+							console.log(props[name][i]);
+							props[name][i] = `<div id="id-${obj.id}"></div>`;
+							i++;
 						}
 					});
 					
