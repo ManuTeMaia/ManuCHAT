@@ -16,6 +16,7 @@ type Props = {
     data?: string,
     text?: string,
     url?: string,
+    time?: string,
     textinput?: any,
     avatar?: any,
     events?: {

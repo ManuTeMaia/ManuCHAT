@@ -2,7 +2,9 @@
   <div class="form--register-wrap">
   {{{heading}}}
     <form action="" class="form--register" enctype="multipart/form-data">
-    {{{textinput}}}
+    {{#each textinputs}}
+      {{{this}}}
+    {{/each}}
     {{{submit}}}
     </form>
     {{{link}}}

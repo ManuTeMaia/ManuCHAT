@@ -14,7 +14,7 @@
         "postcss-grid": {
             "columns": 12,
             "maxWidth": 1200,
-            "gutter": 5,
+            "gutter": 10,
             "legacy": false
         },
         "postcss-import": true,

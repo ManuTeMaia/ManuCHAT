@@ -2,15 +2,13 @@
     {{{avatar}}}
     <div class="main--page-user-profile-fields">
         {{{heading}}}
-        {{{email}}}
-        {{{login}}}
-        {{{firstname}}}
-        {{{lastname}}}
-        {{{phone}}}
+        {{#each profilefields}}
+            {{{this}}}
+        {{/each}}
         <div class="main--page-user-profile-actions">
-            <a href="" class="main--page-user-profile user-profile-link link-change-data">Изменить данные</a>
-            <a href="" class="main--page-user-profile user-profile-link link-change-pass">Изменить пароль</a>
-            <a href="" class="main--page-user-profile user-profile-link link-logout">Выйти</a>
+            {{#each links}}
+                {{{this}}}
+            {{/each}}
         </div>
     </div>
 </div>

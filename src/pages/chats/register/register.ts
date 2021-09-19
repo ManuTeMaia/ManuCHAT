@@ -15,7 +15,6 @@ class RegistrationPage extends Block {
 	}
 	render(): DocumentFragment {
 		const heading = new Heading({
-			class: "heading3",
 			text: "Регистрация"
 		});
 		const textInputs = [
@@ -68,10 +67,9 @@ class RegistrationPage extends Block {
 				placeholder: "***********",
 				required: "required"
 			}
-
 		];
-		const textInput = textInputs.map(
-			(textInput) => new InputWrapper(textInput)
+		const textinputs = textInputs.map(
+			(textinput) => new InputWrapper(textinput)
 		);
 		
         const submit = new Button({
@@ -98,11 +96,9 @@ class RegistrationPage extends Block {
 		});
 		return this.compile(template, {
 			heading:heading,
-			textinput:textInput,
+			textinputs:textinputs,
 			submit:submit,
 			link:link
-
-			
 		});
     }
 }

@@ -1,108 +1,124 @@
-import "../../components/buttons/submit-button";
-import "../../components/headings/headings";
-import "../../components/inputs/text-input";
+import Block from "../../utils/Block";
+import Button from "../../components/buttons/submit-button";
+import Heading from "../../components/headings/headings";
+import InputWrapper from "../../modules/inputs-wrapper/inputs-wrapper";
 import template from "./user-profile-form.hbs";
 import "./user-profile-form.pcss";
 
-function addProfileFormPage():string {
-
-	const profileFormData = {
-		heading: {
-			level: "3",
-			class: "",
+class ProfileFormPage extends Block {
+	constructor(){
+		super("div");
+	}
+	render(): DocumentFragment {
+		const heading = new Heading({
 			text: "Изменить данные"
-		},
-		formclass: "form--user-profile-info",
-		textInputs: {
-			email: {
+		});
+		const formclass = "form--user-profile-info";
+
+		const textinputs = [
+			{
 				label: "E-mail",
 				type: "email",
 				name: "email",
 				placeholder: "dragonfly@123.com"
 			},
-			login: {
+			{
 				label: "Логин",
 				type: "text",
 				name: "login",
 				placeholder: "dragonfly"
 			},
-			firstname: {
+			{
 				label: "Имя",
 				type: "text",
 				name: "first_name",
-				placeholder: "Иветта"
+				placeholder: "Джейн"
 			},
-			lastname: {
+			{
 				label: "Фамилия",
 				type: "text",
 				name: "second_name",
-				placeholder: "Сидорова"
+				placeholder: "Доу"
 			},
-			displayname: {
+			{
 				label: "Имя в чате",
 				type: "text",
 				name: "display_name",
-				placeholder: "Иветта Сидорова"
+				placeholder: "Джейн Доу"
 			},
-			phone: {
+			{
 				label: "Телефон",
 				type: "tel",
 				name: "phone",
 				placeholder: "+7 (000)-000-00-00"
 			}
-		},
-		submit: {
+		].map((textinput) => new InputWrapper(textinput));
+		
+		const submit = new Button({
 			class: "form--user-profile-info-submit",
 			name: "user-profile-штащ-submit",
 			title: "Cохранить"
-		}
+		});
 
-	};
-	const ProfileFormPageElement = document.querySelector(".main--page-user-profile-fields") as HTMLElement;
-	return ProfileFormPageElement.innerHTML = template(profileFormData);
+		return this.compile(template, {
+			heading:heading,
+			formclass:formclass,
+			textinputs:textinputs,
+			submit:submit
+		});
+
+	}
 }
 
-function addProfileFormPasswordPage():string {
-
-	const profileFormData = {
-		heading: {
-			level: "3",
-			class: "",
+class ProfileFormPasswordPage extends Block {
+	constructor(){
+		super("div");
+	}
+	render(): DocumentFragment {
+		const heading = new Heading({
 			text: "Изменить пароль"
-		},
-		form: "form--user-profile-password",
-		textInputs: {
-			currentpassword: {
+		});
+		
+		const formclass = "form--user-profile-password";
+
+		const textinputs = [
+			{
 				label: "Текущий пароль",
 				type: "password",
 				name: "current-password",
 				placeholder: "***********",
 				required: "required"
 			},
-			password: {
+			{
 				label: "Пароль",
 				type: "password",
 				name: "password",
 				placeholder: "***********",
 				required: "required"
 			},
-			passwordrepeat: {
+			{
 				label: "Повторите пароль",
 				type: "password",
 				name: "repeat-password",
 				placeholder: "***********",
 				required: "required"
 			}
-		},
-		submit: {
+		].map((textinput) => new InputWrapper(textinput));
+		
+		const submit = new Button({
 			class: "form--user-profile-password-submit",
 			name: "user-profile-password-submit",
 			title: "Изменить"
-		}
+		});
 
-	};
-	const ProfileFormPasswordPageElement = document.querySelector(".main--page-user-profile-fields") as HTMLElement;
-	return ProfileFormPasswordPageElement.innerHTML = template(profileFormData);
+		return this.compile(template, {
+			heading:heading,
+			formclass:formclass,
+			textinputs:textinputs,
+			submit:submit
+		});
+
+	}
 }
 
-export { addProfileFormPage, addProfileFormPasswordPage };
+export { ProfileFormPage, ProfileFormPasswordPage };

@@ -1,10 +1,15 @@
 <div class="main--page-chat-body-wrap">
     <div class="main--page-chat-body-header">
+        <div class="main--page-chat-body-header-chatname">
         {{{avatar}}}
+        {{{chatname}}}
+        </div>
         <i class="ch-more"></i>
     </div>
     <div class="main--page-chat-body-messages">
-        {{{chatmessages}}}
+        {{#each chatmessages}}
+            {{{this}}}
+        {{/each}}
     </div>
     <div class="main--page-chat-body-footer">
         <i class="ch-attachment"></i>

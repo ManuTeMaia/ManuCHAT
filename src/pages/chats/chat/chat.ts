@@ -33,8 +33,23 @@ class ChatPage extends Block {
 				time: "13:10",
 				title: "Super Chat",
 				lastmessage: "Изображение",
-				unread: "3"
+				unread: "1"
 			},
+			{
+				imagesrc: "/noimage.png",
+				divclass: "chat-list-card card-avatar",
+				imagetitle: "Marvell",
+				time: "15:02",
+				title: "Marvell (активный)",
+				lastmessage: "Что-то непонятное",
+				unread: "2",
+				events: {
+					click: (e:Event) => {
+						(<HTMLElement> e.currentTarget).classList.add("active");
+						pageRender(".chat--wrap",new ChatBodyPage());
+					}
+				}
+			},	
 			{
 				imagesrc: "/noimage.png",
 				divclass: "chat-list-card card-avatar",
@@ -60,22 +75,7 @@ class ChatPage extends Block {
 				time: "Вчера",
 				title: "Андрей",
 				lastmessage: "Ты даже не представляешь как...",
-			},
-			{
-				imagesrc: "/noimage.png",
-				divclass: "chat-list-card card-avatar",
-				imagetitle: "Marvell",
-				time: "Вчера",
-				title: "Marvell",
-				lastmessage: "Что-то непонятное",
-				unread: "2",
-				events: {
-					click: (e:Event) => {
-						(<HTMLElement> e.currentTarget).classList.add("active");
-						pageRender(".chat--wrap",new ChatBodyPage());
-					}
-				}
-			},	
+			}
 		];
 		const chatlist = chatsList.map(
 			(chatlist) => new ChatListCard(chatlist)
@@ -83,7 +83,7 @@ class ChatPage extends Block {
 
 		return this.compile(template, {
 			profilecard:profilecard,
-			chatlist:chatlist,
+			chatlist:chatlist
 		});
 	}
 }

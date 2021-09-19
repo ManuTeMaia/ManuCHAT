@@ -1,1 +1,26 @@
+.message-wrap {
+    float:left;
+    position: relative;
+    max-width: 60%;
+    padding: var(--global--spacing-unit);
+    background: var(--global--color-secondary-20);
+    border-radius: var(--global--border-radius);
+    border-top-left-radius: 0;
+    margin-bottom: var(--global--spacing-unit);
+    clear: both;
+}
 
+.message-wrap.mine {
+    float:right;
+    background: var(--global--color-light-gray);
+    border-top-left-radius: var(--global--border-radius);
+    border-bottom-right-radius: 0;
+}
+
+.message-time {
+    float: right;
+    text-align: right;
+    margin-left: var(--global--spacing-unit);
+    font-size: var(--global--font-size-sm);
+    color: var(--global--color-dark-gray);
+}

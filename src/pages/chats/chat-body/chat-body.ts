@@ -16,6 +16,7 @@ class ChatBodyPage extends Block{
 			imagesrc: "/noimage.png",
 			imagetitle: "This Chat",
 		});
+		const chatname = "Marvell";
 		const textinput = new TextInput({
 				type: "text",
 				name: "message",
@@ -31,12 +32,39 @@ class ChatBodyPage extends Block{
 					}
 				}
 		});
-		const chatmessages = new ChatMessage({
-			label: "Email",
-			data: "dragonfly@123.com"
-		});
+		const chatmessages = [
+			{
+			text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas at neque commodo, mattis sapien bibendum, fringilla lacus. Pellentesque est metus, sollicitudin a vulputate a, luctus at mi. Maecenas eleifend vulputate gravida. Sed sodales diam eget mauris mattis, in rutrum sapien auctor. Aenean sed justo vel mauris gravida mollis eget eu velit. Vivamus ut auctor libero. Maecenas eu ipsum id sapien accumsan feugiat. Donec sit amet condimentum felis, ut tincidunt mauris. Sed nec luctus lorem. Aliquam id blandit urna. Phasellus mauris ipsum, blandit a lacus nec, finibus tempus odio. Quisque sollicitudin viverra dapibus.",
+			time:"13:15"
+			},
+			{
+			ismine:"mine",
+			text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas at neque commodo, mattis sapien bibendum, fringilla lacus. Pellentesque est metus, sollicitudin a vulputate a, luctus at mi. Maecenas eleifend vulputate gravida. Sed sodales diam eget mauris mattis, in rutrum sapien auctor. Aenean sed justo vel mauris gravida mollis eget eu velit. Vivamus ut auctor libero. Maecenas eu ipsum id sapien accumsan feugiat. Donec sit amet condimentum felis, ut tincidunt mauris. Sed nec luctus lorem.",
+			time:"13:35",
+			isrecieved: "+"
+			},
+			{
+			text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas at neque commodo, mattis sapien bibendum, fringilla lacus. Pellentesque est metus, sollicitudin a vulputate a, luctus at mi. Maecenas eleifend vulputate gravida. Sed sodales diam eget mauris mattis, in rutrum sapien auctor. Aenean sed justo vel mauris gravida mollis eget eu velit. Vivamus ut auctor libero. Maecenas eu ipsum id sapien accumsan feugiat. Donec sit amet condimentum felis, ut tincidunt mauris. Sed nec luctus lorem. Aliquam id blandit urna. Phasellus mauris ipsum, blandit a lacus nec, finibus tempus odio. Quisque sollicitudin viverra dapibus.",
+			time:"13:15"
+			},
+			{
+			ismine:"mine",
+			text: "Pellentesque est metus, sollicitudin a vulputate a, luctus at mi. Maecenas eleifend",
+			time:"13:35",
+			isrecieved: "+"
+			},
+			{
+			text:"%)",
+			time:"15:00"
+			},
+			{
+			text:"Что-то непонятное",
+			time:"15:02"
+			}
+		].map((chatmessage) => new ChatMessage(chatmessage));
 
         return this.compile(template, {
+			chatname:chatname,
 			avatar:avatar,
 			chatmessages:chatmessages,
 			textinput:textinput,

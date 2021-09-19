@@ -2,7 +2,9 @@
   <div class="chat--list-wrap">
     {{{profilecard}}}
     <div class="chat--list-chats">
-    {{{chatlist}}}
+    {{#each chatlist}}  
+      {{{this}}}
+    {{/each}}
     </div>
   </div>
   <div class="chat--wrap">Выберите чат чтобы отправить сообщение
