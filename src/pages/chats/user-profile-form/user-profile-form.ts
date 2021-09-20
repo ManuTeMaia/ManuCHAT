@@ -1,8 +1,8 @@
-import Block from "../../utils/Block";
-import submitEmulator from "../../helpers/formActions";
-import Button from "../../components/buttons/submit-button";
-import Heading from "../../components/headings/headings";
-import InputWrapper from "../../modules/inputs-wrapper/inputs-wrapper";
+import Block from "../../../utils/Block";
+import submitEmulator from "../../../helpers/formActions";
+import Button from "../../../components/buttons/submit-button";
+import Heading from "../../../components/headings/headings";
+import InputWrapper from "../../../modules/inputs-wrapper/inputs-wrapper";
 import template from "./user-profile-form.hbs";
 import "./user-profile-form.pcss";
 

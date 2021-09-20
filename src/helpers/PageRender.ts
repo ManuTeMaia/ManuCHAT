@@ -4,7 +4,7 @@ import ChatBody from "../pages/chats/chat-body/chat-body";
 import LoginPage from "../pages/chats/login/login";
 import RegistrationPage from "../pages/chats/register/register";
 import ProfilePage from "../pages/chats/user-profile/user-profile";
-import { ProfileFormPage, ProfileFormPasswordPage } from "../modules/user-profile-form/user-profile-form";
+import { ProfileFormPage, ProfileFormPasswordPage } from "../pages/chats/user-profile-form/user-profile-form";
 
 
 function pageRender(query: string, block: string): Element {
