@@ -12,15 +12,18 @@ pull request #2
 
 ### Команды:
 
+```
 npm run dev //тестируем
 npm run build //собираем
 npm run start // запускаем сервер
 npm run eslint // ESlint
 npm run styles // StyleLint
 
+```
+
 ### Под капотом: 
 
-#### Sprin 1
+#### Sprint 1
 
 1. NodeJs 14.17.5
 
@@ -32,7 +35,7 @@ npm run styles // StyleLint
 
 5. Express 4.17.1
 
-#### Sprin 2
+#### Sprint 2
 
 6. Проект переведен на TipeScript
 
