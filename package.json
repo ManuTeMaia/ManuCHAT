@@ -1,7 +1,7 @@
 {
     "name": "middle.messenger.praktikum.yandex",
-    "version": "1.0.0",
-    "description": "Manutemaia Chat: Sprint 1",
+    "version": "0.2.0",
+    "description": "Manutemaia Chat: Sprint 2",
     "main": "index.js",
     "engine": "^14.17.5",
     "repository": {
@@ -42,8 +42,7 @@
         "build": "rm -rf dist/* && parcel build static/*html",
         "start": "node ./server.ts",
         "eslint": "eslint ./src",
-        "style": "stylelint ./src",
-        "types": "tsc"
+        "style": "stylelint ./src"
     },
     "dependencies": {
         "components": "^0.1.0",

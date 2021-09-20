@@ -26,8 +26,8 @@ class ChatBodyPage extends Block{
 				validationtype: "message",
 				required: true,
 				events: {
-					focus: () => this.validate(),
-					blur: () => this.validate(),
+					focus: (e: Event) => this.validate((e.currentTarget as HTMLInputElement)),
+					blur: (e: Event) => this.validate((e.currentTarget as HTMLInputElement)),
 				}
 		});
         const send = new Button({

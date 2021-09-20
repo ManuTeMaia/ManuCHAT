@@ -56,6 +56,7 @@ class ProfileFormPage extends Block {
 				label: "Фамилия",
 				type: "text",
 				name: "second_name",
+				validationtype: "name",
 				placeholder: "Доу",
 				events: {
 					focus: (e: Event) => this.validate((e.currentTarget as HTMLInputElement)),

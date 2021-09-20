@@ -12,7 +12,6 @@ function submitEmulator(e: Event, query: string, block: string): void {
     e.preventDefault();
     new Validator().formValidate();
     const hasErrors =  document.querySelectorAll(".invalid").length;
-    console.log(hasErrors);
     if(!hasErrors) {
         getFormData();
         pageRender(query, block);

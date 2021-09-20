@@ -1,4 +1,4 @@
-interface Pattern {
+type Patterns = {
 	pattern: RegExp, 
 	error: string
 }
@@ -8,8 +8,12 @@ type ValidResult = {
 	error: string
 } 
 
+type ValTipes = {
+	[key: string]: Patterns
+}
+
 class Validator {
-	validationTypes: Record<string, Pattern>;
+	validationTypes: ValTipes;
 	
 	constructor() {
 		this.validationTypes = {
@@ -40,7 +44,7 @@ class Validator {
       };
     }
   
-	_getValidationType(element: HTMLElement): Record<string, Pattern> | undefined {
+	_getValidationType(element: HTMLElement): ValTipes | undefined {
 		const type = element.getAttribute("valtype");
 
 		if(type) {
@@ -50,6 +54,7 @@ class Validator {
   
     _validate(element: HTMLInputElement): ValidResult {
 		const validType = this._getValidationType(element);
+		
 		if (!validType) {
         throw new Error("No validation type");
 		}
