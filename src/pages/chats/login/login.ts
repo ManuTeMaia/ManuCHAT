@@ -18,6 +18,7 @@ class LoginPage extends Block {
 		const heading = new Heading({
 			text: "Вход"
 		});
+
 		const login = new InputWrapper({
 			label: "Логин",
 			name: "login",
@@ -26,10 +27,11 @@ class LoginPage extends Block {
 			validationtype: "login",
 			required: true,
 			events: {
-				focus: () => this.validate(),
-				blur: () => this.validate(),
+				focus: (e) => this.validate((e.currentTarget as HTMLInputElement)),
+				blur: (e) => this.validate((e.currentTarget as HTMLInputElement)),
 			}
 		});
+
 		const password = new InputWrapper({
 			label: "Пароль",
 			name: "password",
@@ -38,18 +40,20 @@ class LoginPage extends Block {
 			validationtype: "password",
 			required: true,
 			events: {
-				focus: () => this.validate(),
-				blur: () => this.validate(),
+				focus: (e) => this.validate((e.currentTarget as HTMLInputElement)),
+				blur: (e) => this.validate((e.currentTarget as HTMLInputElement)),
 			}
 		});
+
         const submit = new Button({
 			class: "form--login-submit",
 			name: "login-submit",
 			title: "Авторизоваться",
 			events: {
-				click: (e) => submitEmulator(e)
+				click: (e) => submitEmulator(e, ".root", "chats")
 				}
 		});
+
 		const link = new Link({
 			url:"",
 			class:"form--login-register-link",

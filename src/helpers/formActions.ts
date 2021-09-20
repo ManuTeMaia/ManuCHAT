@@ -1,20 +1,21 @@
 import pageRender from "./pageRender";
+import Validator from "../utils/Validator";
 
 function getFormData(): void {
     const data: Record<string, unknown> = {};
-    const inputFields = document.querySelectorAll("input");
+    const inputFields = document.querySelectorAll("form input");
     inputFields.forEach((input: HTMLInputElement) => data[input.name] = input.value);
     console.log(data);
 }
 
-function submitEmulator(e: Event): void {
+function submitEmulator(e: Event, query: string, block: string): void {
     e.preventDefault();
-    this.validate();
+    new Validator().formValidate();
     const hasErrors =  document.querySelectorAll(".invalid").length;
     console.log(hasErrors);
     if(!hasErrors) {
         getFormData();
-        pageRender(".root","chats");
+        pageRender(query, block);
     }
 }
 

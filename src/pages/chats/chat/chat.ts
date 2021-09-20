@@ -16,7 +16,7 @@ class ChatPage extends Block {
 			divclass: "chat-list-profile-card profile-card-avatar",
 			imagetitle: "Изменить данные профиля",
 			events: {
-				click: () => pageRender(".chat--wrap","profile")
+				click: () => pageRender(".chat--wrap", "profile")
 			},
 			class: "chat-list-profile-card profile-card-search",
 			name: "search",

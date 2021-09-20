@@ -1,4 +1,5 @@
 import Block from "../../../utils/Block";
+import submitEmulator from "../../../helpers/formActions";
 import Avatar from "../../../components/avatar/avatar";
 import ChatMessage from "../../../components/chat-message/chat-message";
 import TextInput from "../../../components/inputs/text-input";
@@ -21,15 +22,19 @@ class ChatBodyPage extends Block{
 				type: "text",
 				name: "message",
 				class: "message-input-form-input",
-				placeholder: "Пишите..."
+				placeholder: "Пишите...",
+				validationtype: "message",
+				required: true,
+				events: {
+					focus: () => this.validate(),
+					blur: () => this.validate(),
+				}
 		});
         const send = new Button({
 			class: "main--page-chat-send",
 			name: "send-submit",
 			events: {
-				click: (e) => {
-					e.preventDefault();
-					}
+				click: (e) => submitEmulator(e, "", "")
 				}
 		});
 		const chatmessages = [

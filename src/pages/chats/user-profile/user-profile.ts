@@ -57,7 +57,7 @@ class ProfilePage extends Block{
 				events: {
 					click: (e:Event) => {
 						e.preventDefault();
-						pageRender(".main--page-user-profile-fields", "profile");
+						pageRender(".main--page-user-profile-fields", "profile-change");
 					}
 				}
 			},
@@ -90,7 +90,6 @@ class ProfilePage extends Block{
 			heading:heading,
 			profilefields:profilefields,
 			links:links
-
 		});
     }
 

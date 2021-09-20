@@ -23,7 +23,7 @@ type Props = {
     events?: {
         click?: (e:Event) => void,
         submit?: (e:Event) => void,
-        focus?: () => void,
-        blur?: () => void
+        focus?: (e:Event) => void,
+        blur?: (e:Event) => void
     }
 }

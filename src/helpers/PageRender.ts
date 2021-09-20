@@ -32,7 +32,7 @@ function pageRender(query: string, block: string): Element {
 		case "profile":
 			page = new ProfilePage;
 			break;
-		case "profile-form":
+		case "profile-change":
 			page = new ProfileFormPage;
 			break;
 		case "profile-password":

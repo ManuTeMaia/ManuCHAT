@@ -193,7 +193,7 @@ export default class Block {
 		return document.createElement(tagName);
 	}
 
-	validate(): void {
-		return this.validator().validate();
+	validate(input: HTMLInputElement): void {
+		return this.validator().validate(input);
 	}
 }

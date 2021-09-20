@@ -1,4 +1,5 @@
 import Block from "../../utils/Block";
+import submitEmulator from "../../helpers/formActions";
 import Button from "../../components/buttons/submit-button";
 import Heading from "../../components/headings/headings";
 import InputWrapper from "../../modules/inputs-wrapper/inputs-wrapper";
@@ -23,47 +24,74 @@ class ProfileFormPage extends Block {
 				type: "email",
 				name: "email",
 				validationtype: "email",
-				placeholder: "dragonfly@123.com"
+				placeholder: "dragonfly@123.com",
+				events: {
+					focus: (e: Event) => this.validate((e.currentTarget as HTMLInputElement)),
+					blur: (e: Event) => this.validate((e.currentTarget as HTMLInputElement)),
+				}
 			},
 			{
 				label: "Логин",
 				type: "text",
 				name: "login",
 				validationtype: "login",
-				placeholder: "dragonfly"
+				placeholder: "dragonfly",
+				events: {
+					focus: (e: Event) => this.validate((e.currentTarget as HTMLInputElement)),
+					blur: (e: Event) => this.validate((e.currentTarget as HTMLInputElement)),
+				}
 			},
 			{
 				label: "Имя",
 				type: "text",
 				name: "first_name",
 				validationtype: "name",
-				placeholder: "Джейн"
+				placeholder: "Джейн",
+				events: {
+					focus: (e: Event) => this.validate((e.currentTarget as HTMLInputElement)),
+					blur: (e: Event) => this.validate((e.currentTarget as HTMLInputElement)),
+				}
 			},
 			{
 				label: "Фамилия",
 				type: "text",
 				name: "second_name",
-				placeholder: "Доу"
+				placeholder: "Доу",
+				events: {
+					focus: (e: Event) => this.validate((e.currentTarget as HTMLInputElement)),
+					blur: (e: Event) => this.validate((e.currentTarget as HTMLInputElement)),
+				}
 			},
 			{
 				label: "Имя в чате",
 				type: "text",
 				name: "display_name",
-				placeholder: "Джейн Доу"
+				placeholder: "Джейн Доу",
+				events: {
+					focus: (e: Event) => this.validate((e.currentTarget as HTMLInputElement)),
+					blur: (e: Event) => this.validate((e.currentTarget as HTMLInputElement)),
+				}
 			},
 			{
 				label: "Телефон",
 				type: "tel",
 				name: "phone",
 				validationtype: "phone",
-				placeholder: "+7 (000)-000-00-00"
+				placeholder: "+7 (000)-000-00-00",
+				events: {
+					focus: (e: Event) => this.validate((e.currentTarget as HTMLInputElement)),
+					blur: (e: Event) => this.validate((e.currentTarget as HTMLInputElement)),
+				}
 			}
 		].map((textinput) => new InputWrapper(textinput));
 		
 		const submit = new Button({
 			class: "form--user-profile-info-submit",
 			name: "user-profile-info-submit",
-			title: "Cохранить"
+			title: "Cохранить",
+			events: {
+				click: (e) => submitEmulator(e, ".chat--wrap", "profile")
+				}
 		});
 
 		return this.compile(template, {
@@ -95,7 +123,11 @@ class ProfileFormPasswordPage extends Block {
 				name: "current-password",
 				placeholder: "***********",
 				validationtype: "password",
-				required: true
+				required: true,
+				events: {
+					focus: (e: Event) => this.validate((e.currentTarget as HTMLInputElement)),
+					blur: (e: Event) => this.validate((e.currentTarget as HTMLInputElement)),
+				}
 			},
 			{
 				label: "Пароль",
@@ -103,7 +135,11 @@ class ProfileFormPasswordPage extends Block {
 				name: "password",
 				placeholder: "***********",
 				validationtype: "password",
-				required: true
+				required: true,
+				events: {
+					focus: (e: Event) => this.validate((e.currentTarget as HTMLInputElement)),
+					blur: (e: Event) => this.validate((e.currentTarget as HTMLInputElement)),
+				}
 			},
 			{
 				label: "Повторите пароль",
@@ -111,14 +147,21 @@ class ProfileFormPasswordPage extends Block {
 				name: "repeat-password",
 				placeholder: "***********",
 				validationtype: "password",
-				required: true
+				required: true,
+				events: {
+					focus: (e: Event) => this.validate((e.currentTarget as HTMLInputElement)),
+					blur: (e: Event) => this.validate((e.currentTarget as HTMLInputElement)),
+				}
 			}
 		].map((textinput) => new InputWrapper(textinput));
 		
 		const submit = new Button({
 			class: "form--user-profile-password-submit",
 			name: "user-profile-password-submit",
-			title: "Изменить"
+			title: "Изменить",
+			events: {
+				click: (e) => submitEmulator(e, ".chat--wrap", "profile")
+				}
 		});
 
 		return this.compile(template, {

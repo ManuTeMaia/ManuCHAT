@@ -1,7 +1,6 @@
 import Block from "../../../utils/Block";
 import pageRender from "../../../helpers/pageRender";
-import ChatPage from "../chat/chat";
-import LoginPage from "../login/login";
+import submitEmulator from "../../../helpers/formActions";
 import InputWrapper from  "../../../modules/inputs-wrapper/inputs-wrapper";
 import Button from "../../../components/buttons/submit-button";
 import Heading from "../../../components/headings/headings";
@@ -17,14 +16,18 @@ class RegistrationPage extends Block {
 		const heading = new Heading({
 			text: "Регистрация"
 		});
-		const textInputs = [
+		const textinputs = [
 			{
 				label: "E-mail",
 				type: "email",
 				name: "email",
 				placeholder: "email",
 				validationtype: "email",
-				required: true
+				required: true,
+				events: {
+					focus: (e: Event) => this.validate((e.currentTarget as HTMLInputElement)),
+					blur: (e: Event) => this.validate((e.currentTarget as HTMLInputElement)),
+				}
 			},
 			{
 				label: "Логин",
@@ -32,7 +35,11 @@ class RegistrationPage extends Block {
 				name: "login",
 				placeholder: "Имя пользователя",
 				validationtype: "login",
-				required: true
+				required: true,
+				events: {
+					focus: (e: Event) => this.validate((e.currentTarget as HTMLInputElement)),
+					blur: (e: Event) => this.validate((e.currentTarget as HTMLInputElement)),
+				}
 			},
 			{
 				label: "Имя",
@@ -40,7 +47,11 @@ class RegistrationPage extends Block {
 				name: "first_name",
 				placeholder: "Ваше имя",
 				validationtype: "name",
-				required: true
+				required: true,
+				events: {
+					focus: (e: Event) => this.validate((e.currentTarget as HTMLInputElement)),
+					blur: (e: Event) => this.validate((e.currentTarget as HTMLInputElement)),
+				}
 			},
 			{
 				label: "Фамилия",
@@ -48,7 +59,11 @@ class RegistrationPage extends Block {
 				name: "second_name",
 				placeholder: "Ваша фамилия",
 				validationtype: "name",
-				required: true
+				required: true,
+				events: {
+					focus: (e: Event) => this.validate((e.currentTarget as HTMLInputElement)),
+					blur: (e: Event) => this.validate((e.currentTarget as HTMLInputElement)),
+				}
 			},
 			{
 				label: "Телефон",
@@ -56,7 +71,11 @@ class RegistrationPage extends Block {
 				name: "phone",
 				placeholder: "+7 (000)-000-00-00",
 				validationtype: "phone",
-				required: true
+				required: true,
+				events: {
+					focus: (e: Event) => this.validate((e.currentTarget as HTMLInputElement)),
+					blur: (e: Event) => this.validate((e.currentTarget as HTMLInputElement)),
+				}
 			},
 			{
 				label: "Пароль",
@@ -64,7 +83,11 @@ class RegistrationPage extends Block {
 				name: "password",
 				placeholder: "***********",
 				validationtype: "password",
-				required: true
+				required: true,
+				events: {
+					focus: (e: Event) => this.validate((e.currentTarget as HTMLInputElement)),
+					blur: (e: Event) => this.validate((e.currentTarget as HTMLInputElement)),
+				}
 			},
 			{
 				label: "Повторите пароль",
@@ -72,10 +95,13 @@ class RegistrationPage extends Block {
 				name: "repeat-password",
 				placeholder: "***********",
 				validationtype: "password",
-				required: true
+				required: true,
+				events: {
+					focus: (e: Event) => this.validate((e.currentTarget as HTMLInputElement)),
+					blur: (e: Event) => this.validate((e.currentTarget as HTMLInputElement)),
+				}
 			}
-		];
-		const textinputs = textInputs.map(
+		].map(
 			(textinput) => new InputWrapper(textinput)
 		);
 		
@@ -84,20 +110,17 @@ class RegistrationPage extends Block {
 			name: "registration-submit",
 			title: "Зарегистрироваться",
 			events: {
-				submit: (e) => {
-					e.preventDefault();
-					pageRender(".root",new ChatPage());
-					}
+				click: (e: Event) => submitEmulator(e, ".root", "chats")
 				}
 		});
 		const link = new Link({
 			url:"",
 			class:"form--register-login-link",
-			text:"Войти",
+			text:"Уже есть аккаунт",
 			events: {
-				click: (e) => {
+				click: (e: Event) => {
 					e.preventDefault();
-					pageRender(".root",new LoginPage());
+					pageRender(".root", "login");
 					}
 				}
 		});
