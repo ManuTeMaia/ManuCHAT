@@ -1,9 +1,7 @@
 import Block from "../../../utils/Block";
-import pageRender from "../../../utils/pageRender";
-import ChatBodyPage from "../../../pages/chats/chat-body/chat-body";
+import pageRender from "../../../helpers/PageRender";
 import ChatProfileCard from "../../../modules/chat-list-profile-card/chat-list-profile-card";
 import ChatListCard from "../../../modules/chat-list-card/chat-list-card";
-import ProfilePage from "../user-profile/user-profile";
 import template from "./chat.hbs";
 import "./chat.pcss";
 
@@ -18,7 +16,7 @@ class ChatPage extends Block {
 			divclass: "chat-list-profile-card profile-card-avatar",
 			imagetitle: "Изменить данные профиля",
 			events: {
-				click: () => pageRender(".chat--wrap",new ProfilePage())
+				click: () => pageRender(".chat--wrap","profile")
 			},
 			class: "chat-list-profile-card profile-card-search",
 			name: "search",
@@ -40,13 +38,13 @@ class ChatPage extends Block {
 				divclass: "chat-list-card card-avatar",
 				imagetitle: "Marvell",
 				time: "15:02",
-				title: "Marvell (активный)",
+				title: "Marvell (кликабельно)",
 				lastmessage: "Что-то непонятное",
 				unread: "2",
 				events: {
 					click: (e:Event) => {
 						(<HTMLElement> e.currentTarget).classList.add("active");
-						pageRender(".chat--wrap",new ChatBodyPage());
+						pageRender(".chat--wrap","chat");
 					}
 				}
 			},	

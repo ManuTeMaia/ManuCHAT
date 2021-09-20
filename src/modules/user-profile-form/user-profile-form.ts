@@ -11,8 +11,10 @@ class ProfileFormPage extends Block {
 	}
 	render(): DocumentFragment {
 		const heading = new Heading({
+			class: "main--page-user-profile user-profile-heading",
 			text: "Изменить данные"
 		});
+
 		const formclass = "form--user-profile-info";
 
 		const textinputs = [
@@ -20,18 +22,21 @@ class ProfileFormPage extends Block {
 				label: "E-mail",
 				type: "email",
 				name: "email",
+				validationtype: "email",
 				placeholder: "dragonfly@123.com"
 			},
 			{
 				label: "Логин",
 				type: "text",
 				name: "login",
+				validationtype: "login",
 				placeholder: "dragonfly"
 			},
 			{
 				label: "Имя",
 				type: "text",
 				name: "first_name",
+				validationtype: "name",
 				placeholder: "Джейн"
 			},
 			{
@@ -50,13 +55,14 @@ class ProfileFormPage extends Block {
 				label: "Телефон",
 				type: "tel",
 				name: "phone",
+				validationtype: "phone",
 				placeholder: "+7 (000)-000-00-00"
 			}
 		].map((textinput) => new InputWrapper(textinput));
 		
 		const submit = new Button({
 			class: "form--user-profile-info-submit",
-			name: "user-profile-штащ-submit",
+			name: "user-profile-info-submit",
 			title: "Cохранить"
 		});
 
@@ -76,6 +82,7 @@ class ProfileFormPasswordPage extends Block {
 	}
 	render(): DocumentFragment {
 		const heading = new Heading({
+			class: "main--page-user-profile user-profile-heading",
 			text: "Изменить пароль"
 		});
 		
@@ -87,21 +94,24 @@ class ProfileFormPasswordPage extends Block {
 				type: "password",
 				name: "current-password",
 				placeholder: "***********",
-				required: "required"
+				validationtype: "password",
+				required: true
 			},
 			{
 				label: "Пароль",
 				type: "password",
 				name: "password",
 				placeholder: "***********",
-				required: "required"
+				validationtype: "password",
+				required: true
 			},
 			{
 				label: "Повторите пароль",
 				type: "password",
 				name: "repeat-password",
 				placeholder: "***********",
-				required: "required"
+				validationtype: "password",
+				required: true
 			}
 		].map((textinput) => new InputWrapper(textinput));
 		

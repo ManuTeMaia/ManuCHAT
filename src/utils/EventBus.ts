@@ -1,6 +1,6 @@
 type Listeners = Record<string, Array<() => void>>;
 
-export default class EventBus{
+export default class EventBus {
     
     listeners: Listeners;
     

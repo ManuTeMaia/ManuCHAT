@@ -6,7 +6,7 @@ type Props = {
     title?: string,
     class?: string,
     placeholder?: string,
-    required?: string,
+    required?: boolean,
     value?: string,
     label?: string,
     type?: string,
@@ -17,6 +17,7 @@ type Props = {
     text?: string,
     url?: string,
     time?: string,
+    validationtype?: string
     textinput?: any,
     avatar?: any,
     events?: {

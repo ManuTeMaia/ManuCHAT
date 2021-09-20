@@ -1,96 +1,81 @@
-type ValidationElem = {
-  error: string,
-  pattern: RegExp,
+interface Pattern {
+	pattern: RegExp, 
+	error: string
 }
 
-type ValidationTypes = {
-  name: ValidationElem,
-  login: ValidationElem,
-  email: ValidationElem,
-  password: ValidationElem,
-  phone: ValidationElem,
-  message: ValidationElem,
-}
+type ValidResult = {
+	passed: boolean,
+	error: string
+} 
 
-type ValidationResult = {
-  isValid: boolean,
-  error: string,
-}
-  
-  class Validator {
-  
-    validationTypes: ValidationTypes;
-  
-    constructor() {
-      this.validationTypes = {
-        name: {
-          pattern: /^[A-Z][a-zA-Z-]|^[А-Я][а-яА-Я-]*$/,
-          error: "Name must contain latin or cyrillic symbols, first capital letter, no spaces and numbers, no special symbols except '-'",
-        },
-        login: {
-          pattern: /^(?=.*[a-zA-Z])([a-zA-Z0-9-_]){3,20}$/,
-          error: "Login must be 3-20 symbols long, latin, may use digits, should have letters, no spaces, no special symbols except '-, _'",
-        },
-        email: {
-          pattern: /.+@[^@]+[a-z]+\.[^@]{2,}$/,
-          error: "Email must contain latin, special symbols and '-' are allowed, must have '@' with letters and '.' after that",
-        },
-        password: {
-          pattern: /^(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{8,40}$/,
-          error: "Password must be 8-40 symbols long, must have capital letter and digit",
-        },
-        phone: {
-          pattern: /^[+-d]?\d{10,15}$/,
-          error: "Phone error (10-15 symbols long, only digits, starts with '+'",
-        },
-        message: {
-          pattern: /(.|\s)*\S(.|\s)*/,
-          error: "Message is empty",
-        },
+class Validator {
+	validationTypes: Record<string, Pattern>;
+	
+	constructor() {
+		this.validationTypes = {
+			name: {
+				pattern: /^[А-ЯЁA-Z][А-ЯЁA-Zа-яёa-z-]+$/,
+				error: "Латиница или кириллица, первая буква заглавная, без пробелов и без цифр, нет спецсимволов кроме '-'",
+			},
+			login: {
+				pattern: /^(?=.*[a-zA-Z])([a-zA-Z0-9-_]){3,20}$/,
+				error: "3-20 символов, латиница, может содержать цифры, но не состоять из них, без пробелов, без спецсимволов кроме '-' и '_'",
+			},
+			email: {
+				pattern: /.+@[^@]+[a-z]+\.[^@]{2,}$/,
+				error: "Латиница, допустимы спецсимволы и '-', должен содержать '@', после должны быть буквы и '.'",
+			},
+			password: {
+				pattern: /^(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{8,40}$/,
+				error: "8-40 символов, хоть одна заглавная буква и цифра",
+			},
+			phone: {
+				pattern: /^[+-d]?\d{10,15}$/,
+				error: "10-15 символов, только цифры, может начинаться с '+'",
+			},
+			message: {
+				pattern: /(.|\s)*\S(.|\s)*/,
+				error: "Пустое сообщение",
+			},
       };
     }
   
-    _getValidationType(element: HTMLElement): ValidationElem {
-      const type = element.getAttribute("validation-type");
-      if (type) {
-        return this.validationTypes.type;
-      }
-      
+	_getValidationType(element: HTMLElement): Record<string, Pattern> | undefined {
+		const type = element.getAttribute("valtype");
+
+		if(type) {
+		return this.validationTypes[type];
+		}
     }
   
-    _validate(elem: HTMLInputElement): ValidationResult | undefined {
-      const vtype = this._getValidationType(elem);
-      if (!vtype) {
-        throw new Error("Can't find appropriate validation type");
-      }
-      if (!elem.value && elem.getAttribute("validation-type") !== "message") {
-        return { isValid: true, error: "" };
-      }
-      return {
-        isValid: vtype.pattern.test(elem.value),
-        error: vtype.error,
-      };
+    _validate(element: HTMLInputElement): ValidResult {
+		const validType = this._getValidationType(element);
+		if (!validType) {
+        throw new Error("No validation type");
+		}
+
+		return {
+			passed: validType.pattern.test(element.value),
+			error: validType.error
+		};
     }
   
     validate(): void {
-      const toValidate = document.body.querySelectorAll("[validation-required]");
-      toValidate.forEach((elem: HTMLInputElement) => {
-        const result = this._validate(elem);
-        const attr = elem.getAttribute("validation-label");
-        if (attr) {
-          const labelFor = document.getElementById(attr) as HTMLElement;
-          if (result && result.isValid) {
-            labelFor.classList.remove("active"); 
-          } else {
-            labelFor.classList.add("active");
-            if (result && result.error) {
-              labelFor.textContent = result.error;
-            }
-          }
-        }
-      });
-    }
+		const toValidate = document.querySelectorAll("[valtype]");
+		toValidate.forEach((element: HTMLInputElement) => {
+			const result = this._validate(element);
+			const errorDiv = element.nextElementSibling;
+			
+			if (errorDiv) {
+				if (result && result.passed) {
+					errorDiv.classList.remove("invalid");
+				} else if (result && result.error) {
+					errorDiv.classList.add("invalid"); 
+					errorDiv.textContent = result.error;
+				}
+			}
+		});
+	}
+}
   
-  }
-  
-  export default Validator;
+export default Validator;

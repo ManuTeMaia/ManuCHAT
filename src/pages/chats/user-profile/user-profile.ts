@@ -1,7 +1,5 @@
 import Block from "../../../utils/Block";
-import pageRender from "../../../utils/pageRender";
-import LoginPage from "../../../pages/chats/login/login";
-import { ProfileFormPage, ProfileFormPasswordPage } from "../../../modules/user-profile-form/user-profile-form";
+import pageRender from "../../../helpers/PageRender";
 import ProfileField from "../../../components/profile-field/profile-field";
 import Avatar from "../../../components/avatar/avatar";
 import Heading from  "../../../components/headings/headings";
@@ -13,6 +11,7 @@ class ProfilePage extends Block{
 	constructor() {
         super("div");
     }
+
     render():DocumentFragment {
 		const avatar = new Avatar({
 			divclass: "main--page-user-profile user-profile-avatar",
@@ -52,35 +51,35 @@ class ProfilePage extends Block{
 		
 		const links = [
 			{
-				url:"",
+				url:"#",
 				class:"main--page-user-profile user-profile-link link-change-data",
 				text:"Изменить данные",
 				events: {
 					click: (e:Event) => {
 						e.preventDefault();
-						pageRender(".main--page-user-profile-fields",new ProfileFormPage());
+						pageRender(".main--page-user-profile-fields", "profile");
 					}
 				}
 			},
 			{
-				url:"",
+				url:"#",
 				class:"main--page-user-profile user-profile-link link-change-pass",
 				text:"Изменить пароль",
 				events: {
 					click: (e:Event) => {
 						e.preventDefault();
-						pageRender(".main--page-user-profile-fields",new ProfileFormPasswordPage());
+						pageRender(".main--page-user-profile-fields","profile-password");
 					}
 				}
 			},
 			{
-				url:"",
+				url:"#",
 				class:"main--page-user-profile user-profile-link link-logout",
 				text:"Выйти",
 				events: {
 					click: (e:Event) => {
 						e.preventDefault();
-						pageRender(".root",new LoginPage());
+						pageRender(".root","login");
 					}
 				}
 			},
@@ -96,4 +95,5 @@ class ProfilePage extends Block{
     }
 
 }
+
 export default ProfilePage;

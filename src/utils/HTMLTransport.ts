@@ -1,4 +1,3 @@
-/* eslint-disable quotes */
 enum METHOD {
 	GET = "GET",
 	POST = "POST",

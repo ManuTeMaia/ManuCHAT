@@ -1,7 +1,5 @@
 import Block from "../../../utils/Block";
-import pageRender from "../../../utils/pageRender";
-import ChatPage from "../chat/chat";
-import RegistrationPage from "../register/register";
+import pageRender from "../../../helpers/PageRender";
 import InputWrapper from  "../../../modules/inputs-wrapper/inputs-wrapper";
 import Button from "../../../components/buttons/submit-button";
 import Heading from "../../../components/headings/headings";
@@ -10,9 +8,11 @@ import template from "./login.hbs";
 import "./login.pcss";
 
 class LoginPage extends Block {
+
 	constructor(){
-		super("div");
+		super("div"); 
 	}
+
 	render(): DocumentFragment {
 		const heading = new Heading({
 			text: "Вход"
@@ -22,8 +22,11 @@ class LoginPage extends Block {
 			name: "login",
 			type: "text",
 			placeholder: "Имя пользователя",
+			validationtype: "login",
+			required: true,
 			events: {
-				focus: () => console.log("focused"),
+				focus: () => this.validate(),
+				blur: () => this.validate(),
 			}
 		});
 		const password = new InputWrapper({
@@ -31,8 +34,11 @@ class LoginPage extends Block {
 			name: "password",
 			type: "password",
 			placeholder: "***********",
+			validationtype: "password",
+			required: true,
 			events: {
-				focus: () => console.log("focused"),
+				focus: () => this.validate(),
+				blur: () => this.validate(),
 			}
 		});
         const submit = new Button({
@@ -40,10 +46,7 @@ class LoginPage extends Block {
 			name: "login-submit",
 			title: "Авторизоваться",
 			events: {
-				click: (e) => {
-					e.preventDefault();
-					pageRender(".root",new ChatPage());
-					}
+				click: (e) => this.onSubmit(e)
 				}
 		});
 		const link = new Link({
@@ -53,7 +56,7 @@ class LoginPage extends Block {
 			events: {
 				click: (e) => {
 					e.preventDefault();
-					pageRender(".root",new RegistrationPage());
+					pageRender(".root","registration");
 					}
 				}
 		});
@@ -66,6 +69,24 @@ class LoginPage extends Block {
 			link:link
 		});
     }
+
+	getFormData(): void {
+		const data: Record<string, unknown> = {};
+		const inputFields = document.querySelectorAll("input");
+		inputFields.forEach((input: HTMLInputElement) => data[input.name] = input.value);
+		console.log(data);
+	}
+
+	onSubmit(e: Event): void {
+		e.preventDefault();
+		this.validate();
+		const hasErrors =  document.querySelectorAll(".invalid").length;
+		console.log(hasErrors);
+		if(!hasErrors) {
+			this.getFormData();
+			pageRender(".root","chats");
+		}
+	}
 }
 
 export default LoginPage;

@@ -1,5 +1,5 @@
 import Block from "../../../utils/Block";
-import pageRender from "../../../utils/pageRender";
+import pageRender from "../../../helpers/PageRender";
 import ChatPage from "../chat/chat";
 import LoginPage from "../login/login";
 import InputWrapper from  "../../../modules/inputs-wrapper/inputs-wrapper";
@@ -23,49 +23,56 @@ class RegistrationPage extends Block {
 				type: "email",
 				name: "email",
 				placeholder: "email",
-				required: "reqiured"
+				validationtype: "email",
+				required: true
 			},
 			{
 				label: "Логин",
 				type: "text",
 				name: "login",
 				placeholder: "Имя пользователя",
-				required: "reqiured"
+				validationtype: "login",
+				required: true
 			},
 			{
 				label: "Имя",
 				type: "text",
 				name: "first_name",
 				placeholder: "Ваше имя",
-				required: "reqiured"
+				validationtype: "name",
+				required: true
 			},
 			{
 				label: "Фамилия",
 				type: "text",
 				name: "second_name",
 				placeholder: "Ваша фамилия",
-				required: ""
+				validationtype: "name",
+				required: true
 			},
 			{
 				label: "Телефон",
 				type: "tel",
 				name: "phone",
 				placeholder: "+7 (000)-000-00-00",
-				required: "reqiured"
+				validationtype: "phone",
+				required: true
 			},
 			{
 				label: "Пароль",
 				type: "password",
 				name: "password",
 				placeholder: "***********",
-				required: "required"
+				validationtype: "password",
+				required: true
 			},
 			{
 				label: "Повторите пароль",
 				type: "password",
 				name: "repeat-password",
 				placeholder: "***********",
-				required: "required"
+				validationtype: "password",
+				required: true
 			}
 		];
 		const textinputs = textInputs.map(
@@ -77,7 +84,7 @@ class RegistrationPage extends Block {
 			name: "registration-submit",
 			title: "Зарегистрироваться",
 			events: {
-				click: (e) => {
+				submit: (e) => {
 					e.preventDefault();
 					pageRender(".root",new ChatPage());
 					}

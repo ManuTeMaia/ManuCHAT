@@ -1,1 +1,12 @@
-<input type="{{{type}}}" class="{{{class}}}" name="{{{name}}}" placeholder="{{{placeholder}}}" value="{{{value}}}" {{{required}}}>
+<input 
+type="{{{type}}}" 
+{{#if class}}
+class="{{{class}}}"
+{{/if}}
+name="{{{name}}}" placeholder="{{{placeholder}}}" value="{{{value}}}" 
+{{#if validationtype}}
+valtype="{{{validationtype}}}" 
+{{/if}}
+{{#if required}} 
+required
+{{/if}}>

@@ -1,4 +1,5 @@
 import EventBus from "./EventBus";
+import Validator from "./Validator";
 import { nanoid } from "nanoid";
 
 export default class Block {
@@ -10,16 +11,18 @@ export default class Block {
 	};
 
 	eventBus: () => EventBus;
+	validator: () => Validator;
 	_element: Element;
 	_meta: {
 		tagName: string;
 		props: any;
 	};
 	props: any;
-	id =  nanoid(6);
+	id = nanoid(6);
 
 	constructor(tagName = "div", props = {}) {
 		const eventBus = new EventBus();
+		const validator = new Validator();
 		this._meta = {
 			tagName,
 			props,
@@ -28,7 +31,7 @@ export default class Block {
 		this.props = this._makePropsProxy(props);
 
 		this.eventBus = () => eventBus;
-
+		this.validator = () => validator;
 		this._registerEvents(eventBus);
 		eventBus.emit(Block.EVENTS.INIT);
 	}
@@ -61,10 +64,7 @@ export default class Block {
 		}
 	}
 
-	componentDidUpdate(
-		oldProps: Record<string, unknown>,
-		newProps: Record<string, unknown>,
-	): boolean {
+	componentDidUpdate(oldProps: Record<string, unknown>,newProps: Record<string, unknown>): boolean {
 		return oldProps === newProps || true;
 	}
 
@@ -77,7 +77,7 @@ export default class Block {
 	};
 
 	_addEvents():void {
-		const events:Record<string, () => void> = this.props.events;
+		const events: Record<string, () => void> = this.props.events;
 
 		if (!events) {
 			return;
@@ -88,7 +88,7 @@ export default class Block {
 		});
 	}
 
-	_removeEvents():void {
+	_removeEvents(): void {
 		const {events = {}} = this.props;
 		
 		if (!events) {
@@ -121,7 +121,6 @@ export default class Block {
 				
 				if (value instanceof Block) {
 				components[value.id] = value; 
-				console.log(value);
 				props[name] = `<div id="id-${value.id}"></div>`;
 				}
 			});
@@ -142,7 +141,7 @@ export default class Block {
 	
 	}
 
-	_render():void{
+	_render(): void {
 		const fragment = this.render().firstElementChild as Element;
 
 		this._removeEvents();
@@ -192,5 +191,9 @@ export default class Block {
 
 	_createDocumentElement(tagName: string): HTMLElement {
 		return document.createElement(tagName);
+	}
+
+	validate(): void {
+		return this.validator().validate();
 	}
 }
