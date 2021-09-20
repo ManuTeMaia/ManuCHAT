@@ -7,8 +7,9 @@ Manutemaia Chat
 
 [Веб-хостинг в Netify](https://quirky-lumiere-db1dd9.netlify.app)
 
-pull request #1 https://github.com/ManuTeMaia/middle.messenger.praktikum.yandex/pull/1
-pull request #2 
+[Репозиторий Спринт #1](https://github.com/ManuTeMaia/middle.messenger.praktikum.yandex/tree/sprint_1)
+
+pull request #2: 
 
 ### Команды:
 
