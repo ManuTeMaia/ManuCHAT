@@ -1,5 +1,5 @@
 import Block from "../../../utils/Block";
-import pageRender from "../../../helpers/PageRender";
+import pageRender from "../../../helpers/pageRender";
 import ProfileField from "../../../components/profile-field/profile-field";
 import Avatar from "../../../components/avatar/avatar";
 import Heading from  "../../../components/headings/headings";

@@ -5,7 +5,7 @@
     height: 65px;
     display: flex;
     align-items: center;
-    padding: 1px;
+    margin: 1px;
 }
 
 .chat--list-card-wrap.active {
@@ -19,8 +19,8 @@
 
 .chat--list-card-time {
     position: absolute;
-    right: 5px;
-    top: 5px;
+    right: calc(0.5 * var(--global--spacing-unit));
+    top: calc(0.5 * var(--global--spacing-unit));
     font-size: var(--global--font-size-xs);
     color: var(--global--color-primary-80);
 }
@@ -31,8 +31,8 @@
 
 .chat--list-card-unread {
     position: absolute;
-    right: 5px;
-    bottom: 5px;
+    right: calc(0.5 * var(--global--spacing-unit));
+    bottom: calc(0.5 * var(--global--spacing-unit));
     color: var(--global--color-white);
     background: var(--global--color-primary);
     border-radius: var(--button--border-radius);

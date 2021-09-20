@@ -1,5 +1,5 @@
 import Block from "../../../utils/Block";
-import pageRender from "../../../helpers/PageRender";
+import pageRender from "../../../helpers/pageRender";
 import ChatProfileCard from "../../../modules/chat-list-profile-card/chat-list-profile-card";
 import ChatListCard from "../../../modules/chat-list-card/chat-list-card";
 import template from "./chat.hbs";

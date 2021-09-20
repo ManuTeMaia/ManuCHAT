@@ -1,5 +1,5 @@
 import Block from "../../../utils/Block";
-import pageRender from "../../../helpers/PageRender";
+import pageRender from "../../../helpers/pageRender";
 import ChatPage from "../chat/chat";
 import LoginPage from "../login/login";
 import InputWrapper from  "../../../modules/inputs-wrapper/inputs-wrapper";

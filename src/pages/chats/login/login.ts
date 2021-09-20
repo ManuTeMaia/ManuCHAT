@@ -1,5 +1,6 @@
 import Block from "../../../utils/Block";
-import pageRender from "../../../helpers/PageRender";
+import pageRender from "../../../helpers/pageRender";
+import submitEmulator from "../../../helpers/formActions";
 import InputWrapper from  "../../../modules/inputs-wrapper/inputs-wrapper";
 import Button from "../../../components/buttons/submit-button";
 import Heading from "../../../components/headings/headings";
@@ -46,7 +47,7 @@ class LoginPage extends Block {
 			name: "login-submit",
 			title: "Авторизоваться",
 			events: {
-				click: (e) => this.onSubmit(e)
+				click: (e) => submitEmulator(e)
 				}
 		});
 		const link = new Link({
@@ -68,24 +69,6 @@ class LoginPage extends Block {
 			submit:submit,
 			link:link
 		});
-    }
-
-	getFormData(): void {
-		const data: Record<string, unknown> = {};
-		const inputFields = document.querySelectorAll("input");
-		inputFields.forEach((input: HTMLInputElement) => data[input.name] = input.value);
-		console.log(data);
-	}
-
-	onSubmit(e: Event): void {
-		e.preventDefault();
-		this.validate();
-		const hasErrors =  document.querySelectorAll(".invalid").length;
-		console.log(hasErrors);
-		if(!hasErrors) {
-			this.getFormData();
-			pageRender(".root","chats");
-		}
 	}
 }
 
