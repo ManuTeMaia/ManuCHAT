@@ -1,0 +1,88 @@
+.main--page-chat-body-wrap {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: flex-start;
+    width: 100%;
+    height: 100%;
+    overflow-y: scroll;
+}
+
+.main--page-chat-body-header {
+    position: fixed;
+    grid-column: 3/4 !last;
+    top: 0;
+    right: 0;
+    border-bottom: 1px solid var(--global--color-primary-40);
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: calc(0.75 * var(--global--spacing-unit));
+    background: var(--global--color-white);
+    margin-bottom: calc(0.75 * var(--global--spacing-unit));
+    z-index: 1;
+}
+
+.main--page-chat-body-footer {
+    position: fixed;
+    grid-column: 3/4 !last;
+    bottom: 0;
+    right: 0;
+    border-top: 1px solid var(--global--color-primary-40);
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: calc(0.75 * var(--global--spacing-unit));
+    background: var(--global--color-white);
+    margin-top: calc(0.75 * var(--global--spacing-unit));
+}
+
+.main--page-chat-body-header-chatname {
+    display: flex;
+    align-items: center;
+    font-weight: var(--heading--font-weight-strong);
+}
+
+.main--page-chat-avatar.chat-avatar {
+    margin-right: var(--global--spacing-horizontal);
+}
+
+.main--page-chat-body-messages {
+    margin: 80px 0;
+}
+
+.main--page-chat-body-footer i {
+    font-size: var(--global--font-size-xl);
+}
+
+.main--page-chat-body-footer i::before {
+    text-shadow: rgba(0, 0, 0, 0.15) 0 4px 4px;
+}
+
+.message-input-form {
+    display: flex;
+    width: 100%;
+}
+
+input[type="text"].message-input-form-input {
+    width: 100%;
+    border: var(--form--border-width) solid var(--form--border-color);
+    border-radius: var(--global--border-radius);
+    box-shadow: var(--form--box-shadow);
+    background: var(--global--color-light-gray);
+    margin: 0 calc(0.75 * var(--global--spacing-unit));
+    padding: 0 var(--global--spacing-unit);
+}
+
+button[type="submit"].main--page-chat-send {
+    padding: 0;
+    background: transparent;
+    line-height: 0;
+}
+
+.main--page-chat-send i {
+    font-size: var(--global--font-size-xxl);
+}

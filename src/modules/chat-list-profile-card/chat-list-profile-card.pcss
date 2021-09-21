@@ -1,21 +1,33 @@
 .chat--list-profile-card-wrap {
-	padding:var(--global--spacing-unit);
-	background:var(--global--color-primary-20);
+    padding: calc(0.5 * var(--global--spacing-unit));
+    background: var(--global--color-primary-20);
 }
+
 .chat--list-profile-card-actions {
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
-.profile-card-avatar img {width:60px;}
-.card-actions-icons{
-	font-size:var(--global--font-size-xl);
-	padding-right:12px;
+
+.profile-card-avatar {
+    width: 60px;
+    height: 60px;
 }
+
+.profile-card-avatar img {
+    width: 60px;
+}
+
+.card-actions-icons {
+    font-size: var(--global--font-size-xl);
+    padding-right: 12px;
+}
+
 .card-actions-icons i {
-	padding-left:24px;
-	cursor: pointer;
+    padding-left: 24px;
+    cursor: pointer;
 }
+
 .card-actions-icons i::before {
-	text-shadow:  rgba(0, 0, 0, 0.15) 0 4px 4px;
+    text-shadow: rgba(0, 0, 0, 0.15) 0 4px 4px;
 }

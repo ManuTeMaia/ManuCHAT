@@ -2,21 +2,22 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;900&display=swap');
 @import './fonts.pcss';
+
 :root {
     --global--font: 'Nunito', sans-serif;
     --global--font-size-base: 14px;
-    --global--font-size-xs: .85rem;
-    --global--font-size-sm: .9rem;
+    --global--font-size-xs: 0.65rem;
+    --global--font-size-sm: 0.9rem;
     --global--font-size-md: 1.1rem;
     --global--font-size-lg: 1.25rem;
-    --global--font-size-xl: 2.25rem;
-    --global--font-size-xxl: 6rem;
+    --global--font-size-xl: 1.75rem;
+    --global--font-size-xxl: 2.75rem;
     --global--font-size-xxxl: 10rem;
     --global--letter-spacing: normal;
     --global--line-height-body: 1.5;
     --global--line-height-heading: 1.3;
     --global--line-height-page-title: 1.1;
-    --global--transition: all .35s ease;
+    --global--transition: all 0.35s ease;
     --heading--font-family: var(--global--font-primary);
     --heading--font-size-h4: var(--global--font-size-lg);
     --heading--font-size-h3: calc(1.25 * var(--global--font-size-lg));
@@ -38,23 +39,23 @@
     --global--color-dark-gray: #999;
     --global--color-light-gray: #f1f1f1;
     --global--color-primary: #128175;
-    --global--color-primary-80: #419B91;
-    --global--color-primary-60: #71B4AC;
-    --global--color-primary-40: #A0CDC8;
-    --global--color-primary-20: #CCE0DE;
-    --global--color-secondary: #09417D;
-    --global--color-secondary-80: #3A6797;
-    --global--color-secondary-60: #6B8DB1;
-    --global--color-secondary-40: #9DB3CB;
-    --global--color-secondary-20: #DBE6F1;
+    --global--color-primary-80: #419b91;
+    --global--color-primary-60: #71b4ac;
+    --global--color-primary-40: #a0cdc8;
+    --global--color-primary-20: #cce0de;
+    --global--color-secondary: #09417d;
+    --global--color-secondary-80: #3a6797;
+    --global--color-secondary-60: #6b8db1;
+    --global--color-secondary-40: #9db3cb;
+    --global--color-secondary-20: #dbe6f1;
     --global--color-white-50: rgba(255, 255, 255, 0.5);
-    --global--color-error: #DA0F0F;
+    --global--color-error: #da0f0f;
     --global--color-background: transparent;
     --global--color-border: var(--global--color-primary);
     --global--border-radius: 30px;
-    --global--spacing-unit: 2%;
+    --global--spacing-unit: 15px;
     --global--spacing-measure: unset;
-    --global--spacing-horizontal: calc(0.75*var(--global--spacing-unit));
+    --global--spacing-horizontal: calc(0.75 * var(--global--spacing-unit));
     --global--spacing-vertical: var(--global--spacing-unit);
     --global--box-shadow: 4px 4px 30px 0 rgba(0, 0, 0, 0.10);
     --form--font-family: var(--global--font);
@@ -66,8 +67,8 @@
     --form--border-color: var(--global--color-primary);
     --form--border-width: 1px;
     --form--border-radius: 10px;
-    --form--spacing-unit: calc(0.5 * var(--global--spacing-unit));
-    --form--box-shadow: rgba(0, 0, 0, 0.15) 0 4px 4px 0px;
+    --form--spacing-unit: calc(0.2 * var(--global--spacing-unit));
+    --form--box-shadow: rgba(0, 0, 0, 0.15) 0 4px 4px 0;
     --button--color-text: var(--global--color-white);
     --button--color-text-active: var(--global--color-black);
     --button--color-background: var(--global--color-primary);
@@ -82,13 +83,10 @@
     --button--padding-horizontal: calc(3 * var(--button--padding-vertical));
 }
 
-
 /*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */
-
 
 /* Document
    ========================================================================== */
-
 
 /**
  * 1. Correct the line height in all browsers.
@@ -102,10 +100,8 @@ html {
     /* 2 */
 }
 
-
 /* Sections
      ========================================================================== */
-
 
 /**
    * Remove the margin in all browsers.
@@ -115,7 +111,6 @@ body {
     margin: 0;
 }
 
-
 /**
    * Render the `main` element consistently in IE.
    */
@@ -123,7 +118,6 @@ body {
 main {
     display: block;
 }
-
 
 /**
    * Correct the font size and margin on `h1` elements within `section` and
@@ -135,10 +129,8 @@ h1 {
     margin: 0.67em 0;
 }
 
-
 /* Grouping content
      ========================================================================== */
-
 
 /**
    * 1. Add the correct box sizing in Firefox.
@@ -154,23 +146,20 @@ hr {
     /* 2 */
 }
 
-
 /**
    * 1. Correct the inheritance and scaling of font size in all browsers.
    * 2. Correct the odd `em` font sizing in all browsers.
    */
 
 pre {
-    font-family: monospace, monospace;
+    font-family: monospace;
     /* 1 */
     font-size: 1em;
     /* 2 */
 }
 
-
 /* Text-level semantics
      ========================================================================== */
-
 
 /**
    * Remove the gray background on active links in IE 10.
@@ -179,7 +168,6 @@ pre {
 a {
     background-color: transparent;
 }
-
 
 /**
    * 1. Remove the bottom border in Chrome 57-
@@ -195,7 +183,6 @@ abbr[title] {
     /* 2 */
 }
 
-
 /**
    * Add the correct font weight in Chrome, Edge, and Safari.
    */
@@ -205,7 +192,6 @@ strong {
     font-weight: bolder;
 }
 
-
 /**
    * 1. Correct the inheritance and scaling of font size in all browsers.
    * 2. Correct the odd `em` font sizing in all browsers.
@@ -214,7 +200,7 @@ strong {
 code,
 kbd,
 samp {
-    font-family: monospace, monospace;
+    font-family: monospace;
     /* 1 */
     font-size: 1em;
     /* 2 */
@@ -251,10 +237,8 @@ sup {
     top: -0.5em;
 }
 
-
 /* Embedded content
      ========================================================================== */
-
 
 /**
    * Remove the border on images inside links in IE 10.
@@ -264,10 +248,8 @@ img {
     border-style: none;
 }
 
-
 /* Forms
      ========================================================================== */
-
 
 /**
    * 1. Change the font styles in all browsers.
@@ -289,7 +271,6 @@ textarea {
     /* 2 */
 }
 
-
 /**
    * Show the overflow in IE.
    * 1. Show the overflow in Edge.
@@ -300,7 +281,6 @@ input {
     /* 1 */
     overflow: visible;
 }
-
 
 /**
    * Remove the inheritance of text transform in Edge, Firefox, and IE.
@@ -313,7 +293,6 @@ select {
     text-transform: none;
 }
 
-
 /**
    * Correct the inability to style clickable types in iOS and Safari.
    */
@@ -324,7 +303,6 @@ button,
 [type="submit"] {
     -webkit-appearance: button;
 }
-
 
 /**
    * Remove the inner border and padding in Firefox.
@@ -338,7 +316,6 @@ button::-moz-focus-inner,
     padding: 0;
 }
 
-
 /**
    * Restore the focus styles unset by the previous rule.
    */
@@ -350,7 +327,6 @@ button:-moz-focusring,
     outline: 1px dotted ButtonText;
 }
 
-
 /**
    * Correct the padding in Firefox.
    */
@@ -358,7 +334,6 @@ button:-moz-focusring,
 fieldset {
     padding: 0.35em 0.75em 0.625em;
 }
-
 
 /**
    * 1. Correct the text wrapping in Edge and IE.
@@ -382,7 +357,6 @@ legend {
     /* 1 */
 }
 
-
 /**
    * Add the correct vertical alignment in Chrome, Firefox, and Opera.
    */
@@ -391,7 +365,6 @@ progress {
     vertical-align: baseline;
 }
 
-
 /**
    * Remove the default vertical scrollbar in IE 10+.
    */
@@ -399,7 +372,6 @@ progress {
 textarea {
     overflow: auto;
 }
-
 
 /**
    * 1. Add the correct box sizing in IE 10.
@@ -414,7 +386,6 @@ textarea {
     /* 2 */
 }
 
-
 /**
    * Correct the cursor style of increment and decrement buttons in Chrome.
    */
@@ -423,7 +394,6 @@ textarea {
 [type="number"]::-webkit-outer-spin-button {
     height: auto;
 }
-
 
 /**
    * 1. Correct the odd appearance in Chrome and Safari.
@@ -437,7 +407,6 @@ textarea {
     /* 2 */
 }
 
-
 /**
    * Remove the inner padding in Chrome and Safari on macOS.
    */
@@ -445,7 +414,6 @@ textarea {
 [type="search"]::-webkit-search-decoration {
     -webkit-appearance: none;
 }
-
 
 /**
    * 1. Correct the inability to style clickable types in iOS and Safari.
@@ -459,10 +427,8 @@ textarea {
     /* 2 */
 }
 
-
 /* Interactive
      ========================================================================== */
-
 
 /*
    * Add the correct display in Edge, IE 10+, and Firefox.
@@ -472,7 +438,6 @@ details {
     display: block;
 }
 
-
 /*
    * Add the correct display in all browsers.
    */
@@ -481,10 +446,8 @@ summary {
     display: list-item;
 }
 
-
 /* Misc
      ========================================================================== */
-
 
 /**
    * Add the correct display in IE 10+.
@@ -493,7 +456,6 @@ summary {
 template {
     display: none;
 }
-
 
 /**
    * Add the correct display in IE 10.
@@ -519,24 +481,10 @@ body {
     background-attachment: fixed;
 }
 
-a {
-    cursor: pointer;
-    color: var(--global--color-primary);
-    text-underline-offset: 3px;
-    text-decoration-skip-ink: all;
-    transition: var(--global--transition);
-}
-
-a:hover,
-a:focus {
-    color: var(--global--color-secondary);
-    text-decoration-style: dotted;
-    text-decoration-skip-ink: none;
-    transition: var(--global--transition);
-}
 i {
     color:var(--global--color-primary)
 }
+
 .wrapper {
     display: flex;
     flex-wrap: wrap;

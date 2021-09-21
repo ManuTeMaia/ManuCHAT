@@ -1,12 +1,12 @@
 <div class="wrapper">
   <div class="form--register-wrap">
-  {{>heading heading}}
-    <form action="" class="form--register" enctype="multipart/form-data">
-    {{#each textInputs}}  
-      {{>textInput}}
+  {{{heading}}}
+    <form action="" method="post" class="form--register" enctype="multipart/form-data">
+    {{#each textinputs}}
+      {{{this}}}
     {{/each}}
-    {{>submit submit}}
+    {{{submit}}}
     </form>
-    <a href="" class="form--register-login-link">Авторизоваться</a>
+    {{{link}}}
 </div>
 </div>
