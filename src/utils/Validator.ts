@@ -1,22 +1,19 @@
 type Patterns = {
 	pattern: RegExp, 
 	error: string
-}
+};
 
 type ValidResult = {
 	passed: boolean,
 	error: string
-} 
+};
 
 type ValTipes = {
 	[key: string]: Patterns
-}
+};
 
 class Validator {
-	validationTypes: ValTipes;
-	
-	constructor() {
-		this.validationTypes = {
+		validationTypes: ValTipes = {
 			name: {
 				pattern: /^[А-ЯЁA-Z][А-ЯЁA-Zа-яёa-z-]+$/,
 				error: "Латиница или кириллица, первая буква заглавная, без пробелов и без цифр, нет спецсимволов кроме '-'",
@@ -42,9 +39,9 @@ class Validator {
 				error: "Пустое сообщение",
 			},
       };
-    }
+    
   
-	_getValidationType(element: HTMLElement): ValTipes | undefined {
+	_getValidationType(element: HTMLElement): ValTipes {
 		const type = element.getAttribute("valtype");
 
 		if(type) {
