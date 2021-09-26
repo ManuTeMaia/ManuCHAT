@@ -1,4 +1,5 @@
 import Block from "../../../utils/Block";
+import Validator from "../../../utils/Validator";
 import pageRender from "../../../helpers/pageRender";
 import submitEmulator from "../../../helpers/formActions";
 import InputWrapper from  "../../../modules/inputs-wrapper/inputs-wrapper";
@@ -9,20 +10,25 @@ import template from "./register.hbs";
 import "./register.pcss";
 
 class RegistrationPage extends Block {
-	constructor(){
+	validator: Validator;
+	constructor() {
 		super("div");
+		this.validator = new Validator();
+	}
+	validate(input: HTMLInputElement): void {
+		return this.validator.validate(input);
 	}
 	render(): DocumentFragment {
 		const heading = new Heading({
 			text: "Регистрация"
 		});
-		const textinputs = [
+		const textInputs = [
 			{
 				label: "E-mail",
 				type: "email",
 				name: "email",
 				placeholder: "email",
-				validationtype: "email",
+				validationType: "email",
 				required: true,
 				events: {
 					focus: (e: Event) => this.validate((e.currentTarget as HTMLInputElement)),
@@ -34,7 +40,7 @@ class RegistrationPage extends Block {
 				type: "text",
 				name: "login",
 				placeholder: "Имя пользователя",
-				validationtype: "login",
+				validationType: "login",
 				required: true,
 				events: {
 					focus: (e: Event) => this.validate((e.currentTarget as HTMLInputElement)),
@@ -46,7 +52,7 @@ class RegistrationPage extends Block {
 				type: "text",
 				name: "first_name",
 				placeholder: "Ваше имя",
-				validationtype: "name",
+				validationType: "name",
 				required: true,
 				events: {
 					focus: (e: Event) => this.validate((e.currentTarget as HTMLInputElement)),
@@ -58,7 +64,7 @@ class RegistrationPage extends Block {
 				type: "text",
 				name: "second_name",
 				placeholder: "Ваша фамилия",
-				validationtype: "name",
+				validationType: "name",
 				required: true,
 				events: {
 					focus: (e: Event) => this.validate((e.currentTarget as HTMLInputElement)),
@@ -70,7 +76,7 @@ class RegistrationPage extends Block {
 				type: "tel",
 				name: "phone",
 				placeholder: "+7 (000)-000-00-00",
-				validationtype: "phone",
+				validationType: "phone",
 				required: true,
 				events: {
 					focus: (e: Event) => this.validate((e.currentTarget as HTMLInputElement)),
@@ -82,7 +88,7 @@ class RegistrationPage extends Block {
 				type: "password",
 				name: "password",
 				placeholder: "***********",
-				validationtype: "password",
+				validationType: "password",
 				required: true,
 				events: {
 					focus: (e: Event) => this.validate((e.currentTarget as HTMLInputElement)),
@@ -94,7 +100,7 @@ class RegistrationPage extends Block {
 				type: "password",
 				name: "repeat-password",
 				placeholder: "***********",
-				validationtype: "password",
+				validationType: "password",
 				required: true,
 				events: {
 					focus: (e: Event) => this.validate((e.currentTarget as HTMLInputElement)),
@@ -102,7 +108,7 @@ class RegistrationPage extends Block {
 				}
 			}
 		].map(
-			(textinput) => new InputWrapper(textinput)
+			(textInput) => new InputWrapper(textInput)
 		);
 		
         const submit = new Button({
@@ -125,10 +131,10 @@ class RegistrationPage extends Block {
 				}
 		});
 		return this.compile(template, {
-			heading:heading,
-			textinputs:textinputs,
-			submit:submit,
-			link:link
+			heading,
+			textInputs,
+			submit,
+			link
 		});
     }
 }

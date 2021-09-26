@@ -2,8 +2,18 @@ import Block from "../../utils/Block";
 import template from "./submit-button.hbs";
 import "./buttons.pcss";
 
-class Button extends Block {
-    constructor(props:Props) {
+type ButtonProps = {
+    name: string,
+    title?: string,
+    class?: string,
+    events?: {
+        click?: (e: Event) => void,
+        submit?: (e: Event) => void,
+    };
+};
+
+class Button extends Block <ButtonProps>{
+    constructor(props:ButtonProps) {
         super("button", props);
     }
     render():DocumentFragment {

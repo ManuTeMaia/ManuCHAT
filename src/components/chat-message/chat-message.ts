@@ -2,8 +2,14 @@ import Block from "../../utils/Block";
 import template from "./chat-message.hbs";
 import "./chat-message.pcss";
 
-class ChatMessage extends Block {
-    constructor(props:Props) {
+type MessageTypes = {
+    isMine?: boolean;
+    content: string,
+    isRecieved?: boolean,
+    time: string
+}
+class ChatMessage extends Block <MessageTypes> {
+    constructor(props:MessageTypes) {
         super("avatar", props);
     }
     render():DocumentFragment {

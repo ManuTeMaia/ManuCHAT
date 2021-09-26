@@ -1,4 +1,5 @@
 import Block from "../../../utils/Block";
+import Validator from "../../../utils/Validator";
 import pageRender from "../../../helpers/pageRender";
 import submitEmulator from "../../../helpers/formActions";
 import InputWrapper from  "../../../modules/inputs-wrapper/inputs-wrapper";
@@ -9,9 +10,14 @@ import template from "./login.hbs";
 import "./login.pcss";
 
 class LoginPage extends Block {
+	validator: Validator;
+	constructor() {
+		super("div");
+		this.validator = new Validator();
+	}
 
-	constructor(){
-		super("div"); 
+	validate(input: HTMLInputElement): void {
+		return this.validator.validate(input);
 	}
 
 	render(): DocumentFragment {
@@ -24,7 +30,7 @@ class LoginPage extends Block {
 			name: "login",
 			type: "text",
 			placeholder: "Имя пользователя",
-			validationtype: "login",
+			validationType: "login",
 			required: true,
 			events: {
 				focus: (e) => this.validate((e.currentTarget as HTMLInputElement)),
@@ -37,7 +43,7 @@ class LoginPage extends Block {
 			name: "password",
 			type: "password",
 			placeholder: "***********",
-			validationtype: "password",
+			validationType: "password",
 			required: true,
 			events: {
 				focus: (e) => this.validate((e.currentTarget as HTMLInputElement)),
@@ -67,11 +73,11 @@ class LoginPage extends Block {
 		});
 
 		return this.compile(template, {
-			heading:heading,
-			login:login,
-			password:password,
-			submit:submit,
-			link:link
+			heading,
+			login,
+			password,
+			submit,
+			link
 		});
 	}
 }

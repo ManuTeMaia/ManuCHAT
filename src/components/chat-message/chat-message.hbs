@@ -1,4 +1,11 @@
-<div class="message-wrap {{ismine}}">
-    {{text}}
-    <div class="message-time">{{#if ismine}}{{isrecieved}}{{/if}} {{time}}</div>
+<div class="message-wrap{{#if isMine}} mine{{/if}}">
+    {{content}}
+    <div class="message-time{{#if isRecieved}} recieved{{/if}}">
+        {{#if isMine}}
+            {{#if isRecieved}}
+                <i class="ch-sent"></i>
+            {{/if}}
+        {{/if}}
+        {{time}}
+    </div>
 </div>

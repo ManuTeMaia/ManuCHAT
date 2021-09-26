@@ -10,7 +10,7 @@ import { ProfileFormPage, ProfileFormPasswordPage } from "../pages/chats/user-pr
 function pageRender(query: string, block: string): Element {
 
 	const root = document.querySelector(query);
-	let page: Block = new Block;
+	let page: Block = new Block();
 
 	if(!root) {
 		throw new Error("Root not found");

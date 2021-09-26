@@ -5,25 +5,33 @@ import Heading from "../../../components/headings/headings";
 import InputWrapper from "../../../modules/inputs-wrapper/inputs-wrapper";
 import template from "./user-profile-form.hbs";
 import "./user-profile-form.pcss";
+import Validator from "../../../utils/Validator";
 
 class ProfileFormPage extends Block {
-	constructor(){
+	validator: Validator;
+	constructor() {
 		super("div");
+		this.validator = new Validator();
 	}
+	
+	validate(input: HTMLInputElement): void {
+		return this.validator.validate(input);
+	}
+	
 	render(): DocumentFragment {
 		const heading = new Heading({
 			class: "main--page-user-profile user-profile-heading",
 			text: "Изменить данные"
 		});
 
-		const formclass = "form--user-profile-info";
+		const formClass = "form--user-profile-info";
 
-		const textinputs = [
+		const textInputs = [
 			{
 				label: "E-mail",
 				type: "email",
 				name: "email",
-				validationtype: "email",
+				validationType: "email",
 				placeholder: "dragonfly@123.com",
 				events: {
 					focus: (e: Event) => this.validate((e.currentTarget as HTMLInputElement)),
@@ -34,7 +42,7 @@ class ProfileFormPage extends Block {
 				label: "Логин",
 				type: "text",
 				name: "login",
-				validationtype: "login",
+				validationType: "login",
 				placeholder: "dragonfly",
 				events: {
 					focus: (e: Event) => this.validate((e.currentTarget as HTMLInputElement)),
@@ -45,7 +53,7 @@ class ProfileFormPage extends Block {
 				label: "Имя",
 				type: "text",
 				name: "first_name",
-				validationtype: "name",
+				validationType: "name",
 				placeholder: "Джейн",
 				events: {
 					focus: (e: Event) => this.validate((e.currentTarget as HTMLInputElement)),
@@ -56,7 +64,7 @@ class ProfileFormPage extends Block {
 				label: "Фамилия",
 				type: "text",
 				name: "second_name",
-				validationtype: "name",
+				validationType: "name",
 				placeholder: "Доу",
 				events: {
 					focus: (e: Event) => this.validate((e.currentTarget as HTMLInputElement)),
@@ -77,7 +85,7 @@ class ProfileFormPage extends Block {
 				label: "Телефон",
 				type: "tel",
 				name: "phone",
-				validationtype: "phone",
+				validationType: "phone",
 				placeholder: "+7 (000)-000-00-00",
 				events: {
 					focus: (e: Event) => this.validate((e.currentTarget as HTMLInputElement)),
@@ -96,34 +104,41 @@ class ProfileFormPage extends Block {
 		});
 
 		return this.compile(template, {
-			heading:heading,
-			formclass:formclass,
-			textinputs:textinputs,
-			submit:submit
+			heading,
+			formClass,
+			textInputs,
+			submit
 		});
 
 	}
 }
 
 class ProfileFormPasswordPage extends Block {
-	constructor(){
+	validator: Validator;
+	constructor() {
 		super("div");
+		this.validator = new Validator();
 	}
+
+	validate(input: HTMLInputElement): void {
+		return this.validator.validate(input);
+	}
+
 	render(): DocumentFragment {
 		const heading = new Heading({
 			class: "main--page-user-profile user-profile-heading",
 			text: "Изменить пароль"
 		});
 		
-		const formclass = "form--user-profile-password";
+		const formClass = "form--user-profile-password";
 
-		const textinputs = [
+		const textInputs = [
 			{
 				label: "Текущий пароль",
 				type: "password",
 				name: "current-password",
 				placeholder: "***********",
-				validationtype: "password",
+				validationType: "password",
 				required: true,
 				events: {
 					focus: (e: Event) => this.validate((e.currentTarget as HTMLInputElement)),
@@ -135,7 +150,7 @@ class ProfileFormPasswordPage extends Block {
 				type: "password",
 				name: "password",
 				placeholder: "***********",
-				validationtype: "password",
+				validationType: "password",
 				required: true,
 				events: {
 					focus: (e: Event) => this.validate((e.currentTarget as HTMLInputElement)),
@@ -147,7 +162,7 @@ class ProfileFormPasswordPage extends Block {
 				type: "password",
 				name: "repeat-password",
 				placeholder: "***********",
-				validationtype: "password",
+				validationType: "password",
 				required: true,
 				events: {
 					focus: (e: Event) => this.validate((e.currentTarget as HTMLInputElement)),
@@ -166,10 +181,10 @@ class ProfileFormPasswordPage extends Block {
 		});
 
 		return this.compile(template, {
-			heading:heading,
-			formclass:formclass,
-			textinputs:textinputs,
-			submit:submit
+			heading,
+			formClass,
+			textInputs,
+			submit
 		});
 
 	}

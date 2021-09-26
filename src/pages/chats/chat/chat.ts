@@ -10,37 +10,27 @@ class ChatPage extends Block {
 		super("div");
 	}
 	render(): DocumentFragment {
-		
-		const profilecard = new ChatProfileCard({
-			imagesrc: "/noimage.png",
-			divclass: "chat-list-profile-card profile-card-avatar",
-			imagetitle: "Изменить данные профиля",
-			events: {
-				click: () => pageRender(".chat--wrap", "profile")
-			},
-			class: "chat-list-profile-card profile-card-search",
-			name: "search",
-			placeholder: "Поиск"
-		});
+
+		const profileCard = new ChatProfileCard({...this.props});
 
 		const chatsList = [
 			{
-				imagesrc: "/noimage.png",
-				divclass: "chat-list-card card-avatar",
-				imagetitle: "Super Chat",
+				imageSrc: "/noimage.png",
+				divClass: "chat-list-card card-avatar",
+				imageTitle: "Super Chat",
 				time: "13:10",
 				title: "Super Chat",
-				lastmessage: "Изображение",
-				unread: "1"
+				lastMessage: "Изображение",
+				unread: 1
 			},
 			{
-				imagesrc: "/noimage.png",
-				divclass: "chat-list-card card-avatar",
-				imagetitle: "Marvell",
+				imageSrc: "/noimage.png",
+				divClass: "chat-list-card card-avatar",
+				imageTitle: "Marvell",
 				time: "15:02",
 				title: "Marvell (кликабельно)",
-				lastmessage: "Что-то непонятное",
-				unread: "2",
+				lastMessage: "Что-то непонятное",
+				unread: 2,
 				events: {
 					click: (e:Event) => {
 						(<HTMLElement> e.currentTarget).classList.add("active");
@@ -49,39 +39,39 @@ class ChatPage extends Block {
 				}
 			},	
 			{
-				imagesrc: "/noimage.png",
-				divclass: "chat-list-card card-avatar",
-				imagetitle: "Nikon Lensesя",
+				imageSrc: "/noimage.png",
+				divClass: "chat-list-card card-avatar",
+				imageTitle: "Nikon Lensesя",
 				time: "08:23",
 				title: "Nikon Lenses",
-				ismine: "Вы",
-				lastmessage: "Какой-то текст про никон"
+				mine: "Вы",
+				lastMessage: "Какой-то текст про никон"
 			},
 			{
-				imagesrc: "/noimage.png",
-				divclass: "chat-list-card card-avatar",
-				imagetitle: "Киноклуб",
+				imageSrc: "/noimage.png",
+				divClass: "chat-list-card card-avatar",
+				imageTitle: "Киноклуб",
 				time: "Вчера",
 				title: "Киноклуб",
-				lastmessage: "Стикер",
-				unread: "1"
+				lastMessage: "Стикер",
+				unread: 1
 			},
 			{
-				imagesrc: "/noimage.png",
-				divclass: "chat-list-card card-avatar",
-				imagetitle: "Андрей",
+				imageSrc: "/noimage.png",
+				divClass: "chat-list-card card-avatar",
+				imageTitle: "Андрей",
 				time: "Вчера",
 				title: "Андрей",
-				lastmessage: "Ты даже не представляешь как...",
+				lastMessage: "Ты даже не представляешь как...",
 			}
 		];
-		const chatlist = chatsList.map(
-			(chatlist) => new ChatListCard(chatlist)
+		const chatList = chatsList.map(
+			(chatList) => new ChatListCard(chatList)
 		);
 
 		return this.compile(template, {
-			profilecard:profilecard,
-			chatlist:chatlist
+			profileCard,
+			chatList
 		});
 	}
 }

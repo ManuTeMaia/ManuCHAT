@@ -13,23 +13,21 @@ class ChatBodyPage extends Block{
     }
     render():DocumentFragment {
 		const avatar = new Avatar({
-			divclass: "main--page-chat-avatar chat-avatar",
-			imagesrc: "/noimage.png",
-			imagetitle: "This Chat",
+			divClass: "main--page-chat-avatar chat-avatar",
+			imageSrc: "/noimage.png",
+			imageTitle: "This Chat",
 		});
-		const chatname = "Marvell";
-		const textinput = new TextInput({
+
+		const chatName = "Marvell";
+
+		const textInput = new TextInput({
 				type: "text",
 				name: "message",
 				class: "message-input-form-input",
 				placeholder: "Пишите...",
-				validationtype: "message",
-				required: true,
-				events: {
-					focus: (e: Event) => this.validate((e.currentTarget as HTMLInputElement)),
-					blur: (e: Event) => this.validate((e.currentTarget as HTMLInputElement)),
-				}
+				required: true
 		});
+
         const send = new Button({
 			class: "main--page-chat-send",
 			name: "send-submit",
@@ -37,44 +35,44 @@ class ChatBodyPage extends Block{
 				click: (e) => submitEmulator(e, "", "")
 				}
 		});
-		const chatmessages = [
+
+		const chatMessages = [
 			{
-			text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas at neque commodo, mattis sapien bibendum, fringilla lacus. Pellentesque est metus, sollicitudin a vulputate a, luctus at mi. Maecenas eleifend vulputate gravida. Sed sodales diam eget mauris mattis, in rutrum sapien auctor. Aenean sed justo vel mauris gravida mollis eget eu velit. Vivamus ut auctor libero. Maecenas eu ipsum id sapien accumsan feugiat. Donec sit amet condimentum felis, ut tincidunt mauris. Sed nec luctus lorem. Aliquam id blandit urna. Phasellus mauris ipsum, blandit a lacus nec, finibus tempus odio. Quisque sollicitudin viverra dapibus.",
-			time:"13:15"
+				content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas at neque commodo, mattis sapien bibendum, fringilla lacus. Pellentesque est metus, sollicitudin a vulputate a, luctus at mi. Maecenas eleifend vulputate gravida. Sed sodales diam eget mauris mattis, in rutrum sapien auctor. Aenean sed justo vel mauris gravida mollis eget eu velit. Vivamus ut auctor libero. Maecenas eu ipsum id sapien accumsan feugiat. Donec sit amet condimentum felis, ut tincidunt mauris. Sed nec luctus lorem. Aliquam id blandit urna. Phasellus mauris ipsum, blandit a lacus nec, finibus tempus odio. Quisque sollicitudin viverra dapibus.",
+				time: "13:15"
 			},
 			{
-			ismine:"mine",
-			text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas at neque commodo, mattis sapien bibendum, fringilla lacus. Pellentesque est metus, sollicitudin a vulputate a, luctus at mi. Maecenas eleifend vulputate gravida. Sed sodales diam eget mauris mattis, in rutrum sapien auctor. Aenean sed justo vel mauris gravida mollis eget eu velit. Vivamus ut auctor libero. Maecenas eu ipsum id sapien accumsan feugiat. Donec sit amet condimentum felis, ut tincidunt mauris. Sed nec luctus lorem.",
-			time:"13:35",
-			isrecieved: "+"
+				isMine: true,
+				content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas at neque commodo, mattis sapien bibendum, fringilla lacus. Pellentesque est metus, sollicitudin a vulputate a, luctus at mi. Maecenas eleifend vulputate gravida. Sed sodales diam eget mauris mattis, in rutrum sapien auctor. Aenean sed justo vel mauris gravida mollis eget eu velit. Vivamus ut auctor libero. Maecenas eu ipsum id sapien accumsan feugiat. Donec sit amet condimentum felis, ut tincidunt mauris. Sed nec luctus lorem.",
+				time: "13:35",
+				isRecieved: true
 			},
 			{
-			text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas at neque commodo, mattis sapien bibendum, fringilla lacus. Pellentesque est metus, sollicitudin a vulputate a, luctus at mi. Maecenas eleifend vulputate gravida. Sed sodales diam eget mauris mattis, in rutrum sapien auctor. Aenean sed justo vel mauris gravida mollis eget eu velit. Vivamus ut auctor libero. Maecenas eu ipsum id sapien accumsan feugiat. Donec sit amet condimentum felis, ut tincidunt mauris. Sed nec luctus lorem. Aliquam id blandit urna. Phasellus mauris ipsum, blandit a lacus nec, finibus tempus odio. Quisque sollicitudin viverra dapibus.",
-			time:"13:15"
+				content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas at neque commodo, mattis sapien bibendum, fringilla lacus. Pellentesque est metus, sollicitudin a vulputate a, luctus at mi. Maecenas eleifend vulputate gravida. Sed sodales diam eget mauris mattis, in rutrum sapien auctor. Aenean sed justo vel mauris gravida mollis eget eu velit. Vivamus ut auctor libero. Maecenas eu ipsum id sapien accumsan feugiat. Donec sit amet condimentum felis, ut tincidunt mauris. Sed nec luctus lorem. Aliquam id blandit urna. Phasellus mauris ipsum, blandit a lacus nec, finibus tempus odio. Quisque sollicitudin viverra dapibus.",
+				time: "13:15"
 			},
 			{
-			ismine:"mine",
-			text: "Pellentesque est metus, sollicitudin a vulputate a, luctus at mi. Maecenas eleifend",
-			time:"13:35",
-			isrecieved: "+"
+				isMine: true,
+				content: "Pellentesque est metus, sollicitudin a vulputate a, luctus at mi. Maecenas eleifend",
+				time: "13:35",
+				isRecieved: true
 			},
 			{
-			text:"%)",
-			time:"15:00"
+				content: "%)",
+				time: "15:00"
 			},
 			{
-			text:"Что-то непонятное",
-			time:"15:02"
+				content: "Что-то непонятное",
+				time: "15:02"
 			}
-		].map((chatmessage) => new ChatMessage(chatmessage));
+		].map((chatMessage) => new ChatMessage(chatMessage));
 
         return this.compile(template, {
-			chatname:chatname,
-			avatar:avatar,
-			chatmessages:chatmessages,
-			textinput:textinput,
-			send:send,
-			
+			chatName,
+			avatar,
+			chatMessages,
+			textInput,
+			send,
 		});
     }
 

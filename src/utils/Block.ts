@@ -1,8 +1,7 @@
 import EventBus from "./EventBus";
-import Validator from "./Validator";
 import { nanoid } from "nanoid";
 
-export default class Block {
+export default class Block<TProps = any> {
 	static EVENTS = {
 		INIT: "init",
 		FLOW_CDM: "flow:component-did-mount",
@@ -11,18 +10,16 @@ export default class Block {
 	};
 
 	eventBus: () => EventBus;
-	validator: () => Validator;
 	_element: Element;
 	_meta: {
 		tagName: string;
-		props: any;
+		props: TProps | Record<string, unknown>;
 	};
-	props: any;
+	props: TProps | Record<string, unknown>;
 	id = nanoid(6);
 
 	constructor(tagName = "div", props = {}) {
 		const eventBus = new EventBus();
-		const validator = new Validator();
 		this._meta = {
 			tagName,
 			props,
@@ -31,7 +28,6 @@ export default class Block {
 		this.props = this._makePropsProxy(props);
 
 		this.eventBus = () => eventBus;
-		this.validator = () => validator;
 		this._registerEvents(eventBus);
 		eventBus.emit(Block.EVENTS.INIT);
 	}
@@ -94,6 +90,7 @@ export default class Block {
 		if (!events) {
 			return;
 		}
+
 		Object.keys(events).forEach(eventName => {
 			this._element.removeEventListener(eventName, events[eventName]);
 		});
@@ -110,8 +107,7 @@ export default class Block {
 
 			Object.entries(props).forEach(([name, value]) => {
 				if(Array.isArray(value)) {
-					const objArr = value;
-					objArr.forEach((obj, i) => {
+					value.forEach((obj, i) => {
 						if (obj instanceof Block) {
 							components[obj.id] = obj; 
 							props[name][i] = `<div id="id-${obj.id}"></div>`;
@@ -191,9 +187,5 @@ export default class Block {
 
 	_createDocumentElement(tagName: string): HTMLElement {
 		return document.createElement(tagName);
-	}
-
-	validate(input: HTMLInputElement): void {
-		return this.validator().validate(input);
 	}
 }
