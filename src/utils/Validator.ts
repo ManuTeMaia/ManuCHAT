@@ -61,13 +61,23 @@ class Validator {
 
 	validate(input: HTMLInputElement): void {
 		const result = this._validate(input);
-		const errorDiv = input.nextElementSibling;
+		const inputName =  input.getAttribute("name");
+		console.log(inputName);
+		const errorDiv = document.createElement("div");
+		errorDiv.classList.add("input-error");
+		if (typeof inputName === "string") {
+			errorDiv.setAttribute("error-for", inputName);
+		}
+		const currentDiv = document.querySelector(`[error-for=${inputName}]`);
 
-		if (errorDiv) {
-			if (result && result.passed) {
-				errorDiv.classList.remove("invalid");
-			} else if (result && result.error) {
-				errorDiv.classList.add("invalid");
+		if (result && result.passed) {
+			if(currentDiv) {
+				currentDiv.remove();
+			}
+		} else if (result && result.error) {
+			console.log(currentDiv);
+			if(!currentDiv) {
+				input.parentElement?.appendChild(errorDiv);
 				errorDiv.textContent = result.error;
 			}
 		}
@@ -76,16 +86,8 @@ class Validator {
 	formValidate(): void {
 		const toValidate = document.querySelectorAll("[valtype]");
 		toValidate.forEach((element: HTMLInputElement) => {
-			const result = this._validate(element);
-			const errorDiv = element.nextElementSibling;
-
-			if (errorDiv) {
-				if (result && result.passed) {
-					errorDiv.classList.remove("invalid");
-				} else if (result && result.error) {
-					errorDiv.classList.add("invalid");
-					errorDiv.textContent = result.error;
-				}
+			if(element.hasAttribute("required")) {
+				this.validate(element);
 			}
 		});
 	}

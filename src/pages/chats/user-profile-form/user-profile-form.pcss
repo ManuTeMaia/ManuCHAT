@@ -12,8 +12,7 @@
 }
 
 .main--page-user-profile-form .input-wrapper {
-    display: flex;
-    justify-content: space-between;
+    display: block;
     border-bottom: 1px dotted var(--global--color-primary-40);
     padding: var(--global--spacing-vertical) 0 0;
     position: relative;
@@ -23,10 +22,13 @@
     border: 0;
     text-align: right;
     padding-right: 25px;
+    width: 70%;
 }
 
-.main--page-user-profile-form span {
-    position: absolute;
+.main--page-user-profile-form label {
+    text-align: left;
+    width: 25%;
+    display: inline-block;
 }
 
 .main--page-user-profile-form button {

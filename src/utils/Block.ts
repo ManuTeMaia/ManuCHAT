@@ -9,17 +9,18 @@ export default class Block<TProps = any> {
 		FLOW_RENDER: "flow:render",
 	};
 
-	eventBus: () => EventBus;
+	eventBus: EventBus;
 	_element: Element;
 	_meta: {
 		tagName: string;
 		props: TProps | Record<string, unknown>;
 	};
 	props: TProps | Record<string, unknown>;
+
 	id = nanoid(6);
 
 	constructor(tagName = "div", props = {}) {
-		const eventBus = new EventBus();
+
 		this._meta = {
 			tagName,
 			props,
@@ -27,9 +28,9 @@ export default class Block<TProps = any> {
 
 		this.props = this._makePropsProxy(props);
 
-		this.eventBus = () => eventBus;
-		this._registerEvents(eventBus);
-		eventBus.emit(Block.EVENTS.INIT);
+		this.eventBus = new EventBus();
+		this._registerEvents(this.eventBus);
+		this.eventBus.emit(Block.EVENTS.INIT);
 	}
 
 	_registerEvents(eventBus: EventBus): void {
@@ -46,11 +47,11 @@ export default class Block<TProps = any> {
 
 	init(): void {
 		this._createResources();
-		this.eventBus().emit(Block.EVENTS.FLOW_CDM);
+		this.eventBus.emit(Block.EVENTS.FLOW_CDM);
 	}
 
 	_componentDidMount(): void {
-		this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
+		this.eventBus.emit(Block.EVENTS.FLOW_RENDER);
 	}
 
 	_componentDidUpdate(oldProps: Record<string, unknown>, newProps: Record<string, unknown>): void {
@@ -73,7 +74,7 @@ export default class Block<TProps = any> {
 	};
 
 	_addEvents():void {
-		const events: Record<string, () => void> = this.props.events;
+		const events:Record<string,() => void> = this.props.events;
 
 		if (!events) {
 			return;

@@ -70,7 +70,7 @@ class HTTPTransport {
 
 			xhr.open(
 				method,
-				isGet && !!data ? `${url}${this.queryStringify(data)}` : url,
+				isGet && !!data ? `${url}${data}` : url,
 			);
 
 			Object.keys(headers).forEach((key) => xhr.setRequestHeader(key, headers[key]));
