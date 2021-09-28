@@ -14,9 +14,9 @@ class ProfilePage extends Block{
 
     render():DocumentFragment {
 		const avatar = new Avatar({
-			divclass: "main--page-user-profile user-profile-avatar",
-			imagesrc: "/noimage.png",
-			imagetitle: "Avatar",
+			divClass: "main--page-user-profile user-profile-avatar",
+			imageSrc: "/noimage.png",
+			imageTitle: "Avatar",
 			events: {
 				click: () => alert("Позже тут можно будет загрузить аватар")
 			}
@@ -25,7 +25,7 @@ class ProfilePage extends Block{
 			class: "main--page-user-profile user-profile-heading",
 			text: "Джейн Доу"
 		});
-		const profilefields = [
+		const profileFields = [
 			{
 				label: "Email",
 				data: "dragonfly@123.com"
@@ -47,7 +47,7 @@ class ProfilePage extends Block{
 				data: "+7 (000)-000-00-00"
 			}
 
-		].map((profilefield) => new ProfileField(profilefield));
+		].map((profileField) => new ProfileField(profileField));
 		
 		const links = [
 			{
@@ -86,10 +86,10 @@ class ProfilePage extends Block{
 		].map((link) => new Link(link));
 
         return this.compile(template, {
-			avatar:avatar,
-			heading:heading,
-			profilefields:profilefields,
-			links:links
+			avatar,
+			heading,
+			profileFields,
+			links
 		});
     }
 

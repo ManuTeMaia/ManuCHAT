@@ -1,13 +1,16 @@
 import Block from "../../../utils/Block";
-import pageRender from "../../../helpers/pageRender";
+import Router from "../../../utils/Router";
 import ChatProfileCard from "../../../modules/chat-list-profile-card/chat-list-profile-card";
 import ChatListCard from "../../../modules/chat-list-card/chat-list-card";
 import template from "./chat.hbs";
 import "./chat.pcss";
 
 class ChatPage extends Block {
+	router: Router;
+
 	constructor(){
 		super("div");
+		this.router = new Router();
 	}
 	render(): DocumentFragment {
 
@@ -34,7 +37,7 @@ class ChatPage extends Block {
 				events: {
 					click: (e:Event) => {
 						(<HTMLElement> e.currentTarget).classList.add("active");
-						pageRender(".chat--wrap","chat");
+						this.router.go("/chat");
 					}
 				}
 			},	
@@ -62,6 +65,7 @@ class ChatPage extends Block {
 				imageTitle: "Андрей",
 				time: "Вчера",
 				title: "Андрей",
+				mine: "Вы",
 				lastMessage: "Ты даже не представляешь как...",
 			}
 		];

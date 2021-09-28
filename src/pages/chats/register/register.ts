@@ -1,6 +1,6 @@
 import Block from "../../../utils/Block";
 import Validator from "../../../utils/Validator";
-import pageRender from "../../../helpers/pageRender";
+import Router from "../../../utils/Router";
 import submitEmulator from "../../../helpers/formActions";
 import InputWrapper from  "../../../modules/inputs-wrapper/inputs-wrapper";
 import Button from "../../../components/buttons/submit-button";
@@ -11,9 +11,12 @@ import "./register.pcss";
 
 class RegistrationPage extends Block {
 	validator: Validator;
+	router: Router;
+
 	constructor() {
 		super("div");
 		this.validator = new Validator();
+		this.router = new Router();
 	}
 	validate(input: HTMLInputElement): void {
 		return this.validator.validate(input);
@@ -31,7 +34,6 @@ class RegistrationPage extends Block {
 				validationType: "email",
 				required: true,
 				events: {
-					focus: (e: Event) => this.validate((e.currentTarget as HTMLInputElement)),
 					blur: (e: Event) => this.validate((e.currentTarget as HTMLInputElement)),
 				}
 			},
@@ -43,7 +45,6 @@ class RegistrationPage extends Block {
 				validationType: "login",
 				required: true,
 				events: {
-					focus: (e: Event) => this.validate((e.currentTarget as HTMLInputElement)),
 					blur: (e: Event) => this.validate((e.currentTarget as HTMLInputElement)),
 				}
 			},
@@ -55,7 +56,6 @@ class RegistrationPage extends Block {
 				validationType: "name",
 				required: true,
 				events: {
-					focus: (e: Event) => this.validate((e.currentTarget as HTMLInputElement)),
 					blur: (e: Event) => this.validate((e.currentTarget as HTMLInputElement)),
 				}
 			},
@@ -67,7 +67,6 @@ class RegistrationPage extends Block {
 				validationType: "name",
 				required: true,
 				events: {
-					focus: (e: Event) => this.validate((e.currentTarget as HTMLInputElement)),
 					blur: (e: Event) => this.validate((e.currentTarget as HTMLInputElement)),
 				}
 			},
@@ -79,7 +78,6 @@ class RegistrationPage extends Block {
 				validationType: "phone",
 				required: true,
 				events: {
-					focus: (e: Event) => this.validate((e.currentTarget as HTMLInputElement)),
 					blur: (e: Event) => this.validate((e.currentTarget as HTMLInputElement)),
 				}
 			},
@@ -91,7 +89,6 @@ class RegistrationPage extends Block {
 				validationType: "password",
 				required: true,
 				events: {
-					focus: (e: Event) => this.validate((e.currentTarget as HTMLInputElement)),
 					blur: (e: Event) => this.validate((e.currentTarget as HTMLInputElement)),
 				}
 			},
@@ -103,7 +100,6 @@ class RegistrationPage extends Block {
 				validationType: "password",
 				required: true,
 				events: {
-					focus: (e: Event) => this.validate((e.currentTarget as HTMLInputElement)),
 					blur: (e: Event) => this.validate((e.currentTarget as HTMLInputElement)),
 				}
 			}
@@ -126,7 +122,7 @@ class RegistrationPage extends Block {
 			events: {
 				click: (e: Event) => {
 					e.preventDefault();
-					pageRender(".root", "login");
+					this.router.go("/");
 					}
 				}
 		});

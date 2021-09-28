@@ -1,4 +1,5 @@
 import Block from "../../../utils/Block";
+import Router from "../../../utils/Router";
 import submitEmulator from "../../../helpers/formActions";
 import Button from "../../../components/buttons/submit-button";
 import Heading from "../../../components/headings/headings";
@@ -9,9 +10,12 @@ import Validator from "../../../utils/Validator";
 
 class ProfileFormPage extends Block {
 	validator: Validator;
+	router: Router;
+
 	constructor() {
 		super("div");
 		this.validator = new Validator();
+		this.router = new Router();
 	}
 	
 	validate(input: HTMLInputElement): void {

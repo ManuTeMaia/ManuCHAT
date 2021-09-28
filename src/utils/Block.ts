@@ -1,7 +1,7 @@
 import EventBus from "./EventBus";
 import { nanoid } from "nanoid";
 
-export default class Block<TProps = any> {
+export default class Block {
 	static EVENTS = {
 		INIT: "init",
 		FLOW_CDM: "flow:component-did-mount",
@@ -13,9 +13,9 @@ export default class Block<TProps = any> {
 	_element: Element;
 	_meta: {
 		tagName: string;
-		props: TProps | Record<string, unknown>;
+		props: any;
 	};
-	props: TProps | Record<string, unknown>;
+	props: any;
 
 	id = nanoid(6);
 
@@ -188,5 +188,9 @@ export default class Block<TProps = any> {
 
 	_createDocumentElement(tagName: string): HTMLElement {
 		return document.createElement(tagName);
+	}
+
+	hide(): void {
+		this.getContent().innerHTML = "";
 	}
 }

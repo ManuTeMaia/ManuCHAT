@@ -1,5 +1,7 @@
-import pageRender from "./pageRender";
+import Router from "../utils/Router";
 import Validator from "../utils/Validator";
+
+const router = new Router();
 
 function getFormData(): void {
     const data: Record<string, unknown> = {};
@@ -8,13 +10,13 @@ function getFormData(): void {
     console.log(data);
 }
 
-function submitEmulator(e: Event, query: string, block: string): void {
+function submitEmulator(e: Event, path: string): void {
     e.preventDefault();
+    const hasErrors = document.querySelector("[error-for]");
     new Validator().formValidate();
-    const hasErrors =  document.querySelectorAll(".invalid").length;
     if(!hasErrors) {
         getFormData();
-        pageRender(query, block);
+        router.go(path);
     }
 }
 

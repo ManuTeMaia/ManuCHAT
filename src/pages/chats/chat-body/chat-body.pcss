@@ -78,11 +78,15 @@ input[type="text"].message-input-form-input {
 }
 
 button[type="submit"].main--page-chat-send {
-    padding: 0;
-    background: transparent;
+    padding: calc(0.5 * var(--global--spacing-unit));
     line-height: 0;
 }
 
 .main--page-chat-send i {
-    font-size: var(--global--font-size-xxl);
+    font-size: var(--global--font-size-xl);
+    color: var(--global--color-white);
+}
+
+.main--page-chat-send:hover i {
+    color: var(--global--color-dark-gray);
 }

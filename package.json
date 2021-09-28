@@ -1,7 +1,7 @@
 {
     "name": "middle.messenger.praktikum.yandex",
-    "version": "0.2.0",
-    "description": "Manutemaia Chat: Sprint 2",
+    "version": "0.2.1",
+    "description": "Manutemaia Chat: Sprint 3",
     "main": "index.js",
     "engine": "^14.17.5",
     "repository": {

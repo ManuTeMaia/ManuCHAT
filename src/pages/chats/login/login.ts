@@ -1,6 +1,6 @@
 import Block from "../../../utils/Block";
 import Validator from "../../../utils/Validator";
-import pageRender from "../../../helpers/pageRender";
+import Router from "../../../utils/Router";
 import submitEmulator from "../../../helpers/formActions";
 import InputWrapper from  "../../../modules/inputs-wrapper/inputs-wrapper";
 import Button from "../../../components/buttons/submit-button";
@@ -11,9 +11,14 @@ import "./login.pcss";
 
 class LoginPage extends Block {
 	validator: Validator;
+	router: Router;
+
 	constructor() {
-		super("div");
+		super("div", {events: {
+				submit: (e: Event) => submitEmulator(e, "/chats"),
+			}});
 		this.validator = new Validator();
+		this.router = new Router();
 	}
 
 	validate(input: HTMLInputElement): void {
@@ -33,7 +38,6 @@ class LoginPage extends Block {
 			validationType: "login",
 			required: true,
 			events: {
-				focus: (e) => this.validate((e.currentTarget as HTMLInputElement)),
 				blur: (e) => this.validate((e.currentTarget as HTMLInputElement)),
 			}
 		});
@@ -46,7 +50,6 @@ class LoginPage extends Block {
 			validationType: "password",
 			required: true,
 			events: {
-				focus: (e) => this.validate((e.currentTarget as HTMLInputElement)),
 				blur: (e) => this.validate((e.currentTarget as HTMLInputElement)),
 			}
 		});
@@ -56,7 +59,7 @@ class LoginPage extends Block {
 			name: "login-submit",
 			title: "Авторизоваться",
 			events: {
-				click: (e) => submitEmulator(e, ".root", "chats")
+				//click: (e) => submitEmulator(e, ".root", "chats")
 				}
 		});
 
@@ -67,7 +70,7 @@ class LoginPage extends Block {
 			events: {
 				click: (e) => {
 					e.preventDefault();
-					pageRender(".root","registration");
+					this.router.go("/signup");
 					}
 				}
 		});
