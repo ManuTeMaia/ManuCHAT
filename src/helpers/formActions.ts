@@ -3,11 +3,16 @@ import Validator from "../utils/Validator";
 
 const router = new Router();
 
-function getFormData(): void {
-    const data: Record<string, unknown> = {};
-    const inputFields = document.querySelectorAll("form input");
-    inputFields.forEach((input: HTMLInputElement) => data[input.name] = input.value);
-    console.log(data);
+function getFormData(form: HTMLFormElement): void {
+    console.log(form);
+    const formData = new FormData(form);
+    const consoleData: Record<string, unknown> = {};
+
+    for(const [name, value] of formData) {
+        consoleData[name] =  value;
+    }
+
+    console.log(consoleData);
 }
 
 function submitEmulator(e: Event, path: string): void {
@@ -15,7 +20,7 @@ function submitEmulator(e: Event, path: string): void {
     const hasErrors = document.querySelector("[error-for]");
     new Validator().formValidate();
     if(!hasErrors) {
-        getFormData();
+        getFormData(e.target as HTMLFormElement);
         router.go(path);
     }
 }

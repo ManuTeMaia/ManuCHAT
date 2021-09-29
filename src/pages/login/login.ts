@@ -1,11 +1,11 @@
-import Block from "../../../utils/Block";
-import Validator from "../../../utils/Validator";
-import Router from "../../../utils/Router";
-import submitEmulator from "../../../helpers/formActions";
-import InputWrapper from  "../../../modules/inputs-wrapper/inputs-wrapper";
-import Button from "../../../components/buttons/submit-button";
-import Heading from "../../../components/headings/headings";
-import Link from "../../../components/links/links";
+import Block from "../../utils/Block";
+import Validator from "../../utils/Validator";
+import Router from "../../utils/Router";
+import submitEmulator from "../../helpers/formActions";
+import InputWrapper from "../../modules/inputs-wrapper/inputs-wrapper";
+import Button from "../../components/buttons/submit-button";
+import Heading from "../../components/headings/headings";
+import Link from "../../components/links/links";
 import template from "./login.hbs";
 import "./login.pcss";
 
@@ -14,9 +14,11 @@ class LoginPage extends Block {
 	router: Router;
 
 	constructor() {
-		super("div", {events: {
+		super("div", {
+			events: {
 				submit: (e: Event) => submitEmulator(e, "/chats"),
-			}});
+			}
+		});
 		this.validator = new Validator();
 		this.router = new Router();
 	}

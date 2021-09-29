@@ -1,5 +1,5 @@
 import Block from "../../../utils/Block";
-import pageRender from "../../../helpers/pageRender";
+import Router from "../../../utils/Router";
 import ProfileField from "../../../components/profile-field/profile-field";
 import Avatar from "../../../components/avatar/avatar";
 import Heading from  "../../../components/headings/headings";
@@ -8,8 +8,11 @@ import template from "./user-profile.hbs";
 import "./user-profile.pcss";
 
 class ProfilePage extends Block{
+	router: Router;
+
 	constructor() {
         super("div");
+		this.router = new Router();
     }
 
     render():DocumentFragment {
@@ -55,10 +58,7 @@ class ProfilePage extends Block{
 				class:"main--page-user-profile user-profile-link link-change-data",
 				text:"Изменить данные",
 				events: {
-					click: (e:Event) => {
-						e.preventDefault();
-						pageRender(".main--page-user-profile-fields", "profile-change");
-					}
+					click: () => this.router.go("/settings/edit")
 				}
 			},
 			{
@@ -66,10 +66,7 @@ class ProfilePage extends Block{
 				class:"main--page-user-profile user-profile-link link-change-pass",
 				text:"Изменить пароль",
 				events: {
-					click: (e:Event) => {
-						e.preventDefault();
-						pageRender(".main--page-user-profile-fields","profile-password");
-					}
+					click: () => this.router.go("/settings/pwd")
 				}
 			},
 			{
@@ -77,10 +74,7 @@ class ProfilePage extends Block{
 				class:"main--page-user-profile user-profile-link link-logout",
 				text:"Выйти",
 				events: {
-					click: (e:Event) => {
-						e.preventDefault();
-						pageRender(".root","login");
-					}
+					click: () => this.router.go("/")
 				}
 			},
 		].map((link) => new Link(link));

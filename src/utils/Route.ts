@@ -1,23 +1,6 @@
 import Block from "./Block";
-
-function isEqual(lhs: string, rhs: string): boolean {
-	return lhs === rhs;
-}
-
-function render(query: string, block: Block): Element {
-	const root = document.querySelector(query);
-
-	if(!root) {
-		throw new Error("Root not found");
-	}
-
-	root.innerHTML = "";
-
-	const newBlock  = block.getContent();
-	root.appendChild(newBlock);
-
-	return root;
-}
+import renderDOM from "../helpers/renderDOM";
+import isEqual from "../helpers/isEqual";
 
 class Route {
 	_pathname: string;
@@ -39,26 +22,20 @@ class Route {
 		}
 	}
 
-	leave(): void {
-		if (this._block) {
-			this._block.hide();
-		}
-	}
-
 	match(pathname: string): boolean {
 		return isEqual(pathname, this._pathname);
 	}
 
 	render(): void {
-		/*if (!this._block) {
+		if (!this._block) {
 			this._block = new this._blockClass;
 			console.log(this._props.rootQuery, this._block);
-			render(this._props.rootQuery, <Block>this._block);
+			renderDOM(this._props.rootQuery, <Block>this._block);
 			return;
-		}*/
+		}
 		this._block = new this._blockClass;
 		console.log("--", this._props.rootQuery, this._block);
-		render(this._props.rootQuery, <Block>this._block);
+		renderDOM(this._props.rootQuery, <Block>this._block);
 	}
 }
 

@@ -3,19 +3,23 @@ import TextInput from "../../components/inputs/text-input";
 import Avatar from "../../components/avatar/avatar";
 import template from "./chat-list-profile-card.hbs";
 import "./chat-list-profile-card.pcss";
-import pageRender from "../../helpers/PageRender";
+import Router from "../../utils/Router";
 
 class ChatProfileCard extends Block {
+    router: Router;
+
     constructor(props:TextInput | Avatar) {
         super("div", props);
+        this.router = new Router();
     }
+
     render():DocumentFragment{
         const avatar = new Avatar({
                 imageSrc: "/noimage.png",
                 divClass: "chat-list-profile-card profile-card-avatar",
                 imageTitle: "Изменить данные профиля",
                 events: {
-                    click: () => pageRender(".chat--wrap", "profile")
+                    click: () => this.router.go("/settings")
                 }
 
             });

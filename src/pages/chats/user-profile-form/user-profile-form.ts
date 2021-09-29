@@ -13,7 +13,11 @@ class ProfileFormPage extends Block {
 	router: Router;
 
 	constructor() {
-		super("div");
+		super("div", {
+			events: {
+				click: (e: Event) => submitEmulator(e, "/settings")
+			}
+		});
 		this.validator = new Validator();
 		this.router = new Router();
 	}
@@ -101,10 +105,7 @@ class ProfileFormPage extends Block {
 		const submit = new Button({
 			class: "form--user-profile-info-submit",
 			name: "user-profile-info-submit",
-			title: "Cохранить",
-			events: {
-				click: (e) => submitEmulator(e, ".chat--wrap", "profile")
-				}
+			title: "Cохранить"
 		});
 
 		return this.compile(template, {
@@ -120,7 +121,12 @@ class ProfileFormPage extends Block {
 class ProfileFormPasswordPage extends Block {
 	validator: Validator;
 	constructor() {
-		super("div");
+		super("div", {
+			events: {
+				click: (e: Event) => submitEmulator(e, "/settings")
+			}
+		});
+
 		this.validator = new Validator();
 	}
 
@@ -178,10 +184,7 @@ class ProfileFormPasswordPage extends Block {
 		const submit = new Button({
 			class: "form--user-profile-password-submit",
 			name: "user-profile-password-submit",
-			title: "Изменить",
-			events: {
-				click: (e) => submitEmulator(e, ".chat--wrap", "profile")
-				}
+			title: "Изменить"
 		});
 
 		return this.compile(template, {

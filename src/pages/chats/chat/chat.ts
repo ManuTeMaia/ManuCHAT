@@ -44,7 +44,7 @@ class ChatPage extends Block {
 			{
 				imageSrc: "/noimage.png",
 				divClass: "chat-list-card card-avatar",
-				imageTitle: "Nikon Lensesя",
+				imageTitle: "Nikon Lenses",
 				time: "08:23",
 				title: "Nikon Lenses",
 				mine: "Вы",

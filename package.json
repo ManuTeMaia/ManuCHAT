@@ -45,11 +45,8 @@
         "style": "stylelint ./src"
     },
     "dependencies": {
-        "components": "^0.1.0",
         "express": "^4.17.1",
-        "nanoid": "^3.1.25",
-        "pages": "^0.0.16",
-        "utils": "^0.3.1"
+        "nanoid": "^3.1.25"
     },
     "browserslist": "last 2 versions",
     "staticFiles": {

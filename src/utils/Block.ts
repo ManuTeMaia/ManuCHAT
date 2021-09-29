@@ -1,7 +1,7 @@
 import EventBus from "./EventBus";
 import { nanoid } from "nanoid";
 
-export default class Block {
+export default class Block <BlockProps = any> {
 	static EVENTS = {
 		INIT: "init",
 		FLOW_CDM: "flow:component-did-mount",
@@ -15,7 +15,7 @@ export default class Block {
 		tagName: string;
 		props: any;
 	};
-	props: any;
+	props: BlockProps | Record<string, any>;
 
 	id = nanoid(6);
 
@@ -23,7 +23,7 @@ export default class Block {
 
 		this._meta = {
 			tagName,
-			props,
+			props
 		};
 
 		this.props = this._makePropsProxy(props);

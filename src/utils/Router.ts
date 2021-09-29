@@ -4,33 +4,29 @@ import Route from "./Route";
 class Router {
 	private routes: Route[];
 	private history: History;
-	private _currentRoute: null | Route;
-	private readonly _rootQuery: string;
-	private static __instance: InstanceType<{ new (): Router }>;
+	private static __instance: InstanceType<{ new(): Router }>;
 
 
-	constructor(rootQuery = ".root") {
+	constructor() {
 		if (Router.__instance) {
 			return Router.__instance;
 		}
 
 		this.routes = [];
 		this.history = window.history;
-		this._currentRoute = null;
-		this._rootQuery = rootQuery;
 
 		Router.__instance = this;
 	}
 
-	use(pathname: string, block: new () => Block): this {
-		const route = new Route(pathname, block, { rootQuery: this._rootQuery });
+	use(pathname: string, block: new () => Block, rootQuery = ".root"): this {
+		const route = new Route(pathname, block, {rootQuery});
 		this.routes.push(route);
 		return this;
 	}
 
 	start(): void {
 		window.onpopstate = event => {
-			if(event) {
+			if (event) {
 				this._onRoute((event.currentTarget as Window).location.pathname);
 			}
 		};
@@ -43,11 +39,6 @@ class Router {
 			return;
 		}
 
-		if (this._currentRoute) {
-			this._currentRoute.leave();
-		}
-
-		this._currentRoute = route;
 		route.render();
 	}
 
