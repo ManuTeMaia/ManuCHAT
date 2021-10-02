@@ -4,22 +4,18 @@ import Route from "./Route";
 class Router {
 	private routes: Route[];
 	private history: History;
-	private static __instance: InstanceType<{ new(): Router }>;
+	private readonly _rootQuery: string;
 
-
-	constructor() {
-		if (Router.__instance) {
-			return Router.__instance;
-		}
+	constructor(rootQuery = ".root") {
 
 		this.routes = [];
 		this.history = window.history;
+		this._rootQuery = rootQuery;
 
-		Router.__instance = this;
 	}
 
-	use(pathname: string, block: new () => Block, rootQuery = ".root"): this {
-		const route = new Route(pathname, block, {rootQuery});
+	use(pathname: string, block: new () => Block,  parent?: new () => Block ): this {
+		const route = new Route(pathname, block, {rootQuery: this._rootQuery});
 		this.routes.push(route);
 		return this;
 	}

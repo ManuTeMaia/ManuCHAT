@@ -1,3 +1,5 @@
+import queryStringify from "../helpers/queryStringify";
+
 enum METHOD {
 	GET = "GET",
 	POST = "POST",
@@ -16,7 +18,7 @@ class HTTPTransport {
 		url: string,
 		options: Record<string, unknown> = {},
 	): Promise<XMLHttpRequest> => {
-		return this.request(url + this.queryStringify(options), {
+		return this.request(url + queryStringify(options), {
 			...options,
 			method: METHOD.GET,
 		});
@@ -39,18 +41,6 @@ class HTTPTransport {
 	): Promise<XMLHttpRequest> => {
 		return this.request(url, { ...options, method: METHOD.DELETE });
 	};
-
-	queryStringify(data: Record<string, unknown>): string {
-		if (typeof data !== "object") {
-			throw new Error("Not an object");
-		}
-		const keys = Object.keys(data);
-		return keys.reduce((result, key, index) => {
-			return `${result}${key}=${data[key]}${
-				index < keys.length - 1 ? "&" : ""
-			}`;
-		}, "?");
-	}
 
 	request = (
 		url: string,

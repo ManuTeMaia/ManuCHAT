@@ -15,7 +15,7 @@ export default class Block <BlockProps = any> {
 		tagName: string;
 		props: any;
 	};
-	props: BlockProps | Record<string, any>;
+	props: BlockProps | any;
 
 	id = nanoid(6);
 
