@@ -13,12 +13,14 @@ const router = new Router();
 
 router
 	.use("/", LoginPage)
-	.use("/chats", ChatPage)
 	.use("/signup", RegistrationPage)
-	.use ("/400", Error404)
-	.use ("/500", Error500)
-	.use("/chat", ChatBodyPage, ChatPage)
-	.use("/settings", ProfilePage, ChatPage)
-	.use("/settings/edit", ProfileFormPage, ProfilePage)
-	.use("/settings/pwd", ProfileFormPasswordPage, ProfilePage)
+	.use("/400", Error404)
+	.use("/500", Error500)
+	.use("/chats", ChatPage, ".root",
+		[
+		{pathname: "/chat", block: ChatBodyPage, query: ".chat--wrap"},
+		{pathname:"/settings", block:ProfilePage, query: ".chat--wrap"},
+		{pathname: "/settings/edit",block: ProfileFormPage, query: ".chat--wrap"},
+		{pathname: "/settings/pwd", block: ProfileFormPasswordPage, query: ".chat--wrap"}
+	])
 	.start();

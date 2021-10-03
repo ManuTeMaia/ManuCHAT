@@ -1,21 +1,28 @@
 import Block from "./Block";
 import Route from "./Route";
 
+export type ChildrenType =
+	{ pathname: string, block: { new(): Block }; query: string}[] | undefined;
+
 class Router {
-	private routes: Route[];
 	private history: History;
-	private readonly _rootQuery: string;
+	private routes: Route[];
+	private _rootQuery: string;
 
 	constructor(rootQuery = ".root") {
-
+		if (Router.__instance) {
+			return Router.__instance;
+		}
 		this.routes = [];
 		this.history = window.history;
 		this._rootQuery = rootQuery;
+		Router.__instance = this;
 
 	}
 
-	use(pathname: string, block: new () => Block,  parent?: new () => Block ): this {
-		const route = new Route(pathname, block, {rootQuery: this._rootQuery});
+	use(pathname: string, block: { new(): Block }, childQuery?: string, children?: ChildrenType): this {
+		const query = childQuery ? childQuery : this._rootQuery;
+		const route = new Route(pathname, block, query, children);
 		this.routes.push(route);
 		return this;
 	}

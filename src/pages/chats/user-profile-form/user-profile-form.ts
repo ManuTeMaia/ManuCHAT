@@ -1,12 +1,13 @@
 import Block from "../../../utils/Block";
+import Validator from "../../../utils/Validator";
 import Router from "../../../utils/Router";
 import submitEmulator from "../../../helpers/formActions";
 import Button from "../../../components/buttons/submit-button";
+import Avatar from "../../../components/avatar/avatar";
 import Heading from "../../../components/headings/headings";
 import InputWrapper from "../../../modules/inputs-wrapper/inputs-wrapper";
 import template from "./user-profile-form.hbs";
 import "./user-profile-form.pcss";
-import Validator from "../../../utils/Validator";
 
 class ProfileFormPage extends Block {
 	validator: Validator;
@@ -27,6 +28,14 @@ class ProfileFormPage extends Block {
 	}
 	
 	render(): DocumentFragment {
+		const avatar = new Avatar({
+			divClass: "main--page-user-profile user-profile-avatar",
+			imageSrc: "/noimage.png",
+			imageTitle: "Avatar",
+			events: {
+				click: () => alert("Позже тут можно будет загрузить аватар")
+			}
+		});
 		const heading = new Heading({
 			class: "main--page-user-profile user-profile-heading",
 			text: "Изменить данные"
@@ -109,6 +118,7 @@ class ProfileFormPage extends Block {
 		});
 
 		return this.compile(template, {
+			avatar,
 			heading,
 			formClass,
 			textInputs,

@@ -13,6 +13,7 @@ class LoginPage extends Block {
 	validator: Validator;
 	router: Router;
 
+
 	constructor() {
 		super("div", {
 			events: {
@@ -59,10 +60,7 @@ class LoginPage extends Block {
         const submit = new Button({
 			class: "form--login-submit",
 			name: "login-submit",
-			title: "Авторизоваться",
-			events: {
-				//click: (e) => submitEmulator(e, ".root", "chats")
-				}
+			title: "Авторизоваться"
 		});
 
 		const link = new Link({
