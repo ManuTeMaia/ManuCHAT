@@ -2,6 +2,7 @@ import Router from "../utils/Router";
 import Validator from "../utils/Validator";
 
 function getFormData(form: HTMLFormElement): void {
+    console.log(form);
     const formData = new FormData(form);
     const consoleData: Record<string, unknown> = {};
 

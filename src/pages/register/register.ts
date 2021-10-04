@@ -16,15 +16,17 @@ class RegistrationPage extends Block {
 	constructor() {
 		super("div", {
 			events: {
-				click: (e: Event) => submitEmulator(e, "/chats")
+				submit: (e: Event) => submitEmulator(e, "/chats"),
 			}
 		});
 		this.validator = new Validator();
 		this.router = new Router();
 	}
+
 	validate(input: HTMLInputElement): void {
 		return this.validator.validate(input);
 	}
+
 	render(): DocumentFragment {
 		const heading = new Heading({
 			text: "Регистрация"
