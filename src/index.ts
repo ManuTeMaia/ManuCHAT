@@ -16,11 +16,9 @@ router
 	.use("/signup", RegistrationPage)
 	.use("/400", Error404)
 	.use("/500", Error500)
-	.use("/chats", ChatPage, ".root",
-		[
-		{pathname: "/chat", block: ChatBodyPage, query: ".chat--wrap"},
-		{pathname:"/settings", block:ProfilePage, query: ".chat--wrap"},
-		{pathname: "/settings/edit",block: ProfileFormPage, query: ".chat--wrap"},
-		{pathname: "/settings/pwd", block: ProfileFormPasswordPage, query: ".chat--wrap"}
-	])
+	.use("/chats", ChatPage)
+	.use("/settings", ChatPage,".root",{block:ProfilePage, query: ".chat--wrap"})
+	.use("/chat", ChatPage,".root",{block: ChatBodyPage, query: ".chat--wrap"})
+	.use("/settings/edit", ChatPage,".root",{block: ProfileFormPage, query: ".chat--wrap"})
+	.use ("/settings/pwd", ChatPage, ".root",{block: ProfileFormPasswordPage, query: ".chat--wrap"})
 	.start();

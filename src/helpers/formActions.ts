@@ -17,6 +17,7 @@ function submitEmulator(e: Event, path: string): void {
     new Validator().formValidate();
     if(!hasErrors) {
         getFormData(e.target as HTMLFormElement);
+        console.log(e.target);
         new Router().go(path);
     }
 }
