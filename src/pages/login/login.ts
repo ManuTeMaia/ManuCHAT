@@ -15,7 +15,7 @@ class LoginPage extends Block {
 
 
 	constructor() {
-		super("div", {
+		super( {
 			events: {
 				submit: (e: Event) => submitEmulator(e, "/chats"),
 			}

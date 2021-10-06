@@ -11,20 +11,11 @@ export default class Block <BlockProps = any> {
 
 	eventBus: EventBus;
 	_element: Element;
-	_meta: {
-		tagName: string;
-		props: any;
-	};
 	props: BlockProps | any;
 
 	id = nanoid(6);
 
-	constructor(tagName = "div", props = {}) {
-
-		this._meta = {
-			tagName,
-			props
-		};
+	constructor(props = {}) {
 
 		this.props = this._makePropsProxy(props);
 
@@ -41,8 +32,7 @@ export default class Block <BlockProps = any> {
 	}
 
 	_createResources(): void {
-		const { tagName } = this._meta;
-		this._element = this._createDocumentElement(tagName);
+		this._element = this._createDocumentElement("div");
 	}
 
 	init(): void {
@@ -109,17 +99,13 @@ export default class Block <BlockProps = any> {
 			Object.entries(props).forEach(([name, value]) => {
 				if(Array.isArray(value)) {
 					value.forEach((obj, i) => {
-						if (obj instanceof Block) {
 							components[obj.id] = obj; 
 							props[name][i] = `<div id="id-${obj.id}"></div>`;
-						}
 					});
 				} 
-				
-				if (value instanceof Block) {
+
 				components[value.id] = value; 
 				props[name] = `<div id="id-${value.id}"></div>`;
-				}
 			});
 
 			fragment.innerHTML = tmpl(props); 

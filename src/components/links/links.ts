@@ -13,7 +13,7 @@ type LinkType = {
 
 class Link extends Block <LinkType>{
     constructor(props: LinkType) {
-        super("div", props);
+        super(props);
     }
     render():DocumentFragment {
         return this.compile(template, {...this.props});

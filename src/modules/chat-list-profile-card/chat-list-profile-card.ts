@@ -9,7 +9,7 @@ class ChatProfileCard extends Block {
     router: Router;
 
     constructor(props:TextInput | Avatar) {
-        super("div", props);
+        super(props);
         this.router = new Router();
     }
 

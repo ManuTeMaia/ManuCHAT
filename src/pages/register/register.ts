@@ -14,7 +14,7 @@ class RegistrationPage extends Block {
 	router: Router;
 
 	constructor() {
-		super("div", {
+		super( {
 			events: {
 				submit: (e: Event) => submitEmulator(e, "/chats"),
 			}

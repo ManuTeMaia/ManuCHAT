@@ -11,9 +11,9 @@ import "./user-profile-form.pcss";
 class ProfileFormPasswordPage extends Block {
 	validator: Validator;
 	constructor() {
-		super("div", {
+		super({
 			events: {
-				click: (e: Event) => submitEmulator(e, "/settings")
+				submit: (e: Event) => submitEmulator(e, "/settings")
 			}
 		});
 
@@ -49,7 +49,6 @@ class ProfileFormPasswordPage extends Block {
 				validationType: "password",
 				required: true,
 				events: {
-					focus: (e: Event) => this.validate((e.currentTarget as HTMLInputElement)),
 					blur: (e: Event) => this.validate((e.currentTarget as HTMLInputElement)),
 				}
 			},
@@ -61,7 +60,6 @@ class ProfileFormPasswordPage extends Block {
 				validationType: "password",
 				required: true,
 				events: {
-					focus: (e: Event) => this.validate((e.currentTarget as HTMLInputElement)),
 					blur: (e: Event) => this.validate((e.currentTarget as HTMLInputElement)),
 				}
 			},
@@ -73,7 +71,6 @@ class ProfileFormPasswordPage extends Block {
 				validationType: "password",
 				required: true,
 				events: {
-					focus: (e: Event) => this.validate((e.currentTarget as HTMLInputElement)),
 					blur: (e: Event) => this.validate((e.currentTarget as HTMLInputElement)),
 				}
 			}

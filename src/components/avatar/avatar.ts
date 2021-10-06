@@ -13,7 +13,7 @@ type AvatarProps = {
 
 class Avatar extends Block <AvatarProps> {
 	constructor(props:AvatarProps) {
-		super("avatar", props);
+		super(props);
 	}
 	render():DocumentFragment {
 		return this.compile(template, {...this.props});

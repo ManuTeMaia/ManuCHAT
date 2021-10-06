@@ -9,7 +9,7 @@ import "./chat-body.pcss";
 
 class ChatBodyPage extends Block{
 	constructor() {
-        super("div");
+        super();
     }
     render():DocumentFragment {
 		const avatar = new Avatar({
@@ -32,7 +32,7 @@ class ChatBodyPage extends Block{
 			class: "main--page-chat-send",
 			name: "send-submit",
 			events: {
-				click: (e) => submitEmulator(e, "", "")
+				click: (e) => submitEmulator(e, "")
 				}
 		});
 

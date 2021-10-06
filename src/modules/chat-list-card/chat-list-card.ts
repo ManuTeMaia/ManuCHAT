@@ -13,7 +13,7 @@ type ChatCardType = {
 
 class ChatListCard extends Block {
     constructor(props: Avatar | ChatCardType) {
-        super("div", props);
+        super(props);
     }
     render():DocumentFragment{
         const avatar = new Avatar({...this.props});

@@ -12,7 +12,7 @@ type ErrorType = {
 class Error404 extends Block <ErrorType> {
 
 	constructor() {
-		super("div");
+		super();
 	}
 
 	render():DocumentFragment {
@@ -28,7 +28,7 @@ class Error404 extends Block <ErrorType> {
 class Error500 extends Block <ErrorType> {
 
 	constructor() {
-		super("div");
+		super();
 	}
 
 	render():DocumentFragment {

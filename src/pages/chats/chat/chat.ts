@@ -9,7 +9,7 @@ class ChatPage extends Block {
 	router: Router;
 
 	constructor(){
-		super("div");
+		super();
 		this.router = new Router();
 	}
 	render(): DocumentFragment {

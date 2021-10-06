@@ -19,7 +19,7 @@ type TextInputType = {
 
 class TextInput extends Block <TextInputType>{
     constructor(props: TextInputType) {
-        super("div", props);
+        super(props);
     }
     render():DocumentFragment{
         return this.compile(template, {...this.props});

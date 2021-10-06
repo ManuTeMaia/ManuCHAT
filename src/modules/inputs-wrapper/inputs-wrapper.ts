@@ -12,8 +12,6 @@ type InputsWrapperType = {
     type?: string;
     validationType?: string;
     events?: {
-        click?: (e:Event) => void,
-        focus?: (e:Event) => void,
         blur?: (e:Event) => void
     };
     label: string;
@@ -21,7 +19,7 @@ type InputsWrapperType = {
 
 class InputWrapper extends Block <InputsWrapperType>{
     constructor(props: TextInput | InputsWrapperType ) {
-        super("div", props);
+        super(props);
     }
     render():DocumentFragment{
         const textInput = new TextInput({...this.props});

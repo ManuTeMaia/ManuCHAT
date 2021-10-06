@@ -10,7 +10,7 @@ type MessageTypes = {
 }
 class ChatMessage extends Block <MessageTypes> {
     constructor(props:MessageTypes) {
-        super("avatar", props);
+        super(props);
     }
     render():DocumentFragment {
         return this.compile(template, {...this.props});

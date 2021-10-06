@@ -11,7 +11,7 @@ class ProfilePage extends Block{
 	router: Router;
 
 	constructor() {
-        super("div");
+        super();
 		this.router = new Router();
     }
 
