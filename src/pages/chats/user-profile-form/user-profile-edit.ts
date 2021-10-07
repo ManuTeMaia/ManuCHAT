@@ -12,9 +12,9 @@ class ProfileFormPage extends Block {
 	validator: Validator;
 
 	constructor() {
-		super("div", {
+		super({
 			events: {
-				click: (e: Event) => submitEmulator(e, "/settings")
+				submit: (e: Event) => submitEmulator(e, "/settings")
 			}
 		});
 		this.validator = new Validator();

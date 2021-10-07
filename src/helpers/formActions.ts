@@ -1,15 +1,15 @@
 import Router from "../utils/Router";
 import Validator from "../utils/Validator";
 
-function getFormData(form: HTMLFormElement): void {
-    console.log(form);
+function getFormData(form: HTMLFormElement): Record<string, unknown> {
     const formData = new FormData(form);
     const consoleData: Record<string, unknown> = {};
 
     for(const [name, value] of formData) {
         consoleData[name] =  value;
     }
-    console.log(consoleData);
+   // console.log(consoleData);
+    return consoleData;
 }
 
 function submitEmulator(e: Event, path: string): void {
@@ -18,9 +18,8 @@ function submitEmulator(e: Event, path: string): void {
     new Validator().formValidate();
     if(!hasErrors) {
         getFormData(e.target as HTMLFormElement);
-        console.log(e.target);
         new Router().go(path);
     }
 }
 
-export default submitEmulator;
+export { submitEmulator, getFormData };

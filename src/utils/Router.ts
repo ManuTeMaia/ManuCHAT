@@ -108,3 +108,12 @@ class Router {
 }
 
 export default Router;
+export function withRouter(Component: typeof Block) {
+	return class WithRouter extends Component {
+		constructor(props: any) {
+			const router = new Router();
+
+			super({...props, router: router});
+		}
+	};
+}

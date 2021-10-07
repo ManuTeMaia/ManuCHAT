@@ -1,7 +1,12 @@
 import EventBus from "./EventBus";
 import { nanoid } from "nanoid";
 
-export default class Block <BlockProps = any> {
+interface BlockMeta<P = any> {
+	props: P;
+}
+type Events = Values<typeof Block.EVENTS>;
+
+export default class Block <P = any> {
 	static EVENTS = {
 		INIT: "init",
 		FLOW_CDM: "flow:component-did-mount",
@@ -9,19 +14,29 @@ export default class Block <BlockProps = any> {
 		FLOW_RENDER: "flow:render",
 	};
 
-	eventBus: EventBus;
-	_element: Element;
-	props: BlockProps | any;
+	eventBus: EventBus<Events>;
+	protected readonly _meta: BlockMeta;
+	protected _element: HTMLElement;
+	protected readonly props: P | Record<string, unknown>;
+	protected state: any = {};
 
 	id = nanoid(6);
 
-	constructor(props = {}) {
+	constructor(props?: P) {
 
-		this.props = this._makePropsProxy(props);
+		this._meta = {
+			props,
+		};
 
-		this.eventBus = new EventBus();
+		this.getStateFromProps(props as P);
+
+		this.props = this._makePropsProxy(props || {} as P);
+		this.state = this._makePropsProxy(this.state);
+
+		this.eventBus = new EventBus<Events>();
 		this._registerEvents(this.eventBus);
-		this.eventBus.emit(Block.EVENTS.INIT);
+
+		this.eventBus.emit(Block.EVENTS.INIT, this.props);
 	}
 
 	_registerEvents(eventBus: EventBus): void {
@@ -40,22 +55,31 @@ export default class Block <BlockProps = any> {
 		this.eventBus.emit(Block.EVENTS.FLOW_CDM);
 	}
 
-	_componentDidMount(): void {
+	getStateFromProps(props: P): void {
+		this.state = {};
+	}
+
+	_componentDidMount(props: P): void {
+		this.componentDidMount(props);
+	}
+
+	componentDidMount(props: P): void {
 		this.eventBus.emit(Block.EVENTS.FLOW_RENDER);
 	}
 
-	_componentDidUpdate(oldProps: Record<string, unknown>, newProps: Record<string, unknown>): void {
+	_componentDidUpdate(oldProps: P, newProps: P) {
 		const response = this.componentDidUpdate(oldProps, newProps);
-		if (response) {
-			this._render;
+		if (!response) {
+			return;
 		}
+		this._render();
 	}
 
-	componentDidUpdate(oldProps: Record<string, unknown>,newProps: Record<string, unknown>): boolean {
-		return oldProps === newProps || true;
+	componentDidUpdate(oldProps: P, newProps: P) {
+		return true;
 	}
 
-	setProps = (nextProps: unknown): void => {
+	setProps = (nextProps: P): void => {
 		if (!nextProps) {
 			return;
 		}
@@ -63,27 +87,36 @@ export default class Block <BlockProps = any> {
 		Object.assign(this.props, nextProps);
 	};
 
-	_addEvents():void {
-		const events:Record<string,() => void> = this.props.events;
-
-		if (!events) {
+	setState = (nextState: P): void => {
+		if (!nextState) {
 			return;
 		}
-		
-		Object.keys(events).forEach((event) => {
-			this._element.addEventListener(event, events[event]);
+
+		Object.assign(this.state, nextState);
+	};
+
+	_removeEvents(): void {
+		const events: Record<string, () => void> = (this.props as any).events;
+
+		if (!events || !this._element) {
+			return;
+		}
+
+
+		Object.entries(events).forEach(([event, listener]) => {
+			this._element!.removeEventListener(event, listener);
 		});
 	}
 
-	_removeEvents(): void {
-		const {events = {}} = this.props;
-		
+	_addEvents(): void {
+		const events: Record<string, () => void> = (this.props as any).events;
+
 		if (!events) {
 			return;
 		}
 
-		Object.keys(events).forEach(eventName => {
-			this._element.removeEventListener(eventName, events[eventName]);
+		Object.entries(events).forEach(([event, listener]) => {
+			this._element!.addEventListener(event, listener);
 		});
 	}
 
@@ -99,13 +132,16 @@ export default class Block <BlockProps = any> {
 			Object.entries(props).forEach(([name, value]) => {
 				if(Array.isArray(value)) {
 					value.forEach((obj, i) => {
-							components[obj.id] = obj; 
+						if (obj instanceof Block) {
+							components[obj.id] = obj;
 							props[name][i] = `<div id="id-${obj.id}"></div>`;
+						}
 					});
-				} 
-
-				components[value.id] = value; 
-				props[name] = `<div id="id-${value.id}"></div>`;
+				}
+				if (value instanceof Block) {
+					components[value.id] = value;
+					props[name] = `<div id="id-${value.id}"></div>`;
+				}
 			});
 
 			fragment.innerHTML = tmpl(props); 
@@ -125,7 +161,7 @@ export default class Block <BlockProps = any> {
 	}
 
 	_render(): void {
-		const fragment = this.render().firstElementChild as Element;
+		const fragment = this.render().firstElementChild as HTMLElement;
 
 		this._removeEvents();
 		this._element.innerHTML = "";
@@ -139,11 +175,11 @@ export default class Block <BlockProps = any> {
   }
 
 
-	getContent(): Element {
-		return this._element;
+	getContent(): HTMLElement {
+		return <HTMLElement>this._element;
 	}
 
-	_makePropsProxy(props: Record<string, unknown>): Record<string, unknown> {
+	_makePropsProxy(props: any): any {
 		return new Proxy(props, {
 			get(target: Record<string, unknown>, prop: string) {
 				if (prop.indexOf("_") === 0) {

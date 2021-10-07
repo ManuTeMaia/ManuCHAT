@@ -11,8 +11,6 @@ type TextInputType = {
     type?: string;
     validationType?: string;
     events?: {
-        click?: (e:Event) => void,
-        focus?: (e:Event) => void,
         blur?: (e:Event) => void
     };
 };

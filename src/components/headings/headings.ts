@@ -3,12 +3,12 @@ import template from "./headings.hbs";
 import "./headings.pcss";
 
 type HeadingTypes = {
-    class: string;
+    class?: string;
     text: string;
 }
 
 class Heading extends Block <HeadingTypes>{
-    constructor(props:HeadingTypes) {
+    constructor(props: HeadingTypes) {
         super(props);
     }
     render():DocumentFragment {

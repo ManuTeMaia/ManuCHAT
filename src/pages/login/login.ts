@@ -1,23 +1,34 @@
 import Block from "../../utils/Block";
 import Validator from "../../utils/Validator";
-import Router from "../../utils/Router";
-import submitEmulator from "../../helpers/formActions";
+import Router, {withRouter} from "../../utils/Router";
+import AuthController from "../../controllers/auth";
+import { getFormData } from "../../helpers/formActions";
 import InputWrapper from "../../modules/inputs-wrapper/inputs-wrapper";
 import Button from "../../components/buttons/submit-button";
 import Heading from "../../components/headings/headings";
 import Link from "../../components/links/links";
 import template from "./login.hbs";
 import "./login.pcss";
+import {connect} from "../../store";
 
 class LoginPage extends Block {
 	validator: Validator;
 	router: Router;
 
-
 	constructor() {
 		super( {
 			events: {
-				submit: (e: Event) => submitEmulator(e, "/chats"),
+				submit: async (e: Event) => {
+					e.preventDefault();
+					const refs = getFormData(e.target as HTMLFormElement);
+					const loginData = {
+						login: refs.login as string,
+						password: refs.password as string
+					};
+					console.log(refs);
+					await new AuthController().login(loginData);
+					await this.router.go("/chats");
+				}
 			}
 		});
 		this.validator = new Validator();
@@ -64,15 +75,9 @@ class LoginPage extends Block {
 		});
 
 		const link = new Link({
-			url:"",
+			url:"/signup",
 			class:"form--login-register-link",
-			text:"Нет аккаунта?",
-			events: {
-				click: (e) => {
-					e.preventDefault();
-					this.router.go("/signup");
-					}
-				}
+			text:"Нет аккаунта?"
 		});
 
 		return this.compile(template, {
@@ -85,4 +90,5 @@ class LoginPage extends Block {
 	}
 }
 
-export default LoginPage;
+//export default LoginPage;
+export default withRouter(connect((state: any) => ({user: state.user || {}}), LoginPage));

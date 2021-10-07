@@ -6,6 +6,7 @@ import Heading from  "../../../components/headings/headings";
 import Link from "../../../components/links/links";
 import template from "./user-profile.hbs";
 import "./user-profile.pcss";
+import AuthController from "../../../controllers/auth";
 
 class ProfilePage extends Block{
 	router: Router;
@@ -54,27 +55,24 @@ class ProfilePage extends Block{
 		
 		const links = [
 			{
-				url:"#",
+				url:"/settings/edit",
 				class:"main--page-user-profile user-profile-link link-change-data",
-				text:"Изменить данные",
-				events: {
-					click: () => this.router.go("/settings/edit")
-				}
+				text:"Изменить данные"
 			},
 			{
-				url:"#",
+				url:"/settings/pwd",
 				class:"main--page-user-profile user-profile-link link-change-pass",
-				text:"Изменить пароль",
-				events: {
-					click: () => this.router.go("/settings/pwd")
-				}
+				text:"Изменить пароль"
 			},
 			{
-				url:"#",
+				url:"",
 				class:"main--page-user-profile user-profile-link link-logout",
 				text:"Выйти",
 				events: {
-					click: () => this.router.go("/")
+					click: (e: Event) => {
+						e.preventDefault();
+						new AuthController().logout().then(() => this.router.go("/"));
+					}
 				}
 			},
 		].map((link) => new Link(link));

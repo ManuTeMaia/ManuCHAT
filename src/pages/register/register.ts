@@ -1,13 +1,15 @@
 import Block from "../../utils/Block";
 import Validator from "../../utils/Validator";
-import Router from "../../utils/Router";
-import submitEmulator from "../../helpers/formActions";
+import Router, { withRouter } from "../../utils/Router";
+import AuthController from "../../controllers/auth";
+import { getFormData } from "../../helpers/formActions";
 import InputWrapper from "../../modules/inputs-wrapper/inputs-wrapper";
 import Button from "../../components/buttons/submit-button";
 import Heading from "../../components/headings/headings";
 import Link from "../../components/links/links";
 import template from "./register.hbs";
 import "./register.pcss";
+import {connect} from "../../store";
 
 class RegistrationPage extends Block {
 	validator: Validator;
@@ -16,7 +18,15 @@ class RegistrationPage extends Block {
 	constructor() {
 		super( {
 			events: {
-				submit: (e: Event) => submitEmulator(e, "/chats"),
+				submit: async (e: Event) => {
+					const data: any = {};
+					const refs = getFormData(e.target as HTMLFormElement);
+					Object.entries(refs as { [key: string]: string }).forEach(([key, input]) => {
+						data[key] = input;
+					});
+					await new AuthController().signup(data);
+					await this.router.go("/chats");
+				}
 			}
 		});
 		this.validator = new Validator();
@@ -118,17 +128,13 @@ class RegistrationPage extends Block {
 			name: "registration-submit",
 			title: "Зарегистрироваться"
 		});
+
 		const link = new Link({
-			url:"",
+			url:"/",
 			class:"form--register-login-link",
-			text:"Уже есть аккаунт",
-			events: {
-				click: (e: Event) => {
-					e.preventDefault();
-					this.router.go("/");
-					}
-				}
+			text:"Уже есть аккаунт"
 		});
+
 		return this.compile(template, {
 			heading,
 			textInputs,
@@ -138,4 +144,5 @@ class RegistrationPage extends Block {
     }
 }
 
-export default RegistrationPage;
+//export default RegistrationPage;
+export default withRouter(connect((state: any) => ({user: state.user || {}}), RegistrationPage));
