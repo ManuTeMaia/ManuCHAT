@@ -19,13 +19,19 @@ class RegistrationPage extends Block {
 		super( {
 			events: {
 				submit: async (e: Event) => {
+					e.preventDefault();
 					const data: any = {};
 					const refs = getFormData(e.target as HTMLFormElement);
 					Object.entries(refs as { [key: string]: string }).forEach(([key, input]) => {
 						data[key] = input;
 					});
-					await new AuthController().signup(data);
-					await this.router.go("/chats");
+					console.log(data);
+					const hasErrors = document.querySelector("[error-for]");
+					new Validator().formValidate();
+					if(!hasErrors) {
+						await new AuthController().signup(data);
+						await this.router.go("/chats");
+					}
 				}
 			}
 		});
@@ -108,7 +114,7 @@ class RegistrationPage extends Block {
 					blur: (e: Event) => this.validate((e.currentTarget as HTMLInputElement)),
 				}
 			},
-			{
+			/*{
 				label: "Повторите пароль",
 				type: "password",
 				name: "repeat-password",
@@ -118,7 +124,7 @@ class RegistrationPage extends Block {
 				events: {
 					blur: (e: Event) => this.validate((e.currentTarget as HTMLInputElement)),
 				}
-			}
+			}*/
 		].map(
 			(textInput) => new InputWrapper(textInput)
 		);

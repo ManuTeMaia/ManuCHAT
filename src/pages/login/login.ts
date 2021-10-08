@@ -25,9 +25,13 @@ class LoginPage extends Block {
 						login: refs.login as string,
 						password: refs.password as string
 					};
-					console.log(refs);
-					await new AuthController().login(loginData);
-					await this.router.go("/chats");
+
+					const hasErrors = document.querySelector("[error-for]");
+					new Validator().formValidate();
+					if(!hasErrors) {
+						await new AuthController().login(loginData);
+						await this.router.go("/chats");
+					}
 				}
 			}
 		});
