@@ -1,9 +1,11 @@
 import {AuthAPI, LoginData, SignupData, UserData} from "../api/AuthAPI";
+import Router from "../utils/Router";
 import { store } from "../store";
-import {deleteUser, setError, setUser} from "../store/user";
+import {deleteUser, setError, setUser} from "../store/user.store";
 
 class AuthController {
 	private api: AuthAPI;
+	router = new Router();
 
 	constructor() {
 		this.api = new AuthAPI();
@@ -13,6 +15,7 @@ class AuthController {
 		try {
 			await this.api.signup(data);
 			await this.fetchUser();
+			await this.router.go("/chats");
 		} catch (e) {
 			store.dispatch(setError(e as { reason: string }));
 		}
@@ -22,6 +25,7 @@ class AuthController {
 		try {
 			await this.api.login(data);
 			await this.fetchUser();
+			await this.router.go("/chats");
 		} catch (e) {
 			store.dispatch(setError(e as { reason: string }));
 		}
@@ -30,7 +34,6 @@ class AuthController {
 	async logout() {
 		try {
 			await this.api.logout();
-
 			store.dispatch(deleteUser());
 		} catch (e) {
 			store.dispatch(setError(e as { reason: string }));
@@ -40,9 +43,7 @@ class AuthController {
 	async fetchUser(): Promise<UserData | void> {
 		try {
 			const user = await this.api.read();
-
 			store.dispatch(setUser(user));
-
 			return user;
 		} catch (e) {
 			store.dispatch(deleteUser());
@@ -50,4 +51,4 @@ class AuthController {
 	}
 }
 
-export default AuthController;
+export default new AuthController();

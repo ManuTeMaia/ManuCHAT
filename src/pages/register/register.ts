@@ -1,6 +1,6 @@
 import Block from "../../utils/Block";
 import Validator from "../../utils/Validator";
-import Router, { withRouter } from "../../utils/Router";
+import { withRouter } from "../../utils/Router";
 import AuthController from "../../controllers/auth";
 import { getFormData } from "../../helpers/formActions";
 import InputWrapper from "../../modules/inputs-wrapper/inputs-wrapper";
@@ -12,35 +12,27 @@ import "./register.pcss";
 import {connect} from "../../store";
 
 class RegistrationPage extends Block {
-	validator: Validator;
-	router: Router;
 
-	constructor() {
-		super( {
-			events: {
-				submit: async (e: Event) => {
+	getStateFromProps(): void {
+		this.state = {
+			onSignUp: async (e: Event) => {
 					e.preventDefault();
 					const data: any = {};
 					const refs = getFormData(e.target as HTMLFormElement);
 					Object.entries(refs as { [key: string]: string }).forEach(([key, input]) => {
 						data[key] = input;
 					});
-					console.log(data);
 					const hasErrors = document.querySelector("[error-for]");
 					new Validator().formValidate();
-					if(!hasErrors) {
-						await new AuthController().signup(data);
-						await this.router.go("/chats");
+					if (!hasErrors) {
+						await AuthController.signup(data);
 					}
-				}
 			}
-		});
-		this.validator = new Validator();
-		this.router = new Router();
+		};
 	}
 
 	validate(input: HTMLInputElement): void {
-		return this.validator.validate(input);
+		return new Validator().validate(input);
 	}
 
 	render(): DocumentFragment {
@@ -114,7 +106,7 @@ class RegistrationPage extends Block {
 					blur: (e: Event) => this.validate((e.currentTarget as HTMLInputElement)),
 				}
 			},
-			/*{
+			{
 				label: "Повторите пароль",
 				type: "password",
 				name: "repeat-password",
@@ -124,15 +116,16 @@ class RegistrationPage extends Block {
 				events: {
 					blur: (e: Event) => this.validate((e.currentTarget as HTMLInputElement)),
 				}
-			}*/
+			}
 		].map(
 			(textInput) => new InputWrapper(textInput)
 		);
-		
-        const submit = new Button({
-			class: "form--register-submit",
+
+		const submit = new Button({
+			buttonClass: "form--register-submit",
 			name: "registration-submit",
-			title: "Зарегистрироваться"
+			title: "Зарегистрироваться",
+			onSubmit: onSignUp
 		});
 
 		const link = new Link({
@@ -150,5 +143,5 @@ class RegistrationPage extends Block {
     }
 }
 
-//export default RegistrationPage;
+export { RegistrationPage };
 export default withRouter(connect((state: any) => ({user: state.user || {}}), RegistrationPage));

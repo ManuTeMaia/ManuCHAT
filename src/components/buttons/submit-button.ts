@@ -5,16 +5,13 @@ import "./buttons.pcss";
 type ButtonProps = {
     name: string,
     title?: string,
-    class?: string,
-    events?: {
-        click?: (e: Event) => void,
-        submit?: (e: Event) => void,
-    };
+    buttonClass?: string,
+    onSubmit: (e: Event) => void,
 };
 
-class Button extends Block <ButtonProps>{
-    constructor(props:ButtonProps) {
-        super(props);
+class Button extends Block {
+    constructor({name, buttonClass, title, onSubmit}: ButtonProps) {
+        super({name, buttonClass, title, events: {click: onSubmit}});
     }
     render():DocumentFragment {
         return this.compile(template, {...this.props});

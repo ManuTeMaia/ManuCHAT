@@ -28,7 +28,7 @@ export default class Block <P = any> {
 			props,
 		};
 
-		this.getStateFromProps(props as P);
+		this.getStateFromProps();
 
 		this.props = this._makePropsProxy(props || {} as P);
 		this.state = this._makePropsProxy(this.state);
@@ -55,16 +55,17 @@ export default class Block <P = any> {
 		this.eventBus.emit(Block.EVENTS.FLOW_CDM);
 	}
 
-	getStateFromProps(props: P): void {
+	getStateFromProps(): void {
 		this.state = {};
 	}
 
 	_componentDidMount(props: P): void {
 		this.componentDidMount(props);
+		this.eventBus.emit(Block.EVENTS.FLOW_RENDER);
 	}
 
 	componentDidMount(props: P): void {
-		this.eventBus.emit(Block.EVENTS.FLOW_RENDER);
+		//
 	}
 
 	_componentDidUpdate(oldProps: P, newProps: P) {
@@ -176,6 +177,14 @@ export default class Block <P = any> {
 
 
 	getContent(): HTMLElement {
+		// Хак, чтобы вызвать CDM только после добавления в DOM
+		/*if (this.element?.parentNode?.nodeType === Node.DOCUMENT_FRAGMENT_NODE) {
+			setTimeout(() => {
+				if (this.element?.parentNode?.nodeType !==  Node.DOCUMENT_FRAGMENT_NODE ) {
+					this.eventBus.emit(Block.EVENTS.FLOW_CDM);
+				}
+			}, 100);
+		}*/
 		return <HTMLElement>this._element;
 	}
 

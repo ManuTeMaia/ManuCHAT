@@ -17,6 +17,8 @@
     "homepage": "https://github.com/yandex-praktikum/middle.messenger.praktikum.yandex#readme",
     "devDependencies": {
         "@babel/core": "^7.15.8",
+        "@types/chai": "^4.2.22",
+        "@types/mocha": "^9.0.0",
         "@typescript-eslint/eslint-plugin": "^4.31.0",
         "@typescript-eslint/parser": "^4.31.0",
         "autoprefixer": "^9.8.6",
@@ -26,6 +28,7 @@
         "cssnano": "^4.1.10",
         "eslint": "^7.32.0",
         "handlebars": "^4.7.7",
+        "mocha": "^9.1.2",
         "parcel-bundler": "^1.12.5",
         "parcel-plugin-handlebars-precompile": "^1.0.2",
         "parcel-plugin-static-files-copy": "^2.6.0",
@@ -46,9 +49,11 @@
         "build": "rm -rf dist/* && parcel build static/*html",
         "start": "node ./server.ts",
         "eslint": "eslint ./src",
-        "style": "stylelint ./src"
+        "style": "stylelint ./src",
+        "test": "TS_NODE_COMPILER_OPTIONS='{\"module\": \"commonjs\" }' mocha --require ts-node/register src/**/*.spec.ts"
     },
     "dependencies": {
+        "chai": "^4.3.4",
         "express": "^4.17.1",
         "nanoid": "^3.1.25"
     },

@@ -1,10 +1,12 @@
-import user from "./user";
 import { Store } from "../utils/Store";
 import Block from "../utils/Block";
+import profile from "./profile.store";
+import user from "./user.store";
 
 
 export const store = new Store({
 	user,
+	profile,
 });
 
 

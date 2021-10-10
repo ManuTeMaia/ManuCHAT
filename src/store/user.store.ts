@@ -1,5 +1,5 @@
-import {Action} from "../utils/Store";
-import {UserData} from "../api/AuthAPI";
+import { Action } from "../utils/Store";
+import { UserData } from "../api/AuthAPI";
 
 const SET_USER = "user/SET";
 const DELETE_USER = "user/DELETE";

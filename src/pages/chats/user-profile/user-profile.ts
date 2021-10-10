@@ -1,5 +1,5 @@
 import Block from "../../../utils/Block";
-import Router from "../../../utils/Router";
+import Router, {withRouter} from "../../../utils/Router";
 import ProfileField from "../../../components/profile-field/profile-field";
 import Avatar from "../../../components/avatar/avatar";
 import Heading from  "../../../components/headings/headings";
@@ -7,14 +7,32 @@ import Link from "../../../components/links/links";
 import template from "./user-profile.hbs";
 import "./user-profile.pcss";
 import AuthController from "../../../controllers/auth";
+import {connect} from "../../../store";
 
-class ProfilePage extends Block{
+class ProfilePage extends Block {
 	router: Router;
 
 	constructor() {
-        super();
+		super();
 		this.router = new Router();
-    }
+	}
+
+	componentDidMount() {
+		console.log(this.props.user);
+		console.log(this.props.user);
+		if (!this.props.user) {
+			//this.props.router.go("/");
+		}
+	}
+
+	componentDidUpdate() {
+		console.log(this.props.user);
+		if (!this.props.user) {
+			//this.props.router.go("/");
+		}
+
+		return true;
+	}
 
     render():DocumentFragment {
 		const avatar = new Avatar({
@@ -40,7 +58,7 @@ class ProfilePage extends Block{
 			},
 			{
 				label: "Имя",
-				data: "Джейн"
+				data: "user.profile.first_name"
 			},
 			{
 				label: "Фамилияя",
@@ -71,7 +89,7 @@ class ProfilePage extends Block{
 				events: {
 					click: (e: Event) => {
 						e.preventDefault();
-						new AuthController().logout().then(() => this.router.go("/"));
+						AuthController.logout().then(() => this.router.go("/"));
 					}
 				}
 			},
@@ -87,4 +105,5 @@ class ProfilePage extends Block{
 
 }
 
-export default ProfilePage;
+export {ProfilePage};
+export default withRouter(connect((state: any) => ({user: state.user.profile}), ProfilePage));

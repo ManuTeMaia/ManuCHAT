@@ -29,7 +29,7 @@ class LoginPage extends Block {
 					const hasErrors = document.querySelector("[error-for]");
 					new Validator().formValidate();
 					if(!hasErrors) {
-						await new AuthController().login(loginData);
+						await AuthController.login(loginData);
 						await this.router.go("/chats");
 					}
 				}
@@ -94,5 +94,5 @@ class LoginPage extends Block {
 	}
 }
 
-//export default LoginPage;
+export { LoginPage };
 export default withRouter(connect((state: any) => ({user: state.user || {}}), LoginPage));
