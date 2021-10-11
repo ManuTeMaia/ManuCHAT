@@ -52,20 +52,18 @@ export default class Block <P = any> {
 
 	init(): void {
 		this._createResources();
-		this.eventBus.emit(Block.EVENTS.FLOW_CDM);
+		this.eventBus.emit(Block.EVENTS.FLOW_RENDER, this.props);
 	}
 
-	getStateFromProps(): void {
+	protected getStateFromProps(): void {
 		this.state = {};
 	}
 
 	_componentDidMount(props: P): void {
 		this.componentDidMount(props);
-		this.eventBus.emit(Block.EVENTS.FLOW_RENDER);
 	}
 
 	componentDidMount(props: P): void {
-		//
 	}
 
 	_componentDidUpdate(oldProps: P, newProps: P) {
@@ -105,7 +103,7 @@ export default class Block <P = any> {
 
 
 		Object.entries(events).forEach(([event, listener]) => {
-			this._element!.removeEventListener(event, listener);
+			this._element?.removeEventListener(event, listener);
 		});
 	}
 
@@ -117,7 +115,7 @@ export default class Block <P = any> {
 		}
 
 		Object.entries(events).forEach(([event, listener]) => {
-			this._element!.addEventListener(event, listener);
+			this._element?.addEventListener(event, listener);
 		});
 	}
 

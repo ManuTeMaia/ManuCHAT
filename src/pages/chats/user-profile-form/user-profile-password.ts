@@ -1,19 +1,33 @@
 import Block from "../../../utils/Block";
 import Validator from "../../../utils/Validator";
-import submitEmulator from "../../../helpers/formActions";
+import UserController from "../../../controllers/user";
+import { getFormData } from "../../../helpers/formActions";
 import Button from "../../../components/buttons/submit-button";
 import Avatar from "../../../components/avatar/avatar";
 import Heading from "../../../components/headings/headings";
 import InputWrapper from "../../../modules/inputs-wrapper/inputs-wrapper";
 import template from "./user-profile-form.hbs";
 import "./user-profile-form.pcss";
+import {store} from "../../../store";
 
 class ProfileFormPasswordPage extends Block {
 	validator: Validator;
 	constructor() {
 		super({
 			events: {
-				submit: (e: Event) => submitEmulator(e, "/settings")
+				submit: async (e: Event) => {
+					e.preventDefault();
+					const data: any = {};
+					const refs = getFormData(e.target as HTMLFormElement);
+					Object.entries(refs as { [key: string]: string }).forEach(([key, input]) => {
+						data[key] = input;
+					});
+					const hasErrors = document.querySelector("[error-for]");
+					new Validator().formValidate();
+					if (!hasErrors) {
+						await UserController.changePassword(data);
+					}
+				}
 			}
 		});
 
@@ -25,9 +39,12 @@ class ProfileFormPasswordPage extends Block {
 	}
 
 	render(): DocumentFragment {
+		const user = store.getState().user;
+		const avatarSrc = user.profile.avatar || "/noimage.png";
+		console.log(user);
 		const avatar = new Avatar({
 			divClass: "main--page-user-profile user-profile-avatar",
-			imageSrc: "/noimage.png",
+			imageSrc: avatarSrc,
 			imageTitle: "Avatar",
 			events: {
 				click: () => alert("Позже тут можно будет загрузить аватар")
@@ -44,7 +61,7 @@ class ProfileFormPasswordPage extends Block {
 			{
 				label: "Текущий пароль",
 				type: "password",
-				name: "current-password",
+				name: "oldPassword",
 				placeholder: "***********",
 				validationType: "password",
 				required: true,
@@ -55,7 +72,7 @@ class ProfileFormPasswordPage extends Block {
 			{
 				label: "Пароль",
 				type: "password",
-				name: "password",
+				name: "newPassword",
 				placeholder: "***********",
 				validationType: "password",
 				required: true,
@@ -66,7 +83,7 @@ class ProfileFormPasswordPage extends Block {
 			{
 				label: "Повторите пароль",
 				type: "password",
-				name: "repeat-password",
+				name: "newPasswordRepeat",
 				placeholder: "***********",
 				validationType: "password",
 				required: true,
@@ -77,7 +94,7 @@ class ProfileFormPasswordPage extends Block {
 		].map((textinput) => new InputWrapper(textinput));
 		
 		const submit = new Button({
-			class: "form--user-profile-password-submit",
+			buttonClass: "form--user-profile-password-submit",
 			name: "user-profile-password-submit",
 			title: "Изменить"
 		});

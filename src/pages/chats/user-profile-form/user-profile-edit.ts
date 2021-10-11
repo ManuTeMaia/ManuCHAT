@@ -1,12 +1,14 @@
 import Block from "../../../utils/Block";
 import Validator from "../../../utils/Validator";
-import submitEmulator from "../../../helpers/formActions";
+import UserController from "../../../controllers/user";
+import { getFormData } from "../../../helpers/formActions";
 import Button from "../../../components/buttons/submit-button";
 import Avatar from "../../../components/avatar/avatar";
 import Heading from "../../../components/headings/headings";
 import InputWrapper from "../../../modules/inputs-wrapper/inputs-wrapper";
 import template from "./user-profile-form.hbs";
 import "./user-profile-form.pcss";
+import {store} from "../../../store";
 
 class ProfileFormPage extends Block {
 	validator: Validator;
@@ -14,7 +16,19 @@ class ProfileFormPage extends Block {
 	constructor() {
 		super({
 			events: {
-				submit: (e: Event) => submitEmulator(e, "/settings")
+				submit: async (e: Event) => {
+					e.preventDefault();
+					const data: any = {};
+					const refs = getFormData(e.target as HTMLFormElement);
+					Object.entries(refs as { [key: string]: string }).forEach(([key, input]) => {
+						data[key] = input;
+					});
+					const hasErrors = document.querySelector("[error-for]");
+					new Validator().formValidate();
+					if (!hasErrors) {
+						await UserController.update(data);
+					}
+				}
 			}
 		});
 		this.validator = new Validator();
@@ -25,9 +39,12 @@ class ProfileFormPage extends Block {
 	}
 	
 	render(): DocumentFragment {
+		const user = store.getState().user;
+		const avatarSrc = user.profile.avatar || "/noimage.png";
+		console.log(user);
 		const avatar = new Avatar({
 			divClass: "main--page-user-profile user-profile-avatar",
-			imageSrc: "/noimage.png",
+			imageSrc: avatarSrc,
 			imageTitle: "Avatar",
 			events: {
 				click: () => alert("Позже тут можно будет загрузить аватар")
@@ -46,9 +63,9 @@ class ProfileFormPage extends Block {
 				type: "email",
 				name: "email",
 				validationType: "email",
-				placeholder: "dragonfly@123.com",
+				placeholder: user.profile.email,
+				value: user.profile.email,
 				events: {
-					focus: (e: Event) => this.validate((e.currentTarget as HTMLInputElement)),
 					blur: (e: Event) => this.validate((e.currentTarget as HTMLInputElement)),
 				}
 			},
@@ -57,9 +74,9 @@ class ProfileFormPage extends Block {
 				type: "text",
 				name: "login",
 				validationType: "login",
-				placeholder: "dragonfly",
+				placeholder: user.profile.login,
+				value: user.profile.login,
 				events: {
-					focus: (e: Event) => this.validate((e.currentTarget as HTMLInputElement)),
 					blur: (e: Event) => this.validate((e.currentTarget as HTMLInputElement)),
 				}
 			},
@@ -68,9 +85,9 @@ class ProfileFormPage extends Block {
 				type: "text",
 				name: "first_name",
 				validationType: "name",
-				placeholder: "Джейн",
+				placeholder: user.profile.first_name,
+				value: user.profile.first_name,
 				events: {
-					focus: (e: Event) => this.validate((e.currentTarget as HTMLInputElement)),
 					blur: (e: Event) => this.validate((e.currentTarget as HTMLInputElement)),
 				}
 			},
@@ -79,9 +96,9 @@ class ProfileFormPage extends Block {
 				type: "text",
 				name: "second_name",
 				validationType: "name",
-				placeholder: "Доу",
+				placeholder: user.profile.second_name,
+				value: user.profile.second_name,
 				events: {
-					focus: (e: Event) => this.validate((e.currentTarget as HTMLInputElement)),
 					blur: (e: Event) => this.validate((e.currentTarget as HTMLInputElement)),
 				}
 			},
@@ -89,9 +106,9 @@ class ProfileFormPage extends Block {
 				label: "Имя в чате",
 				type: "text",
 				name: "display_name",
-				placeholder: "Джейн Доу",
+				placeholder: user.profile.display_name,
+				value: user.profile.display_name,
 				events: {
-					focus: (e: Event) => this.validate((e.currentTarget as HTMLInputElement)),
 					blur: (e: Event) => this.validate((e.currentTarget as HTMLInputElement)),
 				}
 			},
@@ -100,16 +117,16 @@ class ProfileFormPage extends Block {
 				type: "tel",
 				name: "phone",
 				validationType: "phone",
-				placeholder: "+7 (000)-000-00-00",
+				placeholder: user.profile.phone,
+				value: user.profile.phone,
 				events: {
-					focus: (e: Event) => this.validate((e.currentTarget as HTMLInputElement)),
 					blur: (e: Event) => this.validate((e.currentTarget as HTMLInputElement)),
 				}
 			}
 		].map((textinput) => new InputWrapper(textinput));
 		
 		const submit = new Button({
-			class: "form--user-profile-info-submit",
+			buttonClass: "form--user-profile-info-submit",
 			name: "user-profile-info-submit",
 			title: "Cохранить"
 		});

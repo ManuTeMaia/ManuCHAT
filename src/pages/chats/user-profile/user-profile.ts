@@ -1,5 +1,5 @@
 import Block from "../../../utils/Block";
-import Router, {withRouter} from "../../../utils/Router";
+import Router from "../../../utils/Router";
 import ProfileField from "../../../components/profile-field/profile-field";
 import Avatar from "../../../components/avatar/avatar";
 import Heading from  "../../../components/headings/headings";
@@ -7,34 +7,14 @@ import Link from "../../../components/links/links";
 import template from "./user-profile.hbs";
 import "./user-profile.pcss";
 import AuthController from "../../../controllers/auth";
-import {connect} from "../../../store";
+import {store} from "../../../store";
 
 class ProfilePage extends Block {
-	router: Router;
+	router: Router = new Router();
 
-	constructor() {
-		super();
-		this.router = new Router();
-	}
+	render():DocumentFragment {
+		const user = store.getState().user;
 
-	componentDidMount() {
-		console.log(this.props.user);
-		console.log(this.props.user);
-		if (!this.props.user) {
-			//this.props.router.go("/");
-		}
-	}
-
-	componentDidUpdate() {
-		console.log(this.props.user);
-		if (!this.props.user) {
-			//this.props.router.go("/");
-		}
-
-		return true;
-	}
-
-    render():DocumentFragment {
 		const avatar = new Avatar({
 			divClass: "main--page-user-profile user-profile-avatar",
 			imageSrc: "/noimage.png",
@@ -45,42 +25,54 @@ class ProfilePage extends Block {
 		});
 		const heading = new Heading({
 			class: "main--page-user-profile user-profile-heading",
-			text: "Джейн Доу"
+			text: user.profile.display_name || user.profile.first_name
 		});
 		const profileFields = [
 			{
 				label: "Email",
-				data: "dragonfly@123.com"
+				data: user.profile.email
 			},
 			{
 				label: "Логин",
-				data: "dragonfly"
+				data: user.profile.login
 			},
 			{
 				label: "Имя",
-				data: "user.profile.first_name"
+				data: user.profile.first_name
 			},
 			{
-				label: "Фамилияя",
-				data: "Доу"
+				label: "Фамилия",
+				data: user.profile.second_name
 			},
 			{
 				label: "Телефон",
-				data: "+7 (000)-000-00-00"
+				data: user.profile.phone
 			}
 
 		].map((profileField) => new ProfileField(profileField));
 		
 		const links = [
 			{
-				url:"/settings/edit",
+				url:"",
 				class:"main--page-user-profile user-profile-link link-change-data",
-				text:"Изменить данные"
+				text:"Изменить данные",
+				events: {
+					click: (e: Event) => {
+						e.preventDefault();
+						this.router.go("/settings/edit");
+					}
+				}
 			},
 			{
-				url:"/settings/pwd",
+				url:"",
 				class:"main--page-user-profile user-profile-link link-change-pass",
-				text:"Изменить пароль"
+				text:"Изменить пароль",
+				events: {
+					click: (e: Event) => {
+						e.preventDefault();
+						this.router.go("/settings/pwd");
+					}
+				}
 			},
 			{
 				url:"",
@@ -105,5 +97,4 @@ class ProfilePage extends Block {
 
 }
 
-export {ProfilePage};
-export default withRouter(connect((state: any) => ({user: state.user.profile}), ProfilePage));
+export default ProfilePage;

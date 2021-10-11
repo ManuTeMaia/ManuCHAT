@@ -15,7 +15,7 @@ class AuthController {
 		try {
 			await this.api.signup(data);
 			await this.fetchUser();
-			await this.router.go("/chats");
+			this.router.go("/chats");
 		} catch (e) {
 			store.dispatch(setError(e as { reason: string }));
 		}
@@ -25,7 +25,7 @@ class AuthController {
 		try {
 			await this.api.login(data);
 			await this.fetchUser();
-			await this.router.go("/chats");
+			this.router.go("/chats");
 		} catch (e) {
 			store.dispatch(setError(e as { reason: string }));
 		}
@@ -35,6 +35,7 @@ class AuthController {
 		try {
 			await this.api.logout();
 			store.dispatch(deleteUser());
+			this.router.go("/");
 		} catch (e) {
 			store.dispatch(setError(e as { reason: string }));
 		}

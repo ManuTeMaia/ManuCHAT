@@ -2,16 +2,19 @@ require("babel-polyfill");
 //import AuthController from "./controllers/auth";
 import "./common/common";
 import Router from "./utils/Router";
-import { LoginPage } from "./pages/login/login";
-import { RegistrationPage } from "./pages/register/register";
+import LoginPage from "./pages/login/login";
+import RegistrationPage from "./pages/register/register";
 import ChatPage from "./pages/chats/chat/chat";
 import ChatBodyPage from "./pages/chats/chat-body/chat-body";
-import { ProfilePage } from "./pages/chats/user-profile/user-profile";
+import ProfilePage from "./pages/chats/user-profile";
 import ProfileFormPage from "./pages/chats/user-profile-form/user-profile-edit";
 import ProfileFormPasswordPage from "./pages/chats/user-profile-form/user-profile-password";
 import {Error404, Error500} from "./pages/error/error";
+import AuthController from "./controllers/auth";
 
 
+AuthController.fetchUser()
+	.then(() => {
 		const router = new Router();
 		router
 			.use("/", LoginPage)
@@ -24,3 +27,4 @@ import {Error404, Error500} from "./pages/error/error";
 			.use("/settings/edit", ChatPage, ".root", {block: ProfileFormPage, query: ".chat--wrap"})
 			.use("/settings/pwd", ChatPage, ".root", {block: ProfileFormPasswordPage, query: ".chat--wrap"})
 			.start();
+	});

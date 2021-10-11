@@ -1,18 +1,17 @@
 import EventBus from "./EventBus";
-//import Block from './Block';
 
 export interface Action {
 	type: string;
 	payload?: any;
 }
 
-type Reducer<S = any> = (state: S, action: Action) => S;
+type Reducer<S = Indexed> = (state: S, action: Action) => S;
 
-type Indexed = {[key: string]: any};
+type Indexed = { [key: string]: any };
 
-export class Store extends EventBus {
+class Store extends EventBus {
 	private state: Indexed = {};
-	private reducer: Reducer;
+	private readonly reducer: Reducer;
 
 	constructor(reducers: Indexed) {
 		super();
@@ -33,7 +32,7 @@ export class Store extends EventBus {
 	}
 
 	private combineReducers(reducers: Indexed): Reducer {
-		return (_state: any, action: Action) => {
+		return (_state, action: Action) => {
 			const newState: Indexed = {};
 
 			Object.entries(reducers).forEach(([key, reducer]) => {
@@ -44,3 +43,5 @@ export class Store extends EventBus {
 		};
 	}
 }
+
+export default Store;

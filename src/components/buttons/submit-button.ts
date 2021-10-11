@@ -6,12 +6,14 @@ type ButtonProps = {
     name: string,
     title?: string,
     buttonClass?: string,
-    onSubmit: (e: Event) => void,
+    events?: {
+        click?: (e: Event) => void,
+    }
 };
 
 class Button extends Block {
-    constructor({name, buttonClass, title, onSubmit}: ButtonProps) {
-        super({name, buttonClass, title, events: {click: onSubmit}});
+    constructor(props: ButtonProps) {
+        super(props);
     }
     render():DocumentFragment {
         return this.compile(template, {...this.props});

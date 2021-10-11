@@ -1,6 +1,6 @@
 import Block from "../../utils/Block";
 import Validator from "../../utils/Validator";
-import Router, {withRouter} from "../../utils/Router";
+import Router from "../../utils/Router";
 import AuthController from "../../controllers/auth";
 import { getFormData } from "../../helpers/formActions";
 import InputWrapper from "../../modules/inputs-wrapper/inputs-wrapper";
@@ -9,7 +9,6 @@ import Heading from "../../components/headings/headings";
 import Link from "../../components/links/links";
 import template from "./login.hbs";
 import "./login.pcss";
-import {connect} from "../../store";
 
 class LoginPage extends Block {
 	validator: Validator;
@@ -73,7 +72,7 @@ class LoginPage extends Block {
 		});
 
         const submit = new Button({
-			class: "form--login-submit",
+			buttonClass: "form--login-submit",
 			name: "login-submit",
 			title: "Авторизоваться"
 		});
@@ -94,5 +93,4 @@ class LoginPage extends Block {
 	}
 }
 
-export { LoginPage };
-export default withRouter(connect((state: any) => ({user: state.user || {}}), LoginPage));
+export default LoginPage;

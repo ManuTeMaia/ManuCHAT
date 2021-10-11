@@ -22,6 +22,7 @@ export const setError = (error: { reason: string }) => ({
 export default (state = { profile: null, error: null }, action: Action) => {
 	switch (action.type) {
 		case SET_USER:
+			//console.log(action.payload);
 			return { error: null, profile: action.payload };
 		case DELETE_USER:
 			return { profile: null, error: null };

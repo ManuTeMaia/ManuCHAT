@@ -1,12 +1,11 @@
-import { Store } from "../utils/Store";
+import Store from "../utils/Store";
 import Block from "../utils/Block";
 import profile from "./profile.store";
 import user from "./user.store";
 
-
 export const store = new Store({
 	user,
-	profile,
+	profile
 });
 
 
@@ -20,6 +19,7 @@ export function connect(stateToProps: (state: any) => any, Component: typeof Blo
 			super.componentDidMount(props);
 
 			store.on("changed", () => {
+				//console.log(...stateToProps(store.getState()));
 				this.setProps({
 					...this.props,
 					...stateToProps(store.getState())

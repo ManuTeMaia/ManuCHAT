@@ -1,6 +1,5 @@
 import Block from "../../utils/Block";
 import Validator from "../../utils/Validator";
-import { withRouter } from "../../utils/Router";
 import AuthController from "../../controllers/auth";
 import { getFormData } from "../../helpers/formActions";
 import InputWrapper from "../../modules/inputs-wrapper/inputs-wrapper";
@@ -9,13 +8,13 @@ import Heading from "../../components/headings/headings";
 import Link from "../../components/links/links";
 import template from "./register.hbs";
 import "./register.pcss";
-import {connect} from "../../store";
 
 class RegistrationPage extends Block {
 
-	getStateFromProps(): void {
-		this.state = {
-			onSignUp: async (e: Event) => {
+	constructor() {
+		super({
+			events: {
+				submit: async (e: Event) => {
 					e.preventDefault();
 					const data: any = {};
 					const refs = getFormData(e.target as HTMLFormElement);
@@ -27,7 +26,14 @@ class RegistrationPage extends Block {
 					if (!hasErrors) {
 						await AuthController.signup(data);
 					}
+				}
 			}
+		});
+	}
+
+	getStateFromProps() {
+		this.state = {
+			...this.props
 		};
 	}
 
@@ -124,8 +130,7 @@ class RegistrationPage extends Block {
 		const submit = new Button({
 			buttonClass: "form--register-submit",
 			name: "registration-submit",
-			title: "Зарегистрироваться",
-			onSubmit: onSignUp
+			title: "Зарегистрироваться"
 		});
 
 		const link = new Link({
@@ -143,5 +148,4 @@ class RegistrationPage extends Block {
     }
 }
 
-export { RegistrationPage };
-export default withRouter(connect((state: any) => ({user: state.user || {}}), RegistrationPage));
+export default RegistrationPage;
