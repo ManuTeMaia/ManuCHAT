@@ -59,14 +59,15 @@ export default class Block <P = any> {
 		this.state = {};
 	}
 
-	_componentDidMount(props: P): void {
+	_componentDidMount(props?: P): void {
 		this.componentDidMount(props);
 	}
 
-	componentDidMount(props: P): void {
+	componentDidMount(_props?: P): void {
+		//
 	}
 
-	_componentDidUpdate(oldProps: P, newProps: P) {
+	_componentDidUpdate(oldProps: P, newProps: P): void {
 		const response = this.componentDidUpdate(oldProps, newProps);
 		if (!response) {
 			return;
@@ -74,7 +75,7 @@ export default class Block <P = any> {
 		this._render();
 	}
 
-	componentDidUpdate(oldProps: P, newProps: P) {
+	componentDidUpdate(_oldProps: P, _newProps: P): boolean {
 		return true;
 	}
 
@@ -175,14 +176,6 @@ export default class Block <P = any> {
 
 
 	getContent(): HTMLElement {
-		// Хак, чтобы вызвать CDM только после добавления в DOM
-		/*if (this.element?.parentNode?.nodeType === Node.DOCUMENT_FRAGMENT_NODE) {
-			setTimeout(() => {
-				if (this.element?.parentNode?.nodeType !==  Node.DOCUMENT_FRAGMENT_NODE ) {
-					this.eventBus.emit(Block.EVENTS.FLOW_CDM);
-				}
-			}, 100);
-		}*/
 		return <HTMLElement>this._element;
 	}
 

@@ -1,19 +1,35 @@
 import Block from "../../../utils/Block";
+import AuthController from "../../../controllers/auth";
 import Router from "../../../utils/Router";
 import ProfileField from "../../../components/profile-field/profile-field";
 import Avatar from "../../../components/avatar/avatar";
-import Heading from  "../../../components/headings/headings";
+import Heading from "../../../components/headings/headings";
 import Link from "../../../components/links/links";
 import template from "./user-profile.hbs";
 import "./user-profile.pcss";
-import AuthController from "../../../controllers/auth";
-import {store} from "../../../store";
 
 class ProfilePage extends Block {
 	router: Router = new Router();
 
+	constructor(props: any) {
+		super(props);
+	}
+	componentDidMount(): void {
+		if (!this.props.user) {
+			this.props.router.go("/");
+		}
+	}
+
+	componentDidUpdate(): boolean {
+		if (!this.props.user) {
+			this.props.router.go("/");
+		}
+
+		return true;
+	}
+
 	render():DocumentFragment {
-		const user = store.getState().user;
+		const user = this.props.user;
 
 		const avatar = new Avatar({
 			divClass: "main--page-user-profile user-profile-avatar",

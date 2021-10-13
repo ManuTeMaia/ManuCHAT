@@ -6,9 +6,9 @@ import LoginPage from "./pages/login/login";
 import RegistrationPage from "./pages/register/register";
 import ChatPage from "./pages/chats/chat/chat";
 import ChatBodyPage from "./pages/chats/chat-body/chat-body";
-import ProfilePage from "./pages/chats/user-profile";
-import ProfileFormPage from "./pages/chats/user-profile-form/user-profile-edit";
-import ProfileFormPasswordPage from "./pages/chats/user-profile-form/user-profile-password";
+import ProfilePage from "./pages/profile/user-profile";
+import ProfilePageEdit from "./pages/profile/user-profile-edit";
+import ProfileEditPasswordPage from "./pages/profile/user-profile-password";
 import {Error404, Error500} from "./pages/error/error";
 import AuthController from "./controllers/auth";
 
@@ -24,7 +24,7 @@ AuthController.fetchUser()
 			.use("/chats", ChatPage)
 			.use("/settings", ChatPage, ".root", {block: ProfilePage, query: ".chat--wrap"})
 			.use("/chat", ChatPage, ".root", {block: ChatBodyPage, query: ".chat--wrap"})
-			.use("/settings/edit", ChatPage, ".root", {block: ProfileFormPage, query: ".chat--wrap"})
-			.use("/settings/pwd", ChatPage, ".root", {block: ProfileFormPasswordPage, query: ".chat--wrap"})
+			.use("/settings/edit", ChatPage, ".root", {block: ProfilePageEdit, query: ".chat--wrap"})
+			.use("/settings/pwd", ChatPage, ".root", {block: ProfileEditPasswordPage, query: ".chat--wrap"})
 			.start();
 	});

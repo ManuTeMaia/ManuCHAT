@@ -8,13 +8,11 @@ import Heading from "../../../components/headings/headings";
 import InputWrapper from "../../../modules/inputs-wrapper/inputs-wrapper";
 import template from "./user-profile-form.hbs";
 import "./user-profile-form.pcss";
-import {store} from "../../../store";
 
-class ProfileFormPage extends Block {
+class ProfileEditPasswordPage extends Block {
 	validator: Validator;
-
-	constructor() {
-		super({
+	constructor(props: any) {
+		super({ props,
 			events: {
 				submit: async (e: Event) => {
 					e.preventDefault();
@@ -26,20 +24,34 @@ class ProfileFormPage extends Block {
 					const hasErrors = document.querySelector("[error-for]");
 					new Validator().formValidate();
 					if (!hasErrors) {
-						await UserController.update(data);
+						await UserController.changePassword(data);
 					}
 				}
 			}
 		});
+
 		this.validator = new Validator();
 	}
-	
+
 	validate(input: HTMLInputElement): void {
 		return this.validator.validate(input);
 	}
-	
-	render(): DocumentFragment {
-		const user = store.getState().user;
+	componentDidMount(): void {
+		if (!this.props.user) {
+			this.props.router.go("/");
+		}
+	}
+
+	componentDidUpdate(): boolean {
+		if (!this.props.user) {
+			this.props.router.go("/");
+		}
+
+		return true;
+	}
+
+	render():DocumentFragment {
+		const user = this.props.user;
 		const avatarSrc = user.profile.avatar || "/noimage.png";
 		console.log(user);
 		const avatar = new Avatar({
@@ -52,73 +64,41 @@ class ProfileFormPage extends Block {
 		});
 		const heading = new Heading({
 			class: "main--page-user-profile user-profile-heading",
-			text: "Изменить данные"
+			text: "Изменить пароль"
 		});
-
-		const formClass = "form--user-profile-info";
+		
+		const formClass = "form--user-profile-password";
 
 		const textInputs = [
 			{
-				label: "E-mail",
-				type: "email",
-				name: "email",
-				validationType: "email",
-				placeholder: user.profile.email,
-				value: user.profile.email,
+				label: "Текущий пароль",
+				type: "password",
+				name: "oldPassword",
+				placeholder: "***********",
+				validationType: "password",
+				required: true,
 				events: {
 					blur: (e: Event) => this.validate((e.currentTarget as HTMLInputElement)),
 				}
 			},
 			{
-				label: "Логин",
-				type: "text",
-				name: "login",
-				validationType: "login",
-				placeholder: user.profile.login,
-				value: user.profile.login,
+				label: "Пароль",
+				type: "password",
+				name: "newPassword",
+				placeholder: "***********",
+				validationType: "password",
+				required: true,
 				events: {
 					blur: (e: Event) => this.validate((e.currentTarget as HTMLInputElement)),
 				}
 			},
 			{
-				label: "Имя",
-				type: "text",
-				name: "first_name",
-				validationType: "name",
-				placeholder: user.profile.first_name,
-				value: user.profile.first_name,
-				events: {
-					blur: (e: Event) => this.validate((e.currentTarget as HTMLInputElement)),
-				}
-			},
-			{
-				label: "Фамилия",
-				type: "text",
-				name: "second_name",
-				validationType: "name",
-				placeholder: user.profile.second_name,
-				value: user.profile.second_name,
-				events: {
-					blur: (e: Event) => this.validate((e.currentTarget as HTMLInputElement)),
-				}
-			},
-			{
-				label: "Имя в чате",
-				type: "text",
-				name: "display_name",
-				placeholder: user.profile.display_name,
-				value: user.profile.display_name,
-				events: {
-					blur: (e: Event) => this.validate((e.currentTarget as HTMLInputElement)),
-				}
-			},
-			{
-				label: "Телефон",
-				type: "tel",
-				name: "phone",
-				validationType: "phone",
-				placeholder: user.profile.phone,
-				value: user.profile.phone,
+				label: "Повторите пароль",
+				type: "password",
+				name: "newPasswordRepeat",
+				placeholder: "***********",
+				validationType: "password",
+				required: true,
 				events: {
 					blur: (e: Event) => this.validate((e.currentTarget as HTMLInputElement)),
 				}
@@ -126,9 +106,9 @@ class ProfileFormPage extends Block {
 		].map((textinput) => new InputWrapper(textinput));
 		
 		const submit = new Button({
-			buttonClass: "form--user-profile-info-submit",
-			name: "user-profile-info-submit",
-			title: "Cохранить"
+			buttonClass: "form--user-profile-password-submit",
+			name: "user-profile-password-submit",
+			title: "Изменить"
 		});
 
 		return this.compile(template, {
@@ -142,4 +122,4 @@ class ProfileFormPage extends Block {
 	}
 }
 
-export default ProfileFormPage;
+export default ProfileEditPasswordPage;
