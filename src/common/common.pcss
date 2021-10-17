@@ -49,6 +49,7 @@
     --global--color-secondary-40: #9db3cb;
     --global--color-secondary-20: #dbe6f1;
     --global--color-white-50: rgba(255, 255, 255, 0.5);
+    --global--color-black-50: rgba(0, 0, 0, 0.5);
     --global--color-error: #da0f0f;
     --global--color-background: transparent;
     --global--color-border: var(--global--color-primary);
@@ -57,7 +58,7 @@
     --global--spacing-measure: unset;
     --global--spacing-horizontal: calc(0.75 * var(--global--spacing-unit));
     --global--spacing-vertical: var(--global--spacing-unit);
-    --global--box-shadow: 4px 4px 30px 0 rgba(0, 0, 0, 0.10);
+    --global--box-shadow: 4px 4px 30px 0 rgba(0, 0, 0, 0.1);
     --form--font-family: var(--global--font);
     --form--font-size: var(--global--font-size-sm);
     --form--line-height: var(--global--line-height-body);
@@ -95,8 +96,10 @@
 
 html {
     line-height: 1.15;
+
     /* 1 */
     -webkit-text-size-adjust: 100%;
+
     /* 2 */
 }
 
@@ -139,10 +142,13 @@ h1 {
 
 hr {
     box-sizing: content-box;
+
     /* 1 */
     height: 0;
+
     /* 1 */
     overflow: visible;
+
     /* 2 */
 }
 
@@ -153,8 +159,10 @@ hr {
 
 pre {
     font-family: monospace;
+
     /* 1 */
     font-size: 1em;
+
     /* 2 */
 }
 
@@ -176,10 +184,13 @@ a {
 
 abbr[title] {
     border-bottom: none;
+
     /* 1 */
     text-decoration: underline;
+
     /* 2 */
     text-decoration: underline dotted;
+
     /* 2 */
 }
 
@@ -201,8 +212,10 @@ code,
 kbd,
 samp {
     font-family: monospace;
+
     /* 1 */
     font-size: 1em;
+
     /* 2 */
 }
 
@@ -262,12 +275,16 @@ optgroup,
 select,
 textarea {
     font-family: inherit;
+
     /* 1 */
     font-size: 100%;
+
     /* 1 */
     line-height: 1.15;
+
     /* 1 */
     margin: 0;
+
     /* 2 */
 }
 
@@ -344,16 +361,22 @@ fieldset {
 
 legend {
     box-sizing: border-box;
+
     /* 1 */
     color: inherit;
+
     /* 2 */
     display: table;
+
     /* 1 */
     max-width: 100%;
+
     /* 1 */
     padding: 0;
+
     /* 3 */
     white-space: normal;
+
     /* 1 */
 }
 
@@ -381,8 +404,10 @@ textarea {
 [type="checkbox"],
 [type="radio"] {
     box-sizing: border-box;
+
     /* 1 */
     padding: 0;
+
     /* 2 */
 }
 
@@ -402,8 +427,10 @@ textarea {
 
 [type="search"] {
     -webkit-appearance: textfield;
+
     /* 1 */
     outline-offset: -2px;
+
     /* 2 */
 }
 
@@ -420,10 +447,12 @@ textarea {
    * 2. Change font properties to `inherit` in Safari.
    */
 
- ::-webkit-file-upload-button {
+::-webkit-file-upload-button {
     -webkit-appearance: button;
+
     /* 1 */
     font: inherit;
+
     /* 2 */
 }
 

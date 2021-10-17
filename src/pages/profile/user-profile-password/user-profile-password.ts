@@ -6,8 +6,8 @@ import Button from "../../../components/buttons/submit-button";
 import Avatar from "../../../components/avatar/avatar";
 import Heading from "../../../components/headings/headings";
 import InputWrapper from "../../../modules/inputs-wrapper/inputs-wrapper";
-import template from "./user-profile-form.hbs";
-import "./user-profile-form.pcss";
+import template from "../user-profile-form.hbs";
+import "../user-profile-form.pcss";
 
 class ProfileEditPasswordPage extends Block {
 	validator: Validator;

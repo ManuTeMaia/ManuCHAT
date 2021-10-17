@@ -1,1 +1,10 @@
-<a href="{{url}}" {{#if class}}class="{{class}}"{{/if}}>{{{text}}}</a>
+{{#if linkIcon}}
+    <div>
+        <i class="{{linkIcon}}"></i>
+{{/if}}
+        <a href="{{url}}"{{#if class}} class="{{class}}"{{/if}}>
+            {{text}}
+        </a>
+{{#if linkIcon}}
+    </div>
+{{/if}}

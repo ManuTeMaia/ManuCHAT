@@ -9,6 +9,7 @@ export enum Method {
 type Options = {
 	method: Method;
 	data?: any;
+	isFormData?: boolean;
 };
 
 class HTTPTransport {
@@ -30,10 +31,11 @@ class HTTPTransport {
 		});
 	}
 
-	public put<Response = void>(path: string, data: unknown): Promise<Response> {
+	public put<Response = void>(path: string, data: unknown, isFormData = false): Promise<Response> {
 		return this.request<Response>(this.endpoint + path, {
 			method: Method.Put,
 			data,
+			isFormData
 		});
 	}
 
@@ -51,7 +53,7 @@ class HTTPTransport {
 	}
 
 	private request<Response>(url: string, options: Options = {method: Method.Get}): Promise<Response> {
-		const {method, data} = options;
+		const {method, data, isFormData} = options;
 
 		return new Promise((resolve, reject) => {
 			const xhr = new XMLHttpRequest();
@@ -71,16 +73,20 @@ class HTTPTransport {
 			xhr.onabort = () => reject({reason: "abort"});
 			xhr.onerror = () => reject({reason: "network error"});
 			xhr.ontimeout = () => reject({reason: "timeout"});
-
-			xhr.setRequestHeader("Content-Type", "application/json");
-
+			if(!isFormData) {
+				xhr.setRequestHeader("Content-Type", "application/json");
+			}
 			xhr.withCredentials = true;
 			xhr.responseType = "json";
 
 			if (method === Method.Get || !data) {
 				xhr.send();
 			} else {
-				xhr.send(JSON.stringify(data));
+				if (isFormData) {
+					xhr.send(data);
+				} else {
+					xhr.send(JSON.stringify(data));
+				}
 			}
 		});
 	}

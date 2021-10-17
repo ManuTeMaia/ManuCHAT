@@ -2,11 +2,12 @@ import Block from "../../../utils/Block";
 import AuthController from "../../../controllers/auth";
 import Router from "../../../utils/Router";
 import ProfileField from "../../../components/profile-field/profile-field";
-import Avatar from "../../../components/avatar/avatar";
+import AvatarForm from "../../../modules/avatar-form/avatar-form";
 import Heading from "../../../components/headings/headings";
 import Link from "../../../components/links/links";
 import template from "./user-profile.hbs";
 import "./user-profile.pcss";
+
 
 class ProfilePage extends Block {
 	router: Router = new Router();
@@ -14,35 +15,17 @@ class ProfilePage extends Block {
 	constructor(props: any) {
 		super(props);
 	}
-	componentDidMount(): void {
-		if (!this.props.user) {
-			this.props.router.go("/");
-		}
-	}
-
-	componentDidUpdate(): boolean {
-		if (!this.props.user) {
-			this.props.router.go("/");
-		}
-
-		return true;
-	}
 
 	render():DocumentFragment {
 		const user = this.props.user;
 
-		const avatar = new Avatar({
-			divClass: "main--page-user-profile user-profile-avatar",
-			imageSrc: "/noimage.png",
-			imageTitle: "Avatar",
-			events: {
-				click: () => alert("Позже тут можно будет загрузить аватар")
-			}
-		});
+		const avatarForm = new AvatarForm({...this.props});
+
 		const heading = new Heading({
 			class: "main--page-user-profile user-profile-heading",
 			text: user.profile.display_name || user.profile.first_name
 		});
+
 		const profileFields = [
 			{
 				label: "Email",
@@ -103,8 +86,8 @@ class ProfilePage extends Block {
 			},
 		].map((link) => new Link(link));
 
-        return this.compile(template, {
-			avatar,
+		return this.compile(template, {
+			avatarForm,
 			heading,
 			profileFields,
 			links

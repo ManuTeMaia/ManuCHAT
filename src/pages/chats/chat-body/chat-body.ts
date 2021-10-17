@@ -1,17 +1,39 @@
 import Block from "../../../utils/Block";
-import submitEmulator from "../../../helpers/formActions";
+import { submitEmulator } from "../../../helpers/formActions";
 import Avatar from "../../../components/avatar/avatar";
 import ChatMessage from "../../../components/chat-message/chat-message";
 import TextInput from "../../../components/inputs/text-input";
 import Button from "../../../components/buttons/submit-button";
 import template from "./chat-body.hbs";
 import "./chat-body.pcss";
+import ChatContextMenu from "../../../modules/chat-context-menu/chat-context-menu";
 
 class ChatBodyPage extends Block{
-	constructor() {
-        super();
+	constructor(props: any) {
+        super(props);
     }
+	getStateFromProps(): void {
+		this.state = {};
+	}
+
+	componentDidMount(): void {
+		console.log("yes");
+		if (!this.props.user) {
+			this.props.router.go("/");
+		}
+	}
+
+	componentDidUpdate(): boolean {
+		if (!this.props.user) {
+			this.props.router.go("/");
+		}
+
+		return true;
+	}
     render():DocumentFragment {
+		//const user = this.props.user;
+		const contextMenu = new ChatContextMenu({...this.props});
+
 		const avatar = new Avatar({
 			divClass: "main--page-chat-avatar chat-avatar",
 			imageSrc: "/noimage.png",
@@ -24,12 +46,11 @@ class ChatBodyPage extends Block{
 				type: "text",
 				name: "message",
 				class: "message-input-form-input",
-				placeholder: "Пишите...",
-				required: true
+				placeholder: "Пишите..."
 		});
 
         const send = new Button({
-			class: "main--page-chat-send",
+			buttonClass: "main--page-chat-send",
 			name: "send-submit",
 			events: {
 				click: (e) => submitEmulator(e, "")
@@ -70,6 +91,7 @@ class ChatBodyPage extends Block{
         return this.compile(template, {
 			chatName,
 			avatar,
+	        contextMenu,
 			chatMessages,
 			textInput,
 			send,

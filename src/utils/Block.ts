@@ -138,17 +138,19 @@ export default class Block <P = any> {
 						}
 					});
 				}
+
 				if (value instanceof Block) {
 					components[value.id] = value;
 					props[name] = `<div id="id-${value.id}"></div>`;
 				}
 			});
 
-			fragment.innerHTML = tmpl(props); 
+			fragment.innerHTML = tmpl(props);
 
 		Object.entries(components).forEach(([id, component]) => {
 			const stub = fragment.content.querySelector(`#id-${id}`);
-	
+			//console.log(fragment.content);
+			//console.log(stub);
 			if(stub) {
 				stub.replaceWith(component.getContent());
 			} else {
@@ -157,7 +159,6 @@ export default class Block <P = any> {
 		});
 
 		return fragment.content;
-	
 	}
 
 	_render(): void {

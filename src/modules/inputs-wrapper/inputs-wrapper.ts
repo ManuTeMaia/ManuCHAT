@@ -18,7 +18,7 @@ type InputsWrapperType = {
 }
 
 class InputWrapper extends Block <InputsWrapperType>{
-    constructor(props: TextInput | InputsWrapperType ) {
+    constructor(props: InputsWrapperType ) {
         super(props);
     }
     render():DocumentFragment{

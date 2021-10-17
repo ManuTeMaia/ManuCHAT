@@ -31,7 +31,7 @@ export class UserAPI extends BaseAPI {
 	}
 
 	updateAvatar(data: FormData): Promise<UserData> {
-		return this.http.put("/profile/avatar", data);
+		return this.http.put("/profile/avatar", data, true);
 	}
 
 	changePassword(data: UpdatePasswordData): Promise<void> {

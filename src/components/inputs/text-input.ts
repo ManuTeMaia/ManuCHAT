@@ -2,7 +2,7 @@ import Block from "../../utils/Block";
 import template from "./text-input.hbs";
 import "./inputs.pcss";
 
-type TextInputType = {
+export type TextInputType = {
     name?: string;
     class?: string;
     placeholder?: string;

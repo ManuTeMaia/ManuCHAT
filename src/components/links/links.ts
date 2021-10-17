@@ -6,6 +6,7 @@ type LinkType = {
     url: string;
     class?: string;
     text: string;
+    linkIcon?: string;
     events?: {
         click: (e: Event) => void;
     }
