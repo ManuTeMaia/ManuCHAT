@@ -51,17 +51,16 @@ class ProfileEditPasswordPage extends Block {
 	}
 
 	render():DocumentFragment {
-		const user = this.props.user;
-		const avatarSrc = user.profile.avatar || "/noimage.png";
-		console.log(user);
+		const user = this.props.props.user;
+		console.log(this.props.props.user);
+		const avatarSrc = `https://ya-praktikum.tech/api/v2/resources${user.profile.avatar}` || "/noimage.png";
+
 		const avatar = new Avatar({
 			divClass: "main--page-user-profile user-profile-avatar",
 			imageSrc: avatarSrc,
-			imageTitle: "Avatar",
-			events: {
-				click: () => alert("Позже тут можно будет загрузить аватар")
-			}
+			imageTitle: user.profile.first_name || "Avatar"
 		});
+
 		const heading = new Heading({
 			class: "main--page-user-profile user-profile-heading",
 			text: "Изменить пароль"

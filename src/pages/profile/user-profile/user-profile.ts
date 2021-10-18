@@ -2,11 +2,13 @@ import Block from "../../../utils/Block";
 import AuthController from "../../../controllers/auth";
 import Router from "../../../utils/Router";
 import ProfileField from "../../../components/profile-field/profile-field";
-import AvatarForm from "../../../modules/avatar-form/avatar-form";
+import Avatar from "../../../components/avatar/avatar";
+import PopupWrapper from "../../../modules/popup-wrapper/popup-wrapper";
 import Heading from "../../../components/headings/headings";
 import Link from "../../../components/links/links";
 import template from "./user-profile.hbs";
 import "./user-profile.pcss";
+
 
 
 class ProfilePage extends Block {
@@ -18,8 +20,25 @@ class ProfilePage extends Block {
 
 	render():DocumentFragment {
 		const user = this.props.user;
+		const avatarSrc = `https://ya-praktikum.tech/api/v2/resources${user.profile.avatar}` || "/noimage.png";
 
-		const avatarForm = new AvatarForm({...this.props});
+		const popupWrapper = new PopupWrapper({
+			popupName: "upload",
+			popupTitle: "Загрузить аватар",
+			popupChoice: "avatarPopup"
+		});
+
+		const avatar = new Avatar({
+			divClass: "main--page-user-profile user-profile-avatar",
+			imageSrc: avatarSrc,
+			imageTitle: user.profile.first_name || "Avatar",
+			events: {
+				click: (e: Event) => {
+					e.preventDefault();
+					document.querySelector(".popup")?.classList.remove("hidden");
+				}
+			}
+		});
 
 		const heading = new Heading({
 			class: "main--page-user-profile user-profile-heading",
@@ -87,7 +106,8 @@ class ProfilePage extends Block {
 		].map((link) => new Link(link));
 
 		return this.compile(template, {
-			avatarForm,
+			popupWrapper,
+			avatar,
 			heading,
 			profileFields,
 			links
