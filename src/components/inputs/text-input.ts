@@ -10,6 +10,7 @@ export type TextInputType = {
     value?: string;
     type?: string;
     validationType?: string;
+    autoComplete?: string;
     events?: {
         blur?: (e:Event) => void
     };

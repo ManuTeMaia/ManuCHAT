@@ -6,12 +6,8 @@ import template from "./chat.hbs";
 import "./chat.pcss";
 
 class ChatPage extends Block {
-	router: Router;
+	router = new Router();
 
-	constructor(){
-		super();
-		this.router = new Router();
-	}
 	render(): DocumentFragment {
 
 		const profileCard = new ChatProfileCard({...this.props});

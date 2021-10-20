@@ -17,7 +17,7 @@ export default class Block <P = any> {
 	eventBus: EventBus<Events>;
 	protected readonly _meta: BlockMeta;
 	protected _element: HTMLElement;
-	protected readonly props: P | Record<string, unknown>;
+	public props: P | Record<string, unknown>;
 	protected state: any = {};
 
 	id = nanoid(6);

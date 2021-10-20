@@ -2,33 +2,38 @@ import Block from "./Block";
 import renderDOM from "../helpers/renderDOM";
 import isEqual from "../helpers/isEqual";
 
-type ChildrenType =
+export type ChildrenType =
 	{ block: { new(): Block }; query: string} | undefined;
 
+export type checkAuthType =
+	(next: () => void, route: Route | undefined) => void;
+
 class Route {
-	_pathname: string;
+	pathname: string;
 	_blockClass: new () => Block;
 	_block: Block | null;
 	_rootQuery: string;
 	_child: ChildrenType;
+	needAuth: boolean;
 
-	constructor(pathname: string, view: { new(): Block }, rootQuery: string, child?: ChildrenType) {
-		this._pathname = pathname;
+	constructor(pathname: string, view: { new(): Block }, rootQuery: string, child?: ChildrenType, needAuth = false) {
+		this.pathname = pathname;
 		this._blockClass = view;
 		this._block = null;
 		this._child = child;
 		this._rootQuery = rootQuery;
+		this.needAuth = needAuth;
 	}
 
 	navigate(pathname: string): void {
 		if (this.match(pathname)) {
-			this._pathname = pathname;
+			this.pathname = pathname;
 			this.render();
 		}
 	}
 
 	match(pathname: string): boolean {
-		return isEqual(pathname, this._pathname);
+		return isEqual(pathname, this.pathname);
 	}
 
 	render(): void {
@@ -51,7 +56,9 @@ class Router {
 	private history: History;
 	private routes: Route[];
 	private _rootQuery: string;
+	needAuth: boolean;
 	private static __instance: InstanceType<new () => Router>;
+	onCheckAuth: checkAuthType | undefined;
 
 	constructor(rootQuery = ".root") {
 		if (Router.__instance) {
@@ -64,34 +71,45 @@ class Router {
 
 	}
 
-	use(pathname: string, block: { new(): Block }, childQuery?: string, child?: ChildrenType): this {
+	use(pathname: string, block: { new(): Block }, childQuery?: string, child?: ChildrenType, needAuth = false): this {
 		const query = childQuery ? childQuery : this._rootQuery;
-		const route = new Route(pathname, block, query, child);
+		const route = new Route(pathname, block, query, child, needAuth);
+		this.needAuth = needAuth;
 		this.routes.push(route);
 		return this;
 	}
 
 	start(): void {
-		window.onpopstate = event => {
-			if (event) {
-				this._onRoute((event.currentTarget as Window).location.pathname);
-			}
+		window.onpopstate = async () => {
+			this._onRoute(window.location.pathname);
 		};
+
 		this._onRoute(window.location.pathname);
 	}
 
 	_onRoute(pathname: string): void {
 		const route = this.getRoute(pathname);
-		if (!route) {
-			return;
+		if (this.onCheckAuth) {
+			return this.onCheckAuth(() => {
+				if (!route) {
+					return;
+				}
+				route.render();
+			}, route);
 		}
 
-		route.render();
+
 	}
 
 	go(pathname: string): void {
 		this.history.pushState({}, "", pathname);
 		this._onRoute(pathname);
+	}
+
+	checkAuth(func: checkAuthType): this {
+		this.onCheckAuth = func;
+
+		return this;
 	}
 
 	back(): void {

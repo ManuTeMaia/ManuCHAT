@@ -36,19 +36,6 @@ class ProfileEditPasswordPage extends Block {
 	validate(input: HTMLInputElement): void {
 		return this.validator.validate(input);
 	}
-	componentDidMount(): void {
-		if (!this.props.user) {
-			this.props.router.go("/");
-		}
-	}
-
-	componentDidUpdate(): boolean {
-		if (!this.props.user) {
-			this.props.router.go("/");
-		}
-
-		return true;
-	}
 
 	render():DocumentFragment {
 		const user = this.props.props.user;
@@ -76,6 +63,7 @@ class ProfileEditPasswordPage extends Block {
 				placeholder: "***********",
 				validationType: "password",
 				required: true,
+				autoComplete: "current-password",
 				events: {
 					blur: (e: Event) => this.validate((e.currentTarget as HTMLInputElement)),
 				}
@@ -87,6 +75,7 @@ class ProfileEditPasswordPage extends Block {
 				placeholder: "***********",
 				validationType: "password",
 				required: true,
+				autoComplete: "new-password",
 				events: {
 					blur: (e: Event) => this.validate((e.currentTarget as HTMLInputElement)),
 				}
@@ -98,6 +87,7 @@ class ProfileEditPasswordPage extends Block {
 				placeholder: "***********",
 				validationType: "password",
 				required: true,
+				autoComplete: "new-password",
 				events: {
 					blur: (e: Event) => this.validate((e.currentTarget as HTMLInputElement)),
 				}

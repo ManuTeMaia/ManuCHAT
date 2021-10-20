@@ -9,8 +9,6 @@ import Heading from "../../../components/headings/headings";
 import InputWrapper from "../../../modules/inputs-wrapper/inputs-wrapper";
 import template from "../user-profile-form.hbs";
 import "../user-profile-form.pcss";
-import PopupWrapper from "../../../modules/popup-wrapper/popup-wrapper";
-import Avatar from "../../../components/avatar/avatar";
 
 class ProfilePageEdit extends Block {
 	validator: Validator;

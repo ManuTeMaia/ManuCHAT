@@ -2,7 +2,7 @@ import Block from "../../utils/Block";
 import template from "./popup-wrapper.hbs";
 import "./popup-wrapper.pcss";
 import AvatarPopup from "../avatar-popup/avatar-popup";
-import ChatPopup from "../chat-popup/chat-popup";
+import NewChatPopup from "../chat-popup/chat-popup";
 import AttachPopup from "../attach-popup/attach-popup";
 import Link from "../../components/links/links";
 
@@ -25,11 +25,12 @@ class PopupWrapper extends Block <PopupWrapperType>{
        const closeLink = new Link({
            url:"",
            class:"popup-close",
-           text:"X",
+           text:"",
            events: {
                click: (e: Event) => {
                    e.preventDefault();
-                   document.querySelector(".popup")?.classList.add("hidden");
+                   console.log(this.props.popupName);
+                   document.querySelector(`[data-popup=${this.props.popupName}]`)?.classList.add("hidden");
                }
            }
        });
@@ -40,7 +41,7 @@ class PopupWrapper extends Block <PopupWrapperType>{
                 popupContent =  new AvatarPopup({...this.props});
                 break;
             case "chatPopup":
-                popupContent  = new ChatPopup({...this.props});
+                popupContent  = new NewChatPopup({...this.props});
                 break;
             case "attachPopup":
                 popupContent = new AttachPopup({...this.props});

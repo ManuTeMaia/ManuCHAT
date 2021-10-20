@@ -9,17 +9,22 @@ import Link from "../../../components/links/links";
 import template from "./user-profile.hbs";
 import "./user-profile.pcss";
 
-
-
 class ProfilePage extends Block {
 	router: Router = new Router();
+	getStateFromProps() {
+		this.state = {
+			onLogout: this.logout
+			};
+		}
 
-	constructor(props: any) {
-		super(props);
+	logout(e: Event): void {
+		e.preventDefault();
+		AuthController.logout().then(() => this.router.go("/"));
 	}
 
 	render():DocumentFragment {
 		const user = this.props.user;
+
 		const avatarSrc = `https://ya-praktikum.tech/api/v2/resources${user.profile.avatar}` || "/noimage.png";
 
 		const popupWrapper = new PopupWrapper({
@@ -35,7 +40,7 @@ class ProfilePage extends Block {
 			events: {
 				click: (e: Event) => {
 					e.preventDefault();
-					document.querySelector(".popup")?.classList.remove("hidden");
+					document.querySelector(`[data-popup=${popupWrapper.props.popupName}]`)?.classList.remove("hidden");
 				}
 			}
 		});
@@ -93,16 +98,13 @@ class ProfilePage extends Block {
 				}
 			},
 			{
-				url:"",
-				class:"main--page-user-profile user-profile-link link-logout",
-				text:"Выйти",
+				url: "",
+				class: "main--page-user-profile user-profile-link link-logout",
+				text: "Выйти",
 				events: {
-					click: (e: Event) => {
-						e.preventDefault();
-						AuthController.logout().then(() => this.router.go("/"));
-					}
+					click: (e: Event) => this.logout(e)
 				}
-			},
+			}
 		].map((link) => new Link(link));
 
 		return this.compile(template, {

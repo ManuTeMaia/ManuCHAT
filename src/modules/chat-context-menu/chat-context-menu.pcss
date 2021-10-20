@@ -8,6 +8,6 @@
     padding: calc(2 * var(--global--spacing-vertical)) var(--global--spacing-horizontal);
 }
 
-.context-menu-wrapper div {
-    margin: var(--global--spacing-unit);
+.context-menu-wrapper div:not(first-nth) {
+    margin: var(--global--spacing-unit) var(--global--spacing-unit)  0 var(--global--spacing-unit);
 }
