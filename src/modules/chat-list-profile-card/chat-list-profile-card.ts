@@ -34,7 +34,7 @@ class ChatProfileCard extends Block {
 
 		const newChatPopup = new PopupWrapper({
 			popupName: "newChat",
-			popupTitle: "Загрузить аватар",
+			popupTitle: "Создать новый чат",
 			popupChoice: "chatPopup"
 		});
 

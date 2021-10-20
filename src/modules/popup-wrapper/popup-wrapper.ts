@@ -2,7 +2,7 @@ import Block from "../../utils/Block";
 import template from "./popup-wrapper.hbs";
 import "./popup-wrapper.pcss";
 import AvatarPopup from "../avatar-popup/avatar-popup";
-import NewChatPopup from "../chat-popup/chat-popup";
+import NewChatPopup from "../chat-popup/new-chat-popup";
 import AttachPopup from "../attach-popup/attach-popup";
 import Link from "../../components/links/links";
 

@@ -1,10 +1,11 @@
 import Block from "../../utils/Block";
 import InputWrapper from "../inputs-wrapper/inputs-wrapper";
 import Button from "../../components/buttons/submit-button";
-import template from "./chat-popup.hbs";
-import "./chat-popup.pcss";
-//import UserController from "../../controllers/user";
-
+import ChatController from "../../controllers/chat";
+import {getFormData} from "../../helpers/formActions";
+import Validator from "../../utils/Validator";
+import template from "./new-chat-popup.hbs";
+import "./new-chat-popup.pcss";
 
 class NewChatPopup extends Block {
 	constructor(props: any) {
@@ -13,8 +14,16 @@ class NewChatPopup extends Block {
 			events: {
 				submit: async (e: Event) => {
 					e.preventDefault();
-					const formData = new FormData(e.target as HTMLFormElement);
-					//await UserController.updateAvatar(formData);
+					const data: any = {};
+					const refs = getFormData(e.target as HTMLFormElement);
+					Object.entries(refs as { [key: string]: string }).forEach(([key, input]) => {
+						data[key] = input;
+					});
+					const hasErrors = document.querySelector("[error-for]");
+					new Validator().formValidate();
+					if (!hasErrors) {
+						await ChatController.createChat(data);
+					}
 				}
 			}
 		});
@@ -26,7 +35,7 @@ class NewChatPopup extends Block {
 			label: "Название чата",
 			name: "title",
 			class: "new-chat-form-input",
-			placeholder: "Название...",
+			placeholder: "Мой новый чат...",
 			validationType: "notnull",
 			required: true
 		});

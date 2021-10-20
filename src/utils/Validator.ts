@@ -31,7 +31,7 @@ class Validator {
 			pattern: /^[+-d]?\d{10,15}$/,
 			error: "10-15 символов, только цифры, может начинаться с '+'",
 		},
-		message: {
+		notnull: {
 			pattern: /(.|\s)*\S(.|\s)*/,
 			error: "Пустое сообщение",
 		}
