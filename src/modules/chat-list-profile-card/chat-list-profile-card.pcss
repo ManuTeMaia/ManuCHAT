@@ -9,7 +9,8 @@
     justify-content: space-between;
 }
 
-.profile-card-avatar, .profile-card-avatar img {
+.profile-card-avatar,
+.profile-card-avatar img {
     width: 60px;
     height: 60px;
 }
@@ -17,6 +18,14 @@
 .card-actions-icons {
     font-size: var(--global--font-size-xl);
     padding-right: 12px;
+}
+
+.card-actions-icons a {
+    text-decoration: none;
+}
+
+.card-actions-icons a:hover i {
+    color: var(--global--color-secondary);
 }
 
 .card-actions-icons i {

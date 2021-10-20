@@ -10,9 +10,9 @@ const ADD_CHAT = "chats/ADD_CHAT";
 const DELETE_CHAT = "chats/DELETE_CHAT";
 const ADD_MESSAGE = "chats/ADD_MESSAGE";
 
-const defaultState: MessengerState = { chats: [], search: [], chat: undefined };
+const defaultState: ChatState = { chats: [], search: [], chat: undefined };
 
-export interface MessengerState {
+export interface ChatState {
 	chats: [];
 	search: [];
 	chat: IChat | undefined;
@@ -67,7 +67,6 @@ export default (state = defaultState, action: Action) => {
 
 			return { ...state, chats: newChats };
 		case ADD_MESSAGE:
-			// todo: переделать на cloneDeep
 			const newChat = { ...state.chat } as IChat;
 			if (!newChat.messages) {
 				newChat.messages = [];

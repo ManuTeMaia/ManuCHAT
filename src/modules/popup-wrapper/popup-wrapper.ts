@@ -9,7 +9,7 @@ import Link from "../../components/links/links";
 type PopupWrapperType = {
     popupName: string;
     popupTitle: string;
-    popupChoice: "avatarPopup" | "chatPopup" | "attachPopup";
+    popupChoice: "avatarPopup" | "newChatPopup" | "chatUsersPopup";
     events?: {
         click: (e: Event) => void;
     }
@@ -40,10 +40,10 @@ class PopupWrapper extends Block <PopupWrapperType>{
             case "avatarPopup":
                 popupContent =  new AvatarPopup({...this.props});
                 break;
-            case "chatPopup":
+            case "newChatPopup":
                 popupContent  = new NewChatPopup({...this.props});
                 break;
-            case "attachPopup":
+            case "chatUsersPopup":
                 popupContent = new AttachPopup({...this.props});
                 break;
 
