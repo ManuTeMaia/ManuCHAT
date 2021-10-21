@@ -4,20 +4,24 @@ import ChatProfileCard from "../../../modules/chat-list-profile-card/chat-list-p
 import ChatListCard from "../../../modules/chat-list-card/chat-list-card";
 import template from "./chat.hbs";
 import "./chat.pcss";
-import {store} from "../../../store";
+import ChatController from "../../../controllers/chat";
 
 class ChatPage extends Block {
 	router = new Router();
 
-	getStateFromProps() {
-		this.state = {
-			//onLogout: this.logout
-		};
+	constructor(props) {
+		super(props);
 	}
-	render(): DocumentFragment {
-		console.log(store.getState());
-		//const chats = this.props.chat;
 
+	async componentDidMount() {
+		this.ws = new ChatWS();
+		await ChatController.getChatList();
+	}
+
+	render(): DocumentFragment {
+
+		const chats = this.props.chats;
+		console.log(this.props, chats);
 		const profileCard = new ChatProfileCard({...this.props});
 
 		const chatsList = [

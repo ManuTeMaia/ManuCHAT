@@ -1,11 +1,13 @@
 require("babel-polyfill");
+
 import AuthController from "./controllers/auth";
+import ChatController from "./controllers/chat";
 import "./common/common";
-import Router, {checkAuthType} from "./utils/Router";
-import LoginPage from "./pages/login/login";
-import RegistrationPage from "./pages/register/register";
-import ChatPage from "./pages/chats/chat/chat";
-import ChatBodyPage from "./pages/chats/chat-body/chat-body";
+import Router, { checkAuthType } from "./utils/Router";
+import LoginPage from "./pages/login";
+import RegistrationPage from "./pages/register";
+import ChatPage from "./pages/chats/chat";
+import ChatBodyPage from "./pages/chats/chat-body";
 import ProfilePage from "./pages/profile/user-profile";
 import ProfilePageEdit from "./pages/profile/user-profile-edit";
 import ProfileEditPasswordPage from "./pages/profile/user-profile-password";
@@ -15,13 +17,15 @@ const router = new Router();
 
 const checkAuth: checkAuthType = async (next, currentRoute): Promise<void> => {
 	const user = await AuthController.fetchUser();
+
 	if (!currentRoute) {
 		return next();
 	}
 
 	if (currentRoute.pathname === "/") {
 		if (user) {
-			return router.go("/chat");
+			//await ChatController.getChatList();
+			return router.go("/chats");
 		}
 		return next();
 	} else {

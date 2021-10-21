@@ -10,7 +10,7 @@ import {
 } from "../api/chatAPI";
 import { store } from "../store";
 import { addChat, deleteChat, setChats, addMessage, setChat } from "../store/chat.store";
-//import { isArray } from "../common/helpers";
+import { isArray } from "../helpers/isArray";
 //import { IChat } from "components/Chat";
 import { UserData } from "api/authAPI.js";
 

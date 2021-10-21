@@ -6,7 +6,7 @@ interface BlockMeta<P = any> {
 }
 type Events = Values<typeof Block.EVENTS>;
 
-export default class Block <P = any> {
+class Block <P = any> {
 	static EVENTS = {
 		INIT: "init",
 		FLOW_CDM: "flow:component-did-mount",
@@ -52,6 +52,7 @@ export default class Block <P = any> {
 
 	init(): void {
 		this._createResources();
+		this.eventBus.emit(Block.EVENTS.FLOW_CDM, this.props);
 		this.eventBus.emit(Block.EVENTS.FLOW_RENDER, this.props);
 	}
 
@@ -63,8 +64,8 @@ export default class Block <P = any> {
 		this.componentDidMount(props);
 	}
 
-	componentDidMount(_props?: P): void {
-		//
+	componentDidMount(props?: P) {
+
 	}
 
 	_componentDidUpdate(oldProps: P, newProps: P): void {
@@ -149,8 +150,6 @@ export default class Block <P = any> {
 
 		Object.entries(components).forEach(([id, component]) => {
 			const stub = fragment.content.querySelector(`#id-${id}`);
-			//console.log(fragment.content);
-			//console.log(stub);
 			if(stub) {
 				stub.replaceWith(component.getContent());
 			} else {
@@ -177,6 +176,14 @@ export default class Block <P = any> {
 
 
 	getContent(): HTMLElement {
+		if (this.element?.parentNode?.nodeType === Node.DOCUMENT_FRAGMENT_NODE) {
+			setTimeout(() => {
+				if (this.element?.parentNode?.nodeType !== Node.DOCUMENT_FRAGMENT_NODE ) {
+					this.eventBus.emit(Block.EVENTS.FLOW_CDM);
+				}
+			}, 100);
+		}
+
 		return <HTMLElement>this._element;
 	}
 
@@ -217,3 +224,5 @@ export default class Block <P = any> {
 		this.getContent().innerHTML = "";
 	}
 }
+
+export default Block;

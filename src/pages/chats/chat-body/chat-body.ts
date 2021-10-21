@@ -9,29 +9,15 @@ import "./chat-body.pcss";
 import ChatContextMenu from "../../../modules/chat-context-menu/chat-context-menu";
 
 class ChatBodyPage extends Block{
-	constructor(props: any) {
-        super(props);
-    }
-	getStateFromProps(): void {
-		this.state = {};
+
+	constructor(props) {
+		super(props);
 	}
 
-	componentDidMount(): void {
-		console.log("yes");
-		if (!this.props.user) {
-			this.props.router.go("/");
-		}
-	}
-
-	componentDidUpdate(): boolean {
-		if (!this.props.user) {
-			this.props.router.go("/");
-		}
-
-		return true;
-	}
     render():DocumentFragment {
-		//const user = this.props.user;
+	    const chats = this.props.chats;
+	    console.log(chats);
+
 		const contextMenu = new ChatContextMenu({...this.props});
 
 		const avatar = new Avatar({

@@ -10,13 +10,13 @@ export type checkAuthType =
 
 class Route {
 	pathname: string;
-	_blockClass: new () => Block;
+	_blockClass: typeof Block;
 	_block: Block | null;
 	_rootQuery: string;
 	_child: ChildrenType;
 	needAuth: boolean;
 
-	constructor(pathname: string, view: { new(): Block }, rootQuery: string, child?: ChildrenType, needAuth = false) {
+	constructor(pathname: string, view:  typeof Block , rootQuery: string, child?: ChildrenType, needAuth = false) {
 		this.pathname = pathname;
 		this._blockClass = view;
 		this._block = null;
@@ -41,13 +41,19 @@ class Route {
 			this._block = new this._blockClass;
 			renderDOM(this._rootQuery, <Block>this._block);
 		}
-		if (this._child) {
+		if (this._child && this._block) {
+			const child = this._child;
+			this._block = new child.block;
+			renderDOM(child.query, <Block>this._block);
+		}
+		if (this._child && !this._block) {
 			this._block = new this._blockClass;
 			renderDOM(this._rootQuery, <Block>this._block);
 			const child = this._child;
 			this._block = new child.block;
 			renderDOM(child.query, <Block>this._block);
 		}
+
 
 	}
 }
@@ -71,7 +77,7 @@ class Router {
 
 	}
 
-	use(pathname: string, block: { new(): Block }, childQuery?: string, child?: ChildrenType, needAuth = false): this {
+	use(pathname: string, block: typeof Block, childQuery?: string, child?: ChildrenType, needAuth = false): this {
 		const query = childQuery ? childQuery : this._rootQuery;
 		const route = new Route(pathname, block, query, child, needAuth);
 		this.needAuth = needAuth;

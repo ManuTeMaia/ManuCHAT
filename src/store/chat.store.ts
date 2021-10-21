@@ -1,7 +1,6 @@
-import { Action } from "../utils/Store";
-import { IChat } from "../components/Chat";
-import { ChatMessage } from "../api/chatAPI";
-import { UserData } from "../api/authAPI";
+import {Action} from "../utils/Store";
+import {ChatMessage} from "../api/chatAPI";
+import {UserData} from "../api/authAPI.js";
 
 const SET_CHATS = "chats/SET";
 const SET_SEARCH = "chats/SET_SEARCH";
@@ -10,7 +9,9 @@ const ADD_CHAT = "chats/ADD_CHAT";
 const DELETE_CHAT = "chats/DELETE_CHAT";
 const ADD_MESSAGE = "chats/ADD_MESSAGE";
 
-const defaultState: ChatState = { chats: [], search: [], chat: undefined };
+type IChat = any;
+
+const defaultState: ChatState = {chats: [], search: [], chat: undefined};
 
 export interface ChatState {
 	chats: [];
@@ -49,31 +50,31 @@ export const addMessage = (message: ChatMessage) => ({
 });
 
 export default (state = defaultState, action: Action) => {
+	const chatIndex = state.chats.findIndex(({id}) => id === action.payload);
+	const newChats = [...state.chats];
+	const newChat = {...state.chat} as IChat;
+
 	switch (action.type) {
 		case SET_CHATS:
-			return { ...state, chats: action.payload };
+			return {...state, chats: action.payload};
 		case SET_SEARCH:
-			return { ...state, search: action.payload };
+			return {...state, search: action.payload};
 		case SET_CHAT:
-			return { ...state, chat: action.payload };
+			return {...state, chat: action.payload};
 		case ADD_CHAT:
-			return { ...state, chats: [action.payload, ...state.chats] };
+			return {...state, chats: [action.payload, ...state.chats]};
 		case DELETE_CHAT:
-			const chatIndex = state.chats.findIndex(({ id }) => id === action.payload);
-			const newChats = [...state.chats];
 			if (chatIndex !== -1) {
 				newChats.splice(chatIndex, 1);
 			}
-
-			return { ...state, chats: newChats };
+			return {...state, chats: newChats};
 		case ADD_MESSAGE:
-			const newChat = { ...state.chat } as IChat;
 			if (!newChat.messages) {
 				newChat.messages = [];
 			}
 
 			newChat.messages.push(action.payload);
-			return { ...state, chat: newChat };
+			return {...state, chat: newChat};
 		default:
 			return state;
 	}

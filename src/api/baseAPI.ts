@@ -7,7 +7,7 @@ abstract class BaseAPI {
 		this.http = new HTTPTransport(endpoint);
 	}
 
-	/*public abstract create?(data: unknown): Promise<unknown>;
+	public abstract create?(data: unknown): Promise<unknown>;
 
 	public abstract read?(identifier?: string): Promise<unknown>;
 
@@ -15,7 +15,6 @@ abstract class BaseAPI {
 
 	public abstract delete?(identifier: string): Promise<unknown>;
 
-	 */
 }
 
 export default BaseAPI;
