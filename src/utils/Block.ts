@@ -65,7 +65,7 @@ class Block <P = any> {
 	}
 
 	componentDidMount(props?: P) {
-
+		//
 	}
 
 	_componentDidUpdate(oldProps: P, newProps: P): void {

@@ -2,7 +2,7 @@ import Block from "../../utils/Block";
 import template from "./avatar.hbs";
 import "./avatar.pcss";
 
-type AvatarProps = {
+export type AvatarProps = {
 	imageSrc: string;
 	divClass?: string;
 	imageTitle?: string;

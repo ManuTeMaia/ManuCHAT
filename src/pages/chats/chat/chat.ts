@@ -4,10 +4,13 @@ import ChatProfileCard from "../../../modules/chat-list-profile-card/chat-list-p
 import ChatListCard from "../../../modules/chat-list-card/chat-list-card";
 import template from "./chat.hbs";
 import "./chat.pcss";
-import ChatController from "../../../controllers/chat";
+//import ChatController from "../../../controllers/chat";
+import ChatWS from "../../../api/chatWS";
+import Link from "../../../components/links/links";
 
 class ChatPage extends Block {
 	router = new Router();
+	ws = new ChatWS();
 
 	constructor(props) {
 		super(props);
@@ -15,75 +18,36 @@ class ChatPage extends Block {
 
 	async componentDidMount() {
 		this.ws = new ChatWS();
-		await ChatController.getChatList();
+		//await ChatController.getChatList();
 	}
 
 	render(): DocumentFragment {
 
-		const chats = this.props.chats;
-		console.log(this.props, chats);
+		let chatCards = this.props.chats;
+		console.log(chatCards);
 		const profileCard = new ChatProfileCard({...this.props});
 
-		const chatsList = [
-			{
-				imageSrc: "/noimage.png",
-				divClass: "chat-list-card card-avatar",
-				imageTitle: "Super Chat",
-				time: "13:10",
-				title: "Super Chat",
-				lastMessage: "Изображение",
-				unread: 1
-			},
-			{
-				imageSrc: "/noimage.png",
-				divClass: "chat-list-card card-avatar",
-				imageTitle: "Marvell",
-				time: "15:02",
-				title: "Marvell (кликабельно)",
-				lastMessage: "Что-то непонятное",
-				unread: 2,
-				events: {
-					click: (e:Event) => {
-						(<HTMLElement> e.currentTarget).classList.add("active");
-						this.router.go("/chat");
-					}
+		//chatCards.map((chatCard) => console.log(chatCard.title));
+
+		chatCards = chatCards.map((chatCard) => new ChatListCard({
+			imageSrc: chatCard.avatar,
+			imageTitle: chatCard.title,
+			time: chatCard.time,
+			title: chatCard.title,
+			lastMessage: chatCard.content,
+			unread: chatCard.unread_count,
+			events: {
+				click: (e: Event) => {
+					(<HTMLElement>e.currentTarget).classList.toggle("active");
+					this.router.go(`/chat?id=${chatCard.id}`);
 				}
-			},	
-			{
-				imageSrc: "/noimage.png",
-				divClass: "chat-list-card card-avatar",
-				imageTitle: "Nikon Lenses",
-				time: "08:23",
-				title: "Nikon Lenses",
-				mine: "Вы",
-				lastMessage: "Какой-то текст про никон"
-			},
-			{
-				imageSrc: "/noimage.png",
-				divClass: "chat-list-card card-avatar",
-				imageTitle: "Киноклуб",
-				time: "Вчера",
-				title: "Киноклуб",
-				lastMessage: "Стикер",
-				unread: 1
-			},
-			{
-				imageSrc: "/noimage.png",
-				divClass: "chat-list-card card-avatar",
-				imageTitle: "Андрей",
-				time: "Вчера",
-				title: "Андрей",
-				mine: "Вы",
-				lastMessage: "Ты даже не представляешь как...",
 			}
-		];
-		const chatList = chatsList.map(
-			(chatList) => new ChatListCard(chatList)
+		})
 		);
 
 		return this.compile(template, {
 			profileCard,
-			chatList
+			chatCards
 		});
 	}
 }

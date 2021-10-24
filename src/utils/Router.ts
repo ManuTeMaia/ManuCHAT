@@ -3,7 +3,7 @@ import renderDOM from "../helpers/renderDOM";
 import isEqual from "../helpers/isEqual";
 
 export type ChildrenType =
-	{ block: { new(): Block }; query: string} | undefined;
+	{ block: typeof Block; query: string} | undefined;
 
 export type checkAuthType =
 	(next: () => void, route: Route | undefined) => void;

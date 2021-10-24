@@ -39,8 +39,11 @@ class ProfileEditPasswordPage extends Block {
 
 	render():DocumentFragment {
 		const user = this.props.props.user;
-		console.log(this.props.props.user);
-		const avatarSrc = `https://ya-praktikum.tech/api/v2/resources${user.profile.avatar}` || "/noimage.png";
+
+		let avatarSrc = "/noimage.png";
+		if (user.profile.avatar !== null) {
+			avatarSrc = `https://ya-praktikum.tech/api/v2/resources${user.profile.avatar}`;
+		}
 
 		const avatar = new Avatar({
 			divClass: "main--page-user-profile user-profile-avatar",

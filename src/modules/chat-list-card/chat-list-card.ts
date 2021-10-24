@@ -1,5 +1,5 @@
 import Block from "../../utils/Block";
-import Avatar from "../../components/avatar/avatar";
+import Avatar, {AvatarProps} from "../../components/avatar/avatar";
 import template from "./chat-list-card.hbs";
 import "./chat-list-card.pcss";
 
@@ -12,7 +12,7 @@ type ChatCardType = {
 };
 
 class ChatListCard extends Block {
-    constructor(props: Avatar | ChatCardType) {
+    constructor(props: AvatarProps | ChatCardType) {
         super(props);
     }
     render():DocumentFragment{

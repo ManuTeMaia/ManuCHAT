@@ -20,7 +20,10 @@ class ChatProfileCard extends Block {
 	render():DocumentFragment {
 		const user = store.getState().user;
 
-		const avatarSrc = `https://ya-praktikum.tech/api/v2/resources${user.profile.avatar}` || "/noimage.png";
+		let avatarSrc = "/noimage.png";
+		if (user.profile.avatar !== null) {
+			avatarSrc = `https://ya-praktikum.tech/api/v2/resources${user.profile.avatar}`;
+		}
 
 		const avatar = new Avatar({
 			imageSrc: avatarSrc,

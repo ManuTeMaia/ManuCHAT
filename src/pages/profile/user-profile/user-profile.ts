@@ -25,7 +25,10 @@ class ProfilePage extends Block {
 	render():DocumentFragment {
 		const user = this.props.user;
 
-		const avatarSrc = `https://ya-praktikum.tech/api/v2/resources${user.profile.avatar}` || "/noimage.png";
+		let avatarSrc = "/noimage.png";
+		if (user.profile.avatar !== null) {
+			avatarSrc = `https://ya-praktikum.tech/api/v2/resources${user.profile.avatar}`;
+		}
 
 		const popupWrapper = new PopupWrapper({
 			popupName: "upload",
