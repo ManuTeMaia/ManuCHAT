@@ -1,7 +1,7 @@
 import Block from "../../utils/Block";
 import template from "./chat-context-menu.hbs";
 import "./chat-context-menu.pcss";
-import Link from "../../components/links/links";
+import Link from "../../components/elements/link/link";
 
 class ChatContextMenu extends Block {
 	constructor(props:Link) {

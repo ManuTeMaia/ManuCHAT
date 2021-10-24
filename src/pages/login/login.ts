@@ -3,21 +3,15 @@ import Validator from "../../utils/Validator";
 import Router from "../../utils/Router";
 import AuthController from "../../controllers/auth";
 import { getFormData } from "../../helpers/formActions";
-import InputWrapper from "../../modules/inputs-wrapper/inputs-wrapper";
-import Button from "../../components/buttons/submit-button";
-import Heading from "../../components/headings/headings";
-import Link from "../../components/links/links";
-import template from "./login.hbs";
 import "./login.pcss";
 
 class LoginPage extends Block {
-	validator: Validator;
-	router: Router;
+	validator = new Validator();
+	router = new Router();
 
-	constructor() {
-		super( {
-			events: {
-				submit: async (e: Event) => {
+	protected getStateFromProps() {
+		this.state = {
+			onLogin: async (e: Event) => {
 					e.preventDefault();
 					const refs = getFormData(e.target as HTMLFormElement);
 					const loginData = {
@@ -29,67 +23,41 @@ class LoginPage extends Block {
 					new Validator().formValidate();
 					if(!hasErrors) {
 						await AuthController.login(loginData);
-						await this.router.go("/chats");
+						//this.router.go("/chats");
 					}
-				}
-			}
-		});
-		this.validator = new Validator();
-		this.router = new Router();
+				},
+			onBlur: (e: Event) => this.validate((e.currentTarget as HTMLInputElement)),
+		};
 	}
 
+	componentDidMount() {
+		if (this.props.user.profile) {
+			this.props.router.go("/chats");
+		}
+	}
 	validate(input: HTMLInputElement): void {
 		return this.validator.validate(input);
 	}
 
-	render(): DocumentFragment {
-		const heading = new Heading({
-			text: "Вход"
-		});
+	render(): string {
 
-		const login = new InputWrapper({
-			label: "Логин",
-			name: "login",
-			type: "text",
-			placeholder: "Имя пользователя",
-			validationType: "login",
-			required: true,
-			events: {
-				blur: (e) => this.validate((e.currentTarget as HTMLInputElement)),
-			}
-		});
-
-		const password = new InputWrapper({
-			label: "Пароль",
-			name: "password",
-			type: "password",
-			placeholder: "***********",
-			validationType: "password",
-			required: true,
-			events: {
-				blur: (e) => this.validate((e.currentTarget as HTMLInputElement)),
-			}
-		});
-
-        const submit = new Button({
-			buttonClass: "form--login-submit",
-			name: "login-submit",
-			title: "Авторизоваться"
-		});
-
-		const link = new Link({
-			url:"/signup",
-			class:"form--login-register-link",
-			text:"Нет аккаунта?"
-		});
-
-		return this.compile(template, {
-			heading,
-			login,
-			password,
-			submit,
-			link
-		});
+		//language=hbs
+		return `
+		<section class="wrapper">
+			<div class="form--login-wrap">
+				{{{Heading text="Вход"}}}
+				<form action="" method="post" class="form--login" enctype="multipart/form-data">
+                    {{{TextInput label="Логин" name="login" type="text" placeholder="Имя пользователя" validationType="login" required=true onBlur=onBlur ref="login"}}}
+                    {{{TextInput label="Пароль" name="password" type="password" placeholder="***********" validationType="password" required=true onBlur=onBlur ref="password"}}}
+                    {{#if user.error }}
+                        <span style="color: red">{{user.error.reason}}</span>
+                    {{/if}}
+                    {{{Button title="Авторизоваться" buttonClass="form--login-submit" name="login-submit" onClick=onLogin}}}
+				</form>
+                {{{Link text="Нет аккаунта?" class="form--login-register-link" url="/signup"}}}
+			</div>
+		</section>
+		`;
 	}
 }
 

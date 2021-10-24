@@ -1,6 +1,5 @@
 import Block from "../../utils/Block";
-import InputWrapper from "../inputs-wrapper/inputs-wrapper";
-import Button from "../../components/buttons/submit-button";
+import Button from "../../components/elements/buttons/button";
 import ChatController from "../../controllers/chat";
 import {getFormData} from "../../helpers/formActions";
 import Validator from "../../utils/Validator";

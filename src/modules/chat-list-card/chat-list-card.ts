@@ -1,5 +1,5 @@
 import Block from "../../utils/Block";
-import Avatar, {AvatarProps} from "../../components/avatar/avatar";
+import Avatar, {AvatarProps} from "../../components/elements/avatar/avatar";
 import template from "./chat-list-card.hbs";
 import "./chat-list-card.pcss";
 

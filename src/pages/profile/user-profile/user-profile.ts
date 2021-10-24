@@ -1,11 +1,11 @@
 import Block from "../../../utils/Block";
 import AuthController from "../../../controllers/auth";
 import Router from "../../../utils/Router";
-import ProfileField from "../../../components/profile-field/profile-field";
-import Avatar from "../../../components/avatar/avatar";
+import ProfileField from "../../../components/elements/profile-field/profile-field";
+import Avatar from "../../../components/elements/avatar/avatar";
 import PopupWrapper from "../../../modules/popup-wrapper/popup-wrapper";
-import Heading from "../../../components/headings/headings";
-import Link from "../../../components/links/links";
+import Heading from "../../../components/elements/heading/heading";
+import Link from "../../../components/elements/link/link";
 import template from "./user-profile.hbs";
 import "./user-profile.pcss";
 

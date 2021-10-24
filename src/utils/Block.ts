@@ -1,7 +1,9 @@
 import EventBus from "./EventBus";
+import Handlebars from "handlebars";
 import { nanoid } from "nanoid";
+import isEqual from "../helpers/isEqual";
 
-interface BlockMeta<P = any> {
+export interface BlockMeta<P = any> {
 	props: P;
 }
 type Events = Values<typeof Block.EVENTS>;
@@ -19,6 +21,8 @@ class Block <P = any> {
 	protected _element: HTMLElement;
 	public props: P | Record<string, unknown>;
 	protected state: any = {};
+	protected children: {[id: string]: Block} = {};
+	protected refs: {[key: string]: HTMLElement} = {};
 
 	id = nanoid(6);
 
@@ -53,7 +57,6 @@ class Block <P = any> {
 	init(): void {
 		this._createResources();
 		this.eventBus.emit(Block.EVENTS.FLOW_CDM, this.props);
-		this.eventBus.emit(Block.EVENTS.FLOW_RENDER, this.props);
 	}
 
 	protected getStateFromProps(): void {
@@ -62,10 +65,11 @@ class Block <P = any> {
 
 	_componentDidMount(props?: P): void {
 		this.componentDidMount(props);
+		this.eventBus.emit(Block.EVENTS.FLOW_RENDER);
 	}
 
-	componentDidMount(props?: P) {
-		//
+	componentDidMount(props?: P): typeof props{
+		return props;
 	}
 
 	_componentDidUpdate(oldProps: P, newProps: P): void {
@@ -76,8 +80,8 @@ class Block <P = any> {
 		this._render();
 	}
 
-	componentDidUpdate(_oldProps: P, _newProps: P): boolean {
-		return true;
+	componentDidUpdate(oldProps: P, newProps: P): boolean {
+		return isEqual(oldProps, newProps);
 	}
 
 	setProps = (nextProps: P): void => {
@@ -125,7 +129,7 @@ class Block <P = any> {
 		return this._element;
 	}
 	
-	compile(tmpl: (ctx: Record<string, unknown>) => string, props: Record<string, any>): DocumentFragment {
+	/*compile(tmpl: (ctx: Record<string, unknown>) => string, props: Record<string, any>): DocumentFragment {
     
 		const fragment = document.createElement("template");
 		const components: Record<string, Block> = {};
@@ -158,31 +162,53 @@ class Block <P = any> {
 		});
 
 		return fragment.content;
+	}*/
+
+	_compile(): DocumentFragment {
+		const fragment = document.createElement("template");
+
+		const template = Handlebars.compile(this.render());
+		fragment.innerHTML = template({...this.state, ...this.props, children: this.children, refs: this.refs});
+
+		Object.entries(this.children).forEach(([id, component]) => {
+
+			const stub = fragment.content.querySelector(`[data-id="${id}"]`);
+
+			if (!stub) {
+				return;
+			}
+
+			stub.replaceWith(component.getContent());
+		});
+
+		return fragment.content;
 	}
 
 	_render(): void {
-		const fragment = this.render().firstElementChild as HTMLElement;
+		const fragment = this._compile();
 
 		this._removeEvents();
-		this._element.innerHTML = "";
+		const newElement = fragment?.firstElementChild;
 
-		this._element = fragment;
+		this._element?.replaceWith(newElement as HTMLElement);
+
+		this._element = newElement as HTMLElement;
 		this._addEvents();
 	}
 
-	render(): DocumentFragment {
-    return new DocumentFragment;
+	render(): string {
+    return "";
   }
 
 
 	getContent(): HTMLElement {
-		if (this.element?.parentNode?.nodeType === Node.DOCUMENT_FRAGMENT_NODE) {
+		/*if (this.element?.parentNode?.nodeType === Node.DOCUMENT_FRAGMENT_NODE) {
 			setTimeout(() => {
 				if (this.element?.parentNode?.nodeType !== Node.DOCUMENT_FRAGMENT_NODE ) {
 					this.eventBus.emit(Block.EVENTS.FLOW_CDM);
 				}
 			}, 100);
-		}
+		}*/
 
 		return <HTMLElement>this._element;
 	}
@@ -197,12 +223,14 @@ class Block <P = any> {
 					return typeof value === "function"? value.bind(target) : value;
 				}
 			},
-			set(target: Record<string, unknown>,prop: string,value: unknown): boolean {
+			set(target: Record<string, unknown>,prop: string, value: unknown): boolean {
 				if (prop.indexOf("_") === 0) {
 					throw new Error("Нет прав");
 				} else {
 					target[prop] = value;
+					this.eventBus.emit(Block.EVENTS.FLOW_CDU, {...target}, target);
 					return true;
+
 				}
 			},
 			deleteProperty(target: Record<string, unknown>, prop: string): boolean {

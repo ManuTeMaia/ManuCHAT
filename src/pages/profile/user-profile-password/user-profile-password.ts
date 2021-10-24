@@ -2,10 +2,9 @@ import Block from "../../../utils/Block";
 import Validator from "../../../utils/Validator";
 import UserController from "../../../controllers/user";
 import { getFormData } from "../../../helpers/formActions";
-import Button from "../../../components/buttons/submit-button";
-import Avatar from "../../../components/avatar/avatar";
-import Heading from "../../../components/headings/headings";
-import InputWrapper from "../../../modules/inputs-wrapper/inputs-wrapper";
+import Button from "../../../components/elements/buttons/button";
+import Avatar from "../../../components/elements/avatar/avatar";
+import Heading from "../../../components/elements/heading/heading";
 import template from "../user-profile-form.hbs";
 import "../user-profile-form.pcss";
 

@@ -1,11 +1,11 @@
 import Block from "../../utils/Block";
-import TextInput from "../../components/inputs/text-input";
-import Avatar from "../../components/avatar/avatar";
+import TextInput from "../../components/elements/inputs/text-input";
+import Avatar from "../../components/elements/avatar/avatar";
 import template from "./chat-list-profile-card.hbs";
 import { store } from "../../store";
 import "./chat-list-profile-card.pcss";
 import Router from "../../utils/Router";
-import Link from "../../components/links/links";
+import Link from "../../components/elements/link/link";
 import PopupWrapper from "../popup-wrapper/popup-wrapper";
 
 class ChatProfileCard extends Block {

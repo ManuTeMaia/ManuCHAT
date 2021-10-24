@@ -1,6 +1,6 @@
 import Block from "../../utils/Block";
-import TextInput from "../../components/inputs/text-input";
-import Button from "../../components/buttons/submit-button";
+import TextInput from "../../components/elements/inputs/text-input";
+import Button from "../../components/elements/buttons/button";
 import template from "./avatar-popup.hbs";
 import "./avatar-popup.pcss";
 import UserController from "../../controllers/user";

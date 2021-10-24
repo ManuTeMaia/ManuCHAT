@@ -1,8 +1,8 @@
-import Avatar from "../../components/avatar/avatar";
+import Avatar from "../../components/elements/avatar/avatar";
 import Block from "../../utils/Block";
 import template from "../../pages/profile/user-profile/user-profile.hbs";
 import {store} from "../../store";
-import Link from "../../components/links/links";
+import Link from "../../components/elements/link/link";
 import AvatarPopup from "../avatar-popup/avatar-popup";
 
 class AvatarForm extends Block {

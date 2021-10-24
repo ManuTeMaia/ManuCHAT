@@ -6,7 +6,7 @@ import template from "./chat.hbs";
 import "./chat.pcss";
 //import ChatController from "../../../controllers/chat";
 import ChatWS from "../../../api/chatWS";
-import Link from "../../../components/links/links";
+import Link from "../../../components/elements/link/link";
 
 class ChatPage extends Block {
 	router = new Router();

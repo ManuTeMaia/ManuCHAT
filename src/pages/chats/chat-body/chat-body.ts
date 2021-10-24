@@ -1,9 +1,9 @@
 import Block from "../../../utils/Block";
 import { submitEmulator } from "../../../helpers/formActions";
-import Avatar from "../../../components/avatar/avatar";
-import ChatMessage from "../../../components/chat-message/chat-message";
-import TextInput from "../../../components/inputs/text-input";
-import Button from "../../../components/buttons/submit-button";
+import Avatar from "../../../components/elements/avatar/avatar";
+import ChatMessage from "../../../components/elements/chat-message/chat-message";
+import TextInput from "../../../components/elements/inputs/text-input";
+import Button from "../../../components/elements/buttons/button";
 import template from "./chat-body.hbs";
 import "./chat-body.pcss";
 import ChatContextMenu from "../../../modules/chat-context-menu/chat-context-menu";

@@ -4,6 +4,8 @@ import AuthController from "./controllers/auth";
 import ChatController from "./controllers/chat";
 import "./common/common";
 import Router, { checkAuthType } from "./utils/Router";
+import regComponent from "./helpers/regComponent";
+import Block from "./utils/Block";
 import LoginPage from "./pages/login";
 import RegistrationPage from "./pages/register";
 import ChatPage from "./pages/chats/chat";
@@ -12,6 +14,13 @@ import ProfilePage from "./pages/profile/user-profile";
 import ProfilePageEdit from "./pages/profile/user-profile-edit";
 import ProfileEditPasswordPage from "./pages/profile/user-profile-password";
 import {Error404, Error500} from "./pages/error/error";
+
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const components = require("./components/**/index.ts") as {[key: string]: { default: typeof Block }};
+
+Object.values(components).forEach((component) => {
+	Object.values(component).forEach(element => regComponent(element.default));
+});
 
 const router = new Router();
 
