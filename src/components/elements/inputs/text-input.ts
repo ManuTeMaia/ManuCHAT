@@ -3,7 +3,6 @@ import "./input.pcss";
 
 export type TextInputType = {
     name: string;
-    label?: string;
     inputClass?: string;
     placeholder?: string;
     required?: boolean;
@@ -11,23 +10,17 @@ export type TextInputType = {
     type: string;
     validationType?: string;
     autoComplete?: string;
-    onBlur: (e:Event) => void;
+    onChange: (e:Event) => void;
 };
 
 export class TextInput extends Block{
-    constructor({name, label, inputClass, placeholder, required, value, type, validationType, autoComplete, onBlur}: TextInputType) {
-        super({name, label, inputClass, placeholder, required, value, type, validationType, autoComplete,  events: {blur: onBlur}});
-    }
-
-    static getName(): string {
-        return "TextInput";
+    constructor({ onChange, ...props}: TextInputType) {
+        super({events: {blur: onChange}, ...props});
     }
 
     render(): string {
         //language=hbs
         return `
-            <div class="input-wrapper">
-                {{#if label}}<label for="{{name}}">{{label}}</label>{{/if}}
                 <input
                     type="{{type}}"
                     {{#if class}}
@@ -40,7 +33,6 @@ export class TextInput extends Block{
                     {{#if required}}
                         required
                     {{/if}}>
-            </div>
         `;
     }
 

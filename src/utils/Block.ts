@@ -128,50 +128,15 @@ class Block <P = any> {
 	get element(): Element | null {
 		return this._element;
 	}
-	
-	/*compile(tmpl: (ctx: Record<string, unknown>) => string, props: Record<string, any>): DocumentFragment {
-    
-		const fragment = document.createElement("template");
-		const components: Record<string, Block> = {};
-
-			Object.entries(props).forEach(([name, value]) => {
-				if(Array.isArray(value)) {
-					value.forEach((obj, i) => {
-						if (obj instanceof Block) {
-							components[obj.id] = obj;
-							props[name][i] = `<div id="id-${obj.id}"></div>`;
-						}
-					});
-				}
-
-				if (value instanceof Block) {
-					components[value.id] = value;
-					props[name] = `<div id="id-${value.id}"></div>`;
-				}
-			});
-
-			fragment.innerHTML = tmpl(props);
-
-		Object.entries(components).forEach(([id, component]) => {
-			const stub = fragment.content.querySelector(`#id-${id}`);
-			if(stub) {
-				stub.replaceWith(component.getContent());
-			} else {
-				return;
-			}
-		});
-
-		return fragment.content;
-	}*/
 
 	_compile(): DocumentFragment {
 		const fragment = document.createElement("template");
 
 		const template = Handlebars.compile(this.render());
+
 		fragment.innerHTML = template({...this.state, ...this.props, children: this.children, refs: this.refs});
 
 		Object.entries(this.children).forEach(([id, component]) => {
-
 			const stub = fragment.content.querySelector(`[data-id="${id}"]`);
 
 			if (!stub) {
@@ -200,16 +165,7 @@ class Block <P = any> {
     return "";
   }
 
-
 	getContent(): HTMLElement {
-		/*if (this.element?.parentNode?.nodeType === Node.DOCUMENT_FRAGMENT_NODE) {
-			setTimeout(() => {
-				if (this.element?.parentNode?.nodeType !== Node.DOCUMENT_FRAGMENT_NODE ) {
-					this.eventBus.emit(Block.EVENTS.FLOW_CDM);
-				}
-			}, 100);
-		}*/
-
 		return <HTMLElement>this._element;
 	}
 
@@ -228,7 +184,7 @@ class Block <P = any> {
 					throw new Error("Нет прав");
 				} else {
 					target[prop] = value;
-					this.eventBus.emit(Block.EVENTS.FLOW_CDU, {...target}, target);
+					new EventBus().emit(Block.EVENTS.FLOW_CDU, {...target}, target);
 					return true;
 
 				}
