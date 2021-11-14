@@ -1,54 +1,47 @@
 import Block from "../../../utils/Block";
 import Router from "../../../utils/Router";
-import ChatProfileCard from "../../../modules/chat-list-profile-card/chat-list-profile-card";
-import ChatListCard from "../../../modules/chat-list-card/chat-list-card";
-import template from "./chat.hbs";
+import ChatController from "../../../controllers/chat";
 import "./chat.pcss";
-//import ChatController from "../../../controllers/chat";
 import ChatWS from "../../../api/chatWS";
-import Link from "../../../components/elements/link/link";
 
 class ChatPage extends Block {
 	router = new Router();
 	ws = new ChatWS();
 
-	constructor(props) {
-		super(props);
+	getStateFromProps(): void {
+
+		//const chatCards = chats;
+
+		this.state = {
+		};
 	}
 
 	async componentDidMount() {
-		this.ws = new ChatWS();
-		//await ChatController.getChatList();
+		//this.ws = new ChatWS();
+		await ChatController.getChatList();
 	}
 
-	render(): DocumentFragment {
-
-		let chatCards = this.props.chats;
-		console.log(chatCards);
-		const profileCard = new ChatProfileCard({...this.props});
-
-		//chatCards.map((chatCard) => console.log(chatCard.title));
-
-		chatCards = chatCards.map((chatCard) => new ChatListCard({
-			imageSrc: chatCard.avatar,
-			imageTitle: chatCard.title,
-			time: chatCard.time,
-			title: chatCard.title,
-			lastMessage: chatCard.content,
-			unread: chatCard.unread_count,
-			events: {
-				click: (e: Event) => {
-					(<HTMLElement>e.currentTarget).classList.toggle("active");
-					this.router.go(`/chat?id=${chatCard.id}`);
-				}
-			}
-		})
-		);
-
-		return this.compile(template, {
-			profileCard,
-			chatCards
-		});
+	render(): string {
+		console.log(this.props.chats);
+		//language=hbs
+		return `
+            <div class="main--page-wrap">
+                <div class="chat--list-wrap">
+	                {{#if avatar}}
+                        {{{ChatProfileCard avatar=avatar}}}
+	                {{else}}
+        				{{{ChatProfileCard}}}
+	                {{/if}}
+                    <div class="chat--list-chats">
+                            {{#each chats}}
+                                {{{ChatListCard chat=this}}}
+                            {{/each}}
+                    </div>
+                </div>
+                <div class="chat--wrap">Выберите чат чтобы отправить сообщение
+                </div>
+            </div>
+		`;
 	}
 }
 export default ChatPage;

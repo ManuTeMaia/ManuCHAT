@@ -33,7 +33,7 @@ class Validator {
 		},
 		notnull: {
 			pattern: /(.|\s)*\S(.|\s)*/,
-			error: "Пустое сообщение",
+			error: "Вы ничего не ввели",
 		}
 	};
 

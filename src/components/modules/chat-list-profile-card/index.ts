@@ -1,0 +1,1 @@
+export { ChatProfileCard as default } from "./chat-list-profile-card";

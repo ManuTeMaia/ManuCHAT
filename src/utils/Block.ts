@@ -131,14 +131,13 @@ class Block <P = any> {
 
 	_compile(): DocumentFragment {
 		const fragment = document.createElement("template");
-
 		const template = Handlebars.compile(this.render());
 
 		fragment.innerHTML = template({...this.state, ...this.props, children: this.children, refs: this.refs});
 
 		Object.entries(this.children).forEach(([id, component]) => {
 			const stub = fragment.content.querySelector(`[data-id="${id}"]`);
-
+			//console.log(stub);
 			if (!stub) {
 				return;
 			}
@@ -166,6 +165,14 @@ class Block <P = any> {
   }
 
 	getContent(): HTMLElement {
+		// Хак, чтобы вызвать CDM только после добавления в DOM
+		if (this.element?.parentNode?.nodeType === Node.DOCUMENT_FRAGMENT_NODE) {
+			setTimeout(() => {
+				if (this.element?.parentNode?.nodeType !==  Node.DOCUMENT_FRAGMENT_NODE ) {
+					this.eventBus.emit(Block.EVENTS.FLOW_CDM);
+				}
+			}, 100);
+		}
 		return <HTMLElement>this._element;
 	}
 

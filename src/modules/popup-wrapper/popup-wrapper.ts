@@ -2,7 +2,7 @@ import Block from "../../utils/Block";
 import template from "./popup-wrapper.hbs";
 import "./popup-wrapper.pcss";
 import AvatarPopup from "../avatar-popup/avatar-popup";
-import NewChatPopup from "../chat-popup/new-chat-popup";
+import NewChatPopup from "../../components/modules/chat-popup/new-chat-popup";
 import AttachPopup from "../attach-popup/attach-popup";
 import Link from "../../components/elements/link/link";
 
@@ -19,21 +19,16 @@ class PopupWrapper extends Block <PopupWrapperType>{
     constructor(props: PopupWrapperType) {
         super(props);
     }
-
-    render():DocumentFragment {
-
-       const closeLink = new Link({
-           url:"",
-           class:"popup-close",
-           text:"",
-           events: {
-               click: (e: Event) => {
-                   e.preventDefault();
-                   console.log(this.props.popupName);
-                   document.querySelector(`[data-popup=${this.props.popupName}]`)?.classList.add("hidden");
-               }
-           }
-       });
+    getStateFromProps() {
+        this.state = {
+            popupClose: (e: Event) => {
+                e.preventDefault();
+                console.log(this.props.popupName);
+                document.querySelector(`[data-popup=${this.props.popupName}]`)?.classList.add("hidden");
+            }
+        };
+    }
+    render(): string {
 
         let popupContent = {};
         switch (this.props.popupChoice) {
@@ -48,12 +43,17 @@ class PopupWrapper extends Block <PopupWrapperType>{
                 break;
 
         }
-
-        return this.compile(template, {
-            ...this.props,
-            closeLink,
-            popupContent
-        });
+        //language=hbs
+        return `
+            <div class="popup hidden" data-popup="{{popupName}}">
+                <div class="popup-overlay"></div>
+                <div class="popup-wrapper">
+                    {{{Link url="" class="popup-close" text="" onClick=popupClose}}}
+                    <h4>{{popupTitle}}</h4>
+                    {{{popupContent}}}
+                </div>
+            </div>
+        `;
     }
 
 }

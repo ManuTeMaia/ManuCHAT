@@ -40,7 +40,7 @@ const checkAuth: checkAuthType = async (next, currentRoute): Promise<void> => {
 		}
 		return next();
 	} else {
-		if (!currentRoute.needAuth) {
+		if (user || !currentRoute.needAuth) {
 			return next();
 		}
 		return router.go("/");
@@ -48,7 +48,6 @@ const checkAuth: checkAuthType = async (next, currentRoute): Promise<void> => {
 };
 
 router
-	.checkAuth(checkAuth)
 	.use("/", LoginPage)
 	.use("/signup", RegistrationPage)
 	.use("/400", Error404)
@@ -58,4 +57,5 @@ router
 	.use("/chat", ChatPage, ".root", {block: ChatBodyPage, query: ".chat--wrap"}, true)
 	.use("/settings/edit", ChatPage, ".root", {block: ProfilePageEdit, query: ".chat--wrap"}, true)
 	.use("/settings/pwd", ChatPage, ".root", {block: ProfileEditPasswordPage, query: ".chat--wrap"}, true)
+	.checkAuth(checkAuth)
 	.start();

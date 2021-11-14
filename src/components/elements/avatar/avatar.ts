@@ -9,7 +9,7 @@ export type AvatarProps = {
 }
 
 export class Avatar extends Block {
-	constructor({imageSrc, divClass, imageTitle, onClick}: AvatarProps) {
+	constructor({imageSrc="/noimage.png", divClass, imageTitle, onClick}: AvatarProps) {
 		super({imageSrc, divClass, imageTitle, events: {click: onClick}});
 	}
 
@@ -21,7 +21,7 @@ export class Avatar extends Block {
 		//language=hbs
 		return `
             <div class="avatar-wrap {{divClass}}">
-                <img src="https://ya-praktikum.tech/api/v2/resources{{imageSrc}}" title="{{imageTitle}}" alt="{{imageTitle}}">
+                <img src="{{imageSrc}}" title="{{imageTitle}}" alt="{{imageTitle}}">
             </div>
         `;
 	}
