@@ -1,12 +1,11 @@
 import Store from "../utils/Store";
 import Block from "../utils/Block";
-import profile from "./profile.store";
+//import profile from "./profile.store";
 import user from "./user.store";
 import chats from "./chat.store";
 
 export const store = new Store({
 	user,
-	profile,
 	chats
 });
 

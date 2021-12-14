@@ -41,12 +41,12 @@ class Route {
 			this._block = new this._blockClass;
 			renderDOM(this._rootQuery, <Block>this._block);
 		}
-		if (this._child && this._block) {
+		else if (this._child && this._block) {
 			const child = this._child;
 			this._block = new child.block;
 			renderDOM(child.query, <Block>this._block);
 		}
-		if (this._child && !this._block) {
+		else if (this._child && !this._block) {
 			this._block = new this._blockClass;
 			renderDOM(this._rootQuery, <Block>this._block);
 			const child = this._child;
@@ -132,7 +132,7 @@ class Router {
 }
 
 export default Router;
-export function withRouter(Component: typeof Block): typeof Block {
+export function withRouter(Component: typeof Block): any {
 	return class WithRouter extends Component {
 		constructor(props: any) {
 			const router = new Router();

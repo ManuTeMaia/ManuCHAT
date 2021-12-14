@@ -11,7 +11,7 @@ import {
 import { store } from "../store";
 import { addChat, deleteChat, setChats, addMessage, setChat } from "../store/chat.store";
 import { isArray } from "../helpers/isArray";
-//import { IChat } from "components/Chat";
+import { ChatProps } from "../store/chat.store";
 import { UserData } from "api/authAPI.js";
 
 class ChatController {
@@ -82,7 +82,7 @@ class ChatController {
 		}
 	}
 
-	setChat(chat: IChat) {
+	setChat(chat: ChatProps) {
 		store.dispatch(setChat(chat));
 	}
 

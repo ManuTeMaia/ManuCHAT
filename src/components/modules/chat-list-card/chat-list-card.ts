@@ -12,7 +12,7 @@ export class ChatListCard extends Block {
         super(props);
     }
     render(): string {
-        console.log(this.props.chats);
+        console.log(this.props);
         //language=hbs
         return `
             <div class="chat--list-card-wrap chat-{{chat.id}}">

@@ -3,7 +3,7 @@ import Block from "../../utils/Block";
 import template from "../../pages/profile/user-profile/user-profile.hbs";
 import {store} from "../../store";
 import Link from "../../components/elements/link/link";
-import AvatarPopup from "../avatar-popup/avatar-popup";
+import AvatarPopup from "../../components/modules/avatar-popup/avatar-popup";
 
 class AvatarForm extends Block {
 	constructor(props: any) {

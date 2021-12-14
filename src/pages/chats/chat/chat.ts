@@ -18,11 +18,12 @@ class ChatPage extends Block {
 
 	async componentDidMount() {
 		//this.ws = new ChatWS();
-		await ChatController.getChatList();
+		const chats = await ChatController.getChatList();
+
 	}
 
 	render(): string {
-		console.log(this.props.chats);
+		console.log(chats);
 		//language=hbs
 		return `
             <div class="main--page-wrap">

@@ -9,29 +9,29 @@ const ADD_CHAT = "chats/ADD_CHAT";
 const DELETE_CHAT = "chats/DELETE_CHAT";
 const ADD_MESSAGE = "chats/ADD_MESSAGE";
 
-type IChat = any;
+export type ChatProps = any;//TBD
 
-const defaultState: ChatState = {chats: [], search: [], chat: undefined};
+const defaultState: ChatState = {chats: [], search: [], single_chat: undefined};
 
 export interface ChatState {
 	chats: [];
 	search: [];
-	chat: IChat | undefined;
+	single_chat: ChatProps | undefined;
 }
 
-export const setChats = (chats: IChat[]) => ({
+export const setChats = (chats: ChatProps[]) => ({
 	type: SET_CHATS,
 	payload: chats,
 });
 
-export const setChat = (chat: IChat) => ({
+export const setChat = (single_chat: ChatProps) => ({
 	type: SET_CHAT,
-	payload: chat,
+	payload: single_chat,
 });
 
-export const addChat = (chat: IChat) => ({
+export const addChat = (single_chat: ChatProps) => ({
 	type: ADD_CHAT,
-	payload: chat,
+	payload: single_chat,
 });
 
 export const deleteChat = (chatId: number) => ({
@@ -52,7 +52,7 @@ export const addMessage = (message: ChatMessage) => ({
 export default (state = defaultState, action: Action) => {
 	const chatIndex = state.chats.findIndex(({id}) => id === action.payload);
 	const newChats = [...state.chats];
-	const newChat = {...state.chat} as IChat;
+	const newChat = {...state.single_chat} as ChatProps;
 
 	switch (action.type) {
 		case SET_CHATS:
@@ -60,7 +60,7 @@ export default (state = defaultState, action: Action) => {
 		case SET_SEARCH:
 			return {...state, search: action.payload};
 		case SET_CHAT:
-			return {...state, chat: action.payload};
+			return {...state, single_chat: action.payload};
 		case ADD_CHAT:
 			return {...state, chats: [action.payload, ...state.chats]};
 		case DELETE_CHAT:
@@ -74,7 +74,7 @@ export default (state = defaultState, action: Action) => {
 			}
 
 			newChat.messages.push(action.payload);
-			return {...state, chat: newChat};
+			return {...state, single_chat: newChat};
 		default:
 			return state;
 	}
