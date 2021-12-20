@@ -14,13 +14,13 @@ class Block <P = any> {
 		FLOW_CDM: "flow:component-did-mount",
 		FLOW_CDU: "flow:component-did-update",
 		FLOW_RENDER: "flow:render",
-	};
+	} as const;
 
 	eventBus: EventBus<Events>;
 	protected readonly _meta: BlockMeta;
 	protected _element: HTMLElement;
 	public props: P | Record<string, unknown>;
-	protected state: any = {};
+	protected state: P | Record<string, unknown>;
 	protected children: {[id: string]: Block} = {};
 	protected refs: {[key: string]: HTMLElement} = {};
 
@@ -137,7 +137,6 @@ class Block <P = any> {
 
 		Object.entries(this.children).forEach(([id, component]) => {
 			const stub = fragment.content.querySelector(`[data-id="${id}"]`);
-			//console.log(stub);
 			if (!stub) {
 				return;
 			}
@@ -165,14 +164,6 @@ class Block <P = any> {
   }
 
 	getContent(): HTMLElement {
-		// Хак, чтобы вызвать CDM только после добавления в DOM
-		if (this.element?.parentNode?.nodeType === Node.DOCUMENT_FRAGMENT_NODE) {
-			setTimeout(() => {
-				if (this.element?.parentNode?.nodeType !==  Node.DOCUMENT_FRAGMENT_NODE ) {
-					this.eventBus.emit(Block.EVENTS.FLOW_CDM);
-				}
-			}, 100);
-		}
 		return <HTMLElement>this._element;
 	}
 

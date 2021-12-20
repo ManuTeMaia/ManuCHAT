@@ -2,113 +2,107 @@ import Block from "../../../utils/Block";
 import Validator from "../../../utils/Validator";
 import UserController from "../../../controllers/user";
 import { getFormData } from "../../../helpers/formActions";
-import Button from "../../../components/elements/buttons/button";
-import Avatar from "../../../components/elements/avatar/avatar";
-import Heading from "../../../components/elements/heading/heading";
-import template from "../user-profile-form.hbs";
 import "../user-profile-form.pcss";
 
 class ProfileEditPasswordPage extends Block {
-	validator: Validator;
-	constructor(props: any) {
-		super({ props,
-			events: {
-				submit: async (e: Event) => {
-					e.preventDefault();
-					const data: any = {};
-					const refs = getFormData(e.target as HTMLFormElement);
-					Object.entries(refs as { [key: string]: string }).forEach(([key, input]) => {
-						data[key] = input;
-					});
-					const hasErrors = document.querySelector("[error-for]");
-					new Validator().formValidate();
-					if (!hasErrors) {
-						await UserController.changePassword(data);
+	validator = new Validator();
+
+	protected getStateFromProps() {
+		const onBlur = (e: Event) => {
+			console.log(e.currentTarget);
+			this.validate((e.currentTarget as HTMLInputElement));
+		};
+
+		this.state = {
+			formInputs: [
+				{
+					label: "Текущий пароль",
+					name: "oldPassword",
+					input: {
+						type: "password",
+						name: "oldPassword",
+						placeholder: "***********",
+						validationType: "password",
+						required: true,
+						autoComplete: "current-password",
+						onChange: onBlur
+					}
+				},
+				{
+					label: "Пароль",
+					name: "newPassword",
+					input: {
+						type: "password",
+						name: "newPassword",
+						placeholder: "***********",
+						validationType: "password",
+						required: true,
+						autoComplete: "new-password",
+						onChange: onBlur
+					}
+				},
+				{
+					label: "Повторите пароль",
+					name: "newPasswordRepeat",
+					input: {
+						type: "password",
+						name: "newPasswordRepeat",
+						placeholder: "***********",
+						validationType: "password",
+						required: true,
+						autoComplete: "new-password",
+						onChange: onBlur
 					}
 				}
-			}
-		});
+			],
+			onSave: async (e: Event) => {
+				e.preventDefault();
+				const data: Record<string, unknown> = {};
+				const form = document.querySelector("#changePwdForm");
+				const refs = getFormData(form as HTMLFormElement);
+				Object.entries(refs as { [key: string]: string }).forEach(([key, input]) => {
+					data[key] = input;
+				});
+				const hasErrors = document.querySelector("[error-for]");
+				new Validator().formValidate();
+				if (!hasErrors) {
+					await UserController.changePassword(data);
+				}
+			},
 
-		this.validator = new Validator();
+			uploadAvatar: (e: Event) => {
+				e.preventDefault();
+				document.querySelector("[data-popup=uploadAvatar]")?.classList.remove("hidden");
+			}
+		};
+
 	}
 
 	validate(input: HTMLInputElement): void {
 		return this.validator.validate(input);
 	}
 
-	render():DocumentFragment {
-		const user = this.props.props.user;
+	render(): string {
 
-		let avatarSrc = "/noimage.png";
-		if (user.profile.avatar !== null) {
-			avatarSrc = `https://ya-praktikum.tech/api/v2/resources${user.profile.avatar}`;
-		}
-
-		const avatar = new Avatar({
-			divClass: "main--page-user-profile user-profile-avatar",
-			imageSrc: avatarSrc,
-			imageTitle: user.profile.first_name || "Avatar"
-		});
-
-		const heading = new Heading({
-			class: "main--page-user-profile user-profile-heading",
-			text: "Изменить пароль"
-		});
-		
-		const formClass = "form--user-profile-password";
-
-		const textInputs = [
-			{
-				label: "Текущий пароль",
-				type: "password",
-				name: "oldPassword",
-				placeholder: "***********",
-				validationType: "password",
-				required: true,
-				autoComplete: "current-password",
-				events: {
-					blur: (e: Event) => this.validate((e.currentTarget as HTMLInputElement)),
-				}
-			},
-			{
-				label: "Пароль",
-				type: "password",
-				name: "newPassword",
-				placeholder: "***********",
-				validationType: "password",
-				required: true,
-				autoComplete: "new-password",
-				events: {
-					blur: (e: Event) => this.validate((e.currentTarget as HTMLInputElement)),
-				}
-			},
-			{
-				label: "Повторите пароль",
-				type: "password",
-				name: "newPasswordRepeat",
-				placeholder: "***********",
-				validationType: "password",
-				required: true,
-				autoComplete: "new-password",
-				events: {
-					blur: (e: Event) => this.validate((e.currentTarget as HTMLInputElement)),
-				}
-			}
-		].map((textinput) => new InputWrapper(textinput));
-		
-		const submit = new Button({
-			buttonClass: "form--user-profile-password-submit",
-			name: "user-profile-password-submit",
-			title: "Изменить"
-		});
-
-		return this.compile(template, {
-			avatar,
-			heading,
-			formClass,
-			textInputs,
-			submit
-		});
+		//language=hbs
+		return `
+			<section class="main--page-user-profile-wrap">
+                {{{AvatarPopup popupName="uploadAvatar" popupTitle="Загрузить аватар"}}}
+                {{{Avatar imageSrc=avatarSrc imageTitle=imageTitle divClass="main--page-user-profile user-profile-avatar" onClick=uploadAvatar}}}
+                {{{Heading class="main--page-user-profile user-profile-heading" text="Изменить пароль"}}}
+				  <div class="main--page-user-profile-form">
+				    <form id="changePwdForm"  action="" method="post" class="form--user-profile-password" enctype="multipart/form-data">
+                        {{#each formInputs}}
+                            {{{InputWrapper label=this.label name=this.name input=this.input}}}
+                        {{/each}}
+                        {{#if user.error }}
+                            <span style="color: red">{{user.error.reason}}</span>
+                        {{/if}}
+                        {{{Button title="Изменить пароль" buttonClass="form--user-profile-password-submit" name="user-profile-password-submit" onClick=onSave}}}
+				    </form>
+				  </div>
+			</section>
+		`;
 
 	}
 }

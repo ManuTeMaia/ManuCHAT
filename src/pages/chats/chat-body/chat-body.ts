@@ -1,88 +1,75 @@
 import Block from "../../../utils/Block";
-import { submitEmulator } from "../../../helpers/formActions";
-import Avatar from "../../../components/elements/avatar/avatar";
-import ChatMessage from "../../../components/elements/chat-message/chat-message";
-import TextInput from "../../../components/elements/inputs/text-input";
-import Button from "../../../components/elements/buttons/button";
-import template from "./chat-body.hbs";
+import { getFormData } from "../../../helpers/formActions";
 import "./chat-body.pcss";
-import ChatContextMenu from "../../../modules/chat-context-menu/chat-context-menu";
+import Validator from "../../../utils/Validator";
+import ChatController from "../../../controllers/chat";
 
-class ChatBodyPage extends Block{
+export class ChatBodyPage extends Block{
+	validator = new Validator();
 
-	constructor(props) {
-		super(props);
+	protected getStateFromProps() {
+		const onBlur = (e: Event) => {
+			console.log(e.currentTarget);
+			this.validator.validate((e.currentTarget as HTMLInputElement));
+		};
+
+		this.state = {
+			formInputs:
+				{
+					name: "message",
+					input:
+						{
+							name: "message",
+							type: "text",
+							placeholder: "Пишите...",
+							validationType: "notnull",
+							required: true,
+							onChange: onBlur
+						}
+				},
+			sendMessage: async (e: Event) => {
+				e.preventDefault();
+				const data: any = {};
+				const form = document.querySelector("#chatMessageForm");
+				const refs = getFormData(form as HTMLFormElement);
+				Object.entries(refs as { [key: string]: string }).forEach(([key, input]) => {
+					data[key] = input;
+				});
+				const hasErrors = document.querySelector("[error-for]");
+				new Validator().formValidate();
+				if (!hasErrors) {
+					await ChatController.addMessage(data);
+				}
+			}
+		};
 	}
 
-    render():DocumentFragment {
-	    const chats = this.props.chats;
-	    console.log(chats);
-
-		const contextMenu = new ChatContextMenu({...this.props});
-
-		const avatar = new Avatar({
-			divClass: "main--page-chat-avatar chat-avatar",
-			imageSrc: "/noimage.png",
-			imageTitle: "This Chat",
-		});
-
-		const chatName = "Marvell";
-
-		const textInput = new TextInput({
-				type: "text",
-				name: "message",
-				class: "message-input-form-input",
-				placeholder: "Пишите..."
-		});
-
-        const send = new Button({
-			buttonClass: "main--page-chat-send",
-			name: "send-submit",
-			events: {
-				click: (e) => submitEmulator(e, "")
-				}
-		});
-
-		const chatMessages = [
-			{
-				content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas at neque commodo, mattis sapien bibendum, fringilla lacus. Pellentesque est metus, sollicitudin a vulputate a, luctus at mi. Maecenas eleifend vulputate gravida. Sed sodales diam eget mauris mattis, in rutrum sapien auctor. Aenean sed justo vel mauris gravida mollis eget eu velit. Vivamus ut auctor libero. Maecenas eu ipsum id sapien accumsan feugiat. Donec sit amet condimentum felis, ut tincidunt mauris. Sed nec luctus lorem. Aliquam id blandit urna. Phasellus mauris ipsum, blandit a lacus nec, finibus tempus odio. Quisque sollicitudin viverra dapibus.",
-				time: "13:15"
-			},
-			{
-				isMine: true,
-				content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas at neque commodo, mattis sapien bibendum, fringilla lacus. Pellentesque est metus, sollicitudin a vulputate a, luctus at mi. Maecenas eleifend vulputate gravida. Sed sodales diam eget mauris mattis, in rutrum sapien auctor. Aenean sed justo vel mauris gravida mollis eget eu velit. Vivamus ut auctor libero. Maecenas eu ipsum id sapien accumsan feugiat. Donec sit amet condimentum felis, ut tincidunt mauris. Sed nec luctus lorem.",
-				time: "13:35",
-				isRecieved: true
-			},
-			{
-				content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas at neque commodo, mattis sapien bibendum, fringilla lacus. Pellentesque est metus, sollicitudin a vulputate a, luctus at mi. Maecenas eleifend vulputate gravida. Sed sodales diam eget mauris mattis, in rutrum sapien auctor. Aenean sed justo vel mauris gravida mollis eget eu velit. Vivamus ut auctor libero. Maecenas eu ipsum id sapien accumsan feugiat. Donec sit amet condimentum felis, ut tincidunt mauris. Sed nec luctus lorem. Aliquam id blandit urna. Phasellus mauris ipsum, blandit a lacus nec, finibus tempus odio. Quisque sollicitudin viverra dapibus.",
-				time: "13:15"
-			},
-			{
-				isMine: true,
-				content: "Pellentesque est metus, sollicitudin a vulputate a, luctus at mi. Maecenas eleifend",
-				time: "13:35",
-				isRecieved: true
-			},
-			{
-				content: "%)",
-				time: "15:00"
-			},
-			{
-				content: "Что-то непонятное",
-				time: "15:02"
-			}
-		].map((chatMessage) => new ChatMessage(chatMessage));
-
-        return this.compile(template, {
-			chatName,
-			avatar,
-	        contextMenu,
-			chatMessages,
-			textInput,
-			send,
-		});
-    }
+	render(): string {
+		// language=hbs
+		return `
+		<div class="main--page-chat-body-wrap">
+    <div class="main--page-chat-body-header">
+        <div class="main--page-chat-body-header-chatname">
+        {{{Avatar imageSrc=chat.avatar imageTitle=chat.title}}}
+        {{{Heading title=chat.title}}}
+        </div>
+        <i class="ch-more"></i>
+        {{{contextMenu}}}
+    </div>
+    <div class="main--page-chat-body-messages">
+        {{#each chatMessages}}
+            {{{ChatMessage this}}}
+        {{/each}}
+    </div>
+    <div class="main--page-chat-body-footer">
+        <i class="ch-attachment"></i>
+        <form action="" class="create-new-chat-form" id="chatMessageForm">
+            {{{InputWrapper label=formInputs.label name=formInputs.name input=formInputs.input}}}
+            {{{Button buttonClass="main--page-chat-sendt" name="send-submit" title="Отправить" onClick=sendMessage}}}
+        </form>
+    </div>
+</div>
+		`;
+}
 
 }
-export default ChatBodyPage;

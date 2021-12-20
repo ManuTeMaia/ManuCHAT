@@ -2,8 +2,6 @@ import Block from "../../../utils/Block";
 import "./avatar-popup.pcss";
 import UserController from "../../../controllers/user";
 import Validator from "../../../utils/Validator";
-//import {getFormData} from "../../helpers/formActions";
-//import ChatController from "../../controllers/chat";
 
 
 export class AvatarPopup extends Block {
@@ -34,7 +32,7 @@ export class AvatarPopup extends Block {
 
 			popupClose: (e: Event) => {
 				e.preventDefault();
-				document.querySelector("[data-popup=newChat]")?.classList.add("hidden");
+				document.querySelector("[data-popup=uploadAvatar]")?.classList.add("hidden");
 			},
 
 			uploadAvatar: async (e: Event) => {
@@ -50,7 +48,7 @@ export class AvatarPopup extends Block {
 				new Validator().formValidate();
 				if (!hasErrors) {
 					await UserController.updateAvatar(formData);
-					document.querySelector("[data-popup=newChat]")?.classList.add("hidden");
+					document.querySelector("[data-popup=uploadAvatar]")?.classList.add("hidden");
 				}
 			}
 		};
@@ -59,7 +57,7 @@ export class AvatarPopup extends Block {
 	render(): string {
 		//language=hbs
 		return `
-            <div class="popup hidden" data-popup="{{popupName}}">
+            <div class="popup hidden" data-popup="uploadAvatar">
                 <div class="popup-overlay"></div>
                 <div class="popup-wrapper">
                     {{{Button type="button" buttonIcon="ch-exit" buttonClass="popup-close" onClick=popupClose}}}
@@ -67,7 +65,7 @@ export class AvatarPopup extends Block {
 					<div class="popup-content uploadAvatar">
                         <form action="" class="file-upload-form" enctype="multipart/form-data">
 		                    {{{InputWrapper label=formInputs.label name=formInputs.name input=formInputs.input}}}
-							{{{Button buttonClass="avatar-upload-submit" name="upload-submit" title="Pfuhepbnm" onClick=uploadAvatar}}}
+							{{{Button buttonClass="avatar-upload-submit" name="upload-submit" title="Загрузить" onClick=uploadAvatar}}}
 						</form>
 					</div>
                 </div>

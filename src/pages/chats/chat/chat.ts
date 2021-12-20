@@ -3,27 +3,29 @@ import Router from "../../../utils/Router";
 import ChatController from "../../../controllers/chat";
 import "./chat.pcss";
 import ChatWS from "../../../api/chatWS";
+import {store} from "../../../store";
 
 class ChatPage extends Block {
 	router = new Router();
 	ws = new ChatWS();
 
 	getStateFromProps(): void {
-
-		//const chatCards = chats;
-
 		this.state = {
+			onChatSelect: () => {
+				console.log("test ref "+this.refs.chatCard);
+			}
 		};
 	}
 
 	async componentDidMount() {
 		//this.ws = new ChatWS();
-		const chats = await ChatController.getChatList();
+		await ChatController.getChatList();
+		store.on("changed", () => this.eventBus.emit("flow:render"));
 
 	}
 
 	render(): string {
-		console.log(chats);
+		//console.log(this.props.chats);
 		//language=hbs
 		return `
             <div class="main--page-wrap">
@@ -35,7 +37,7 @@ class ChatPage extends Block {
 	                {{/if}}
                     <div class="chat--list-chats">
                             {{#each chats}}
-                                {{{ChatListCard chat=this}}}
+                                {{{ChatListCard chat=this onClick=this.onChatSelect ref=this.chatCard}}}
                             {{/each}}
                     </div>
                 </div>

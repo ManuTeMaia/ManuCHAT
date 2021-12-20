@@ -18,7 +18,7 @@ export class ChatProfileCard extends Block {
 		super(props);
 	}
 
-	getStateFromProps() {
+	getStateFromProps():void {
 		this.state = {
 			onPopupOpen: (e: Event) => {
 			e.preventDefault();
@@ -39,7 +39,7 @@ export class ChatProfileCard extends Block {
 							{{{Button type="button" buttonIcon="ch-chat" buttonClass="chat-list-profile-card profile-card-action" onClick=onPopupOpen}}}
                             {{{Button type="button" buttonIcon="ch-settings" buttonClass="chat-list-profile-card profile-card-action"}}}
 						</div>
-                    {{{NewChatPopup popupName="newChat" popupTitle="Создать новый чат" popupChoice="newChatPopup"}}}
+                    {{{NewChatPopup popupName="newChat" popupTitle="Создать новый чат"}}}
 					</div>
 				{{{TextInput type="search" name="search" placeholder="Поиск" class="chat-list-profile-card profile-card-search"}}}
 			</div>

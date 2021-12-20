@@ -19,7 +19,7 @@ export const setError = (error: { reason: string }) => ({
 	payload: error,
 });
 
-export default (state = { profile: null, error: null }, action: Action) => {
+export default (state = { profile: null, error: null }, action: Action): Record<string, unknown> => {
 	switch (action.type) {
 		case SET_USER:
 			//console.log(action.payload);

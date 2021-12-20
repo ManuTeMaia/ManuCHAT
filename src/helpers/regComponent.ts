@@ -1,11 +1,7 @@
 import Block from "../utils/Block";
 import Handlebars, { HelperOptions } from "handlebars";
 
-interface BlockConstructable<P = any> {
-	new(props: P): Block;
-}
-
-function regComponent(Component: BlockConstructable): void {
+function regComponent(Component: typeof Block): void {
 
 	Handlebars.registerHelper(Component.name, function ({ hash: { ref, ...hash }, data }: HelperOptions) {
 

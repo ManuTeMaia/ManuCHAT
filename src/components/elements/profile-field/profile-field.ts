@@ -12,7 +12,7 @@ export class ProfileField extends Block <ProFieldTypes>{
     }
 
     static getName(): string {
-        return "Link";
+        return "ProfileField";
     }
 
     render(): string {

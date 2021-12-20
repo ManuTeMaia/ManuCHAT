@@ -1,20 +1,6 @@
 import BaseAPI from "./baseAPI";
 import { UserData } from "./authAPI.js";
 
-export interface UpdateProfileData {
-	email: string;
-	login: string;
-	first_name: string;
-	second_name: string;
-	display_name: string;
-	phone: string;
-}
-
-export interface UpdatePasswordData {
-	oldPassword: string;
-	newPassword: string;
-}
-
 export interface SearchData {
 	login: string;
 }
@@ -26,7 +12,7 @@ export class UserAPI extends BaseAPI {
 		super("/user");
 	}
 
-	update(data: UpdateProfileData): Promise<UserData> {
+	update(data: Record<string, unknown>): Promise<UserData> {
 		return this.http.put("/profile", data);
 	}
 
@@ -34,7 +20,7 @@ export class UserAPI extends BaseAPI {
 		return this.http.put("/profile/avatar", data, true);
 	}
 
-	changePassword(data: UpdatePasswordData): Promise<void> {
+	changePassword(data: Record<string, unknown>): Promise<void> {
 		return this.http.put("/password", data);
 	}
 

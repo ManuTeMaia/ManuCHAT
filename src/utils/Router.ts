@@ -3,7 +3,7 @@ import renderDOM from "../helpers/renderDOM";
 import isEqual from "../helpers/isEqual";
 
 export type ChildrenType =
-	{ block: typeof Block; query: string} | undefined;
+	{ childBlock: typeof Block; childQuery: string} | undefined;
 
 export type checkAuthType =
 	(next: () => void, route: Route | undefined) => void;
@@ -14,6 +14,7 @@ class Route {
 	_block: Block | null;
 	_rootQuery: string;
 	_child: ChildrenType;
+	_childBlock: Block | null;
 	needAuth: boolean;
 
 	constructor(pathname: string, view:  typeof Block , rootQuery: string, child?: ChildrenType, needAuth = false) {
@@ -21,6 +22,7 @@ class Route {
 		this._blockClass = view;
 		this._block = null;
 		this._child = child;
+		this._childBlock = null;
 		this._rootQuery = rootQuery;
 		this.needAuth = needAuth;
 	}
@@ -37,24 +39,18 @@ class Route {
 	}
 
 	render(): void {
-		if (!this._block) {
+		//console.log(this._block);
+		//console.log(this._child);
+
 			this._block = new this._blockClass;
 			renderDOM(this._rootQuery, <Block>this._block);
-		}
-		else if (this._child && this._block) {
-			const child = this._child;
-			this._block = new child.block;
-			renderDOM(child.query, <Block>this._block);
-		}
-		else if (this._child && !this._block) {
-			this._block = new this._blockClass;
-			renderDOM(this._rootQuery, <Block>this._block);
-			const child = this._child;
-			this._block = new child.block;
-			renderDOM(child.query, <Block>this._block);
-		}
 
-
+			if (this._child) {
+				const child = this._child;
+				this._childBlock = new child.childBlock;
+				//console.log(this._childBlock);
+				renderDOM(child.childQuery, <Block>this._childBlock);
+			}
 	}
 }
 
@@ -77,8 +73,8 @@ class Router {
 
 	}
 
-	use(pathname: string, block: typeof Block, childQuery?: string, child?: ChildrenType, needAuth = false): this {
-		const query = childQuery ? childQuery : this._rootQuery;
+	use(pathname: string, block: typeof Block, rootQuery?: string, child?: ChildrenType, needAuth = false): this {
+		const query = rootQuery ? rootQuery : this._rootQuery;
 		const route = new Route(pathname, block, query, child, needAuth);
 		this.needAuth = needAuth;
 		this.routes.push(route);

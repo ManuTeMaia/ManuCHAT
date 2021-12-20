@@ -1,122 +1,49 @@
 import Block from "../../../utils/Block";
 import AuthController from "../../../controllers/auth";
 import Router from "../../../utils/Router";
-import ProfileField from "../../../components/elements/profile-field/profile-field";
-import Avatar from "../../../components/elements/avatar/avatar";
-import PopupWrapper from "../../../modules/popup-wrapper/popup-wrapper";
-import Heading from "../../../components/elements/heading/heading";
-import Link from "../../../components/elements/link/link";
-import template from "./user-profile.hbs";
 import "./user-profile.pcss";
 
 class ProfilePage extends Block {
 	router: Router = new Router();
-	getStateFromProps() {
-		this.state = {
-			onLogout: this.logout
-			};
-		}
 
-	logout(e: Event): void {
-		e.preventDefault();
-		AuthController.logout().then(() => this.router.go("/"));
+	protected getStateFromProps() {
+
+		this.state = {
+			onLogout: async () => {
+							await AuthController.logout();
+							this.router.go("/");
+
+							},
+
+			uploadAvatar: (e: Event) => {
+				e.preventDefault();
+				document.querySelector("[data-popup=uploadAvatar]")?.classList.remove("hidden");
+			}
+		};
+		
 	}
 
-	render():DocumentFragment {
-		const user = this.props.user;
+	render():string {
 
-		let avatarSrc = "/noimage.png";
-		if (user.profile.avatar !== null) {
-			avatarSrc = `https://ya-praktikum.tech/api/v2/resources${user.profile.avatar}`;
-		}
-
-		const popupWrapper = new PopupWrapper({
-			popupName: "upload",
-			popupTitle: "Загрузить аватар",
-			popupChoice: "avatarPopup"
-		});
-
-		const avatar = new Avatar({
-			divClass: "main--page-user-profile user-profile-avatar",
-			imageSrc: avatarSrc,
-			imageTitle: user.profile.first_name || "Avatar",
-			events: {
-				click: (e: Event) => {
-					e.preventDefault();
-					document.querySelector(`[data-popup=${popupWrapper.props.popupName}]`)?.classList.remove("hidden");
-				}
-			}
-		});
-
-		const heading = new Heading({
-			class: "main--page-user-profile user-profile-heading",
-			text: user.profile.display_name || user.profile.first_name
-		});
-
-		const profileFields = [
-			{
-				label: "Email",
-				data: user.profile.email
-			},
-			{
-				label: "Логин",
-				data: user.profile.login
-			},
-			{
-				label: "Имя",
-				data: user.profile.first_name
-			},
-			{
-				label: "Фамилия",
-				data: user.profile.second_name
-			},
-			{
-				label: "Телефон",
-				data: user.profile.phone
-			}
-
-		].map((profileField) => new ProfileField(profileField));
-		
-		const links = [
-			{
-				url:"",
-				class:"main--page-user-profile user-profile-link link-change-data",
-				text:"Изменить данные",
-				events: {
-					click: (e: Event) => {
-						e.preventDefault();
-						this.router.go("/settings/edit");
-					}
-				}
-			},
-			{
-				url:"",
-				class:"main--page-user-profile user-profile-link link-change-pass",
-				text:"Изменить пароль",
-				events: {
-					click: (e: Event) => {
-						e.preventDefault();
-						this.router.go("/settings/pwd");
-					}
-				}
-			},
-			{
-				url: "",
-				class: "main--page-user-profile user-profile-link link-logout",
-				text: "Выйти",
-				events: {
-					click: (e: Event) => this.logout(e)
-				}
-			}
-		].map((link) => new Link(link));
-
-		return this.compile(template, {
-			popupWrapper,
-			avatar,
-			heading,
-			profileFields,
-			links
-		});
+		//language=hbs
+		return `
+            <div class="main--page-user-profile-wrap">
+                {{{AvatarPopup popupName="uploadAvatar" popupTitle="Загрузить аватар"}}}
+                {{{Avatar imageSrc=avatarSrc imageTitle=imageTitle divClass="main--page-user-profile user-profile-avatar" onClick=uploadAvatar}}}
+                <div class="main--page-user-profile-fields">
+                    {{{Heading class="main--page-user-profile user-profile-heading" text=headingText}}}
+                    {{#each profileFields}}
+                        {{{ProfileField label=this.label data=this.data}}}
+                    {{/each}}
+                    <div class="main--page-user-profile-actions">
+	                    {{{Link url="/settings/edit" class="main--page-user-profile user-profile-link link-change-data" text="Изменить данные"}}}
+                        {{{Link url="/settings/pwd" class="main--page-user-profile user-profile-link link-change-pass" text="Изменить пароль"}}}
+                        {{{Link url="/" class="main--page-user-profile user-profile-link link-logout" text="Выйти" onClick=onLogout}}}
+                        {{{Button title="Выйти" buttonClass="main--page-user-profile user-profile-link link-logout" name="logout-submit" onClick=onLogout}}}
+                    </div>
+                </div>
+            </div>
+		`;
     }
 
 }
