@@ -1,5 +1,6 @@
 import BaseAPI from "./baseAPI";
 import { UserData } from "./authAPI";
+import {ChatProps} from "../pages/chats/chat/chat";
 
 export interface CreateChatData {
 	title: string;
@@ -24,6 +25,11 @@ export interface ChatUsersData {
 
 export interface ChatTokenResponse {
 	token: string;
+}
+
+export interface ChatAvatarData {
+	chatId: number;
+	avatar: string;
 }
 
 export interface ChatMessage {
@@ -64,6 +70,10 @@ export class ChatAPI extends BaseAPI {
 
 	delete(data: DeleteChatData): Promise<void> {
 		return this.http.delete("", data);
+	}
+
+	setAvatar(data: FormData): Promise<ChatProps> {
+		return this.http.put("/avatar", data, true);
 	}
 
 	token({ chatId }: ChatTokenData): Promise<ChatTokenResponse> {

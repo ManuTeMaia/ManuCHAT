@@ -16,11 +16,11 @@ export default abstract class WS {
 		this.pingInterval = null;
 	}
 
-	connect(to: string) {
+	connect(to: string): void {
 		this.ws = new WebSocket(this.endpoint + to);
 	}
 
-	shutdown() {
+	shutdown(): void {
 		if (this.pingInterval) {
 			clearInterval(this.pingInterval);
 			this.pingInterval = null;
@@ -29,19 +29,19 @@ export default abstract class WS {
 		this.ws?.close();
 	}
 
-	rePing(interval: number = WS.DEFAULT_INTERVAL) {
+	rePing(interval: number = WS.DEFAULT_INTERVAL): void {
 		this.pingInterval = setInterval(() => this.ping, interval);
 	}
 
-	ping() {
-		this.send({ type: 'ping' });
+	ping(): void {
+		this.send({ type: "ping" });
 	}
 
-	addListener(event: string, listener: EventListener) {
+	addListener(event: string, listener: EventListener): void {
 		this.ws?.addEventListener(event, listener);
 	}
 
-	send(messageData: SocketMessageData) {
+	send(messageData: SocketMessageData): void {
 		this.ws?.send(JSON.stringify(messageData));
 	}
 }

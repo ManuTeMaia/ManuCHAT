@@ -31,7 +31,7 @@ export class NewChatPopup extends Block {
 
 			popupClose: (e: Event) => {
 				e.preventDefault();
-				document.querySelector("[data-popup=newChat]")?.classList.add("hidden");
+				document.querySelector("#newChat")?.classList.add("hidden");
 			},
 
 			createChat: async (e: Event) => {
@@ -46,7 +46,7 @@ export class NewChatPopup extends Block {
 				new Validator().formValidate();
 				if (!hasErrors) {
 					await ChatController.createChat(data);
-					document.querySelector("[data-popup=newChat]")?.classList.add("hidden");
+					document.querySelector("#newChat")?.classList.add("hidden");
 				}
 			}
 		};
@@ -54,10 +54,10 @@ export class NewChatPopup extends Block {
 	render(): string {
 		//language=hbs
 		return `
-            <div class="popup hidden" data-popup="{{popupName}}">
+            <div class="popup hidden" id="newChat" data-popup="{{popupName}}">
                 <div class="popup-overlay"></div>
                 <div class="popup-wrapper">
-                    {{{Button type="button" buttonIcon="ch-exit" buttonClass="popup-close" onClick=popupClose}}}
+                    {{{Button type="button" buttonIcon="ch-close" buttonClass="popup-close" onClick=popupClose}}}
                     <h4>Создать новый чат</h4>
 					<div class="popup-content newChat">
 						<form action="" class="create-new-chat-form" id="newChatForm">

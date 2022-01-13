@@ -1,22 +1,35 @@
 import Block from "../../../utils/Block";
 import "./chat-list-card.pcss";
+import { ChatProps } from "../../../pages/chats/chat/chat";
 
 type ChatCardType = {
+    chat: ChatProps;
     time: string;
     title:string;
     unread_count?: number;
-    onClick: (e: Event) => void;
+    onClick: (e: Event, chat: ChatProps) => void;
 };
 
 export class ChatListCard extends Block {
     constructor({onClick, ...props}: ChatCardType) {
-        super({events: {click: onClick}, ...props});
+        super({events: { click: (e: Event) => onClick?.(e, props.chat) }, ...props});
     }
+
     render(): string {
+
         //language=hbs
         return `
             <div class="chat--list-card-wrap chat-{{chat.id}}">
-                {{{Avatar imageSrc=chat.avatar imageTitle=chat.title divClass="chat-list-card chat-card-avatar"}}} 
+                <div class="avatar-wrap">
+                    <img
+                        {{#if chat.avatar}}
+                        src="https://ya-praktikum.tech/api/v2/resources{{chat.avatar}}"
+                        {{else}}
+                        src="/noimage.png"
+                        {{/if}}
+                        alt="{{chat.title}}"
+                    >
+                </div>
                 <div class="chat--list-card-time">{{chat.last_message.time}}</div>  
                 <div class="chat--list-card-text">
                     <div class="chat--list-card-title">{{chat.title}}</div>

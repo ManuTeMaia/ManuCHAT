@@ -9,10 +9,10 @@ import {
 	DeleteChatData,
 } from "../api/chatAPI";
 import { store } from "../store";
-import { addChat, deleteChat, setChats, addMessage, setChat } from "../store/chat.store";
+import {addChat, deleteChat, setChats, addMessage, setChat, setChatAvatar} from "../store/chat.store";
 import { isArray } from "../helpers/isArray";
-import { ChatProps } from "../store/chat.store";
 import { UserData } from "api/authAPI.js";
+import {setResponse} from "../store/profile.store";
 
 class ChatController {
 	private api: ChatAPI;
@@ -38,6 +38,16 @@ class ChatController {
 			return id;
 		} catch (e) {
 			console.log(e);
+		}
+	}
+
+	async setAvatar(data: FormData) {
+		try {
+			const avatar = await this.api.setAvatar(data);
+			store.dispatch(setChatAvatar(avatar));
+			store.dispatch(setResponse({ success: "Updated" }));
+		} catch (e) {
+			store.dispatch(setResponse({ error: (e as { reason: string }).reason }));
 		}
 	}
 
@@ -82,8 +92,8 @@ class ChatController {
 		}
 	}
 
-	setChat(chat: ChatProps) {
-		store.dispatch(setChat(chat));
+	setChat(chatId: number) {
+		store.dispatch(setChat(chatId));
 	}
 
 	addMessage(message: ChatMessage | ChatMessage[]) {

@@ -3,6 +3,7 @@ import Validator from "../../../utils/Validator";
 import UserController from "../../../controllers/user";
 import { getFormData } from "../../../helpers/formActions";
 import "../user-profile-form.pcss";
+import {UpdatePasswordData} from "../../../api/userAPI";
 
 class ProfileEditPasswordPage extends Block {
 	validator = new Validator();
@@ -57,7 +58,7 @@ class ProfileEditPasswordPage extends Block {
 			],
 			onSave: async (e: Event) => {
 				e.preventDefault();
-				const data: Record<string, unknown> = {};
+				const data: UpdatePasswordData = {};
 				const form = document.querySelector("#changePwdForm");
 				const refs = getFormData(form as HTMLFormElement);
 				Object.entries(refs as { [key: string]: string }).forEach(([key, input]) => {
@@ -69,7 +70,6 @@ class ProfileEditPasswordPage extends Block {
 					await UserController.changePassword(data);
 				}
 			},
-
 			uploadAvatar: (e: Event) => {
 				e.preventDefault();
 				document.querySelector("[data-popup=uploadAvatar]")?.classList.remove("hidden");
@@ -87,7 +87,7 @@ class ProfileEditPasswordPage extends Block {
 		//language=hbs
 		return `
 			<section class="main--page-user-profile-wrap">
-                {{{AvatarPopup popupName="uploadAvatar" popupTitle="Загрузить аватар"}}}
+                {{{AvatarPopup popupName="uploadUserAvatar" popupTitle="Загрузить аватар"}}}
                 {{{Avatar imageSrc=avatarSrc imageTitle=imageTitle divClass="main--page-user-profile user-profile-avatar" onClick=uploadAvatar}}}
                 {{{Heading class="main--page-user-profile user-profile-heading" text="Изменить пароль"}}}
 				  <div class="main--page-user-profile-form">

@@ -35,7 +35,8 @@ class Route {
 	}
 
 	match(pathname: string): boolean {
-		return isEqual(pathname, this.pathname);
+		const url = new URL(pathname, window.location.origin);
+		return isEqual(url.pathname, this.pathname);
 	}
 
 	render(): void {

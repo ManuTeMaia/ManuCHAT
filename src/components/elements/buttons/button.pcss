@@ -23,16 +23,14 @@ button[type=submit]:hover {
 
 button[type=button] {
     background: transparent;
-    color: var(--button--color-text);
+    color: var(--global--color-primary);
     border: var(--button--border-width) solid transparent;
     border-radius: 0;
     cursor: pointer;
-    font-weight: var(--button--font-weight);
     font-family: var(--button--font-family);
     font-size: var(--button--font-size);
     line-height: var(--button--line-height);
     padding: 0;
-    text-decoration: none;
     box-shadow: none;
     transition: var(--global--transition);
 }
@@ -41,4 +39,15 @@ button[type=button]:focus,
 button[type=button]:hover {
     color: var(--global--color-secondary);
     transition: var(--global--transition);
+}
+
+button[type=button].aslink {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    margin-bottom: var(--global--spacing-unit);
+}
+
+button[type=button].aslink:focus,
+button[type=button].aslink:hover {
+    text-decoration-style: dotted;
 }

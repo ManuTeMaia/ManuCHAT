@@ -22,7 +22,8 @@ export class ChatProfileCard extends Block {
 		this.state = {
 			onPopupOpen: (e: Event) => {
 			e.preventDefault();
-			document.querySelector("[data-popup=newChat]")?.classList.remove("hidden");
+			const newChat = this.refs.newChat;
+				newChat.classList.remove("hidden");
 			},
 			goProfile: () => this.router.go("/settings"),
 		};
@@ -36,10 +37,10 @@ export class ChatProfileCard extends Block {
 				<div class="chat--list-profile-card-actions">
 					{{{Avatar imageSrc=avatar imageTitle="Изменить данные профиля" divClass="chat-list-profile-card profile-card-avatar" onClick=goProfile}}}
 						<div class="chat--list-profile-card-actions card-actions-icons">
-							{{{Button type="button" buttonIcon="ch-chat" buttonClass="chat-list-profile-card profile-card-action" onClick=onPopupOpen}}}
-                            {{{Button type="button" buttonIcon="ch-settings" buttonClass="chat-list-profile-card profile-card-action"}}}
+							{{{Button type="button" buttonIcon="ch-chat-new" buttonClass="chat-list-profile-card profile-card-action" onClick=onPopupOpen}}}
+                            {{{Button type="button" buttonIcon="ch-cogs" buttonClass="chat-list-profile-card profile-card-action"}}}
 						</div>
-                    {{{NewChatPopup popupName="newChat" popupTitle="Создать новый чат"}}}
+                    {{{NewChatPopup popupName="newChat" popupTitle="Создать новый чат" ref="newChat"}}}
 					</div>
 				{{{TextInput type="search" name="search" placeholder="Поиск" class="chat-list-profile-card profile-card-search"}}}
 			</div>

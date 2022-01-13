@@ -54,7 +54,7 @@ router
 	//.use("/500", Error500)
 	.use("/chats", ChatPage,undefined,undefined,true)
 	.use("/settings", ChatPage, ".root", {childBlock: ProfilePage, childQuery: ".chat--wrap"}, true)
-	.use("/chat", ChatPage, ".root", {childBlock: ChatBodyPage, childQuery: ".chat--wrap"}, true)
+	.use("/chat/", ChatPage, ".root", {childBlock: ChatBodyPage, childQuery: ".chat--wrap"}, true)
 	.use("/settings/edit", ChatPage, ".root", {childBlock: ProfilePageEdit, childQuery: ".chat--wrap"}, true)
 	.use("/settings/pwd", ChatPage, ".root", {childBlock: ProfileEditPasswordPage, childQuery: ".chat--wrap"}, true)
 	.checkAuth(checkAuth)

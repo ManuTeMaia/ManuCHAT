@@ -32,7 +32,7 @@ class Block <P = any> {
 			props,
 		};
 
-		this.getStateFromProps();
+		this.getStateFromProps(props);
 
 		this.props = this._makePropsProxy(props || {} as P);
 		this.state = this._makePropsProxy(this.state);
@@ -59,16 +59,17 @@ class Block <P = any> {
 		this.eventBus.emit(Block.EVENTS.FLOW_CDM, this.props);
 	}
 
-	protected getStateFromProps(): void {
-		this.state = {};
+	protected getStateFromProps(props?:P): void {
+		this.state = {...props};
 	}
+
 
 	_componentDidMount(props?: P): void {
 		this.componentDidMount(props);
 		this.eventBus.emit(Block.EVENTS.FLOW_RENDER);
 	}
 
-	componentDidMount(props?: P): typeof props{
+	componentDidMount(props?: P): typeof props {
 		return props;
 	}
 

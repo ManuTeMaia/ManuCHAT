@@ -23,8 +23,8 @@ export class TextInput extends Block{
         return `
                 <input
                     type="{{type}}"
-                    {{#if class}}
-                        class="{{class}}"
+                    {{#if inputClass}}
+                        class="{{inputClass}}"
                     {{/if}}
                         name="{{name}}" placeholder="{{placeholder}}" value="{{value}}" autocomplete="{{autoComplete}}"
                     {{#if validationType}}
