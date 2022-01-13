@@ -93,7 +93,6 @@ class Block <P = any> {
 			const oldProps = { ...this.props };
 			Object.assign(this.props, nextProps);
 			this.eventBus.emit(Block.EVENTS.FLOW_CDU, oldProps, this.props);
-			console.log(this.props);
 	}
 
 	setState(nextState: unknown) {
@@ -104,6 +103,7 @@ class Block <P = any> {
 		const oldState = { ...this.state };
 		Object.assign(this.props, nextState);
 		this.eventBus.emit(Block.EVENTS.FLOW_CDU, oldState, this.state);
+		console.log(this.state);
 	}
 
 	_removeEvents(): void {
@@ -163,6 +163,7 @@ class Block <P = any> {
 
 		this._element = newElement as HTMLElement;
 		this._addEvents();
+		console.count("render");
 	}
 
 	render(): string {

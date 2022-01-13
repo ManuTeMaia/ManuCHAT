@@ -67,6 +67,7 @@ export class ChatUserPopup extends Block<ChatUsersPopupProps> {
 		};
 	}
 
+
 	render(): string {
 		//language=hbs
 		return `
@@ -78,6 +79,7 @@ export class ChatUserPopup extends Block<ChatUsersPopupProps> {
 					<div class="popup-content">
                         {{{TextInput type="search" name="search" placeholder="Поиск пользователя" class="chat-user-search" onInput=onUserSearch}}}
                         <form id="chatUserActions" action="" class="file-upload-form" enctype="multipart/form-data">
+                            {{{Checkbox id=search.id name=search.login label=search.first_name }}}
 	                            {{#each search}}
                             {{{Checkbox id=this.id name=this.login label=this.first_name }}}
 	                            {{/each}}
