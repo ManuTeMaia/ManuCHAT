@@ -98,7 +98,7 @@ class ProfilePageEdit extends Block {
 			],
 			onSave: async (e: Event) => {
 				e.preventDefault();
-				const data: UpdateProfileData = {};
+				const data = {} as UpdateProfileData;
 				const form = document.querySelector("#editUserForm");
 				const refs = getFormData(form as HTMLFormElement);
 				Object.entries(refs as { [key: string]: string }).forEach(([key, input]) => {

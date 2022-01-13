@@ -1,0 +1,1 @@
+export { CheckboxInput as default } from "./checkbox";

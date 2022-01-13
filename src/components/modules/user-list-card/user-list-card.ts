@@ -18,19 +18,9 @@ export class UserListCard extends Block {
 
         //language=hbs
         return `
-            <div class="chat--user-card-wrap user-{{user.id}}">
-                <div class="avatar-wrap">
-                    <img
-                        {{#if user.avatar}}
-                        src="https://ya-praktikum.tech/api/v2/resources{{user.avatar}}"
-                        {{else}}
-                        src="/noimage.png"
-                        {{/if}}
-                        alt="{{user.login}}"
-                    >
-                </div>
-                <div class="chat--list-card-text">
-                    <div class="chat--list-card-title">{{user.login}}: {{user.first_name}}</div>
+            <div>
+                <input type="checkbox" id={{user.id}} name={{user.id}}>
+                <label for={{user.id}}>{{user.login}}: {{user.first_name}}</label>
             </div>
         `;
     }

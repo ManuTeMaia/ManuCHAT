@@ -11,11 +11,16 @@ export type TextInputType = {
     validationType?: string;
     autoComplete?: string;
     onChange: (e:Event) => void;
+    onInput?: () => void;
 };
 
 export class TextInput extends Block{
-    constructor({ onChange, ...props}: TextInputType) {
-        super({events: {blur: onChange}, ...props});
+    constructor({ onChange, onInput, ...props}: TextInputType) {
+        super({events: {blur: onChange, input: onInput}, ...props});
+    }
+
+    static getName(): string {
+        return "TextInput";
     }
 
     render(): string {

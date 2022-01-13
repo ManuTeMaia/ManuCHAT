@@ -9,6 +9,7 @@ export interface BlockMeta<P = any> {
 type Events = Values<typeof Block.EVENTS>;
 
 class Block <P = any> {
+
 	static EVENTS = {
 		INIT: "init",
 		FLOW_CDM: "flow:component-did-mount",
@@ -85,21 +86,25 @@ class Block <P = any> {
 		return isEqual(oldProps, newProps);
 	}
 
-	setProps = (nextProps: P): void => {
-		if (!nextProps) {
-			return;
-		}
+	setProps(nextProps: unknown) {
+			if (!nextProps) {
+				return;
+			}
+			const oldProps = { ...this.props };
+			Object.assign(this.props, nextProps);
+			this.eventBus.emit(Block.EVENTS.FLOW_CDU, oldProps, this.props);
+			console.log(this.props);
+	}
 
-		Object.assign(this.props, nextProps);
-	};
-
-	setState = (nextState: P): void => {
+	setState(nextState: unknown) {
 		if (!nextState) {
 			return;
 		}
 
-		Object.assign(this.state, nextState);
-	};
+		const oldState = { ...this.state };
+		Object.assign(this.props, nextState);
+		this.eventBus.emit(Block.EVENTS.FLOW_CDU, oldState, this.state);
+	}
 
 	_removeEvents(): void {
 		const events: Record<string, () => void> = (this.props as any).events;

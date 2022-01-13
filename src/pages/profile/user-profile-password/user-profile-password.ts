@@ -58,7 +58,7 @@ class ProfileEditPasswordPage extends Block {
 			],
 			onSave: async (e: Event) => {
 				e.preventDefault();
-				const data: UpdatePasswordData = {};
+				const data = {} as UpdatePasswordData;
 				const form = document.querySelector("#changePwdForm");
 				const refs = getFormData(form as HTMLFormElement);
 				Object.entries(refs as { [key: string]: string }).forEach(([key, input]) => {

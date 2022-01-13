@@ -2,7 +2,7 @@ import { UserAPI, UpdateProfileData, UpdatePasswordData, SearchData } from "../a
 import { store } from "../store";
 import { setUser } from "../store/user.store";
 import { setResponse } from "../store/profile.store";
-//import { setSearch } from "../store/messenger";
+import { setSearch } from "../store/user.store";
 import { UserData } from "api/AuthAPI.js";
 import Router from "../utils/Router";
 
@@ -49,7 +49,7 @@ class UserController {
 	async search(data: SearchData) {
 		const users = await this.searchUsers(data);
 		if (users) {
-			//store.dispatch(setSearch(users));
+			store.dispatch(setSearch(users));
 		}
 	}
 
