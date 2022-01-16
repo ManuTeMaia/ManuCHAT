@@ -1,6 +1,5 @@
 import Block from "./Block";
 import renderDOM from "../helpers/renderDOM";
-import isEqual from "../helpers/isEqual";
 
 export type ChildrenType =
 	{ childBlock: typeof Block; childQuery: string} | undefined;
@@ -36,12 +35,10 @@ class Route {
 
 	match(pathname: string): boolean {
 		const url = new URL(pathname, window.location.origin);
-		return isEqual(url.pathname, this.pathname);
+		return url.pathname === this.pathname;
 	}
 
 	render(): void {
-		//console.log(this._block);
-		//console.log(this._child);
 
 			this._block = new this._blockClass;
 			renderDOM(this._rootQuery, <Block>this._block);

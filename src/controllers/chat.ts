@@ -11,8 +11,8 @@ import {
 import { store } from "../store";
 import {addChat, deleteChat, setChats, addMessage, setChat, setChatAvatar} from "../store/chat.store";
 import { isArray } from "../helpers/isArray";
-import { UserData } from "api/authAPI.js";
 import {setResponse} from "../store/profile.store";
+import {setSearch} from "../store/user.store";
 
 class ChatController {
 	private api: ChatAPI;
@@ -84,9 +84,13 @@ class ChatController {
 		}
 	}
 
-	async getChatUsers(data: ChatUsersData): Promise<UserData[] | undefined> {
+	async getChatUsers(data: ChatUsersData) {
 		try {
-			return this.api.users(data);
+			const users = await this.api.users(data);
+			if (users) {
+				store.dispatch(setSearch(users));
+			}
+
 		} catch (e) {
 			console.log(e);
 		}

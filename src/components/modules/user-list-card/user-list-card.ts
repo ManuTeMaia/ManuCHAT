@@ -14,8 +14,11 @@ export class UserListCard extends Block {
         super({events: { click: (e: Event) => onClick?.(e, props.chat, props.user) }, ...props});
     }
 
-    render(): string {
+    static getName(): string {
+        return "UserListCard";
+    }
 
+    render(): string {
         //language=hbs
         return `
             <div>

@@ -65,6 +65,7 @@ export default (state = defaultState, action: Action) => {
 		case SET_CHATS:
 			return {...state, chats: action.payload};
 		case SET_SEARCH:
+			console.log(action.payload);
 			return {...state, search: action.payload};
 		case SET_CHAT:
 			return {...state, chat: currentChat};

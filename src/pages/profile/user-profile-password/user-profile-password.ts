@@ -62,7 +62,7 @@ class ProfileEditPasswordPage extends Block {
 				const form = document.querySelector("#changePwdForm");
 				const refs = getFormData(form as HTMLFormElement);
 				Object.entries(refs as { [key: string]: string }).forEach(([key, input]) => {
-					data[key] = input;
+					data[(key as keyof UpdatePasswordData)] = input;
 				});
 				const hasErrors = document.querySelector("[error-for]");
 				new Validator().formValidate();
@@ -96,7 +96,7 @@ class ProfileEditPasswordPage extends Block {
                             {{{InputWrapper label=this.label name=this.name input=this.input}}}
                         {{/each}}
                         {{#if user.error }}
-                            <span style="color: red">{{user.error.reason}}</span>
+                            <div class="input-error">{{user.error.reason}}</div>
                         {{/if}}
                         {{{Button title="Изменить пароль" buttonClass="form--user-profile-password-submit" name="user-profile-password-submit" onClick=onSave}}}
 				    </form>

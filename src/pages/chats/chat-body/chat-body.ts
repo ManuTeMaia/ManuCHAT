@@ -15,16 +15,13 @@ export class ChatBodyPage extends Block {
 
 	constructor(props: ChatBodyProps) {
 		super(props);
-		console.log(props);
 	}
 
 	router = new Router();
 	validator = new Validator();
 	ws = new ChatWS();
 
-
 	protected getStateFromProps(props: ChatBodyProps) {
-
 		const onBlur = (e: Event) => {
 			this.validator.validate((e.currentTarget as HTMLInputElement));
 		};
@@ -74,7 +71,8 @@ export class ChatBodyPage extends Block {
 			},
 			setAvatar: (e: Event) => {
 				e.preventDefault();
-				document.querySelector("[data-popup=uploadAvatar]")?.classList.remove("hidden");
+				const uploadChatAvatar = this.refs.uploadChatAvatar;
+				uploadChatAvatar.classList.remove("hidden");
 			}
 		};
 	}
@@ -86,7 +84,7 @@ export class ChatBodyPage extends Block {
 		<div class="main--page-chat-body-wrap">
    			 <div class="main--page-chat-body-header">
 		        <div class="main--page-chat-body-header-chatname">
-			        {{{AvatarPopup popUpName="uploadChatAvatar" popUpTitle="Загрузить аватар" chatId=chat.id}}}
+			        {{{AvatarPopup popUpName="uploadChatAvatar" popUpTitle="Загрузить аватар" chatId=chat.id ref="uploadChatAvatar"}}}
 		            {{{Avatar imageSrc=avatarSrc imageTitle=chat.title onClick=setAvatar}}}
 		            {{{Heading text=chat.title}}}
 		        </div>
@@ -99,20 +97,19 @@ export class ChatBodyPage extends Block {
                      {{{Button type="button" buttonClass="main--page-delete-chat aslink" buttonIcon="ch-trash" name="delete-chat" title="Удалить чат" onClick=onDeleteChat}}}
                  </div>
     		</div>
-	    <div class="main--page-chat-body-messages">
-	        {{#each chatMessages}}
-	            {{{ChatMessage this}}}
-	        {{/each}}
-	    </div>
-	    <div class="main--page-chat-body-footer">
-	        <i class="ch-attach"></i>
-	        <form action="" class="create-new-message-form" id="chatMessageForm">
-	            {{{InputWrapper label=formInputs.label name=formInputs.name input=formInputs.input}}}
-	            {{{Button buttonClass="main--page-chat-send" buttonIcon="ch-send" name="send-submit" title="" onClick=onMessageSend}}}
-	        </form>
-	    </div>
-</div>
+		    <div class="main--page-chat-body-messages">
+		        {{#each chatMessages}}
+		            {{{ChatMessage this}}}
+		        {{/each}}
+		    </div>
+		    <div class="main--page-chat-body-footer">
+		        <i class="ch-attach"></i>
+		        <form action="" class="create-new-message-form" id="chatMessageForm">
+		            {{{InputWrapper label=formInputs.label name=formInputs.name input=formInputs.input}}}
+		            {{{Button buttonClass="main--page-chat-send" buttonIcon="ch-send" name="send-submit" title="" onClick=onMessageSend}}}
+		        </form>
+		    </div>
+		</div>
 		`;
-}
-
+	}
 }

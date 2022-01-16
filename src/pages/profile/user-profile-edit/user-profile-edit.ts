@@ -6,7 +6,7 @@ import "../user-profile-form.pcss";
 import {UpdateProfileData} from "../../../api/userAPI";
 import {UserProps} from "../user-profile/user-profile";
 
-class ProfilePageEdit extends Block {
+	class ProfilePageEdit extends Block {
 
 	constructor(props: UserProps) {
 		super(props);
@@ -102,7 +102,7 @@ class ProfilePageEdit extends Block {
 				const form = document.querySelector("#editUserForm");
 				const refs = getFormData(form as HTMLFormElement);
 				Object.entries(refs as { [key: string]: string }).forEach(([key, input]) => {
-					data[key] = input;
+					data[(key as keyof UpdateProfileData)] = input;
 				});
 				const hasErrors = document.querySelector("[error-for]");
 				new Validator().formValidate();
@@ -135,7 +135,7 @@ class ProfilePageEdit extends Block {
                             {{{InputWrapper label=this.label name=this.name input=this.input}}}
                         {{/each}}
                         {{#if user.error}}
-                            <span style="color: red">{{user.error.reason}}</span>
+                            <div class="input-error">{{user.error.reason}}</div>
                         {{/if}}
                         {{{Button title="Сохранить" buttonClass="form--user-profile-info-submit" name="user-profile-info-submit" onClick=onSave}}}
 				    </form>

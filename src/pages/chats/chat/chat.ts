@@ -26,7 +26,7 @@ interface LastMessage {
 class ChatPage extends Block {
 	constructor(props: ChatProps) {
 		super(props);
-		console.log(props);
+		//console.log(props);
 	}
 	router = new Router();
 	ws = new ChatWS();
@@ -49,7 +49,7 @@ class ChatPage extends Block {
 
 	getStateFromProps(props: UserProps): void {
 		this.state = {
-			avatar: props.user.avatar !== null ?`https://ya-praktikum.tech/api/v2/resources${props.user.avatar}` : "/noimage.png",
+			//avatar: props.user.avatar !== null ?`https://ya-praktikum.tech/api/v2/resources${props.user.avatar}` : "/noimage.png",
 			onChatSelect: async (e: Event, chat: ChatProps) => {
 				e.preventDefault();
 				const response = await ChatController.getToken({ chatId: chat.id });
@@ -66,11 +66,7 @@ class ChatPage extends Block {
 		return `
             <div class="main--page-wrap">
                 <div class="chat--list-wrap">
-	                {{#if avatar}}
-                        {{{ChatProfileCard avatar=avatar}}}
-	                {{else}}
-        				{{{ChatProfileCard}}}
-	                {{/if}}
+                        {{{ChatProfileCard}}}
                     <div class="chat--list-chats">
                             {{#each chats}}
                                 {{{ChatListCard chat=this imageSrc=../chatAvatar onClick=../onChatSelect}}}

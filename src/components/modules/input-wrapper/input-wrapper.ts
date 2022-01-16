@@ -14,6 +14,10 @@ export class InputWrapper extends Block{
 		super(props);
 	}
 
+	static getName(): string {
+		return "InputWrapper";
+	}
+
 	render(): string {
 		//language=hbs
 		return `
@@ -28,7 +32,8 @@ export class InputWrapper extends Block{
                               type=input.type
                               validationType=input.validationType
                               autoComplete=input.autoComplete
-                              onChange=input.onChange}}}
+                              onChange=input.onChange
+                              onInput=input.onInput}}}
             </div>
         `;
 	}

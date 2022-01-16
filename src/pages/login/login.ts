@@ -75,7 +75,7 @@ class LoginPage extends Block {
 						{{{InputWrapper label=this.label name=this.name input=this.input}}}
 					{{/each}}
                     {{#if user.error }}
-                        <span style="color: red">{{user.error.reason}}</span>
+                        <div class="input-error">{{user.error.reason}}</div>
                     {{/if}}
                     {{{Button title="Авторизоваться" buttonClass="form--login-submit" name="login-submit" onClick=onLogin}}}
 				</form>

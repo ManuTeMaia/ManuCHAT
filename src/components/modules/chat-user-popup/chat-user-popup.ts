@@ -1,9 +1,9 @@
 import Block from "../../../utils/Block";
-import "./chat-user-popup.pcss";
 import UserController from "../../../controllers/user";
 import ChatController from "../../../controllers/chat";
 import {UserData} from "../../../api/authAPI";
-
+import {connect, store} from "../../../store";
+import {SearchResults} from "../search-results/search-results";
 
 export interface ChatUsersPopupProps {
 	popUpName: string;
@@ -11,7 +11,6 @@ export interface ChatUsersPopupProps {
 	chatId: number;
 	buttonName: string;
 	buttonTitle: string;
-	searchUser: UserData | undefined;
 	search: UserData | undefined;
 }
 
@@ -35,7 +34,6 @@ export class ChatUserPopup extends Block<ChatUsersPopupProps> {
 							placeholder: "Найти пользователя...",
 						}
 				},
-
 			popupClose: (e: Event) => {
 				e.preventDefault();
 				document.querySelector(`[data-popup=${props.popUpName}]`)?.classList.add("hidden");
@@ -46,9 +44,13 @@ export class ChatUserPopup extends Block<ChatUsersPopupProps> {
 				if(props.popUpName === "addChatUser") {
 					const searchString = (e.target as HTMLInputElement).value;
 					await UserController.search({ login: searchString });
-
+					connect((state: any) => ({
+						search: state.user.search,
+					}), SearchResults as typeof Block);
+					console.log(store.getState());
 				} else if (props.popUpName === "deleteChatUser") {
 					await ChatController.getChatUsers({chatId: props.chatId});
+					console.log(store.getState());
 				}
 			},
 
@@ -58,15 +60,18 @@ export class ChatUserPopup extends Block<ChatUsersPopupProps> {
 				//const formData = new FormData(form as HTMLFormElement);
 				if(props.popUpName === "addChatUser") {
 					//await ChatController.addUsersToChat(data);
-					document.querySelector("[data-popup=addChatUser]")?.classList.add("hidden");
 				} else if (props.popUpName === "deleteChatUser") {
 					//await ChatController.setAvatar(formData);
-					document.querySelector("[data-popup=deleteChatUser]")?.classList.add("hidden");
 				}
+				document.querySelector(`[data-popup=${props.popUpName}]`)?.classList.add("hidden");
 			}
 		};
+		console.log(this.state);
 	}
 
+	static getName(): string {
+		return "ChatUserPopup";
+	}
 
 	render(): string {
 		//language=hbs
@@ -79,10 +84,7 @@ export class ChatUserPopup extends Block<ChatUsersPopupProps> {
 					<div class="popup-content">
                         {{{TextInput type="search" name="search" placeholder="Поиск пользователя" class="chat-user-search" onInput=onUserSearch}}}
                         <form id="chatUserActions" action="" class="file-upload-form" enctype="multipart/form-data">
-                            {{{Checkbox id=search.id name=search.login label=search.first_name }}}
-	                            {{#each search}}
-                            {{{Checkbox id=this.id name=this.login label=this.first_name }}}
-	                            {{/each}}
+                            {{{SearchResults search=this ref="result"}}}
 	                        {{#if chatId}}
 	                        	{{{TextInput type="hidden" name="chatId" value=chatId}}}
             				{{/if}}
@@ -94,3 +96,4 @@ export class ChatUserPopup extends Block<ChatUsersPopupProps> {
 		`;
 	}
 }
+

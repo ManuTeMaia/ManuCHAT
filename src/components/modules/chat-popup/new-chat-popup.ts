@@ -51,6 +51,11 @@ export class NewChatPopup extends Block {
 			}
 		};
 	}
+
+	static getName(): string {
+		return "NewChatPopup";
+	}
+
 	render(): string {
 		//language=hbs
 		return `

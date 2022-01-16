@@ -1,25 +1,33 @@
 import Block from "../../../utils/Block";
 import "./chat-list-profile-card.pcss";
-import Router from "../../../utils/Router";
+import Router, {withRouter} from "../../../utils/Router";
 import {AvatarProps} from "../../elements/avatar/avatar";
 import NewChatPopup from "../chat-popup";
 import {TextInputType} from "../../elements/inputs/text-input";
+import {connect} from "../../../store";
+import {UserData} from "../../../api/authAPI";
 
 export type ProfileCardType = {
 	avatar: AvatarProps;
 	newChatPopup?: NewChatPopup;
 	search: TextInputType;
+	user: UserData;
 };
 
 export class ChatProfileCard extends Block {
 	router = new Router();
+	user = connect((state: any) => ({
+		user: state.user.profile || {},
+	}), ChatProfileCard as typeof Block);
 
-	constructor(props: ProfileCardType) {
-		super(props);
+	constructor({user: user,  ...props}: ProfileCardType) {
+		super({user: user,  ...props});
+		console.log(props);
 	}
 
-	getStateFromProps():void {
+	getStateFromProps(props: ProfileCardType):void {
 		this.state = {
+			avatar: props.user && props.user.avatar !== null ?`https://ya-praktikum.tech/api/v2/resources${props.user.avatar}` : "/noimage.png",
 			onPopupOpen: (e: Event) => {
 			e.preventDefault();
 			const newChat = this.refs.newChat;
@@ -27,6 +35,11 @@ export class ChatProfileCard extends Block {
 			},
 			goProfile: () => this.router.go("/settings"),
 		};
+		console.log(this.state);
+	}
+
+	static getName(): string {
+		return "ChatProfileCard";
 	}
 
 	render(): string {
@@ -48,3 +61,7 @@ export class ChatProfileCard extends Block {
 	}
 
 }
+
+export default withRouter(connect((state: any) => ({
+	user: state.user.profile || {},
+}), ChatProfileCard as typeof Block));

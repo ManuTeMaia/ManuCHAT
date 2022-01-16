@@ -2,15 +2,15 @@ import BaseAPI from "./baseAPI";
 import { UserData } from "./authAPI.js";
 
 export interface UpdateProfileData {
-	email: string;
-	login: string;
-	first_name: string;
-	second_name: string;
-	display_name: string;
-	phone: string;
+		email: string;
+		login: string;
+		first_name: string;
+		second_name: string;
+		display_name: string;
+		phone: string;
 }
 
-export interface UpdatePasswordData {
+export type UpdatePasswordData = {
 	oldPassword: string;
 	newPassword: string;
 }

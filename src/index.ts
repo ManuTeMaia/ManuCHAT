@@ -1,7 +1,5 @@
-import ChatController from "./controllers/chat";
-
 require("babel-polyfill");
-
+import ChatController from "./controllers/chat";
 import AuthController from "./controllers/auth";
 import "./common/common";
 import Router, { checkAuthType } from "./utils/Router";
@@ -17,7 +15,7 @@ import ProfileEditPasswordPage from "./pages/profile/user-profile-password";
 import Error404 from "./pages/error/";
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
-const components = require("./components/**/index.ts") as {[key: string]: { default: typeof Block }};
+const components = require("./components/**/index.ts") as {[key: string]: { default: Block }};
 
 Object.values(components).forEach((component) => {
 	Object.values(component).forEach(element => regComponent(element.default));

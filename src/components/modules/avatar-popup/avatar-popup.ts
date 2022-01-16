@@ -52,6 +52,10 @@ export class AvatarPopup extends Block<AvatarPopupProps> {
 		};
 	}
 
+	static getName(): string {
+		return "AvatarPopup";
+	}
+
 	render(): string {
 		//language=hbs
 		return `

@@ -15,8 +15,11 @@ export class ChatListCard extends Block {
         super({events: { click: (e: Event) => onClick?.(e, props.chat) }, ...props});
     }
 
-    render(): string {
+    static getName(): string {
+        return "ChatListCard";
+    }
 
+    render(): string {
         //language=hbs
         return `
             <div class="chat--list-card-wrap chat-{{chat.id}}">
@@ -35,7 +38,9 @@ export class ChatListCard extends Block {
                     <div class="chat--list-card-title">{{chat.title}}</div>
                     <div class="chat--list-card-lastmessage">
                         {{#if chat.last_message}}
-                            
+                            {{#if (self_message chat.last_message.user.login user.login)}}
+                                <span>Вы: </span>
+                            {{/if}}
                             {{chat.last_message.content}}
                         {{else}}
                             Нет сообщений

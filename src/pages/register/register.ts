@@ -147,9 +147,8 @@ class RegistrationPage extends Block {
                             {{{InputWrapper label=this.label name=this.name input=this.input}}}
                         {{/each}}
                         {{#if user.error }}
-                            <span style="color: red">{{user.error.reason}}</span>
+                            <div class="input-error">{{user.error.reason}}</div>
                         {{/if}}
-						
 			            {{{Button title="Зарегистрироваться" buttonClass="form--register-submit" name="registration-submit" onClick=onRegister}}}
 					</form>
 					{{{Link text="Уже есть аккаунт" class="form--register-login-link" url="/"}}}
