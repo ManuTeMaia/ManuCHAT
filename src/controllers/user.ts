@@ -1,7 +1,7 @@
 import { UserAPI, UpdateProfileData, UpdatePasswordData, SearchData } from "../api/userAPI";
 import { store } from "../store";
 import { setUser } from "../store/user.store";
-import { setResponse } from "../store/profile.store";
+import { setResponse } from "../store/respose.store";
 import { setSearch } from "../store/user.store";
 import { UserData } from "api/AuthAPI.js";
 import Router from "../utils/Router";

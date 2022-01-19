@@ -32,6 +32,7 @@ class ChatWS extends WS {
 				type,
 				content: JSON.parse(data),
 			};
+			console.log("Получены данные", messageResponse);
 			onMessage(messageResponse);
 		});
 
@@ -41,6 +42,7 @@ class ChatWS extends WS {
 	}
 
 	sendMessage(message: string): void {
+		console.log("Send", message);
 		this.send({ type: "message", content: message });
 	}
 

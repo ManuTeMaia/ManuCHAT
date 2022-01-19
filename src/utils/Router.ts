@@ -130,7 +130,6 @@ export function withRouter(Component: typeof Block): any {
 	return class WithRouter extends Component {
 		constructor(props: any) {
 			const router = new Router();
-
 			super({...props, router: router});
 		}
 	};

@@ -14,7 +14,7 @@ export interface LoginData {
 	password: string;
 }
 
-export type UserData = Omit<SignupData, "password"> & { avatar: string; display_name: string; };
+export type UserData = Omit<SignupData, "password"> & { id: number; avatar: string; display_name: string; };
 
 export class AuthAPI extends BaseAPI {
 	constructor() {

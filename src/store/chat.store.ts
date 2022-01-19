@@ -4,7 +4,7 @@ import {UserData} from "../api/authAPI.js";
 import {ChatProps} from "../pages/chats/chat/chat";
 
 const SET_CHATS = "chats/SET";
-const SET_SEARCH = "chats/SET_SEARCH";
+const SET_USER_SEARCH = "chats/SET_USER_SEARCH";
 const SET_CHAT = "chats/SET_CHAT";
 const SET_CHAT_AVATAR = "chats/SET_CHAT_AVATAR";
 const ADD_CHAT = "chats/ADD_CHAT";
@@ -12,11 +12,10 @@ const DELETE_CHAT = "chats/DELETE_CHAT";
 const ADD_MESSAGE = "chats/ADD_MESSAGE";
 
 
-const defaultState: ChatState = {chats: [], search: [], chat: undefined};
+const defaultState: ChatState = {chats: [], chat: undefined};
 
 export interface ChatState {
 	chats: [];
-	search: [];
 	chat: ChatProps | undefined;
 }
 
@@ -45,9 +44,9 @@ export const deleteChat = (chatId: number) => ({
 	payload: chatId,
 });
 
-export const setSearch = (search: UserData[]) => ({
-	type: SET_SEARCH,
-	payload: search,
+export const setUserSearch = (searchuser: UserData[]) => ({
+	type: SET_USER_SEARCH,
+	payload: searchuser,
 });
 
 export const addMessage = (message: ChatMessage) => ({
@@ -59,14 +58,14 @@ export default (state = defaultState, action: Action) => {
 	const chatIndex = state.chats.findIndex(({id}) => id === action.payload);
 	const newChats = [...state.chats];
 	const newChat = {...state.chat} as ChatProps;
+	console.log(newChat);
 	const currentChat = state.chats[chatIndex] as ChatProps;
 
 	switch (action.type) {
 		case SET_CHATS:
 			return {...state, chats: action.payload};
-		case SET_SEARCH:
-			console.log(action.payload);
-			return {...state, search: action.payload};
+		case SET_USER_SEARCH:
+			return {...state, searchuser: action.payload};
 		case SET_CHAT:
 			return {...state, chat: currentChat};
 		case SET_CHAT_AVATAR:
@@ -79,10 +78,10 @@ export default (state = defaultState, action: Action) => {
 			}
 			return {...state, chats: newChats};
 		case ADD_MESSAGE:
-			if (!newChat.messages) {
-				newChat.messages = [];
-			}
-
+			//if (!newChat.messages) {
+			//	newChat.messages = [];
+			//}
+			console.log(action.payload);
 			newChat.messages.push(action.payload);
 			return {...state, chat: newChat};
 		default:

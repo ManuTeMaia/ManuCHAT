@@ -2,10 +2,12 @@ import Store from "../utils/Store";
 import Block from "../utils/Block";
 import user from "./user.store";
 import chats from "./chat.store";
+import response from "./respose.store";
 
 export const store = new Store({
 	user,
 	chats,
+	response
 });
 
 
@@ -19,7 +21,7 @@ export function connect(stateToProps: (state: any) => any, Component: typeof Blo
 			super.componentDidMount(props);
 
 			store.on("changed", () => {
-				console.log(stateToProps(store.getState()));
+				//console.log(stateToProps(store.getState()));
 				this.setProps({
 					...this.props,
 					...stateToProps(store.getState())

@@ -11,8 +11,8 @@ import {
 import { store } from "../store";
 import {addChat, deleteChat, setChats, addMessage, setChat, setChatAvatar} from "../store/chat.store";
 import { isArray } from "../helpers/isArray";
-import {setResponse} from "../store/profile.store";
-import {setSearch} from "../store/user.store";
+import {setResponse} from "../store/respose.store";
+import {setUserSearch} from "../store/chat.store";
 
 class ChatController {
 	private api: ChatAPI;
@@ -54,16 +54,18 @@ class ChatController {
 	async addUsersToChat(data: AddUsersData) {
 		try {
 			await this.api.update(data);
+			store.dispatch(setResponse({ success: "Пользователь(-и) добавлен(-ы)" }));
 		} catch (e) {
-			console.log(e);
+			store.dispatch(setResponse({ error: (e as { reason: string }).reason }));
 		}
 	}
 
 	async deleteUsersFromChat(data: AddUsersData) {
 		try {
-			return this.api.deleteUsers(data);
+			await this.api.deleteUsers(data);
+			store.dispatch(setResponse({ success: "Пользователь(-и) удален(-ы)" }));
 		} catch (e) {
-			console.log(e);
+			store.dispatch(setResponse({ error: (e as { reason: string }).reason }));
 		}
 	}
 
@@ -88,11 +90,11 @@ class ChatController {
 		try {
 			const users = await this.api.users(data);
 			if (users) {
-				store.dispatch(setSearch(users));
+				store.dispatch(setUserSearch(users));
 			}
 
 		} catch (e) {
-			console.log(e);
+			console.log("Shit happense. Again.");
 		}
 	}
 
@@ -105,8 +107,10 @@ class ChatController {
 			for (let i = message.length - 1; i >= 0; i--) {
 				store.dispatch(addMessage(message[i]));
 			}
+			console.log(message);
 		} else {
 			store.dispatch(addMessage(message as ChatMessage));
+			console.log(message);
 		}
 	}
 }

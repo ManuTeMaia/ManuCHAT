@@ -18,6 +18,7 @@ export default abstract class WS {
 
 	connect(to: string): void {
 		this.ws = new WebSocket(this.endpoint + to);
+		console.log("Connected", this.ws);
 	}
 
 	shutdown(): void {
@@ -27,6 +28,7 @@ export default abstract class WS {
 		}
 
 		this.ws?.close();
+		console.log("Connection close");
 	}
 
 	rePing(interval: number = WS.DEFAULT_INTERVAL): void {
@@ -38,10 +40,12 @@ export default abstract class WS {
 	}
 
 	addListener(event: string, listener: EventListener): void {
+		console.log(event, listener);
 		this.ws?.addEventListener(event, listener);
 	}
 
 	send(messageData: SocketMessageData): void {
+		console.log(messageData);
 		this.ws?.send(JSON.stringify(messageData));
 	}
 }

@@ -6,6 +6,7 @@ import ChatController from "../../../controllers/chat";
 import {DeleteChatData} from "../../../api/chatAPI";
 import Router from "../../../utils/Router";
 import "./chat-body.pcss";
+import {getFormData} from "../../../helpers/formActions";
 
 interface ChatBodyProps {
 	chat: ChatProps;
@@ -22,9 +23,6 @@ export class ChatBodyPage extends Block {
 	ws = new ChatWS();
 
 	protected getStateFromProps(props: ChatBodyProps) {
-		const onBlur = (e: Event) => {
-			this.validator.validate((e.currentTarget as HTMLInputElement));
-		};
 
 		this.state = {
 			avatarSrc: props.chat.avatar!==null ? `https://ya-praktikum.tech/api/v2/resources${props.chat.avatar}` : "/noimage.png",
@@ -39,22 +37,20 @@ export class ChatBodyPage extends Block {
 							inputClass: "message-input-form-input",
 							validationType: "notnull",
 							required: true,
-							onChange: onBlur
 						}
 				},
+
 			onChatOptions: (e: Event) => {
 				e.preventDefault();
 				document.querySelector(".chat-options")?.classList.toggle("hidden");
 			},
 			onAddUser: (e: Event) => {
 				e.preventDefault();
-				const addUserPopup = this.refs.addChatUser;
-				addUserPopup.classList.remove("hidden");
+				document.querySelector("[data-popup=addChatUser]")?.classList.toggle("hidden");
 			},
 			onDeleteUser: (e: Event) => {
 				e.preventDefault();
-				const deleteUserPopup = this.refs.deleteChatUser;
-				deleteUserPopup.classList.remove("hidden");
+				document.querySelector("[data-popup=deleteChatUser]")?.classList.toggle("hidden");
 			},
 			onDeleteChat: async (e: Event) => {
 				e.preventDefault();
@@ -65,10 +61,21 @@ export class ChatBodyPage extends Block {
 					await ChatController.deleteChat(chatId);
 				}
 			},
-			onMessageSend: (e: Event, message: string) => {
+
+			onMessageSend: (e: Event) => {
 				e.preventDefault();
-				this.ws?.sendMessage(message);
+				const form = document.querySelector("#chatMessageForm");
+				const fields = getFormData(form as HTMLFormElement);
+				const message = fields.message as string;
+				const hasErrors = document.querySelector("[error-for]");
+				this.validator.formValidate();
+				if(!hasErrors) {
+					this.ws.sendMessage(message);
+					(this.refs.message.querySelector("input") as HTMLInputElement).value = "";
+				}
+
 			},
+
 			setAvatar: (e: Event) => {
 				e.preventDefault();
 				const uploadChatAvatar = this.refs.uploadChatAvatar;
@@ -88,24 +95,24 @@ export class ChatBodyPage extends Block {
 		            {{{Avatar imageSrc=avatarSrc imageTitle=chat.title onClick=setAvatar}}}
 		            {{{Heading text=chat.title}}}
 		        </div>
-                 {{{Button type="button" buttonClass="main--page-chat-options" buttonIcon="ch-more" name="chat-options" title="" onClick=onChatOptions ref="menuButton"}}}
+               {{{Button type="button" buttonClass="main--page-chat-options" buttonIcon="ch-more" name="chat-options" title="" onClick=onChatOptions ref="menuButton"}}}
                  <div class="context-menu-wrapper chat-options hidden">
-                     {{{ChatUserPopup popUpName="addChatUser" popUpTitle="Добавить пользователя" buttonName="add-chat-user" buttonTitle="Добавить" chatId=chat.id  ref="addChatUser"}}}
-                     {{{ChatUserPopup popUpName="deleteChatUser" popUpTitle="Удалить пользователя" buttonName="delete-chat-user" buttonTitle="Удалить" chatId=chat.id ref="deleteChatUser"}}}
                      {{{Button type="button" buttonClass="main--page-user-add aslink" buttonIcon="ch-user-add" name="add-user" title="Добавить пользователя" onClick=onAddUser}}}
                      {{{Button type="button" buttonClass="main--page-user-add aslink" buttonIcon="ch-user-delete" name="delete-user" title="Удалить пользователя" onClick=onDeleteUser}}}
                      {{{Button type="button" buttonClass="main--page-delete-chat aslink" buttonIcon="ch-trash" name="delete-chat" title="Удалить чат" onClick=onDeleteChat}}}
                  </div>
-    		</div>
+                 {{{AddUserPopup chatId=chat.id  ref="addChatUser"}}}
+                 {{{DeleteUserPopup chatId=chat.id ref="deleteChatUser"}}}
+             </div>
 		    <div class="main--page-chat-body-messages">
-		        {{#each chatMessages}}
-		            {{{ChatMessage this}}}
+		        {{#each message}}
+		            {{{ChatMessage message=this}}}
 		        {{/each}}
 		    </div>
 		    <div class="main--page-chat-body-footer">
 		        <i class="ch-attach"></i>
 		        <form action="" class="create-new-message-form" id="chatMessageForm">
-		            {{{InputWrapper label=formInputs.label name=formInputs.name input=formInputs.input}}}
+		            {{{InputWrapper label=formInputs.label name=formInputs.name input=formInputs.input ref="message"}}}
 		            {{{Button buttonClass="main--page-chat-send" buttonIcon="ch-send" name="send-submit" title="" onClick=onMessageSend}}}
 		        </form>
 		    </div>

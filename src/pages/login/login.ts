@@ -45,10 +45,10 @@ class LoginPage extends Block {
 			onLogin: async (e: Event) => {
 				e.preventDefault();
 				const form = document.querySelector("#loginForm");
-				const refs = getFormData(form as HTMLFormElement);
+				const fields = getFormData(form as HTMLFormElement);
 				const loginData = {
-					login: refs.login as string,
-					password: refs.password as string
+					login: fields.login as string,
+					password: fields.password as string
 				};
 
 				const hasErrors = document.querySelector("[error-for]");

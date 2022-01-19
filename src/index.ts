@@ -18,6 +18,7 @@ import Error404 from "./pages/error/";
 const components = require("./components/**/index.ts") as {[key: string]: { default: Block }};
 
 Object.values(components).forEach((component) => {
+	//console.log(component);
 	Object.values(component).forEach(element => regComponent(element.default));
 });
 

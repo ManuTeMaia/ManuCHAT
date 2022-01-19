@@ -1,7 +1,8 @@
+import { AddUserPopup } from "./add-user-popup";
 import {connect} from "../../../store";
 import Block from "../../../utils/Block";
-import { SearchResults } from "./search-results";
 
 export default connect((state: any) => ({
+	response: state.response,
 	search: state.user.search,
-}), SearchResults as typeof Block);
+}), AddUserPopup as typeof Block);
