@@ -1,21 +1,24 @@
 import Block from "../../../utils/Block";
 import Validator from "../../../utils/Validator";
-import ChatWS from "../../../api/chatWS";
+import ChatWS, {MessageResponse} from "../../../api/chatWS";
 import {ChatProps} from "../chat/chat";
 import ChatController from "../../../controllers/chat";
 import {DeleteChatData} from "../../../api/chatAPI";
 import Router from "../../../utils/Router";
 import "./chat-body.pcss";
 import {getFormData} from "../../../helpers/formActions";
+import {isArray} from "../../../helpers/isArray";
 
 interface ChatBodyProps {
 	chat: ChatProps;
+	messages: [];
 }
 
 export class ChatBodyPage extends Block {
 
 	constructor(props: ChatBodyProps) {
 		super(props);
+		console.log(props);
 	}
 
 	router = new Router();
@@ -23,8 +26,11 @@ export class ChatBodyPage extends Block {
 	ws = new ChatWS();
 
 	protected getStateFromProps(props: ChatBodyProps) {
+		//ChatController.setChat(props.chat.id);
 
 		this.state = {
+			current: props.chat,
+			messages: props.chat.messages,
 			avatarSrc: props.chat.avatar!==null ? `https://ya-praktikum.tech/api/v2/resources${props.chat.avatar}` : "/noimage.png",
 			formInputs:
 				{
@@ -52,6 +58,7 @@ export class ChatBodyPage extends Block {
 				e.preventDefault();
 				document.querySelector("[data-popup=deleteChatUser]")?.classList.toggle("hidden");
 			},
+
 			onDeleteChat: async (e: Event) => {
 				e.preventDefault();
 				const delConfirm = confirm("Вы действительно хотите удалить этот чат?");
@@ -71,6 +78,7 @@ export class ChatBodyPage extends Block {
 				this.validator.formValidate();
 				if(!hasErrors) {
 					this.ws.sendMessage(message);
+
 					(this.refs.message.querySelector("input") as HTMLInputElement).value = "";
 				}
 
@@ -82,7 +90,31 @@ export class ChatBodyPage extends Block {
 				uploadChatAvatar.classList.remove("hidden");
 			}
 		};
+		console.log(this.state);
 	}
+
+	async componentDidMount(props?: any) {
+		const response = await ChatController.getToken({ chatId: props.chat.id });
+		if (response?.token) {
+			this.onChatClick(props.user.id, props.chat.id, response.token);
+		}
+	}
+
+	onMessage = (response: MessageResponse): void => {
+		ChatController.addMessage(response.content);
+		const totalMessages = isArray(response.content) ? response.content.length : 1;
+		this.ws?.increaseOffsetBy(totalMessages);
+	};
+
+	onChatClick = (userId: number, chatId: number, token: string): void => {
+		if (!this.ws) {
+			this.ws = new ChatWS();
+		}
+		this.ws.shutdown();
+		const path = `/${userId}/${chatId}/${token}`;
+		this.ws.setup(path, this.onMessage);
+
+	};
 
 	render(): string {
 
@@ -104,10 +136,10 @@ export class ChatBodyPage extends Block {
                  {{{AddUserPopup chatId=chat.id  ref="addChatUser"}}}
                  {{{DeleteUserPopup chatId=chat.id ref="deleteChatUser"}}}
              </div>
-		    <div class="main--page-chat-body-messages">
-		        {{#each message}}
-		            {{{ChatMessage message=this}}}
-		        {{/each}}
+		    <div class="main--page-chat-body-messages" data-messages={{messages.length}}>
+                {{#each messages}}
+                    {{{ChatMessage user=../user message=this}}}
+                {{/each}}
 		    </div>
 		    <div class="main--page-chat-body-footer">
 		        <i class="ch-attach"></i>

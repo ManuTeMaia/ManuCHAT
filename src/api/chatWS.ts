@@ -42,7 +42,6 @@ class ChatWS extends WS {
 	}
 
 	sendMessage(message: string): void {
-		console.log("Send", message);
 		this.send({ type: "message", content: message });
 	}
 

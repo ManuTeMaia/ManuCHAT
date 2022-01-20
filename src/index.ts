@@ -1,4 +1,6 @@
 require("babel-polyfill");
+import "./helpers/hbsHelpers";
+
 import ChatController from "./controllers/chat";
 import AuthController from "./controllers/auth";
 import "./common/common";

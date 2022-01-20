@@ -57,8 +57,6 @@ export const addMessage = (message: ChatMessage) => ({
 export default (state = defaultState, action: Action) => {
 	const chatIndex = state.chats.findIndex(({id}) => id === action.payload);
 	const newChats = [...state.chats];
-	const newChat = {...state.chat} as ChatProps;
-	console.log(newChat);
 	const currentChat = state.chats[chatIndex] as ChatProps;
 
 	switch (action.type) {
@@ -78,12 +76,14 @@ export default (state = defaultState, action: Action) => {
 			}
 			return {...state, chats: newChats};
 		case ADD_MESSAGE:
-			//if (!newChat.messages) {
-			//	newChat.messages = [];
-			//}
-			console.log(action.payload);
-			newChat.messages.push(action.payload);
-			return {...state, chat: newChat};
+
+			if (!currentChat.messages) {
+				currentChat.messages = [];
+			}
+
+			currentChat.messages.push(action.payload);
+			console.log(currentChat.messages);
+			return {...state, chat: currentChat};
 		default:
 			return state;
 	}

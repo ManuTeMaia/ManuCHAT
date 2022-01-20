@@ -1,15 +1,15 @@
 import Block from "../../../utils/Block";
 import "./chat-message.pcss";
+import {UserData} from "../../../api/authAPI";
 
 type MessageTypes = {
-    isMine?: boolean;
-    content: string,
-    isRecieved?: boolean,
-    time: string
+    user: UserData;
+    message: ChatMessage;
 }
-export class ChatMessage extends Block {
+export class ChatMessage extends Block<MessageTypes> {
     constructor(props: MessageTypes) {
         super(props);
+        console.log(props);
     }
 
     static getName(): string {
@@ -19,15 +19,22 @@ export class ChatMessage extends Block {
     render():string {
         //language=hbs
         return `
-            <div class="message-wrap{{#if isMine}} mine{{/if}}">
-                {{content}}
-                <div class="message-time{{#if isRecieved}} recieved{{/if}}">
-                    {{#if isMine}}
-                        {{#if isRecieved}}
-                            <i class="ch-sent"></i>
+            <div class="message-wrap{{#if (self_message user.id message.user_id)}} mine{{/if}}">
+                {{#unless (self_message user.id message.user_id)}}
+                    <em>{{user.login}}</em>
+                {{/unless}}
+                {{message.content}}
+                <div class="message-time">
+                    {{#if (self_message user.id message.user_id)}}
+                        {{#if (message_sended status)}}
+                                <i class="ch-sent gray"></i>
+                        {{else if (message_recieved status) }}
+                                <i class="ch-sent gray"></i>
+                        {{else if (message_readed status) }}
+                                <i class="ch-sent green"></i>
                         {{/if}}
                     {{/if}}
-                    {{time}}
+                    {{convert_message_date message.time}}
                 </div>
             </div>
         `;
