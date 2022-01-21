@@ -57,7 +57,8 @@ export const addMessage = (message: ChatMessage) => ({
 export default (state = defaultState, action: Action) => {
 	const chatIndex = state.chats.findIndex(({id}) => id === action.payload);
 	const newChats = [...state.chats];
-	const currentChat = state.chats[chatIndex] as ChatProps;
+	const currentChatId = state.chats[chatIndex] as ChatProps;
+	const currentChat = {...state.chat};
 
 	switch (action.type) {
 		case SET_CHATS:
@@ -65,7 +66,7 @@ export default (state = defaultState, action: Action) => {
 		case SET_USER_SEARCH:
 			return {...state, searchuser: action.payload};
 		case SET_CHAT:
-			return {...state, chat: currentChat};
+			return {...state, chat: currentChatId};
 		case SET_CHAT_AVATAR:
 			return {...state, chat: action.payload};
 		case ADD_CHAT:
@@ -80,9 +81,8 @@ export default (state = defaultState, action: Action) => {
 			if (!currentChat.messages) {
 				currentChat.messages = [];
 			}
-
 			currentChat.messages.push(action.payload);
-			console.log(currentChat.messages);
+			console.log(action.payload);
 			return {...state, chat: currentChat};
 		default:
 			return state;

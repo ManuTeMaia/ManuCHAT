@@ -26,11 +26,9 @@ export class ChatBodyPage extends Block {
 	ws = new ChatWS();
 
 	protected getStateFromProps(props: ChatBodyProps) {
-		//ChatController.setChat(props.chat.id);
+		ChatController.setChat(props.chat.id);
 
 		this.state = {
-			current: props.chat,
-			messages: props.chat.messages,
 			avatarSrc: props.chat.avatar!==null ? `https://ya-praktikum.tech/api/v2/resources${props.chat.avatar}` : "/noimage.png",
 			formInputs:
 				{
@@ -136,8 +134,8 @@ export class ChatBodyPage extends Block {
                  {{{AddUserPopup chatId=chat.id  ref="addChatUser"}}}
                  {{{DeleteUserPopup chatId=chat.id ref="deleteChatUser"}}}
              </div>
-		    <div class="main--page-chat-body-messages" data-messages={{messages.length}}>
-                {{#each messages}}
+		    <div class="main--page-chat-body-messages" data-messages={{chat.messages.length}}>
+                {{#each chat.messages}}
                     {{{ChatMessage user=../user message=this}}}
                 {{/each}}
 		    </div>
