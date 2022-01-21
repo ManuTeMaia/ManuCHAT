@@ -8,9 +8,11 @@ import Router from "../../../utils/Router";
 import "./chat-body.pcss";
 import {getFormData} from "../../../helpers/formActions";
 import {isArray} from "../../../helpers/isArray";
+import {UserData} from "../../../api/authAPI";
 
 interface ChatBodyProps {
 	chat: ChatProps;
+	user: UserData;
 	messages: [];
 }
 
@@ -18,7 +20,7 @@ export class ChatBodyPage extends Block {
 
 	constructor(props: ChatBodyProps) {
 		super(props);
-		console.log(props);
+		console.log(props.chat.messages);
 	}
 
 	router = new Router();
@@ -27,8 +29,9 @@ export class ChatBodyPage extends Block {
 
 	protected getStateFromProps(props: ChatBodyProps) {
 		ChatController.setChat(props.chat.id);
-
+		this.onChatSetup(props);
 		this.state = {
+			messages: props.chat.messages,
 			avatarSrc: props.chat.avatar!==null ? `https://ya-praktikum.tech/api/v2/resources${props.chat.avatar}` : "/noimage.png",
 			formInputs:
 				{
@@ -91,28 +94,23 @@ export class ChatBodyPage extends Block {
 		console.log(this.state);
 	}
 
-	async componentDidMount(props?: any) {
-		const response = await ChatController.getToken({ chatId: props.chat.id });
-		if (response?.token) {
-			this.onChatClick(props.user.id, props.chat.id, response.token);
-		}
-	}
-
 	onMessage = (response: MessageResponse): void => {
 		ChatController.addMessage(response.content);
 		const totalMessages = isArray(response.content) ? response.content.length : 1;
 		this.ws?.increaseOffsetBy(totalMessages);
 	};
 
-	onChatClick = (userId: number, chatId: number, token: string): void => {
-		if (!this.ws) {
-			this.ws = new ChatWS();
+	async onChatSetup(props: ChatBodyProps) {
+		const response = await ChatController.getToken({ chatId: props.chat.id });
+		if (response?.token) {
+			if (!this.ws) {
+				this.ws = new ChatWS();
+			}
+			this.ws.shutdown();
+			const path = `/${props.user.id}/${props.chat.id}/${response.token}`;
+			this.ws.setup(path, this.onMessage);
 		}
-		this.ws.shutdown();
-		const path = `/${userId}/${chatId}/${token}`;
-		this.ws.setup(path, this.onMessage);
-
-	};
+	}
 
 	render(): string {
 

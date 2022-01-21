@@ -82,6 +82,7 @@ class Block <P = any> {
 			return;
 		}
 		this._render();
+		console.count("render")
 	}
 
 	componentDidUpdate(oldProps: P, newProps: P): boolean {
@@ -95,7 +96,7 @@ class Block <P = any> {
 			const oldProps = { ...this.props };
 			Object.assign(this.props, nextProps);
 			this.eventBus.emit(Block.EVENTS.FLOW_CDU, oldProps, this.props);
-			//console.log(this.props);
+			console.log(this.props);
 	}
 
 	setState(nextState: unknown) {

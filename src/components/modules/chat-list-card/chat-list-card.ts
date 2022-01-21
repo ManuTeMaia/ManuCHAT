@@ -11,7 +11,6 @@ type ChatCardType = {
     time: string;
     title:string;
     unread_count?: number;
-    onClick: (e: Event, chat: ChatProps) => void;
 };
 
 export class ChatListCard extends Block {

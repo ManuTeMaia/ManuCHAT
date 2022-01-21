@@ -49,7 +49,7 @@ export const setUserSearch = (searchuser: UserData[]) => ({
 	payload: searchuser,
 });
 
-export const addMessage = (message: ChatMessage) => ({
+export const addMessage = (message: ChatMessage | ChatMessage[]) => ({
 	type: ADD_MESSAGE,
 	payload: message,
 });

@@ -31,7 +31,7 @@ class ChatPage extends Block {
                         {{{ChatProfileCard}}}
                     <div class="chat--list-chats">
                             {{#each chats}}
-                                {{{ChatListCard chat=this onClick=../onChatSelect}}}
+                                {{{ChatListCard chat=this}}}
                             {{/each}}
                     </div>
                 </div>
