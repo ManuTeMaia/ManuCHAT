@@ -77,12 +77,10 @@ export default (state = defaultState, action: Action) => {
 			}
 			return {...state, chats: newChats};
 		case ADD_MESSAGE:
-
 			if (!currentChat.messages) {
 				currentChat.messages = [];
 			}
 			currentChat.messages.push(action.payload);
-			console.log(action.payload);
 			return {...state, chat: currentChat};
 		default:
 			return state;

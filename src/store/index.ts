@@ -21,7 +21,9 @@ export function connect(stateToProps: (state: any) => any, Component: typeof Blo
 			super.componentDidMount(props);
 
 			store.on("changed", () => {
-				//console.log(stateToProps(store.getState()));
+				//console.log("props", this.props);
+				//console.log("state2props", stateToProps(store.getState()));
+
 				this.setProps({
 					...this.props,
 					...stateToProps(store.getState())

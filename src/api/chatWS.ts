@@ -37,7 +37,7 @@ class ChatWS extends WS {
 		});
 
 		this.addListener("open", () => {
-			this.getOldMessages();
+			this.send({ type: "get old", content: `${this.offset}` });
 		});
 	}
 
@@ -48,10 +48,6 @@ class ChatWS extends WS {
 	shutdown(): void {
 		super.shutdown();
 		this.offset = 0;
-	}
-
-	getOldMessages(): void {
-		this.send({ type: "get old", content: `${this.offset}` });
 	}
 
 	increaseOffsetBy(by: number): void {

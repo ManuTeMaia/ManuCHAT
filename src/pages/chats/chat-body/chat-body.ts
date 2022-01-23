@@ -20,7 +20,7 @@ export class ChatBodyPage extends Block {
 
 	constructor(props: ChatBodyProps) {
 		super(props);
-		console.log(props.chat.messages);
+		//console.log(props.chat);
 	}
 
 	router = new Router();
@@ -28,8 +28,6 @@ export class ChatBodyPage extends Block {
 	ws = new ChatWS();
 
 	protected getStateFromProps(props: ChatBodyProps) {
-		ChatController.setChat(props.chat.id);
-		this.onChatSetup(props);
 		this.state = {
 			messages: props.chat.messages,
 			avatarSrc: props.chat.avatar!==null ? `https://ya-praktikum.tech/api/v2/resources${props.chat.avatar}` : "/noimage.png",
@@ -46,7 +44,6 @@ export class ChatBodyPage extends Block {
 							required: true,
 						}
 				},
-
 			onChatOptions: (e: Event) => {
 				e.preventDefault();
 				document.querySelector(".chat-options")?.classList.toggle("hidden");
@@ -92,6 +89,16 @@ export class ChatBodyPage extends Block {
 			}
 		};
 		console.log(this.state);
+	}
+
+	componentDidMount(props: ChatBodyProps): typeof props {
+		ChatController.setChat(props.chat.id);
+		this.onChatSetup(props);
+		return props;
+	}
+
+	componentDidUpdate(): boolean {
+		return true;
 	}
 
 	onMessage = (response: MessageResponse): void => {

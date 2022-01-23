@@ -107,7 +107,7 @@ class ChatController {
 			for (let i = message.length - 1; i >= 0; i--) {
 				store.dispatch(addMessage(message[i]));
 			}
-			//console.log(message);
+			console.log(message);
 		} else {
 			store.dispatch(addMessage(message as ChatMessage));
 			//console.log(message);
