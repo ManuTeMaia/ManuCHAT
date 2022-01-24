@@ -67,15 +67,10 @@ export class ChatBodyPage extends Block {
 				}
 			},
 
-			onMessageSend: (e: Event) => {
-				e.preventDefault();
-				const form = document.querySelector("#chatMessageForm");
-				const fields = getFormData(form as HTMLFormElement);
-				const message = fields.message as string;
-				const hasErrors = document.querySelector("[error-for]");
-				this.validator.formValidate();
-				if(!hasErrors) {
-					this.ws.sendMessage(message);
+			onMessageSend: () => {
+				const newMessage = (this.refs.message.querySelector("input") as HTMLInputElement).value;
+				if(newMessage) {
+					this.ws.sendMessage(newMessage);
 
 					(this.refs.message.querySelector("input") as HTMLInputElement).value = "";
 				}
@@ -148,7 +143,7 @@ export class ChatBodyPage extends Block {
 		        <i class="ch-attach"></i>
 		        <form action="" class="create-new-message-form" id="chatMessageForm">
 		            {{{InputWrapper label=formInputs.label name=formInputs.name input=formInputs.input ref="message"}}}
-		            {{{Button buttonClass="main--page-chat-send" buttonIcon="ch-send" name="send-submit" title="" onClick=onMessageSend}}}
+		            {{{Button type="button" buttonClass="main--page-chat-send" buttonIcon="ch-send" name="send-submit" title="" onClick=onMessageSend}}}
 		        </form>
 		    </div>
 		</div>
