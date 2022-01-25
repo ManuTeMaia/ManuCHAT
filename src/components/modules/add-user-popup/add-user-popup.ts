@@ -4,13 +4,11 @@ import ChatController from "../../../controllers/chat";
 import {UserData} from "../../../api/authAPI";
 import {getFormData} from "../../../helpers/formActions";
 import {AddUsersData} from "../../../api/chatAPI";
+import {store} from "../../../store";
 
 export interface ChatUsersPopupProps {
-	popUpName: string;
-	popUpTitle: string;
+	response: string;
 	chatId: number;
-	buttonName: string;
-	buttonTitle: string;
 	search: UserData | undefined;
 }
 
@@ -52,6 +50,7 @@ export class AddUserPopup extends Block<ChatUsersPopupProps> {
 				const users = Object.values(fields);
 				const searchData = {chatId: props.chatId, users: users} as AddUsersData;
 				await ChatController.addUsersToChat(searchData);
+				console.log(store.getState().response);
 				document.querySelector("[data-popup=addChatUser]")?.classList.remove("hidden");
 			}
 		};

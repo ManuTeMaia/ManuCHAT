@@ -3,6 +3,6 @@ import {connect} from "../../../store";
 import Block from "../../../utils/Block";
 
 export default connect((state: any) => ({
-	response: state.response,
+	response: state.user.response,
 	search: state.user.search,
 }), AddUserPopup as typeof Block);

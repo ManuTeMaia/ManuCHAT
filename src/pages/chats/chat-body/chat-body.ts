@@ -6,7 +6,6 @@ import ChatController from "../../../controllers/chat";
 import {DeleteChatData} from "../../../api/chatAPI";
 import Router from "../../../utils/Router";
 import "./chat-body.pcss";
-import {getFormData} from "../../../helpers/formActions";
 import {isArray} from "../../../helpers/isArray";
 import {UserData} from "../../../api/authAPI";
 
@@ -20,7 +19,7 @@ export class ChatBodyPage extends Block {
 
 	constructor(props: ChatBodyProps) {
 		super(props);
-		//console.log(props.chat);
+		console.log(props.chat);
 	}
 
 	router = new Router();
@@ -29,7 +28,6 @@ export class ChatBodyPage extends Block {
 
 	protected getStateFromProps(props: ChatBodyProps) {
 		this.state = {
-			messages: props.chat.messages,
 			avatarSrc: props.chat.avatar!==null ? `https://ya-praktikum.tech/api/v2/resources${props.chat.avatar}` : "/noimage.png",
 			formInputs:
 				{
@@ -71,7 +69,7 @@ export class ChatBodyPage extends Block {
 				const newMessage = (this.refs.message.querySelector("input") as HTMLInputElement).value;
 				if(newMessage) {
 					this.ws.sendMessage(newMessage);
-
+					//this.onChatSetup(props);
 					(this.refs.message.querySelector("input") as HTMLInputElement).value = "";
 				}
 
@@ -102,12 +100,9 @@ export class ChatBodyPage extends Block {
 		this.ws?.increaseOffsetBy(totalMessages);
 	};
 
-	async onChatSetup(props: ChatBodyProps) {
+	async onChatSetup(props: ChatBodyProps): Promise<void> {
 		const response = await ChatController.getToken({ chatId: props.chat.id });
 		if (response?.token) {
-			if (!this.ws) {
-				this.ws = new ChatWS();
-			}
 			this.ws.shutdown();
 			const path = `/${props.user.id}/${props.chat.id}/${response.token}`;
 			this.ws.setup(path, this.onMessage);
@@ -134,11 +129,7 @@ export class ChatBodyPage extends Block {
                  {{{AddUserPopup chatId=chat.id  ref="addChatUser"}}}
                  {{{DeleteUserPopup chatId=chat.id ref="deleteChatUser"}}}
              </div>
-		    <div class="main--page-chat-body-messages" data-messages={{chat.messages.length}}>
-                {{#each chat.messages}}
-                    {{{ChatMessage user=../user message=this}}}
-                {{/each}}
-		    </div>
+			{{{Messages}}}
 		    <div class="main--page-chat-body-footer">
 		        <i class="ch-attach"></i>
 		        <form action="" class="create-new-message-form" id="chatMessageForm">

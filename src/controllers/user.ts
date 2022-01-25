@@ -1,7 +1,7 @@
 import { UserAPI, UpdateProfileData, UpdatePasswordData, SearchData } from "../api/userAPI";
 import { store } from "../store";
 import { setUser } from "../store/user.store";
-import { setResponse } from "../store/respose.store";
+import { setResponse } from "../store/user.store";
 import { setSearch } from "../store/user.store";
 import { UserData } from "api/AuthAPI.js";
 import Router from "../utils/Router";
@@ -18,10 +18,10 @@ class UserController {
 		try {
 			const user = await this.api.update(data);
 			store.dispatch(setUser(user));
-			store.dispatch(setResponse({ success: "Updated" }));
+			store.dispatch(setResponse({success: "Успех"}));
 			this.router.go("/settings");
 		} catch (e) {
-			store.dispatch(setResponse({ error: (e as { reason: string }).reason }));
+			store.dispatch(setResponse({error: (e as { reason: string }).reason }));
 		}
 	}
 
@@ -29,21 +29,19 @@ class UserController {
 		try {
 			const user = await this.api.updateAvatar(data);
 			store.dispatch(setUser(user));
-			store.dispatch(setResponse({ success: "Updated" }));
+			store.dispatch(setResponse({success: "Успех"}));
 			this.router.go("/settings");
 		} catch (e) {
-			store.dispatch(setResponse({ error: (e as { reason: string }).reason }));
-		}
+			store.dispatch(setResponse({error: (e as { reason: string }).reason }));		}
 	}
 
 	async changePassword(data: UpdatePasswordData) {
 		try {
 			await this.api.changePassword(data);
-			store.dispatch(setResponse({ success: "Updated" }));
+			store.dispatch(setResponse({success: "Успех"}));
 			this.router.go("/settings");
 		} catch (e) {
-			store.dispatch(setResponse({ error: (e as { reason: string }).reason }));
-		}
+			store.dispatch(setResponse({error: (e as { reason: string }).reason }));		}
 	}
 
 	async search(data: SearchData) {
@@ -60,8 +58,7 @@ class UserController {
 		try {
 			return this.api.search(data);
 		} catch (e) {
-			store.dispatch(setResponse({ error: (e as { reason: string }).reason }));
-		}
+			store.dispatch(setResponse({error: (e as { reason: string }).reason }));		}
 	}
 }
 

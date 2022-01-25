@@ -9,7 +9,6 @@ type MessageTypes = {
 export class ChatMessage extends Block<MessageTypes> {
     constructor(props: MessageTypes) {
         super(props);
-        console.log(props);
     }
 
     static getName(): string {
@@ -21,7 +20,7 @@ export class ChatMessage extends Block<MessageTypes> {
         return `
             <div class="message-wrap{{#if (self_message user.id message.user_id)}} mine{{/if}}">
                 {{#unless (self_message user.id message.user_id)}}
-                    <em>{{user.login}}</em>
+                    <em>{{message.user_id}} / {{user.login}}</em>
                 {{/unless}}
                 {{message.content}}
                 <div class="message-time">

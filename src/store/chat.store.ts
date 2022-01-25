@@ -2,6 +2,7 @@ import {Action} from "../utils/Store";
 import {ChatMessage} from "../api/chatAPI";
 import {UserData} from "../api/authAPI.js";
 import {ChatProps} from "../pages/chats/chat/chat";
+import {isArray} from "../helpers/isArray";
 
 const SET_CHATS = "chats/SET";
 const SET_USER_SEARCH = "chats/SET_USER_SEARCH";
@@ -10,13 +11,19 @@ const SET_CHAT_AVATAR = "chats/SET_CHAT_AVATAR";
 const ADD_CHAT = "chats/ADD_CHAT";
 const DELETE_CHAT = "chats/DELETE_CHAT";
 const ADD_MESSAGE = "chats/ADD_MESSAGE";
+const SET_ERROR = "chats/SET_ERROR";
+const SET_RESPONSE = "chats/SET_RESPONSE";
 
 
-const defaultState: ChatState = {chats: [], chat: undefined};
+
+const defaultState: ChatState = {chats: [], chat: undefined, messages: [], error: null, success: null};
 
 export interface ChatState {
 	chats: [];
 	chat: ChatProps | undefined;
+	messages: ChatMessage[];
+	error: string | null;
+	success: string | null;
 }
 
 export const setChats = (chats: ChatProps[]) => ({
@@ -54,6 +61,11 @@ export const addMessage = (message: ChatMessage | ChatMessage[]) => ({
 	payload: message,
 });
 
+export const setResponse = (response: { success?: string; error?: string }) => ({
+	type: SET_RESPONSE,
+	payload: response,
+});
+
 export default (state = defaultState, action: Action) => {
 	const chatIndex = state.chats.findIndex(({id}) => id === action.payload);
 	const newChats = [...state.chats];
@@ -80,8 +92,18 @@ export default (state = defaultState, action: Action) => {
 			if (!currentChat.messages) {
 				currentChat.messages = [];
 			}
-			currentChat.messages.push(action.payload);
+			console.log(currentChat.messages);
+			if (isArray(action.payload)) {
+				currentChat.messages = [...currentChat.messages, ...action.payload];
+			} else {
+				currentChat.messages.push(action.payload);
+			}
+			console.log(action.payload, currentChat.messages);
 			return {...state, chat: currentChat};
+		case SET_RESPONSE:
+			return { error: null, success: action.payload };
+		case SET_ERROR:
+			return { error: action.payload, success: null };
 		default:
 			return state;
 	}

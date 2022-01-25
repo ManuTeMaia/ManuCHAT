@@ -4,7 +4,8 @@ import { UserData } from "../api/AuthAPI";
 const SET_USER = "user/SET";
 const DELETE_USER = "user/DELETE";
 const SET_SEARCH = "user/SEARCH";
-const SET_ERROR = "user/SET_ERROR";
+const SET_RESPONSE = "user/SET_RESPONSE";
+
 
 export const setUser = (user: UserData) => ({
 	type: SET_USER,
@@ -15,9 +16,9 @@ export const deleteUser = () => ({
 	type: DELETE_USER,
 });
 
-export const setError = (error: { reason: string }) => ({
-	type: SET_ERROR,
-	payload: error,
+export const setResponse = (response: { success?: string; error?: string }) => ({
+	type: SET_RESPONSE,
+	payload: response,
 });
 
 export const setSearch = (search: UserData[]) => ({
@@ -25,7 +26,7 @@ export const setSearch = (search: UserData[]) => ({
 	payload: search,
 });
 
-export default (state = { profile: null, error: null, search: [] }, action: Action): Record<string, unknown> => {
+export default (state = { profile: null, response: null, search: [] }, action: Action): Record<string, unknown> => {
 	switch (action.type) {
 		case SET_USER:
 			return { error: null, profile: action.payload };
@@ -33,8 +34,8 @@ export default (state = { profile: null, error: null, search: [] }, action: Acti
 			return { profile: null, error: null };
 		case SET_SEARCH:
 			return {...state, search: action.payload};
-		case SET_ERROR:
-			return { error: action.payload, profile: null };
+		case SET_RESPONSE:
+			return { response: action.payload };
 		default:
 			return state;
 	}

@@ -10,7 +10,7 @@ import {
 } from "../api/chatAPI";
 import { store } from "../store";
 import {addChat, deleteChat, setChats, addMessage, setChat, setChatAvatar} from "../store/chat.store";
-import { isArray } from "../helpers/isArray";
+//import { isArray } from "../helpers/isArray";
 import {setResponse} from "../store/respose.store";
 import {setUserSearch} from "../store/chat.store";
 
@@ -103,15 +103,15 @@ class ChatController {
 	}
 
 	addMessage(message: ChatMessage | ChatMessage[]) {
-		if (isArray(message)) {
-			for (let i = message.length - 1; i >= 0; i--) {
-				store.dispatch(addMessage(message[i]));
-			}
+		//if (isArray(message)) {
+		//	for (let i = message.length - 1; i >= 0; i--) {
+		//		store.dispatch(addMessage(message[i]));
+		//	}
+		//	console.log(message);
+		//} else {
+			store.dispatch(addMessage(message));
 			console.log(message);
-		} else {
-			store.dispatch(addMessage(message as ChatMessage));
-			//console.log(message);
-		}
+		//}
 	}
 }
 
