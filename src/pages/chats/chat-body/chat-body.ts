@@ -1,5 +1,4 @@
 import Block from "../../../utils/Block";
-import Validator from "../../../utils/Validator";
 import ChatWS, {MessageResponse} from "../../../api/chatWS";
 import {ChatProps} from "../chat/chat";
 import ChatController from "../../../controllers/chat";
@@ -20,11 +19,11 @@ export class ChatBodyPage extends Block {
 
 	constructor(props: ChatBodyProps) {
 		super(props);
+		this.scrollMessages(this.refs.messages);
 		console.log(props.chat);
 	}
 
 	router = new Router();
-	validator = new Validator();
 	ws = new ChatWS();
 
 	protected getStateFromProps(props: ChatBodyProps) {
@@ -70,7 +69,8 @@ export class ChatBodyPage extends Block {
 				const newMessage = (this.refs.message.querySelector("input") as HTMLInputElement).value;
 				if(newMessage) {
 					this.ws.sendMessage(newMessage);
-					//this.onChatSetup(props);
+					this.onNewMassage(props);
+					this.scrollMessages(this.refs.messages);
 					(this.refs.message.querySelector("input") as HTMLInputElement).value = "";
 
 				}
@@ -83,7 +83,6 @@ export class ChatBodyPage extends Block {
 				uploadChatAvatar.classList.remove("hidden");
 			}
 		};
-		console.log(this.state);
 	}
 
 	componentDidMount(props: ChatBodyProps): void {
@@ -107,12 +106,31 @@ export class ChatBodyPage extends Block {
 			this.ws.shutdown();
 			const path = `/${props.user.id}/${props.chat.id}/${response.token}`;
 			this.ws.setup(path, this.onMessage);
-
 		}
 	}
 
-	render(): string {
+	async onNewMassage(props: ChatBodyProps): Promise<void> {
+		const response = await ChatController.getToken({ chatId: props.chat.id });
+		if (response?.token) {
+			this.ws.shutdown();
+			const path = `/${props.user.id}/${props.chat.id}/${response.token}`;
+			this.ws.onceMessage(path, this.onMessage);
+		}
+	}
 
+	scrollMessages(element: Element): void {
+		const messages = element.parentNode;
+		console.log(messages);
+		//const shouldScroll = messages.scrollTop + messages.clientHeight === messages.scrollHeight;
+		//console.log(shouldScroll, messages.scrollHeight, messages.scrollTop, messages.clientHeight);
+		//if (!shouldScroll) {
+		console.log(messages.scrollHeight, messages.scrollTop);
+			messages.scrollTop = messages.scrollHeight;
+
+		//}
+	}
+
+	render(): string {
 		// language=hbs
 		return `
 		<div class="main--page-chat-body-wrap">
@@ -131,7 +149,7 @@ export class ChatBodyPage extends Block {
                  {{{AddUserPopup chatId=chat.id  ref="addChatUser"}}}
                  {{{DeleteUserPopup chatId=chat.id ref="deleteChatUser"}}}
              </div>
-			{{{Messages chatId=chat.id}}}
+			{{{Messages chatId=chat.id ref="messages"}}}
 		    <div class="main--page-chat-body-footer">
 		        <i class="ch-attach"></i>
 		        <form action="" class="create-new-message-form" id="chatMessageForm">

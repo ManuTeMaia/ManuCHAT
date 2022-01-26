@@ -11,19 +11,16 @@ const SET_CHAT_AVATAR = "chats/SET_CHAT_AVATAR";
 const ADD_CHAT = "chats/ADD_CHAT";
 const DELETE_CHAT = "chats/DELETE_CHAT";
 const ADD_MESSAGE = "chats/ADD_MESSAGE";
-const SET_ERROR = "chats/SET_ERROR";
 const SET_RESPONSE = "chats/SET_RESPONSE";
 
 
 
-const defaultState: ChatState = {chats: [], chat: undefined, messages: [], error: null, success: null};
+const defaultState: ChatState = {chats: [], chat: undefined, response: null};
 
 export interface ChatState {
 	chats: [];
 	chat: ChatProps | undefined;
-	messages: ChatMessageProps[];
-	error: string | null;
-	success: string | null;
+	response: string | null;
 }
 
 export const setChats = (chats: ChatProps[]) => ({
@@ -80,7 +77,8 @@ export default (state = defaultState, action: Action) => {
 		case SET_CHAT:
 			return {...state, chat: currentChatId};
 		case SET_CHAT_AVATAR:
-			return {...state, chat: action.payload};
+			currentChat.avatar = action.payload;
+			return {...state, chat: currentChat};
 		case ADD_CHAT:
 			return {...state, chats: [action.payload, ...state.chats]};
 		case DELETE_CHAT:
@@ -99,9 +97,7 @@ export default (state = defaultState, action: Action) => {
 			}
 			return {...state, chat: currentChat};
 		case SET_RESPONSE:
-			return { error: null, success: action.payload };
-		case SET_ERROR:
-			return { error: action.payload, success: null };
+			return { ...state, response: action.payload };
 		default:
 			return state;
 	}

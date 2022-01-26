@@ -23,7 +23,7 @@ class ChatWS extends WS {
 		this.offset = 0;
 	}
 
-	setup(path: string, onMessage: (res: MessageResponse) => void) {
+	onceMessage(path: string, onMessage: (res: MessageResponse) => void): void {
 		this.connect(path);
 		this.rePing();
 		this.addListener("message", wsResponse => {
@@ -35,7 +35,10 @@ class ChatWS extends WS {
 			console.log("Получены данные", messageResponse);
 			onMessage(messageResponse);
 		});
+	}
 
+	setup(path: string, onMessage: (res: MessageResponse) => void): void {
+		this.onceMessage(path, onMessage);
 		this.addListener("open", () => {
 			this.send({ type: "get old", content: `${this.offset}` });
 		});

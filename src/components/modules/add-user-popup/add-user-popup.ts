@@ -4,12 +4,12 @@ import ChatController from "../../../controllers/chat";
 import {UserData} from "../../../api/authAPI";
 import {getFormData} from "../../../helpers/formActions";
 import {AddUsersData} from "../../../api/chatAPI";
-import {store} from "../../../store";
+import isEqual from "../../../helpers/isEqual";
 
 export interface ChatUsersPopupProps {
-	response: string;
 	chatId: number;
 	search: UserData | undefined;
+	response: {error?: string, success?: string};
 }
 
 export class AddUserPopup extends Block<ChatUsersPopupProps> {
@@ -50,10 +50,13 @@ export class AddUserPopup extends Block<ChatUsersPopupProps> {
 				const users = Object.values(fields);
 				const searchData = {chatId: props.chatId, users: users} as AddUsersData;
 				await ChatController.addUsersToChat(searchData);
-				console.log(store.getState().response);
 				document.querySelector("[data-popup=addChatUser]")?.classList.remove("hidden");
 			}
 		};
+	}
+
+	componentDidUpdate(oldProps: ChatUsersPopupProps, newProps: ChatUsersPopupProps) {
+		return isEqual(oldProps, newProps);
 	}
 
 	static getName(): string {
@@ -75,10 +78,10 @@ export class AddUserPopup extends Block<ChatUsersPopupProps> {
 	                        {{{Button buttonClass="chat-user-actions-submit" name="add-chat-user" title="Добавить" onClick=chatUserAdd}}}
 						</form>
 	                    {{#if response.error }}
-	                    <div class="input-error">{{response.error.reason}}</div>
+	                    <div class="input-error">{{response.error}}</div>
 			            {{/if}}
 			            {{#if response.success }}
-	                    <div class="input-success">{{response.success.success}}</div>
+	                    <div class="input-success">{{response.success}}</div>
 	                    {{/if}}
 					</div>
                 </div>

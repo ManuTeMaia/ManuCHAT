@@ -16,26 +16,16 @@ export class Messages extends Block{
 	}
 
 	componentDidMount(props: MessagesType | undefined): typeof props {
-		this.scrollMessages(this.getContent());
 		if (props?.chatId) {
 			const searchUsers = ChatController.getChatUsers({chatId: props.chatId as number});
 			return {searchUsers, ...props} as MessagesType;
 		}
 	}
-
+	componentDidUpdate(): boolean {
+		return false;
+	}
 	static getName(): string {
 		return "Messages";
-	}
-
-	//messages: this.element;
-	scrollMessages(element: Element): void {
-		const messages = element;
-		console.log(messages);
-		const shouldScroll = messages.scrollTop + messages.clientHeight === messages.scrollHeight;
-		console.log(shouldScroll, messages.scrollHeight, messages.scrollTop, messages.clientHeight);
-		if (!shouldScroll) {
-			messages.scrollTop = messages.scrollHeight;
-		}
 	}
 
 	render(): string {

@@ -41,8 +41,8 @@ class ChatController {
 	async setAvatar(data: FormData) {
 		try {
 			const avatar = await this.api.setAvatar(data);
-			store.dispatch(setChatAvatar(avatar));
 			store.dispatch(setResponse({ success: "Updated" }));
+			store.dispatch(setChatAvatar(avatar));
 		} catch (e) {
 			store.dispatch(setResponse({ error: (e as { reason: string }).reason }));
 		}
@@ -51,7 +51,8 @@ class ChatController {
 	async addUsersToChat(data: AddUsersData) {
 		try {
 			await this.api.update(data);
-			store.dispatch(setResponse({ success: "Пользователь(-и) добавлен(-ы)" }));
+			store.dispatch(setResponse({ success: "User(-s) added" }));
+			await this.getChatUsers({chatId: data.chatId});
 		} catch (e) {
 			store.dispatch(setResponse({ error: (e as { reason: string }).reason }));
 		}
@@ -60,7 +61,8 @@ class ChatController {
 	async deleteUsersFromChat(data: AddUsersData) {
 		try {
 			await this.api.deleteUsers(data);
-			store.dispatch(setResponse({ success: "Пользователь(-и) удален(-ы)" }));
+			store.dispatch(setResponse({ success: "User(-s) deleted" }));
+			await this.getChatUsers({chatId: data.chatId});
 		} catch (e) {
 			store.dispatch(setResponse({ error: (e as { reason: string }).reason }));
 		}
@@ -101,7 +103,6 @@ class ChatController {
 
 	addMessage(message: ChatMessageProps | ChatMessageProps[]) {
 			store.dispatch(addMessage(message));
-			//console.log(message);
 	}
 }
 

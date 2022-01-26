@@ -1,13 +1,12 @@
 import Block from "../../../utils/Block";
 import ChatController from "../../../controllers/chat";
-import {UserData} from "../../../api/authAPI";
 import {getFormData} from "../../../helpers/formActions";
 import {AddUsersData} from "../../../api/chatAPI";
+import isEqual from "../../../helpers/isEqual";
 
 export interface ChatUsersPopupProps {
 	chatId: number;
-	response: string;
-	search: UserData | undefined;
+	response: {error?: string, success?: string};
 }
 
 export class DeleteUserPopup extends Block<ChatUsersPopupProps> {
@@ -53,6 +52,10 @@ export class DeleteUserPopup extends Block<ChatUsersPopupProps> {
 		}
 	}
 
+	componentDidUpdate(oldProps: ChatUsersPopupProps, newProps: ChatUsersPopupProps) {
+		return isEqual(oldProps, newProps);
+	}
+
 	static getName(): string {
 		return "DeleteUserPopup";
 	}
@@ -73,10 +76,10 @@ export class DeleteUserPopup extends Block<ChatUsersPopupProps> {
 							{{{Button buttonClass="chat-user-actions-submit" name="delete-chat-user" title="Удалить" onClick=chatUserAction}}}
 						</form>
                         {{#if response.error }}
-                            <div class="input-error">{{response.error.reason}}</div>
+                            <div class="input-error">{{response.error}}</div>
                         {{/if}}
                         {{#if response.success }}
-                            <div class="input-success">{{response.success.success}}</div>
+                            <div class="input-success">{{response.success}}</div>
                         {{/if}}
 					</div>
                 </div>

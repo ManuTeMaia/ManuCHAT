@@ -28,7 +28,7 @@ export class ChatListCard extends Block {
     }
 
     componentDidUpdate(oldProps: ChatProps, newProps: ChatProps) {
-        return isEqual(oldProps, newProps);
+        return !isEqual(oldProps, newProps);
     }
 
     static getName(): string {
