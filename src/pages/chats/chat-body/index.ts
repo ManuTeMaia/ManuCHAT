@@ -8,6 +8,7 @@ const chatId = url.searchParams.get("chatid");
 
 export default withRouter(connect((state: any) => ({
 	user: state.user.profile,
+	searchUser: state.chats.searchuser,
 	chat: state.chats.chat ? state.chats.chat : state.chats.chats[state.chats.chats.findIndex((item: Record<string, unknown> ) => item.id == chatId)],
 }), ChatBodyPage as typeof Block));
 

@@ -3,7 +3,6 @@ import ChatController from "../../../controllers/chat";
 import {UserData} from "../../../api/authAPI";
 import {getFormData} from "../../../helpers/formActions";
 import {AddUsersData} from "../../../api/chatAPI";
-import {store} from "../../../store";
 
 export interface ChatUsersPopupProps {
 	chatId: number;
@@ -42,17 +41,17 @@ export class DeleteUserPopup extends Block<ChatUsersPopupProps> {
 				const users = Object.values(fields);
 				const searchData = {chatId: props.chatId, users: users} as AddUsersData;
 				await ChatController.deleteUsersFromChat(searchData);
-				console.log(store.getState().response);
 				document.querySelector("[data-popup=deleteChatUser]")?.classList.remove("hidden");
 			}
 		};
 	}
-componentDidMount(props?: ChatUsersPopupProps): typeof props {
-	if (props?.chatId) {
-	const searchuser = ChatController.getChatUsers({chatId: props.chatId as number});
-	return {searchuser, ...props} as ChatUsersPopupProps;
+
+	componentDidMount(props: ChatUsersPopupProps | undefined): typeof props {
+		if (props?.chatId) {
+		const chatUsers = ChatController.getChatUsers({chatId: props.chatId as number});
+		return {chatUsers, ...props} as ChatUsersPopupProps;
+		}
 	}
-}
 
 	static getName(): string {
 		return "DeleteUserPopup";
@@ -68,7 +67,7 @@ componentDidMount(props?: ChatUsersPopupProps): typeof props {
                     <h4>Удалить пользователя</h4>
 					<div class="popup-content">
                         <form id="deleteChatUser" action="" class="file-upload-form" enctype="multipart/form-data">
-                            {{#each searchuser}}
+                            {{#each chatUsers}}
                                 {{{Checkbox id=this.id name=this.login label=this.first_name}}}
                             {{/each}}
 							{{{Button buttonClass="chat-user-actions-submit" name="delete-chat-user" title="Удалить" onClick=chatUserAction}}}

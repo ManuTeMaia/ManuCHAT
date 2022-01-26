@@ -8,6 +8,7 @@ import Router from "../../../utils/Router";
 import "./chat-body.pcss";
 import {isArray} from "../../../helpers/isArray";
 import {UserData} from "../../../api/authAPI";
+import isEqual from "../../../helpers/isEqual";
 
 interface ChatBodyProps {
 	chat: ChatProps;
@@ -71,6 +72,7 @@ export class ChatBodyPage extends Block {
 					this.ws.sendMessage(newMessage);
 					//this.onChatSetup(props);
 					(this.refs.message.querySelector("input") as HTMLInputElement).value = "";
+
 				}
 
 			},
@@ -84,21 +86,20 @@ export class ChatBodyPage extends Block {
 		console.log(this.state);
 	}
 
-	componentDidMount(props: ChatBodyProps): typeof props {
+	componentDidMount(props: ChatBodyProps): void {
 		ChatController.setChat(props.chat.id);
 		this.onChatSetup(props);
-		return props;
 	}
 
-	componentDidUpdate(): boolean {
-		return true;
+	componentDidUpdate(oldProps: ChatProps, newProps: ChatProps) {
+		return isEqual(oldProps, newProps);
 	}
 
 	onMessage = (response: MessageResponse): void => {
 		ChatController.addMessage(response.content);
 		const totalMessages = isArray(response.content) ? response.content.length : 1;
 		this.ws?.increaseOffsetBy(totalMessages);
-	};
+	}
 
 	async onChatSetup(props: ChatBodyProps): Promise<void> {
 		const response = await ChatController.getToken({ chatId: props.chat.id });
@@ -106,6 +107,7 @@ export class ChatBodyPage extends Block {
 			this.ws.shutdown();
 			const path = `/${props.user.id}/${props.chat.id}/${response.token}`;
 			this.ws.setup(path, this.onMessage);
+
 		}
 	}
 
@@ -129,7 +131,7 @@ export class ChatBodyPage extends Block {
                  {{{AddUserPopup chatId=chat.id  ref="addChatUser"}}}
                  {{{DeleteUserPopup chatId=chat.id ref="deleteChatUser"}}}
              </div>
-			{{{Messages}}}
+			{{{Messages chatId=chat.id}}}
 		    <div class="main--page-chat-body-footer">
 		        <i class="ch-attach"></i>
 		        <form action="" class="create-new-message-form" id="chatMessageForm">

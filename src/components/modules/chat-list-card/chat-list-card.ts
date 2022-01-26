@@ -4,13 +4,11 @@ import { ChatProps } from "../../../pages/chats/chat/chat";
 import Router from "../../../utils/Router";
 import {UserData} from "../../../api/authAPI";
 import ChatController from "../../../controllers/chat";
+import isEqual from "../../../helpers/isEqual";
 
 type ChatCardType = {
     chat: ChatProps;
     user: UserData;
-    time: string;
-    title:string;
-    unread_count?: number;
 };
 
 export class ChatListCard extends Block {
@@ -29,6 +27,9 @@ export class ChatListCard extends Block {
         });
     }
 
+    componentDidUpdate(oldProps: ChatProps, newProps: ChatProps) {
+        return isEqual(oldProps, newProps);
+    }
 
     static getName(): string {
         return "ChatListCard";

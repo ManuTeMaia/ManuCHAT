@@ -1,26 +1,39 @@
 import Block from "../../../utils/Block";
 import "./chat-message.pcss";
 import {UserData} from "../../../api/authAPI";
+import {ChatMessageProps} from "../../../api/chatAPI";
 
 type MessageTypes = {
     user: UserData;
-    message: ChatMessage;
+    chatUsers: UserData[];
+    message: ChatMessageProps;
 }
 export class ChatMessage extends Block<MessageTypes> {
     constructor(props: MessageTypes) {
         super(props);
+
+    }
+    protected getStateFromProps(props: MessageTypes) {
+        this.state = {
+            messageUserLogin: this.getMessageUserData(props.message.user_id, props.chatUsers)
+        };
     }
 
     static getName(): string {
         return "ChatMessage";
     }
 
+    getMessageUserData (messageUserId: number, chatUsers: Array<UserData>): string {
+        const MessageUser = (chatUsers as Array<UserData>).filter((user: UserData) => user.id === messageUserId);
+        return MessageUser[0].display_name ? MessageUser[0].display_name : MessageUser[0].first_name;
+}
+
     render():string {
         //language=hbs
         return `
             <div class="message-wrap{{#if (self_message user.id message.user_id)}} mine{{/if}}">
                 {{#unless (self_message user.id message.user_id)}}
-                    <em>{{message.user_id}} / {{user.login}}</em>
+                    <em>{{messageUserLogin}}</em><br />
                 {{/unless}}
                 {{message.content}}
                 <div class="message-time">

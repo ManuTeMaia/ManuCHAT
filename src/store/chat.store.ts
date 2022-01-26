@@ -1,5 +1,5 @@
 import {Action} from "../utils/Store";
-import {ChatMessage} from "../api/chatAPI";
+import {ChatMessageProps} from "../api/chatAPI";
 import {UserData} from "../api/authAPI.js";
 import {ChatProps} from "../pages/chats/chat/chat";
 import {isArray} from "../helpers/isArray";
@@ -21,7 +21,7 @@ const defaultState: ChatState = {chats: [], chat: undefined, messages: [], error
 export interface ChatState {
 	chats: [];
 	chat: ChatProps | undefined;
-	messages: ChatMessage[];
+	messages: ChatMessageProps[];
 	error: string | null;
 	success: string | null;
 }
@@ -51,12 +51,12 @@ export const deleteChat = (chatId: number) => ({
 	payload: chatId,
 });
 
-export const setUserSearch = (searchuser: UserData[]) => ({
+export const setUserSearch = (chatUsers: UserData[]) => ({
 	type: SET_USER_SEARCH,
-	payload: searchuser,
+	payload: chatUsers,
 });
 
-export const addMessage = (message: ChatMessage | ChatMessage[]) => ({
+export const addMessage = (message: ChatMessageProps | ChatMessageProps[]) => ({
 	type: ADD_MESSAGE,
 	payload: message,
 });
@@ -76,7 +76,7 @@ export default (state = defaultState, action: Action) => {
 		case SET_CHATS:
 			return {...state, chats: action.payload};
 		case SET_USER_SEARCH:
-			return {...state, searchuser: action.payload};
+			return {...state, chatUsers: action.payload};
 		case SET_CHAT:
 			return {...state, chat: currentChatId};
 		case SET_CHAT_AVATAR:
@@ -92,13 +92,11 @@ export default (state = defaultState, action: Action) => {
 			if (!currentChat.messages) {
 				currentChat.messages = [];
 			}
-			console.log(currentChat.messages);
 			if (isArray(action.payload)) {
-				currentChat.messages = [...currentChat.messages, ...action.payload];
+				currentChat.messages = [...currentChat.messages, ...action.payload].reverse();
 			} else {
 				currentChat.messages.push(action.payload);
 			}
-			console.log(action.payload, currentChat.messages);
 			return {...state, chat: currentChat};
 		case SET_RESPONSE:
 			return { error: null, success: action.payload };

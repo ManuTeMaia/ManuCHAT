@@ -1,5 +1,5 @@
 import WS from "./webSocket";
-import { ChatMessage } from "./chatAPI";
+import { ChatMessageProps } from "./chatAPI";
 
 export interface onMessageData {
 	data: string;
@@ -7,7 +7,7 @@ export interface onMessageData {
 
 export interface MessageResponse {
 	type: string;
-	content: ChatMessage | ChatMessage[];
+	content: ChatMessageProps | ChatMessageProps[];
 }
 
 export interface WSResponse {
@@ -23,7 +23,7 @@ class ChatWS extends WS {
 		this.offset = 0;
 	}
 
-	setup(path: string, onMessage: (d: MessageResponse) => void) {
+	setup(path: string, onMessage: (res: MessageResponse) => void) {
 		this.connect(path);
 		this.rePing();
 		this.addListener("message", wsResponse => {

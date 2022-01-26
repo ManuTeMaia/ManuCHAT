@@ -1,7 +1,7 @@
 import {
 	AddUsersData,
 	ChatAPI,
-	ChatMessage,
+	ChatMessageProps,
 	ChatTokenData,
 	ChatTokenResponse,
 	ChatUsersData,
@@ -9,10 +9,7 @@ import {
 	DeleteChatData,
 } from "../api/chatAPI";
 import { store } from "../store";
-import {addChat, deleteChat, setChats, addMessage, setChat, setChatAvatar} from "../store/chat.store";
-//import { isArray } from "../helpers/isArray";
-import {setResponse} from "../store/respose.store";
-import {setUserSearch} from "../store/chat.store";
+import {addChat, deleteChat, setChats, addMessage, setChat, setChatAvatar, setResponse, setUserSearch} from "../store/chat.store";
 
 class ChatController {
 	private api: ChatAPI;
@@ -102,16 +99,9 @@ class ChatController {
 		store.dispatch(setChat(chatId));
 	}
 
-	addMessage(message: ChatMessage | ChatMessage[]) {
-		//if (isArray(message)) {
-		//	for (let i = message.length - 1; i >= 0; i--) {
-		//		store.dispatch(addMessage(message[i]));
-		//	}
-		//	console.log(message);
-		//} else {
+	addMessage(message: ChatMessageProps | ChatMessageProps[]) {
 			store.dispatch(addMessage(message));
-			console.log(message);
-		//}
+			//console.log(message);
 	}
 }
 

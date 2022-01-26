@@ -4,5 +4,5 @@ import { DeleteUserPopup } from "./delete-user-popup";
 
 export default connect((state: any) => ({
 	response: state.chats.response,
-	searchuser: state.chats.searchuser,
+	chatUsers: state.chats.chatUsers,
 }), DeleteUserPopup as typeof Block);
