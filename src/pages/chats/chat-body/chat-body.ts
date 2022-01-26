@@ -19,7 +19,6 @@ export class ChatBodyPage extends Block {
 
 	constructor(props: ChatBodyProps) {
 		super(props);
-		this.scrollMessages(this.refs.messages);
 		console.log(props.chat);
 	}
 
@@ -70,7 +69,6 @@ export class ChatBodyPage extends Block {
 				if(newMessage) {
 					this.ws.sendMessage(newMessage);
 					this.onNewMassage(props);
-					this.scrollMessages(this.refs.messages);
 					(this.refs.message.querySelector("input") as HTMLInputElement).value = "";
 
 				}
@@ -85,12 +83,12 @@ export class ChatBodyPage extends Block {
 		};
 	}
 
-	componentDidMount(props: ChatBodyProps): void {
-		ChatController.setChat(props.chat.id);
-		this.onChatSetup(props);
+	async componentDidMount(props: ChatBodyProps): Promise<void> {
+		await ChatController.setChat(props.chat.id);
+		await this.onChatSetup(props);
 	}
 
-	componentDidUpdate(oldProps: ChatProps, newProps: ChatProps) {
+	componentDidUpdate(oldProps: ChatProps, newProps: ChatProps): void {
 		return isEqual(oldProps, newProps);
 	}
 
@@ -118,18 +116,6 @@ export class ChatBodyPage extends Block {
 		}
 	}
 
-	scrollMessages(element: Element): void {
-		const messages = element.parentNode;
-		console.log(messages);
-		//const shouldScroll = messages.scrollTop + messages.clientHeight === messages.scrollHeight;
-		//console.log(shouldScroll, messages.scrollHeight, messages.scrollTop, messages.clientHeight);
-		//if (!shouldScroll) {
-		console.log(messages.scrollHeight, messages.scrollTop);
-			messages.scrollTop = messages.scrollHeight;
-
-		//}
-	}
-
 	render(): string {
 		// language=hbs
 		return `
@@ -149,7 +135,7 @@ export class ChatBodyPage extends Block {
                  {{{AddUserPopup chatId=chat.id  ref="addChatUser"}}}
                  {{{DeleteUserPopup chatId=chat.id ref="deleteChatUser"}}}
              </div>
-			{{{Messages chatId=chat.id ref="messages"}}}
+			{{{Messages chatId=chat.id ref="messagesWrap"}}}
 		    <div class="main--page-chat-body-footer">
 		        <i class="ch-attach"></i>
 		        <form action="" class="create-new-message-form" id="chatMessageForm">

@@ -29,7 +29,6 @@ const router = new Router();
 const checkAuth: checkAuthType = async (next, currentRoute): Promise<void> => {
 	const user = await AuthController.fetchUser();
 	if (user) {
-		console.count("chats");
 		await ChatController.getChatList();
 	}
 	if (!currentRoute) {

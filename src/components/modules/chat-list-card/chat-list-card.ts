@@ -19,7 +19,7 @@ export class ChatListCard extends Block {
             events: {
                 click: async (e: Event) => {
                     e.preventDefault();
-                    ChatController.setChat(props.chat.id);
+                    await ChatController.setChat(props.chat.id);
                     this.router.go(`/chat/?chatid=${props.chat.id}`);
 
                 },
