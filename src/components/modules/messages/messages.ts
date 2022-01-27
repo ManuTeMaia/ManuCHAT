@@ -15,6 +15,7 @@ export class Messages extends Block{
 	}
 
 	componentDidUpdate(): boolean {
+		this.scrollMessages(this.element as HTMLElement);
 		return false;
 	}
 
@@ -22,15 +23,14 @@ export class Messages extends Block{
 		return "Messages";
 	}
 
-	scrollMessages(): void {
-		const messages = document.querySelector(".main--page-chat-body-messages");
-		//const messages = this.element;
-		console.log(messages, messages.lastChild.previousSibling);
-		messages.lastChild.previousSibling.scrollIntoView(true);
+	scrollMessages(element: HTMLElement): void {
+		const lastMessage = element.lastChild?.previousSibling as HTMLElement;
+		if (lastMessage) {
+			lastMessage.scrollIntoView(true);
+		}
 	}
 
 	render(): string {
-		//this.scrollMessages();
 		//language=hbs
 		return `
             <div class="main--page-chat-body-messages" data-messages={{chat.messages.length}}>

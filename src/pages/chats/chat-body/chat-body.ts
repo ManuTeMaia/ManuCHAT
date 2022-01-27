@@ -1,6 +1,5 @@
 import Block from "../../../utils/Block";
 import ChatWS, {MessageResponse} from "../../../api/chatWS";
-import {ChatProps} from "../chat/chat";
 import ChatController from "../../../controllers/chat";
 import {DeleteChatData} from "../../../api/chatAPI";
 import Router from "../../../utils/Router";
@@ -8,6 +7,7 @@ import "./chat-body.pcss";
 import {isArray} from "../../../helpers/isArray";
 import {UserData} from "../../../api/authAPI";
 import isEqual from "../../../helpers/isEqual";
+import {ChatProps} from "../../../components/modules/chat-list/chat-list";
 
 interface ChatBodyProps {
 	chat: ChatProps;
@@ -88,7 +88,7 @@ export class ChatBodyPage extends Block {
 		await this.onChatSetup(props);
 	}
 
-	componentDidUpdate(oldProps: ChatProps, newProps: ChatProps): void {
+	componentDidUpdate(oldProps: ChatProps, newProps: ChatProps): boolean {
 		return isEqual(oldProps, newProps);
 	}
 

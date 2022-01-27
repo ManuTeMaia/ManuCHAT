@@ -1,7 +1,7 @@
 import {AuthAPI, LoginData, SignupData, UserData} from "../api/AuthAPI";
 import Router from "../utils/Router";
 import { store } from "../store";
-import {deleteUser, setError, setUser} from "../store/user.store";
+import {deleteUser, setResponse, setUser} from "../store/user.store";
 
 class AuthController {
 	private api: AuthAPI;
@@ -17,7 +17,7 @@ class AuthController {
 			await this.fetchUser();
 			this.router.go("/chats");
 		} catch (e) {
-			store.dispatch(setError(e as { reason: string }));
+			store.dispatch(setResponse({ error: (e as { reason: string }).reason }));
 		}
 	}
 
@@ -27,7 +27,7 @@ class AuthController {
 			await this.fetchUser();
 			this.router.go("/chats");
 		} catch (e) {
-			store.dispatch(setError(e as { reason: string }));
+			store.dispatch(setResponse({ error: (e as { reason: string }).reason }));
 		}
 	}
 
@@ -37,7 +37,7 @@ class AuthController {
 			store.dispatch(deleteUser());
 			this.router.go("/");
 		} catch (e) {
-			store.dispatch(setError(e as { reason: string }));
+			store.dispatch(setResponse({ error: (e as { reason: string }).reason }));
 		}
 	}
 

@@ -1,7 +1,7 @@
 import Block from "../../../utils/Block";
 import "./user-list-card.pcss";
-import { ChatProps } from "../../../pages/chats/chat/chat";
 import {UserData} from "../../../api/authAPI";
+import {ChatProps} from "../chat-list/chat-list";
 
 type UserCardType = {
     user: UserData;

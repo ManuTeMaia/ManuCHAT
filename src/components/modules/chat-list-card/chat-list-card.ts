@@ -1,10 +1,9 @@
 import Block from "../../../utils/Block";
 import "./chat-list-card.pcss";
-import { ChatProps } from "../../../pages/chats/chat/chat";
 import Router from "../../../utils/Router";
 import {UserData} from "../../../api/authAPI";
 import ChatController from "../../../controllers/chat";
-import isEqual from "../../../helpers/isEqual";
+import {ChatProps} from "../chat-list/chat-list";
 
 type ChatCardType = {
     chat: ChatProps;
@@ -25,10 +24,6 @@ export class ChatListCard extends Block {
                 },
             }
         });
-    }
-
-    componentDidUpdate(oldProps: ChatProps, newProps: ChatProps) {
-        return !isEqual(oldProps, newProps);
     }
 
     static getName(): string {

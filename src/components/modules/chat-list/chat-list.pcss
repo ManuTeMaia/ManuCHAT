@@ -1,0 +1,54 @@
+.chat--list-card-wrap {
+    position: relative;
+    border-top: 1px solid var(--global--color-primary-40);
+    padding: calc(0.5 * var(--global--spacing-unit));
+    height: 65px;
+    display: flex;
+    align-items: center;
+    margin: 1px;
+}
+
+.chat--list-card-wrap.active,
+.chat--list-card-wrap:hover {
+    background: var(--global--color-light-gray);
+}
+
+.chat-list-card.card-avatar {
+    float: left;
+}
+
+.chat--list-card-text {
+    margin-left: 1em;
+}
+
+.chat--list-card-time {
+    position: absolute;
+    right: calc(0.5 * var(--global--spacing-unit));
+    top: calc(0.5 * var(--global--spacing-unit));
+    font-size: var(--global--font-size-xs);
+    color: var(--global--color-primary-80);
+}
+
+.chat--list-card-title {
+    font-weight: var(--heading--font-weight-strong);
+}
+
+.chat--list-card-unread {
+    position: absolute;
+    right: calc(0.5 * var(--global--spacing-unit));
+    bottom: calc(0.5 * var(--global--spacing-unit));
+    color: var(--global--color-white);
+    background: var(--global--color-primary);
+    border-radius: var(--button--border-radius);
+    padding: 12px 9px;
+    line-height: 0px;
+    font-size: var(--global--font-size-xs);
+}
+
+.chat--list-card-lastmessage {
+    color: var(--global--color-dark-gray);
+}
+
+.chat--list-card-lastmessage span {
+    font-weight: var(--heading--font-weight-strong);
+}

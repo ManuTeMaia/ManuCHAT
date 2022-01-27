@@ -102,8 +102,9 @@ class ChatController {
 		await this.getChatUsers({chatId: chatId});
 	}
 
-	addMessage(message: ChatMessageProps | ChatMessageProps[]) {
+	async addMessage(message: ChatMessageProps | ChatMessageProps[]) {
 			store.dispatch(addMessage(message));
+			await this.getChatList();
 	}
 }
 

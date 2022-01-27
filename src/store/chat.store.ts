@@ -1,8 +1,8 @@
 import {Action} from "../utils/Store";
 import {ChatMessageProps} from "../api/chatAPI";
 import {UserData} from "../api/authAPI.js";
-import {ChatProps} from "../pages/chats/chat/chat";
 import {isArray} from "../helpers/isArray";
+import {ChatProps} from "../components/modules/chat-list/chat-list";
 
 const SET_CHATS = "chats/SET";
 const SET_USER_SEARCH = "chats/SET_USER_SEARCH";

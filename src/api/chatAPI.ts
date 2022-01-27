@@ -1,6 +1,7 @@
 import BaseAPI from "./baseAPI";
 import { UserData } from "./authAPI";
-import {ChatProps} from "../pages/chats/chat/chat";
+import {ChatProps} from "../components/modules/chat-list/chat-list";
+
 
 export interface CreateChatData {
 	title: string;
