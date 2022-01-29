@@ -17,7 +17,7 @@ interface LastMessage {
     user: UserData;
     time: string;
     content: string;
-};
+}
 
 export class ChatList extends Block<ChatProps>{
     router = new Router();

@@ -1,3 +1,5 @@
+import Error500 from "./pages/error500";
+
 require("babel-polyfill");
 import "./helpers/hbsHelpers";
 
@@ -14,13 +16,12 @@ import ChatBodyPage from "./pages/chats/chat-body";
 import ProfilePage from "./pages/profile/user-profile";
 import ProfilePageEdit from "./pages/profile/user-profile-edit";
 import ProfileEditPasswordPage from "./pages/profile/user-profile-password";
-import Error404 from "./pages/error/";
+import Error404 from "./pages/error404/";
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const components = require("./components/**/index.ts") as {[key: string]: { default: Block }};
 
 Object.values(components).forEach((component) => {
-	//console.log(component);
 	Object.values(component).forEach(element => regComponent(element.default));
 });
 
@@ -51,12 +52,12 @@ const checkAuth: checkAuthType = async (next, currentRoute): Promise<void> => {
 router
 	.use("/", LoginPage)
 	.use("/signup", RegistrationPage)
-	.use("/404", Error404)
-	//.use("/500", Error500)
 	.use("/chats", ChatPage,undefined,undefined,true)
 	.use("/settings", ChatPage, ".root", {childBlock: ProfilePage, childQuery: ".chat--wrap"}, true)
 	.use("/chat/", ChatPage, ".root", {childBlock: ChatBodyPage, childQuery: ".chat--wrap"}, true)
 	.use("/settings/edit", ChatPage, ".root", {childBlock: ProfilePageEdit, childQuery: ".chat--wrap"}, true)
 	.use("/settings/pwd", ChatPage, ".root", {childBlock: ProfileEditPasswordPage, childQuery: ".chat--wrap"}, true)
+	.use("/500", Error500)
+	.useError("/404", Error404)
 	.checkAuth(checkAuth)
 	.start();

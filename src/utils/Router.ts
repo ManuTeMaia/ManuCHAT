@@ -46,18 +46,18 @@ class Route {
 			if (this._child) {
 				const child = this._child;
 				this._childBlock = new child.childBlock;
-				//console.log(this._childBlock);
 				renderDOM(child.childQuery, <Block>this._childBlock);
 			}
 	}
 }
 
 class Router {
-	private history: History;
-	private routes: Route[];
+	history: History;
 	private _rootQuery: string;
-	needAuth: boolean;
 	private static __instance: InstanceType<new () => Router>;
+	private _errorRoute?: Route;
+	private routes: Route[];
+	needAuth: boolean;
 	onCheckAuth: checkAuthType | undefined;
 
 	constructor(rootQuery = ".root") {
@@ -71,7 +71,7 @@ class Router {
 
 	}
 
-	use(pathname: string, block: typeof Block, rootQuery?: string, child?: ChildrenType, needAuth = false): this {
+	public use(pathname: string, block: typeof Block, rootQuery?: string, child?: ChildrenType, needAuth = false): this {
 		const query = rootQuery ? rootQuery : this._rootQuery;
 		const route = new Route(pathname, block, query, child, needAuth);
 		this.needAuth = needAuth;
@@ -79,7 +79,12 @@ class Router {
 		return this;
 	}
 
-	start(): void {
+	public useError(pathname: string, block: typeof Block) {
+		this._errorRoute = new Route(pathname, block, this._rootQuery);
+		return this;
+	}
+
+	public start(): void {
 		window.onpopstate = async () => {
 			this._onRoute(window.location.pathname);
 		};
@@ -87,8 +92,12 @@ class Router {
 		this._onRoute(window.location.pathname);
 	}
 
-	_onRoute(pathname: string): void {
-		const route = this.getRoute(pathname);
+	private _onRoute(pathname: string): void {
+		let route = this.getRoute(pathname);
+		if (route === undefined) {
+			this.history.replaceState({}, "", this._errorRoute?.pathname);
+			route = this._errorRoute;
+		}
 		if (this.onCheckAuth) {
 			return this.onCheckAuth(() => {
 				if (!route) {
@@ -101,7 +110,7 @@ class Router {
 
 	}
 
-	go(pathname: string): void {
+	public go(pathname: string): void {
 		this.history.pushState({}, "", pathname);
 		this._onRoute(pathname);
 	}
@@ -112,11 +121,11 @@ class Router {
 		return this;
 	}
 
-	back(): void {
+	public back(): void {
 		this.history.back();
 	}
 
-	forward(): void {
+	public forward(): void {
 		this.history.forward();
 	}
 

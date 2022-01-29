@@ -1,3 +1,5 @@
+import { API_URL } from "../common/global-consts";
+
 export enum Method {
 	Get = "Get",
 	Post = "Post",
@@ -13,8 +15,8 @@ type Options = {
 };
 
 class HTTPTransport {
-	static API_URL = "https://ya-praktikum.tech/api/v2";
 	protected endpoint: string;
+	static API_URL: string = API_URL;
 
 	constructor(endpoint: string) {
 		this.endpoint = `${HTTPTransport.API_URL}${endpoint}`;
@@ -72,7 +74,7 @@ class HTTPTransport {
 			};
 
 			xhr.onabort = () => reject({reason: "abort"});
-			xhr.onerror = () => reject({reason: "network error"});
+			xhr.onerror = () => reject({reason: "network error404"});
 			xhr.ontimeout = () => reject({reason: "timeout"});
 			if(!isFormData) {
 				xhr.setRequestHeader("Content-Type", "application/json");

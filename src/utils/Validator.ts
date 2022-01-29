@@ -64,9 +64,9 @@ class Validator {
 			const result = this._validate(input);
 			const inputName = input.getAttribute("name");
 			const errorDiv = document.createElement("div");
-			errorDiv.classList.add("input-error");
+			errorDiv.classList.add("input-error404");
 			if (typeof inputName === "string") {
-				errorDiv.setAttribute("error-for", inputName);
+				errorDiv.setAttribute("error404-for", inputName);
 			}
 			const currentDiv = document.querySelector(`[error-for=${inputName}]`);
 

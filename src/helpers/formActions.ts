@@ -8,13 +8,13 @@ function getFormData(form: HTMLFormElement): Record<string, unknown> {
     for(const [name, value] of formData) {
         consoleData[name] =  value;
     }
-   // console.log(consoleData);
+
     return consoleData;
 }
 
 function submitEmulator(e: Event, path: string): void {
     e.preventDefault();
-    const hasErrors = document.querySelector("[error-for]");
+    const hasErrors = document.querySelector("[error404-for]");
     new Validator().formValidate();
     if(!hasErrors) {
         getFormData(e.target as HTMLFormElement);

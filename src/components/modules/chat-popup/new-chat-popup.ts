@@ -42,7 +42,7 @@ export class NewChatPopup extends Block {
 				Object.entries(refs as { [key: string]: string }).forEach(([key, input]) => {
 					data[key] = input;
 				});
-				const hasErrors = document.querySelector("[error-for]");
+				const hasErrors = document.querySelector("[error404-for]");
 				new Validator().formValidate();
 				if (!hasErrors) {
 					await ChatController.createChat(data);

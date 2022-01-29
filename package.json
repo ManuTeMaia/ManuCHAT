@@ -9,7 +9,7 @@
         "url": "git+https://github.com/yandex-praktikum/middle.messenger.praktikum.yandex.git"
     },
     "keywords": [],
-    "author": "",
+    "author": "Manutemaia",
     "license": "ISC",
     "bugs": {
         "url": "https://github.com/yandex-praktikum/middle.messenger.praktikum.yandex/issues"
@@ -18,7 +18,10 @@
     "devDependencies": {
         "@babel/core": "^7.15.8",
         "@types/chai": "^4.2.22",
+        "@types/jsdom": "^16.2.14",
+        "@types/jsdom-global": "^3.0.2",
         "@types/mocha": "^9.0.0",
+        "@types/sinon": "^10.0.9",
         "@typescript-eslint/eslint-plugin": "^4.31.0",
         "@typescript-eslint/parser": "^4.31.0",
         "autoprefixer": "^9.8.6",
@@ -28,6 +31,8 @@
         "cssnano": "^4.1.10",
         "eslint": "^7.32.0",
         "handlebars": "^4.7.7",
+        "jsdom": "19.0.0",
+        "jsdom-global": "3.0.2",
         "mocha": "^9.1.2",
         "parcel-bundler": "^1.12.5",
         "parcel-plugin-handlebars-precompile": "^1.0.2",
@@ -39,6 +44,7 @@
         "postcss-nested": "^5.0.6",
         "postcss-normalize": "^9.0.0",
         "postcss-url": "^9.0.0",
+        "sinon": "^11.1.2",
         "stylelint": "^13.13.1",
         "stylelint-config-standard": "^22.0.0",
         "ts-node": "^10.2.1",

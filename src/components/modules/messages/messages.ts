@@ -11,7 +11,6 @@ export type MessagesType = {
 export class Messages extends Block{
 	constructor(props: MessagesType) {
 		super(props);
-		console.log(props);
 	}
 
 	componentDidUpdate(): boolean {

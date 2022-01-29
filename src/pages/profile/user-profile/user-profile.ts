@@ -3,6 +3,7 @@ import AuthController from "../../../controllers/auth";
 import Router from "../../../utils/Router";
 import {UserData} from "../../../api/authAPI";
 import "./user-profile.pcss";
+import {RESOURCE_URL} from "../../../common/global-consts";
 
 export interface UserProps {
 	user: UserData;
@@ -16,7 +17,7 @@ class ProfilePage extends Block {
 		this.state = {
 			headingText: props.user.display_name || `${props.user.first_name} ${props.user.second_name}`,
 			imageTitle: props.user.first_name || "Загрузите аватар",
-			avatarSrc: props.user.avatar !== null ?`https://ya-praktikum.tech/api/v2/resources${props.user.avatar}` : "/noimage.png",
+			avatarSrc: props.user.avatar !== null ?`${RESOURCE_URL}${props.user.avatar}` : "/noimage.png",
 			profileFields: [
 				{
 					label: "Email",

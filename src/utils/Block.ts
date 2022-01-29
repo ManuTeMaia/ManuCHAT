@@ -7,7 +7,6 @@ import {BlockConstructable} from "../helpers/regComponent";
 export interface BlockMeta<P = any> {
 	props: P;
 }
-type Events = Values<typeof Block.EVENTS>;
 
 class Block <P = any> {
 
@@ -18,7 +17,7 @@ class Block <P = any> {
 		FLOW_RENDER: "flow:render",
 	} as const;
 
-	eventBus: EventBus<Events>;
+	eventBus = new EventBus();
 	protected readonly _meta: BlockMeta;
 	protected _element: HTMLElement;
 	public default: BlockConstructable;
@@ -40,7 +39,6 @@ class Block <P = any> {
 		this.props = this._makePropsProxy(props || {} as P);
 		this.state = this._makePropsProxy(this.state);
 
-		this.eventBus = new EventBus<Events>();
 		this._registerEvents(this.eventBus);
 
 		this.eventBus.emit(Block.EVENTS.INIT, this.props);
@@ -178,7 +176,7 @@ class Block <P = any> {
 	_makePropsProxy(props: any): any {
 		return new Proxy(props, {
 			get(target: Record<string, unknown>, prop: string) {
-				if (prop.indexOf("_") === 0) {
+				if (prop.toString().indexOf("_") === 0) {
 					throw new Error("Нет прав");
 				} else {
 					const value: unknown = target[prop];
@@ -186,7 +184,8 @@ class Block <P = any> {
 				}
 			},
 			set(target: Record<string, unknown>,prop: string, value: unknown): boolean {
-				if (prop.indexOf("_") === 0) {
+				prop.toString();
+				if (prop.toString().indexOf("_") === 0) {
 					throw new Error("Нет прав");
 				} else {
 					target[prop] = value;

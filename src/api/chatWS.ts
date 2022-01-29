@@ -32,7 +32,7 @@ class ChatWS extends WS {
 				type,
 				content: JSON.parse(data),
 			};
-			console.log("Получены данные", messageResponse);
+
 			onMessage(messageResponse);
 		});
 	}

@@ -4,6 +4,7 @@ import Router from "../../../utils/Router";
 import {UserData} from "../../../api/authAPI";
 import ChatController from "../../../controllers/chat";
 import {ChatProps} from "../chat-list/chat-list";
+import {RESOURCE_URL} from "../../../common/global-consts";
 
 type ChatCardType = {
     chat: ChatProps;
@@ -26,6 +27,13 @@ export class ChatListCard extends Block {
         });
     }
 
+    protected getStateFromProps(props: ChatCardType ) {
+
+        this.state = {
+            avatarSrc: props.chat.avatar !== null ? `${RESOURCE_URL}${props.chat.avatar}` : "/noimage.png",
+        };
+    }
+
     static getName(): string {
         return "ChatListCard";
     }
@@ -34,16 +42,7 @@ export class ChatListCard extends Block {
         //language=hbs
         return `
             <div class="chat--list-card-wrap chat-{{chat.id}}">
-                <div class="avatar-wrap">
-                    <img
-                        {{#if chat.avatar}}
-                        src="https://ya-praktikum.tech/api/v2/resources{{chat.avatar}}"
-                        {{else}}
-                        src="/noimage.png"
-                        {{/if}}
-                        alt="{{chat.title}}"
-                    >
-                </div>
+                {{{Avatar imageSrc=avatarSrc imageTitle=chat.title}}}
                 <div class="chat--list-card-time">{{convert_message_date chat.last_message.time}}</div>  
                 <div class="chat--list-card-text">
                     <div class="chat--list-card-title">{{chat.title}}</div>

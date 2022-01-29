@@ -5,6 +5,7 @@ import { getFormData } from "../../../helpers/formActions";
 import "../user-profile-form.pcss";
 import {UpdateProfileData} from "../../../api/userAPI";
 import {UserProps} from "../user-profile/user-profile";
+import {RESOURCE_URL} from "../../../common/global-consts";
 
 	class ProfilePageEdit extends Block {
 
@@ -22,7 +23,7 @@ import {UserProps} from "../user-profile/user-profile";
 		this.state = {
 			headingText: props.user.display_name || `${props.user.first_name} ${props.user.second_name}`,
 			imageTitle: props.user.first_name || "Загрузите аватар",
-			avatarSrc: props.user.avatar !== null ? `https://ya-praktikum.tech/api/v2/resources${props.user.avatar}` : "/noimage.png",
+			avatarSrc: props.user.avatar !== null ? `${RESOURCE_URL}${props.user.avatar}` : "/noimage.png",
 			formInputs: [
 				{
 					label: "E-mail",
@@ -104,7 +105,7 @@ import {UserProps} from "../user-profile/user-profile";
 				Object.entries(refs as { [key: string]: string }).forEach(([key, input]) => {
 					data[(key as keyof UpdateProfileData)] = input;
 				});
-				const hasErrors = document.querySelector("[error-for]");
+				const hasErrors = document.querySelector("[error404-for]");
 				new Validator().formValidate();
 				if (!hasErrors) {
 					await UserController.update(data);

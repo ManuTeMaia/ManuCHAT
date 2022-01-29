@@ -5,6 +5,7 @@ import {AvatarProps} from "../../elements/avatar/avatar";
 import NewChatPopup from "../chat-popup";
 import {TextInputType} from "../../elements/inputs/text-input";
 import {UserData} from "../../../api/authAPI";
+import {RESOURCE_URL} from "../../../common/global-consts";
 
 export type ProfileCardType = {
 	avatar: AvatarProps;
@@ -23,7 +24,7 @@ export class ChatProfileCard extends Block {
 	getStateFromProps(props: ProfileCardType):void {
 
 		this.state = {
-			avatar: props.user && props.user.avatar !== null ?`https://ya-praktikum.tech/api/v2/resources${props.user.avatar}` : "/noimage.png",
+			avatar: props.user && props.user.avatar !== null ?`${RESOURCE_URL}${props.user.avatar}` : "/noimage.png",
 			onPopupOpen: (e: Event) => {
 			e.preventDefault();
 			const newChat = this.refs.newChat;

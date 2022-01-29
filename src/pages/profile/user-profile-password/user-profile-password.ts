@@ -4,17 +4,19 @@ import UserController from "../../../controllers/user";
 import { getFormData } from "../../../helpers/formActions";
 import "../user-profile-form.pcss";
 import {UpdatePasswordData} from "../../../api/userAPI";
+import {RESOURCE_URL} from "../../../common/global-consts";
+import {UserProps} from "../user-profile/user-profile";
 
 class ProfileEditPasswordPage extends Block {
 	validator = new Validator();
 
-	protected getStateFromProps() {
+	protected getStateFromProps(props: UserProps) {
 		const onBlur = (e: Event) => {
-			console.log(e.currentTarget);
 			this.validate((e.currentTarget as HTMLInputElement));
 		};
 
 		this.state = {
+			avatarSrc: props.user.avatar !== null ? `${RESOURCE_URL}${props.user.avatar}` : "/noimage.png",
 			formInputs: [
 				{
 					label: "Текущий пароль",
@@ -64,7 +66,7 @@ class ProfileEditPasswordPage extends Block {
 				Object.entries(refs as { [key: string]: string }).forEach(([key, input]) => {
 					data[(key as keyof UpdatePasswordData)] = input;
 				});
-				const hasErrors = document.querySelector("[error-for]");
+				const hasErrors = document.querySelector("[error404-for]");
 				new Validator().formValidate();
 				if (!hasErrors) {
 					await UserController.changePassword(data);

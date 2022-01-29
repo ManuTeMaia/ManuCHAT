@@ -9,7 +9,6 @@ class LoginPage extends Block {
 
 	protected getStateFromProps(): void {
 		const onBlur = (e: Event) => {
-			console.log(e.currentTarget);
 			this.validator.validate((e.currentTarget as HTMLInputElement));
 		};
 
@@ -51,7 +50,7 @@ class LoginPage extends Block {
 					password: fields.password as string
 				};
 
-				const hasErrors = document.querySelector("[error-for]");
+				const hasErrors = document.querySelector("[error404-for]");
 				this.validator.formValidate();
 					if(!hasErrors) {
 						await AuthController.login(loginData);

@@ -9,7 +9,6 @@ class RegistrationPage extends Block {
 
 	protected getStateFromProps() {
 		const onBlur = (e: Event) => {
-			console.log(e.currentTarget);
 			this.validator.validate((e.currentTarget as HTMLInputElement));
 		};
 
@@ -116,7 +115,7 @@ class RegistrationPage extends Block {
 				Object.entries(refs as { [key: string]: string }).forEach(([key, input]) => {
 					data[key] = input;
 				});
-				const hasErrors = document.querySelector("[error-for]");
+				const hasErrors = document.querySelector("[error404-for]");
 				new Validator().formValidate();
 				if (!hasErrors) {
 					await AuthController.signup(data);
@@ -126,7 +125,6 @@ class RegistrationPage extends Block {
 	}
 
 	componentDidMount() {
-		console.log(this.props);
 		if (this.props.user.profile) {
 			this.props.router.go("/chats");
 		}

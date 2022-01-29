@@ -19,7 +19,6 @@ export class ChatBodyPage extends Block {
 
 	constructor(props: ChatBodyProps) {
 		super(props);
-		console.log(props.chat);
 	}
 
 	router = new Router();

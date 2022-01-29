@@ -44,7 +44,6 @@ export class AvatarPopup extends Block<AvatarPopupProps> {
 						await UserController.updateAvatar(formData);
 
 					} else if (props.popUpName === "uploadChatAvatar") {
-						console.log(formData);
 						await ChatController.setAvatar(formData);
 					}
 				document.querySelector("[data-popup=uploadAvatar]")?.classList.add("hidden");
