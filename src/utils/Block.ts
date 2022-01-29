@@ -1,5 +1,5 @@
 import EventBus from "./EventBus";
-import Handlebars from "handlebars";
+import Handlebars from "handlebars/dist/handlebars.runtime";
 import { nanoid } from "nanoid";
 import isEqual from "../helpers/isEqual";
 import {BlockConstructable} from "../helpers/regComponent";

@@ -1,4 +1,4 @@
-import BaseAPI from "./BaseAPI";
+import BaseAPI from "./baseAPI";
 
 export interface SignupData {
 	first_name: string;
