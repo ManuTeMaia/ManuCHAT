@@ -11,7 +11,7 @@ Manutemaia Chat
 
 [Репозиторий Спринт #2](https://github.com/ManuTeMaia/middle.messenger.praktikum.yandex/tree/sprint_2)
 
-pull request #3: https://github.com/ManuTeMaia/middle.messenger.praktikum.yandex/pull/3
+pull request #3: https://github.com/ManuTeMaia/middle.messenger.praktikum.yandex/pull/4
 
 ### Команды:
 
