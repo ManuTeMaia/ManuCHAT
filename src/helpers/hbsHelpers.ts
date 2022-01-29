@@ -1,4 +1,4 @@
-import Handlebars from "handlebars/dist/handlebars.runtime";
+import Handlebars from "handlebars";
 
 Handlebars.registerHelper("slice_message", (value: string) => {
 	if (value.length >= 30) {
