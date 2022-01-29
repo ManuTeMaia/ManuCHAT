@@ -1,4 +1,4 @@
-import {AuthAPI, LoginData, SignupData, UserData} from "../api/AuthAPI";
+import {AuthAPI, LoginData, SignupData, UserData} from "../api/authAPI";
 import Router from "../utils/Router";
 import { store } from "../store";
 import {deleteUser, setResponse, setUser} from "../store/user.store";
