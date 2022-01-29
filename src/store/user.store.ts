@@ -35,7 +35,7 @@ export default (state = { profile: null, response: null, search: [] }, action: A
 		case SET_SEARCH:
 			return {...state, search: action.payload};
 		case SET_RESPONSE:
-			return { response: action.payload };
+			return { ...state, response: action.payload };
 		default:
 			return state;
 	}

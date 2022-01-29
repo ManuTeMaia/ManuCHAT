@@ -144,8 +144,8 @@ class RegistrationPage extends Block {
 			            {{#each formInputs}}
                             {{{InputWrapper label=this.label name=this.name input=this.input}}}
                         {{/each}}
-                        {{#if user.error }}
-                            <div class="input-error">{{user.error.reason}}</div>
+                        {{#if user.response.error }}
+                            <div class="input-error">{{user.response.error }}</div>
                         {{/if}}
 			            {{{Button title="Зарегистрироваться" buttonClass="form--register-submit" name="registration-submit" onClick=onRegister}}}
 					</form>

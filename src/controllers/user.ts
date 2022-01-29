@@ -1,8 +1,7 @@
 import { UserAPI, UpdateProfileData, UpdatePasswordData, SearchData } from "../api/userAPI";
 import { store } from "../store";
 import { setUser } from "../store/user.store";
-import { setResponse } from "../store/user.store";
-import { setSearch } from "../store/user.store";
+import { setResponse, setSearch } from "../store/user.store";
 import { UserData } from "api/authAPI";
 import Router from "../utils/Router";
 
@@ -58,7 +57,8 @@ class UserController {
 		try {
 			return this.api.search(data);
 		} catch (e) {
-			store.dispatch(setResponse({error: (e as { reason: string }).reason }));		}
+			store.dispatch(setResponse({error: (e as { reason: string }).reason }));
+		}
 	}
 }
 

@@ -4,5 +4,5 @@ import {connect} from "../../../store";
 import Block from "../../../utils/Block";
 
 export default withRouter(connect((state: any) => ({
-	user: state.user
+	user: state.user.profile || {}
 }), ProfileEditPasswordPage as typeof Block));

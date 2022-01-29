@@ -73,8 +73,8 @@ class LoginPage extends Block {
 					{{#each formInputs}}
 						{{{InputWrapper label=this.label name=this.name input=this.input}}}
 					{{/each}}
-                    {{#if user.error }}
-                        <div class="input-error">{{user.error.reason}}</div>
+                    {{#if user.response.error }}
+                        <div class="input-error">{{user.response.error}}</div>
                     {{/if}}
                     {{{Button title="Авторизоваться" buttonClass="form--login-submit" name="login-submit" onClick=onLogin}}}
 				</form>
