@@ -51,7 +51,7 @@ export class ChatProfileCard extends Block {
 						</div>
                     {{{NewChatPopup popupName="newChat" popupTitle="Создать новый чат" ref="newChat"}}}
 					</div>
-				{{{TextInput type="search" name="search" placeholder="Поиск" class="chat-list-profile-card profile-card-search"}}}
+				{{{TextInput type="search" title="Заглушка" name="search" placeholder="Поиск" class="chat-list-profile-card profile-card-search"}}}
 			</div>
 		`;
 	}

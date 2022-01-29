@@ -136,7 +136,7 @@ export class ChatBodyPage extends Block {
              </div>
 			{{{Messages chatId=chat.id ref="messagesWrap"}}}
 		    <div class="main--page-chat-body-footer">
-		        <i class="ch-attach"></i>
+		        <i class="ch-attach" title="Заглушка"></i>
 		        <form action="" class="create-new-message-form" id="chatMessageForm">
 		            {{{InputWrapper label=formInputs.label name=formInputs.name input=formInputs.input ref="message"}}}
 		            {{{Button type="button" buttonClass="main--page-chat-send" buttonIcon="ch-send" name="send-submit" title="" onClick=onMessageSend}}}

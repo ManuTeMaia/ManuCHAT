@@ -16,7 +16,11 @@ class ChatPage extends Block {
 	                {{{ChatProfileCard}}}
 	                {{{ChatList chats=this}}}
                 </div>
-                <div class="chat--wrap">Выберите чат чтобы отправить сообщение
+	            <div class="chat--wrap">
+		            <div>
+			            Выберите чат чтобы отправить сообщение <br />
+		            	или создайте новый чат, нажав на иконку <span class="icon-in-text"><i class="ch-chat-new"></i></span> на боковой панели.
+	            	</div>
                 </div>
             </div>
 		`;
