@@ -21,6 +21,7 @@ npm run build //собираем
 npm run start // запускаем сервер
 npm run eslint // ESlint
 npm run styles // StyleLint
+npm run test // запуск тестов
 
 ```
 

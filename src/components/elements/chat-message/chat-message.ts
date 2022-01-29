@@ -38,13 +38,7 @@ export class ChatMessage extends Block<MessageTypes> {
                 {{message.content}}
                 <div class="message-time">
                     {{#if (self_message user.id message.user_id)}}
-                        {{#if (message_sended status)}}
-                                <i class="ch-sent gray"></i>
-                        {{else if (message_recieved status) }}
-                                <i class="ch-sent gray"></i>
-                        {{else if (message_readed status) }}
-                                <i class="ch-sent green"></i>
-                        {{/if}}
+                            <i class="ch-sent green"></i>
                     {{/if}}
                     {{convert_message_date message.time}}
                 </div>
