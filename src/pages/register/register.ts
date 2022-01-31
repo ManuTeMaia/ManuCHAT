@@ -110,12 +110,12 @@ class RegistrationPage extends Block {
 			onRegister: async (e: Event) => {
 				e.preventDefault();
 				const data: any = {};
-				const form = document.querySelector("#regForm");
-				const refs = getFormData(form as HTMLFormElement);
+				const form = document.querySelector<HTMLFormElement>("#regForm");
+				const refs = getFormData(form);
 				Object.entries(refs as { [key: string]: string }).forEach(([key, input]) => {
 					data[key] = input;
 				});
-				const hasErrors = document.querySelector("[error404-for]");
+				const hasErrors = document.querySelector("[error-for]");
 				new Validator().formValidate();
 				if (!hasErrors) {
 					await AuthController.signup(data);

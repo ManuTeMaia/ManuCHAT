@@ -1,4 +1,4 @@
-import {AddUsersData, ChatAPI, ChatTokenData, ChatUsersData, CreateChatData, DeleteChatData} from "./ChatAPI";
+import {AddUsersData, ChatAPI, ChatTokenData, ChatUsersData, CreateChatData, DeleteChatData} from "./сhatAPI";
 import sinon from "sinon";
 import { expect } from "chai";
 import { API_URL } from "../common/global-consts";

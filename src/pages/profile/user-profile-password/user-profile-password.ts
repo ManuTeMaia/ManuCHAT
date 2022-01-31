@@ -63,12 +63,12 @@ class ProfileEditPasswordPage extends Block {
 			onSave: async (e: Event) => {
 				e.preventDefault();
 				const data = {} as UpdatePasswordData;
-				const form = document.querySelector("#changePwdForm");
-				const refs = getFormData(form as HTMLFormElement);
+				const form = document.querySelector<HTMLFormElement>("#changePwdForm");
+				const refs = getFormData(form);
 				Object.entries(refs as { [key: string]: string }).forEach(([key, input]) => {
 					data[(key as keyof UpdatePasswordData)] = input;
 				});
-				const hasErrors = document.querySelector("[error404-for]");
+				const hasErrors = document.querySelector("[error-for]");
 				new Validator().formValidate();
 				if (!hasErrors) {
 					await UserController.changePassword(data);

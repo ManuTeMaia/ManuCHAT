@@ -1,5 +1,7 @@
 import Block from "../../../utils/Block";
 import {UserData} from "../../../api/authAPI";
+import isEqual from "../../../helpers/isEqual";
+import {ChatUsersPopupProps} from "../add-user-popup/add-user-popup";
 
 interface SearchResultsProps {
 	search: UserData[];
@@ -14,6 +16,10 @@ export class SearchResults extends Block<SearchResultsProps> {
 		this.state = {
 			result: props.search
 		};
+	}
+
+	componentDidUpdate(oldProps: SearchResultsProps, newProps: SearchResultsProps) {
+		return isEqual(oldProps, newProps);
 	}
 
 	static getName(): string {

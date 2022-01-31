@@ -38,26 +38,26 @@ export class AddUserPopup extends Block<ChatUsersPopupProps> {
 			},
 
 			onUserSearch: async (e: Event) => {
-				const searchString = (e.target as HTMLInputElement).value;
+				const searchString = <HTMLInputElement>e.target.value;
 				await UserController.search({ login: searchString });
 				document.querySelector("[data-popup=addChatUser]")?.classList.remove("hidden");
 			},
 
 			chatUserAdd: async (e: Event) => {
 				e.preventDefault();
-				const form = document.querySelector("#addChatUser");
-				const fields = getFormData(form as HTMLFormElement);
+				const form = document.querySelector<HTMLFormElement>("#addChatUser");
+				const fields = getFormData(form);
 				const users = Object.values(fields);
-				const searchData = {chatId: props.chatId, users: users} as AddUsersData;
+				const searchData = <AddUsersData>{chatId: props.chatId, users: users};
 				await ChatController.addUsersToChat(searchData);
 				document.querySelector("[data-popup=addChatUser]")?.classList.remove("hidden");
 			}
 		};
 	}
 
-	componentDidUpdate(oldProps: ChatUsersPopupProps, newProps: ChatUsersPopupProps) {
+	/*componentDidUpdate(oldProps: ChatUsersPopupProps, newProps: ChatUsersPopupProps) {
 		return isEqual(oldProps, newProps);
-	}
+	}*/
 
 	static getName(): string {
 		return "AddUserPopup";

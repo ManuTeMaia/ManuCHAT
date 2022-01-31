@@ -7,8 +7,9 @@
       <option name="myIgnoreVendorSpecificProperties" value="false" />
       <option name="myCustomPropertiesList">
         <value>
-          <list size="1">
+          <list size="2">
             <item index="0" class="java.lang.String" itemvalue="grid-pull" />
+            <item index="1" class="java.lang.String" itemvalue="grid-push" />
           </list>
         </value>
       </option>

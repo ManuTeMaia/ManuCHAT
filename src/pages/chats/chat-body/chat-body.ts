@@ -63,7 +63,8 @@ export class ChatBodyPage extends Block {
 				}
 			},
 
-			onMessageSend: () => {
+			onMessageSend: (e: Event) => {
+				e.preventDefault();
 				const newMessage = (this.refs.message.querySelector("input") as HTMLInputElement).value;
 				if(newMessage) {
 					this.ws.sendMessage(newMessage);
@@ -138,8 +139,8 @@ export class ChatBodyPage extends Block {
 		    <div class="main--page-chat-body-footer">
 		        <i class="ch-attach" title="Заглушка"></i>
 		        <form action="" class="create-new-message-form" id="chatMessageForm">
-		            {{{InputWrapper label=formInputs.label name=formInputs.name input=formInputs.input ref="message"}}}
-		            {{{Button type="button" buttonClass="main--page-chat-send" buttonIcon="ch-send" name="send-submit" title="" onClick=onMessageSend}}}
+		            {{{InputWrapper label=formInputs.label name=formInputs.name input=formInputs.input ref="message" }}}
+		            {{{Button buttonClass="main--page-chat-send" buttonIcon="ch-send" name="send-submit" title="" onClick=onMessageSend}}}
 		        </form>
 		    </div>
 		</div>

@@ -12,7 +12,7 @@ export type ButtonProps = {
 
 export class Button extends Block {
     constructor({name, type="submit", title, buttonClass, buttonIcon, onClick}: ButtonProps) {
-        super({name, type, title, buttonClass, buttonIcon, events: {click: onClick}});
+        super({name, type, title, buttonClass, buttonIcon, events: {click: onClick }});
     }
 
     static getName(): string {

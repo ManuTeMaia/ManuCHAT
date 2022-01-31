@@ -43,14 +43,14 @@ class LoginPage extends Block {
 			],
 			onLogin: async (e: Event) => {
 				e.preventDefault();
-				const form = document.querySelector("#loginForm");
-				const fields = getFormData(form as HTMLFormElement);
+				const form = document.querySelector<HTMLFormElement>("#loginForm");
+				const fields = getFormData(form);
 				const loginData = {
 					login: fields.login as string,
 					password: fields.password as string
 				};
 
-				const hasErrors = document.querySelector("[error404-for]");
+				const hasErrors = document.querySelector("[error-for]");
 				this.validator.formValidate();
 					if(!hasErrors) {
 						await AuthController.login(loginData);
