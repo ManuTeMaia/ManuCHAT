@@ -4,7 +4,6 @@ import ChatController from "../../../controllers/chat";
 import {UserData} from "../../../api/authAPI";
 import {getFormData} from "../../../helpers/formActions";
 import {AddUsersData} from "../../../api/chatAPI";
-import isEqual from "../../../helpers/isEqual";
 
 export interface ChatUsersPopupProps {
 	chatId: number;
@@ -20,7 +19,7 @@ export class AddUserPopup extends Block<ChatUsersPopupProps> {
 	protected getStateFromProps(props: ChatUsersPopupProps) {
 
 		this.state = {
-			search: props.search,
+			//search: props.search,
 			formInputs: {
 				label: "Поиск пользователя",
 				name: "avatar",
@@ -55,10 +54,6 @@ export class AddUserPopup extends Block<ChatUsersPopupProps> {
 		};
 	}
 
-	/*componentDidUpdate(oldProps: ChatUsersPopupProps, newProps: ChatUsersPopupProps) {
-		return isEqual(oldProps, newProps);
-	}*/
-
 	static getName(): string {
 		return "AddUserPopup";
 	}
@@ -74,7 +69,7 @@ export class AddUserPopup extends Block<ChatUsersPopupProps> {
 					<div class="popup-content">
                         {{{TextInput type="search" name="search" placeholder="Поиск пользователя" class="chat-user-search" onInput=onUserSearch}}}
                         <form id="addChatUser" action="" class="file-upload-form" enctype="multipart/form-data">
-            				{{{SearchResults search=search ref="searchResults"}}}
+            				{{{SearchResults result=this}}}
 	                        {{{Button buttonClass="chat-user-actions-submit" name="add-chat-user" title="Добавить" onClick=chatUserAdd}}}
 						</form>
 	                    {{#if response.error }}

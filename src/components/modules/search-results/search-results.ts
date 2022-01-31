@@ -1,10 +1,9 @@
 import Block from "../../../utils/Block";
 import {UserData} from "../../../api/authAPI";
 import isEqual from "../../../helpers/isEqual";
-import {ChatUsersPopupProps} from "../add-user-popup/add-user-popup";
 
 interface SearchResultsProps {
-	search: UserData[];
+	result: UserData[];
 }
 
 export class SearchResults extends Block<SearchResultsProps> {
@@ -12,13 +11,7 @@ export class SearchResults extends Block<SearchResultsProps> {
 		super({...props});
 	}
 
-	protected getStateFromProps(props: SearchResultsProps) {
-		this.state = {
-			result: props.search
-		};
-	}
-
-	componentDidUpdate(oldProps: SearchResultsProps, newProps: SearchResultsProps) {
+	componentDidUpdate(oldProps:SearchResultsProps, newProps:SearchResultsProps): void {
 		return isEqual(oldProps, newProps);
 	}
 
