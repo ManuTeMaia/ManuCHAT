@@ -1,0 +1,38 @@
+.main--page-user-profile-wrap {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: center;
+    width: 100%;
+    height: 100%;
+}
+
+.main--page-user-profile-fields {
+    width: 100%;
+}
+
+.main--page-user-profile-actions {
+    margin-top: var(--global--spacing-vertical);
+    padding: var(--global--spacing-vertical) 0;
+    width: 100%;
+    clear: both;
+}
+
+.user-profile-link {
+    padding: var(--global--spacing-vertical) 0 0;
+    grid-column: 2/3;
+    grid-push: 1/6;
+    grid-pull: 1/6;
+}
+
+.user-profile-link.link-logout {
+    text-align: left;
+    color: var(--global--color-error);
+    margin-top: 10px;
+}
+
+.main--page-user-profile.user-profile-avatar,
+.main--page-user-profile.user-profile-avatar img {
+    width: 100px;
+    height: 100px;
+}

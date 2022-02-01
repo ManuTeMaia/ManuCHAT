@@ -1,21 +1,25 @@
-import pageRender from "./pageRender";
+import Router from "../utils/Router";
 import Validator from "../utils/Validator";
 
-function getFormData(): void {
-    const data: Record<string, unknown> = {};
-    const inputFields = document.querySelectorAll("form input");
-    inputFields.forEach((input: HTMLInputElement) => data[input.name] = input.value);
-    console.log(data);
+function getFormData(form: HTMLFormElement): Record<string, unknown> {
+    const formData = new FormData(form);
+    const consoleData: Record<string, unknown> = {};
+
+    for(const [name, value] of formData) {
+        consoleData[name] =  value;
+    }
+
+    return consoleData;
 }
 
-function submitEmulator(e: Event, query: string, block: string): void {
+function submitEmulator(e: Event, path: string): void {
     e.preventDefault();
+    const hasErrors = document.querySelector("[error404-for]");
     new Validator().formValidate();
-    const hasErrors =  document.querySelectorAll(".invalid").length;
     if(!hasErrors) {
-        getFormData();
-        pageRender(query, block);
+        getFormData(e.target as HTMLFormElement);
+        new Router().go(path);
     }
 }
 
-export default submitEmulator;
+export { submitEmulator, getFormData };

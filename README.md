@@ -1,7 +1,7 @@
 Manutemaia Chat
 ======
 
-## Учебный проект Yandex.Практикум. Спринт 2.
+## Учебный проект Yandex.Практикум. Спринт 3.
 
 [Дизайн-макет в Figma](https://www.figma.com/file/LTUtHdbBdjjGonMOwMMljk/Manutemaia-Chat?node-id=0%3A1)
 
@@ -9,7 +9,9 @@ Manutemaia Chat
 
 [Репозиторий Спринт #1](https://github.com/ManuTeMaia/middle.messenger.praktikum.yandex/tree/sprint_1)
 
-pull request #2: https://github.com/ManuTeMaia/middle.messenger.praktikum.yandex/pull/3
+[Репозиторий Спринт #2](https://github.com/ManuTeMaia/middle.messenger.praktikum.yandex/tree/sprint_2)
+
+pull request #3: https://github.com/ManuTeMaia/middle.messenger.praktikum.yandex/pull/4
 
 ### Команды:
 
@@ -19,6 +21,7 @@ npm run build //собираем
 npm run start // запускаем сервер
 npm run eslint // ESlint
 npm run styles // StyleLint
+npm run test // запуск тестов
 
 ```
 
@@ -44,16 +47,14 @@ npm run styles // StyleLint
 
 8. Попытка компонентного подхода
 
+#### Sprint 3
+
+9. Добавлен роутинг
+10. Реализация компонентного подхода (рефакторинг на 80%)
+11. Работа с API и WS
+12. Тесты Mocha & Chai & Sinon & JSDOM
+13. Установлен Helmet для защиты от XSS
+
 ### Информация для ревью:
 
-1. Переделан псевдороутинг.
-
-2. Страницы с ошибками открываются отдельно: 
-
-[Ошибка 50*](https://quirky-lumiere-db1dd9.netlify.app/500.html)
-
-[Ошибка 404](https://quirky-lumiere-db1dd9.netlify.app/404.html) 
-
-3. Страница профиля пользователя доступна при нажатии на аватар в боковой панели.
-
-4. Переписка чата кликабельна во втором чате (Marvell).
+1. Страница профиля пользователя доступна при нажатии на аватар в боковой панели.

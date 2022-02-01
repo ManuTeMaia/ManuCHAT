@@ -2,9 +2,10 @@
     "compilerOptions": {
         "outDir": "dist",
         "baseUrl": "./src/",
-        "target": "es2016",
         "declaration": false,
-        "module": "ES6",
+        "target": "es2016",
+        "module": "CommonJS",
+        "esModuleInterop": true,
         "strictNullChecks": true,
         "sourceMap": true,
         "noImplicitAny": true,

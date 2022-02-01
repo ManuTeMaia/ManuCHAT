@@ -1,66 +1,86 @@
 @font-face {
-	font-family: 'manu-chat';
-	src:  url('../../static/fonts/manu-chat.eot?8aia3f');
-	src:  url('../../static/fonts/manu-chat.eot?8aia3f#iefix') format('embedded-opentype'),
-		url('../../static/fonts/manu-chat.ttf?8aia3f') format('truetype'),
-		url('../../static/fonts/manu-chat.woff?8aia3f') format('woff'),
-		url('../../static/fonts/manu-chat.svg?8aia3f#manu-chat') format('svg');
-	font-weight: normal;
-	font-style: normal;
-	font-display: block;
+    font-family: 'manu-chat';
+    src: url('../../static/fonts/manu-chat.eot?w0s3i2');
+    src:
+        url('../../static/fonts/manu-chat.eot?w0s3i2#iefix') format('embedded-opentype'),
+        url('../../static/fonts/manu-chat.ttf?w0s3i2') format('truetype'),
+        url('../../static/fonts/manu-chat.woff?w0s3i2') format('woff'),
+        url('../../static/fonts/manu-chat.svg?w0s3i2#manu-chat') format('svg');
+    font-weight: normal;
+    font-style: normal;
+    font-display: block;
 }
 
 i {
-	/* use !important to prevent issues with browser extensions that change fonts */
-	font-family: 'manu-chat' !important;
-	speak: never;
-	font-style: normal;
-	font-weight: normal;
-	font-variant: normal;
-	text-transform: none;
-	line-height: 1;
+    /* use !important to prevent issues with browser extensions that change fonts */
+    font-family: "manu-chat", serif !important;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
 
-	/* Better Font Rendering =========== */
-	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale;
+    /* Better Font Rendering =========== */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
-.ch-add_user:before {
-	content: "\e900";
+.ch-sent::before {
+    content: "\e90e";
 }
-.ch-attachment:before {
-	content: "\e901";
+
+.ch-attach::before {
+    content: "\e900";
 }
-.ch-chat:before {
-	content: "\e902";
+
+.ch-chat-new::before {
+    content: "\e901";
 }
-.ch-compass:before {
-	content: "\e903";
+
+.ch-close::before {
+    content: "\e902";
 }
-.ch-delete_user:before {
-	content: "\e904";
+
+.ch-cogs::before {
+    content: "\e903";
 }
-.ch-duplicate:before {
-	content: "\e905";
+
+.ch-exit::before {
+    content: "\e904";
 }
-.ch-gallery:before {
-	content: "\e906";
+
+.ch-file::before {
+    content: "\e905";
 }
-.ch-more:before {
-	content: "\e907";
+
+.ch-geo-tag::before {
+    content: "\e906";
 }
-.ch-pin:before {
-	content: "\e908";
+
+.ch-image::before {
+    content: "\e907";
 }
-.ch-search:before {
-	content: "\e909";
+
+.ch-more::before {
+    content: "\e908";
 }
-.ch-send:before {
-	content: "\e90a";
+
+.ch-search::before {
+    content: "\e909";
 }
-.ch-settings:before {
-	content: "\e90b";
+
+.ch-send::before {
+    content: "\e90a";
 }
-.ch-trash:before {
-	content: "\e90c";
+
+.ch-trash::before {
+    content: "\e90b";
+}
+
+.ch-user-add::before {
+    content: "\e90c";
+}
+
+.ch-user-delete::before {
+    content: "\e90d";
 }

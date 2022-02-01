@@ -2,8 +2,15 @@
     "extends": "stylelint-config-standard",
     "rules": {
         "color-hex-case": "lower",
-        "indentation": 4
+        "indentation": 4,
+        "property-no-unknown": [
+            true,
+            {
+                "ignoreProperties": ["/^grid-/"]
+            }
+        ]
     },
+
     "ignoreFiles": [
         "dist/*",
         "*.hbs",

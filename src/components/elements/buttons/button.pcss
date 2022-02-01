@@ -1,0 +1,53 @@
+button[type=submit] {
+    background: var(--button--color-background);
+    color: var(--button--color-text);
+    border: var(--button--border-width) solid transparent;
+    border-radius: var(--button--border-radius);
+    cursor: pointer;
+    font-weight: var(--button--font-weight);
+    font-family: var(--button--font-family);
+    font-size: var(--button--font-size);
+    line-height: var(--button--line-height);
+    padding: var(--button--padding-vertical) var(--button--padding-horizontal);
+    text-decoration: none;
+    box-shadow: var(--form--box-shadow);
+    transition: var(--global--transition);
+}
+
+button[type=submit]:focus,
+button[type=submit]:hover {
+    background: var(--button--color-background-active);
+    color: var(--button--color-text-active);
+    transition: var(--global--transition);
+}
+
+button[type=button] {
+    background: transparent;
+    color: var(--global--color-primary);
+    border: var(--button--border-width) solid transparent;
+    border-radius: 0;
+    cursor: pointer;
+    font-family: var(--button--font-family);
+    font-size: var(--button--font-size);
+    line-height: var(--button--line-height);
+    padding: 0;
+    box-shadow: none;
+    transition: var(--global--transition);
+}
+
+button[type=button]:focus,
+button[type=button]:hover {
+    color: var(--global--color-secondary);
+    transition: var(--global--transition);
+}
+
+button[type=button].aslink {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    margin-bottom: var(--global--spacing-unit);
+}
+
+button[type=button].aslink:focus,
+button[type=button].aslink:hover {
+    text-decoration-style: dotted;
+}

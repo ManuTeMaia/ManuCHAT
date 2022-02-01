@@ -43,15 +43,25 @@
 .main--page-chat-body-header-chatname {
     display: flex;
     align-items: center;
-    font-weight: var(--heading--font-weight-strong);
 }
 
-.main--page-chat-avatar.chat-avatar {
-    margin-right: var(--global--spacing-horizontal);
+.main--page-chat-body-header-chatname h3 {
+    margin-block-start: 0;
+    margin-block-end: 0;
+}
+
+.main--page-chat-body-header-chatname .avatar-wrap {
+    margin-right: calc(2 * var(--global--spacing-unit));
+}
+
+.main--page-chat-options i {
+    font-size: var(--global--font-size-xl);
+    text-shadow: rgba(0, 0, 0, 0.15) 0 4px 4px;
 }
 
 .main--page-chat-body-messages {
-    margin: 80px 0;
+    margin: 80px 30px 80px 0;
+    width: 100%;
 }
 
 .main--page-chat-body-footer i {
@@ -62,8 +72,7 @@
     text-shadow: rgba(0, 0, 0, 0.15) 0 4px 4px;
 }
 
-.message-input-form {
-    display: flex;
+.create-new-message-form {
     width: 100%;
 }
 
@@ -74,15 +83,54 @@ input[type="text"].message-input-form-input {
     box-shadow: var(--form--box-shadow);
     background: var(--global--color-light-gray);
     margin: 0 calc(0.75 * var(--global--spacing-unit));
-    padding: 0 var(--global--spacing-unit);
+    padding: calc(0.5 * var(--global--spacing-unit)) var(--global--spacing-unit);
 }
 
 button[type="submit"].main--page-chat-send {
-    padding: 0;
-    background: transparent;
+    display: inline-block;
+    float: right;
+    padding: 10px 10px 8px 8px;
     line-height: 0;
 }
 
+.create-new-message-form .input-wrapper {
+    position: relative;
+    display: inline-block;
+    width: 92%;
+    margin-bottom: 0;
+}
+
+.create-new-message-form .input-error {
+    position: absolute;
+    bottom: 11px;
+    right: 0;
+}
+
+button[type=button].main--page-chat-send {
+    float: right;
+    padding: 5px 10px;
+}
+
 .main--page-chat-send i {
-    font-size: var(--global--font-size-xxl);
+    font-size: var(--global--font-size-xl);
+    text-shadow: rgba(0, 0, 0, 0.15) 0 4px 4px;
+}
+
+.main--page-chat-send:hover i {
+    color: var(--global--color-primary-60);
+}
+
+.context-menu-wrapper {
+    position: absolute;
+    width: 180px;
+    background: var(--global--color-white);
+    box-shadow: var(--global--box-shadow);
+    border-radius: var(--global--border-radius);
+    padding: calc(2 * var(--global--spacing-unit)) calc(2 * var(--global--spacing-unit)) var(--global--spacing-unit);
+    top: 30px;
+    right: 30px;
+}
+
+button[type=button].aslink.main--page-delete-chat {
+    color: var(--global--color-error);
 }

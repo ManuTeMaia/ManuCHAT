@@ -1,82 +1,149 @@
 import Block from "../../../utils/Block";
-import submitEmulator from "../../../helpers/formActions";
-import Avatar from "../../../components/avatar/avatar";
-import ChatMessage from "../../../components/chat-message/chat-message";
-import TextInput from "../../../components/inputs/text-input";
-import Button from "../../../components/buttons/submit-button";
-import template from "./chat-body.hbs";
+import ChatWS, {MessageResponse} from "../../../api/chatWS";
+import ChatController from "../../../controllers/chat";
+import {DeleteChatData} from "../../../api/chatAPI";
+import Router from "../../../utils/Router";
 import "./chat-body.pcss";
+import {isArray} from "../../../helpers/isArray";
+import {UserData} from "../../../api/authAPI";
+import isEqual from "../../../helpers/isEqual";
+import {ChatProps} from "../../../components/modules/chat-list/chat-list";
 
-class ChatBodyPage extends Block{
-	constructor() {
-        super("div");
-    }
-    render():DocumentFragment {
-		const avatar = new Avatar({
-			divclass: "main--page-chat-avatar chat-avatar",
-			imagesrc: "/noimage.png",
-			imagetitle: "This Chat",
-		});
-		const chatname = "Marvell";
-		const textinput = new TextInput({
-				type: "text",
-				name: "message",
-				class: "message-input-form-input",
-				placeholder: "Пишите...",
-				validationtype: "message",
-				required: true,
-				events: {
-					focus: (e: Event) => this.validate((e.currentTarget as HTMLInputElement)),
-					blur: (e: Event) => this.validate((e.currentTarget as HTMLInputElement)),
-				}
-		});
-        const send = new Button({
-			class: "main--page-chat-send",
-			name: "send-submit",
-			events: {
-				click: (e) => submitEmulator(e, "", "")
-				}
-		});
-		const chatmessages = [
-			{
-			text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas at neque commodo, mattis sapien bibendum, fringilla lacus. Pellentesque est metus, sollicitudin a vulputate a, luctus at mi. Maecenas eleifend vulputate gravida. Sed sodales diam eget mauris mattis, in rutrum sapien auctor. Aenean sed justo vel mauris gravida mollis eget eu velit. Vivamus ut auctor libero. Maecenas eu ipsum id sapien accumsan feugiat. Donec sit amet condimentum felis, ut tincidunt mauris. Sed nec luctus lorem. Aliquam id blandit urna. Phasellus mauris ipsum, blandit a lacus nec, finibus tempus odio. Quisque sollicitudin viverra dapibus.",
-			time:"13:15"
-			},
-			{
-			ismine:"mine",
-			text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas at neque commodo, mattis sapien bibendum, fringilla lacus. Pellentesque est metus, sollicitudin a vulputate a, luctus at mi. Maecenas eleifend vulputate gravida. Sed sodales diam eget mauris mattis, in rutrum sapien auctor. Aenean sed justo vel mauris gravida mollis eget eu velit. Vivamus ut auctor libero. Maecenas eu ipsum id sapien accumsan feugiat. Donec sit amet condimentum felis, ut tincidunt mauris. Sed nec luctus lorem.",
-			time:"13:35",
-			isrecieved: "+"
-			},
-			{
-			text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas at neque commodo, mattis sapien bibendum, fringilla lacus. Pellentesque est metus, sollicitudin a vulputate a, luctus at mi. Maecenas eleifend vulputate gravida. Sed sodales diam eget mauris mattis, in rutrum sapien auctor. Aenean sed justo vel mauris gravida mollis eget eu velit. Vivamus ut auctor libero. Maecenas eu ipsum id sapien accumsan feugiat. Donec sit amet condimentum felis, ut tincidunt mauris. Sed nec luctus lorem. Aliquam id blandit urna. Phasellus mauris ipsum, blandit a lacus nec, finibus tempus odio. Quisque sollicitudin viverra dapibus.",
-			time:"13:15"
-			},
-			{
-			ismine:"mine",
-			text: "Pellentesque est metus, sollicitudin a vulputate a, luctus at mi. Maecenas eleifend",
-			time:"13:35",
-			isrecieved: "+"
-			},
-			{
-			text:"%)",
-			time:"15:00"
-			},
-			{
-			text:"Что-то непонятное",
-			time:"15:02"
-			}
-		].map((chatmessage) => new ChatMessage(chatmessage));
-
-        return this.compile(template, {
-			chatname:chatname,
-			avatar:avatar,
-			chatmessages:chatmessages,
-			textinput:textinput,
-			send:send,
-			
-		});
-    }
-
+interface ChatBodyProps {
+	chat: ChatProps;
+	user: UserData;
+	messages: [];
 }
-export default ChatBodyPage;
+
+export class ChatBodyPage extends Block {
+
+	constructor(props: ChatBodyProps) {
+		super(props);
+	}
+
+	router = new Router();
+	ws = new ChatWS();
+
+	protected getStateFromProps(props: ChatBodyProps) {
+		this.state = {
+			avatarSrc: props.chat.avatar!==null ? `https://ya-praktikum.tech/api/v2/resources${props.chat.avatar}` : "/noimage.png",
+			formInputs:
+				{
+					name: "message",
+					input:
+						{
+							name: "message",
+							type: "text",
+							placeholder: "Пишите...",
+							inputClass: "message-input-form-input",
+							validationType: "notnull",
+							required: true,
+						}
+				},
+			onChatOptions: (e: Event) => {
+				e.preventDefault();
+				document.querySelector(".chat-options")?.classList.toggle("hidden");
+			},
+			onAddUser: (e: Event) => {
+				e.preventDefault();
+				document.querySelector("[data-popup=addChatUser]")?.classList.toggle("hidden");
+			},
+			onDeleteUser: (e: Event) => {
+				e.preventDefault();
+				document.querySelector("[data-popup=deleteChatUser]")?.classList.toggle("hidden");
+			},
+
+			onDeleteChat: async (e: Event) => {
+				e.preventDefault();
+				const delConfirm = confirm("Вы действительно хотите удалить этот чат?");
+				if (delConfirm) {
+					const chatId = { chatId: props.chat.id } as DeleteChatData;
+					this.router.go("/chats");
+					await ChatController.deleteChat(chatId);
+				}
+			},
+
+			onMessageSend: (e: Event) => {
+				e.preventDefault();
+				const newMessage = (this.refs.message.querySelector("input") as HTMLInputElement).value;
+				if(newMessage) {
+					this.ws.sendMessage(newMessage);
+					this.onNewMassage(props);
+					(this.refs.message.querySelector("input") as HTMLInputElement).value = "";
+
+				}
+
+			},
+
+			setAvatar: (e: Event) => {
+				e.preventDefault();
+				const uploadChatAvatar = this.refs.uploadChatAvatar;
+				uploadChatAvatar.classList.remove("hidden");
+			}
+		};
+	}
+
+	async componentDidMount(props: ChatBodyProps): Promise<void> {
+		await ChatController.setChat(props.chat.id);
+		await this.onChatSetup(props);
+	}
+
+	componentDidUpdate(oldProps: ChatProps, newProps: ChatProps): boolean {
+		return isEqual(oldProps, newProps);
+	}
+
+	onMessage = (response: MessageResponse): void => {
+		ChatController.addMessage(response.content);
+		const totalMessages = isArray(response.content) ? response.content.length : 1;
+		this.ws?.increaseOffsetBy(totalMessages);
+	}
+
+	async onChatSetup(props: ChatBodyProps): Promise<void> {
+		const response = await ChatController.getToken({ chatId: props.chat.id });
+		if (response?.token) {
+			this.ws.shutdown();
+			const path = `/${props.user.id}/${props.chat.id}/${response.token}`;
+			this.ws.setup(path, this.onMessage);
+		}
+	}
+
+	async onNewMassage(props: ChatBodyProps): Promise<void> {
+		const response = await ChatController.getToken({ chatId: props.chat.id });
+		if (response?.token) {
+			this.ws.shutdown();
+			const path = `/${props.user.id}/${props.chat.id}/${response.token}`;
+			this.ws.onceMessage(path, this.onMessage);
+		}
+	}
+
+	render(): string {
+		// language=hbs
+		return `
+		<div class="main--page-chat-body-wrap">
+   			 <div class="main--page-chat-body-header">
+		        <div class="main--page-chat-body-header-chatname">
+			        {{{AvatarPopup popUpName="uploadChatAvatar" popUpTitle="Загрузить аватар" chatId=chat.id ref="uploadChatAvatar"}}}
+		            {{{Avatar imageSrc=avatarSrc imageTitle=chat.title onClick=setAvatar}}}
+		            {{{Heading text=chat.title}}}
+		        </div>
+               {{{Button type="button" buttonClass="main--page-chat-options" buttonIcon="ch-more" name="chat-options" title="" onClick=onChatOptions ref="menuButton"}}}
+                 <div class="context-menu-wrapper chat-options hidden">
+                     {{{Button type="button" buttonClass="main--page-user-add aslink" buttonIcon="ch-user-add" name="add-user" title="Добавить пользователя" onClick=onAddUser}}}
+                     {{{Button type="button" buttonClass="main--page-user-add aslink" buttonIcon="ch-user-delete" name="delete-user" title="Удалить пользователя" onClick=onDeleteUser}}}
+                     {{{Button type="button" buttonClass="main--page-delete-chat aslink" buttonIcon="ch-trash" name="delete-chat" title="Удалить чат" onClick=onDeleteChat}}}
+                 </div>
+                 {{{AddUserPopup chatId=chat.id  ref="addChatUser"}}}
+                 {{{DeleteUserPopup chatId=chat.id ref="deleteChatUser"}}}
+             </div>
+			{{{Messages chatId=chat.id ref="messagesWrap"}}}
+		    <div class="main--page-chat-body-footer">
+		        <i class="ch-attach" title="Заглушка"></i>
+		        <form action="" class="create-new-message-form" id="chatMessageForm">
+		            {{{InputWrapper label=formInputs.label name=formInputs.name input=formInputs.input ref="message" }}}
+		            {{{Button buttonClass="main--page-chat-send" buttonIcon="ch-send" name="send-submit" title="" onClick=onMessageSend}}}
+		        </form>
+		    </div>
+		</div>
+		`;
+	}
+}
