@@ -100,8 +100,8 @@ import {RESOURCE_URL} from "../../../common/global-consts";
 			onSave: async (e: Event) => {
 				e.preventDefault();
 				const data = {} as UpdateProfileData;
-				const form = document.querySelector<HTMLFormElement>("#editUserForm");
-				const refs = getFormData(form);
+				const form = document.querySelector("#editUserForm");
+				const refs = getFormData(<HTMLFormElement>form);
 				Object.entries(refs as { [key: string]: string }).forEach(([key, input]) => {
 					data[(key as keyof UpdateProfileData)] = input;
 				});

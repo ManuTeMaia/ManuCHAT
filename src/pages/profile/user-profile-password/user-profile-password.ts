@@ -10,7 +10,7 @@ import {UserProps} from "../user-profile/user-profile";
 class ProfileEditPasswordPage extends Block {
 	validator = new Validator();
 
-	protected getStateFromProps(props: UserProps) {
+	protected getStateFromProps(props: UserProps): void {
 		const onBlur = (e: Event) => {
 			this.validate((e.currentTarget as HTMLInputElement));
 		};
@@ -63,8 +63,8 @@ class ProfileEditPasswordPage extends Block {
 			onSave: async (e: Event) => {
 				e.preventDefault();
 				const data = {} as UpdatePasswordData;
-				const form = document.querySelector<HTMLFormElement>("#changePwdForm");
-				const refs = getFormData(form);
+				const form = document.querySelector("#changePwdForm");
+				const refs = getFormData(<HTMLFormElement>form);
 				Object.entries(refs as { [key: string]: string }).forEach(([key, input]) => {
 					data[(key as keyof UpdatePasswordData)] = input;
 				});

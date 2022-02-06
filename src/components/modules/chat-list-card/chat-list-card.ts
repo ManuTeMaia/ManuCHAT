@@ -9,9 +9,11 @@ import {RESOURCE_URL} from "../../../common/global-consts";
 type ChatCardType = {
     chat: ChatProps;
     user: UserData;
+    avatarSrc: string;
+    events: { click: (e: Event) => Promise<void> };
 };
 
-export class ChatListCard extends Block {
+export class ChatListCard extends Block<ChatCardType> {
     router = new Router();
 
     constructor(props: ChatCardType) {
@@ -27,7 +29,7 @@ export class ChatListCard extends Block {
         });
     }
 
-    protected getStateFromProps(props: ChatCardType ) {
+    protected getStateFromProps(props: ChatCardType): void {
 
         this.state = {
             avatarSrc: props.chat.avatar !== null ? `${RESOURCE_URL}${props.chat.avatar}` : "/noimage.png",

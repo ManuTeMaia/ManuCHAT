@@ -7,6 +7,8 @@ import isEqual from "../../../helpers/isEqual";
 export interface ChatUsersPopupProps {
 	chatId: number;
 	response: {error?: string, success?: string};
+	popupClose: (e: Event) => void;
+	chatUserAction: (e: Event) => Promise<void>;
 }
 
 export class DeleteUserPopup extends Block<ChatUsersPopupProps> {
@@ -14,20 +16,9 @@ export class DeleteUserPopup extends Block<ChatUsersPopupProps> {
 		super(props);
 	}
 
-	protected getStateFromProps(props: ChatUsersPopupProps) {
+	protected getStateFromProps(props: ChatUsersPopupProps): void {
 
 		this.state = {
-			formInputs: {
-				label: "Поиск пользователя",
-				name: "avatar",
-				input: {
-					type: "search",
-					name: "user",
-					class: "search-chat-user-form-input",
-					placeholder: "Найти пользователя...",
-					}
-				},
-
 			popupClose: (e: Event) => {
 				e.preventDefault();
 				document.querySelector("[data-popup=deleteChatUser]")?.classList.add("hidden");
@@ -45,14 +36,15 @@ export class DeleteUserPopup extends Block<ChatUsersPopupProps> {
 		};
 	}
 
-	componentDidMount(props: ChatUsersPopupProps | undefined): typeof props {
+	async componentDidMount(props: ChatUsersPopupProps): Promise<typeof props> {
 		if (props?.chatId) {
-		const chatUsers = ChatController.getChatUsers({chatId: props.chatId as number});
-		return {chatUsers, ...props} as ChatUsersPopupProps;
+		const chatUsers = await ChatController.getChatUsers({chatId: props.chatId});
+		return <ChatUsersPopupProps>{chatUsers, ...props};
 		}
+		return props;
 	}
 
-	componentDidUpdate(oldProps: ChatUsersPopupProps, newProps: ChatUsersPopupProps) {
+	componentDidUpdate(oldProps: ChatUsersPopupProps, newProps: ChatUsersPopupProps): boolean {
 		return isEqual(oldProps, newProps);
 	}
 

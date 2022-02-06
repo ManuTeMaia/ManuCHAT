@@ -9,6 +9,9 @@ export interface ChatUsersPopupProps {
 	chatId: number;
 	search: UserData | undefined;
 	response: {error?: string, success?: string};
+	popupClose: (e: Event) => void;
+	onUserSearch: (e: Event) => void;
+	chatUserAdd: (e: Event) => void;
 }
 
 export class AddUserPopup extends Block<ChatUsersPopupProps> {
@@ -16,36 +19,23 @@ export class AddUserPopup extends Block<ChatUsersPopupProps> {
 		super(props);
 	}
 
-	protected getStateFromProps(props: ChatUsersPopupProps) {
-
+	protected getStateFromProps(props: ChatUsersPopupProps): void {
 		this.state = {
-			//search: props.search,
-			formInputs: {
-				label: "Поиск пользователя",
-				name: "avatar",
-				input: {
-					type: "search",
-					name: "user",
-					class: "search-chat-user-form-input",
-					placeholder: "Найти пользователя...",
-					}
-				},
-
 			popupClose: (e: Event) => {
 				e.preventDefault();
 				document.querySelector("[data-popup=addChatUser]")?.classList.add("hidden");
 			},
 
 			onUserSearch: async (e: Event) => {
-				const searchString = <HTMLInputElement>e.target.value;
+				const searchString = (e.target as HTMLInputElement).value;
 				await UserController.search({ login: searchString });
 				document.querySelector("[data-popup=addChatUser]")?.classList.remove("hidden");
 			},
 
 			chatUserAdd: async (e: Event) => {
 				e.preventDefault();
-				const form = document.querySelector<HTMLFormElement>("#addChatUser");
-				const fields = getFormData(form);
+				const form = document.querySelector("#addChatUser");
+				const fields = getFormData(<HTMLFormElement>form);
 				const users = Object.values(fields);
 				const searchData = <AddUsersData>{chatId: props.chatId, users: users};
 				await ChatController.addUsersToChat(searchData);

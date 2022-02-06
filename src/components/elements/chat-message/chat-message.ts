@@ -7,13 +7,14 @@ type MessageTypes = {
     user: UserData;
     chatUsers: UserData[];
     message: ChatMessageProps;
+    messageUserLogin: string;
 }
 export class ChatMessage extends Block<MessageTypes> {
     constructor(props: MessageTypes) {
         super(props);
 
     }
-    protected getStateFromProps(props: MessageTypes) {
+    protected getStateFromProps(props: MessageTypes): void {
         this.state = {
             messageUserLogin: this.getMessageUserData(props.message.user_id, props.chatUsers)
         };

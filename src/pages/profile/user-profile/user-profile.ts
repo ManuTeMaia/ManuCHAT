@@ -12,7 +12,7 @@ export interface UserProps {
 class ProfilePage extends Block {
 	router: Router = new Router();
 
-	protected getStateFromProps(props: UserProps ) {
+	protected getStateFromProps(props: UserProps): void {
 
 		this.state = {
 			headingText: props.user.display_name || `${props.user.first_name} ${props.user.second_name}`,

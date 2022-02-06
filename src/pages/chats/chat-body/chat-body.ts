@@ -1,30 +1,45 @@
 import Block from "../../../utils/Block";
+import Validator from "../../../utils/Validator";
+import Router from "../../../utils/Router";
 import ChatWS, {MessageResponse} from "../../../api/chatWS";
 import ChatController from "../../../controllers/chat";
-import {DeleteChatData} from "../../../api/chatAPI";
-import Router from "../../../utils/Router";
-import "./chat-body.pcss";
 import {isArray} from "../../../helpers/isArray";
-import {UserData} from "../../../api/authAPI";
 import isEqual from "../../../helpers/isEqual";
+import {UserData} from "../../../api/authAPI";
+import {DeleteChatData} from "../../../api/chatAPI";
 import {ChatProps} from "../../../components/modules/chat-list/chat-list";
+import {InputWrapperType} from "../../../components/modules/input-wrapper/input-wrapper";
+import "./chat-body.pcss";
 
 interface ChatBodyProps {
 	chat: ChatProps;
 	user: UserData;
 	messages: [];
+	avatarSrc: string;
+	formInputs: Partial<InputWrapperType>;
+	onChatOptions: (e: Event) => void;
+	onAddUser: (e: Event) => void;
+	onDeleteUser: (e: Event) => void;
+	onDeleteChat: (e: Event) => void;
+	onMessageSend: (e: Event) => void;
+	setAvatar: (e: Event) => void;
 }
 
-export class ChatBodyPage extends Block {
+export class ChatBodyPage extends Block<ChatBodyProps> {
 
 	constructor(props: ChatBodyProps) {
 		super(props);
 	}
 
+	validator = new Validator();
 	router = new Router();
 	ws = new ChatWS();
 
-	protected getStateFromProps(props: ChatBodyProps) {
+	protected getStateFromProps(props: ChatBodyProps): void {
+		const onBlur = (e: Event) => {
+			this.validator.validate(<HTMLInputElement>e.currentTarget);
+		};
+
 		this.state = {
 			avatarSrc: props.chat.avatar!==null ? `https://ya-praktikum.tech/api/v2/resources${props.chat.avatar}` : "/noimage.png",
 			formInputs:
@@ -32,12 +47,13 @@ export class ChatBodyPage extends Block {
 					name: "message",
 					input:
 						{
-							name: "message",
+							inputName: "message",
 							type: "text",
 							placeholder: "Пишите...",
 							inputClass: "message-input-form-input",
 							validationType: "notnull",
 							required: true,
+							onChange: onBlur
 						}
 				},
 			onChatOptions: (e: Event) => {
@@ -83,12 +99,12 @@ export class ChatBodyPage extends Block {
 		};
 	}
 
-	async componentDidMount(props: ChatBodyProps): Promise<void> {
+	async componentDidMount(props: ChatBodyProps): Promise<void>  {
 		await ChatController.setChat(props.chat.id);
 		await this.onChatSetup(props);
 	}
 
-	componentDidUpdate(oldProps: ChatProps, newProps: ChatProps): boolean {
+	componentDidUpdate(oldProps: ChatBodyProps, newProps: ChatBodyProps): boolean {
 		return isEqual(oldProps, newProps);
 	}
 

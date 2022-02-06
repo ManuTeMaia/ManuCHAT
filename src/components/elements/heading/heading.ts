@@ -1,13 +1,13 @@
 import Block from "../../../utils/Block";
 import "./heading.pcss";
 
-type HeadingTypes = {
+export type HeadingType = {
     class?: string;
     text: string;
 }
 
-export class Heading extends Block {
-    constructor(props: HeadingTypes) {
+export class Heading extends Block<HeadingType> {
+    constructor(props: HeadingType) {
         super(props);
     }
 

@@ -53,7 +53,7 @@ class Route {
 
 class Router {
 	history: History;
-	private _rootQuery: string;
+	private readonly _rootQuery: string;
 	private static __instance: InstanceType<new () => Router>;
 	private _errorRoute?: Route;
 	private routes: Route[];
@@ -79,7 +79,7 @@ class Router {
 		return this;
 	}
 
-	public useError(pathname: string, block: typeof Block) {
+	public useError(pathname: string, block: typeof Block): this {
 		this._errorRoute = new Route(pathname, block, this._rootQuery);
 		return this;
 	}

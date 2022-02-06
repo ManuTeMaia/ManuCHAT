@@ -9,7 +9,7 @@ export const store = new Store({
 });
 
 
-export function connect(stateToProps: (state: any) => any, Component: typeof Block): any {
+export function connect(stateToProps: (state: Indexed) => Indexed, Component: typeof Block): any {
 	return class WithStore extends Component {
 		constructor(props: any) {
 			super({...props, ...stateToProps(store.getState())});

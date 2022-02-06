@@ -57,7 +57,7 @@ export class ChatAPI extends BaseAPI {
 		super("/chats");
 	}
 
-	read() {
+	read(): Promise<ChatProps[]> {
 		return this.http.get();
 	}
 

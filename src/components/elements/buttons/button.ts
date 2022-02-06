@@ -8,11 +8,12 @@ export type ButtonProps = {
     buttonIcon?: string;
     buttonClass?: string;
     onClick: (e: Event) => void;
+    events: {click: (e: Event) => void };
 };
 
-export class Button extends Block {
-    constructor({name, type="submit", title, buttonClass, buttonIcon, onClick}: ButtonProps) {
-        super({name, type, title, buttonClass, buttonIcon, events: {click: onClick }});
+export class Button extends Block<ButtonProps> {
+    constructor({type="submit", onClick, ...props}: ButtonProps) {
+        super({...props, type, onClick, events: {click: onClick }});
     }
 
     static getName(): string {

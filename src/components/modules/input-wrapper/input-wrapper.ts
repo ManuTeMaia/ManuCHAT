@@ -1,12 +1,11 @@
 import Block from "../../../utils/Block";
-import TextInput from "../../elements/inputs";
 import "./input-wrapper.pcss";
+import {TextInputType} from "../../elements/inputs/text-input";
 
 export type InputWrapperType = {
-	input: TextInput;
-	ref: string;
-	name: string;
+	input: TextInputType;
 	label?: string;
+	name: string;
 };
 
 export class InputWrapper extends Block{
@@ -24,7 +23,7 @@ export class InputWrapper extends Block{
             <div class="input-wrapper">
                 {{#if label}}<label for="{{name}}">{{label}}</label>{{/if}}
                 {{{TextInput  ref=input.name
-                              name=input.name
+                              inputName=input.inputName
                               inputClass=input.inputClass
                               placeholder=input.placeholder
                               required=input.required

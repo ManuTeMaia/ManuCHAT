@@ -3,7 +3,7 @@ import "./chat.pcss";
 import {ChatProps} from "../../../components/modules/chat-list/chat-list";
 
 
-class ChatPage extends Block {
+class ChatPage extends Block<ChatProps> {
 	constructor(props: ChatProps) {
 		super(props);
 	}

@@ -3,13 +3,25 @@ import Validator from "../../utils/Validator";
 import AuthController from "../../controllers/auth";
 import { getFormData } from "../../helpers/formActions";
 import "./login.pcss";
+import {InputWrapperType} from "../../components/modules/input-wrapper/input-wrapper";
+import {ButtonProps} from "../../components/elements/buttons/button";
+import {HeadingType} from "../../components/elements/heading/heading";
+import {LinkType} from "../../components/elements/link/link";
 
-class LoginPage extends Block {
+export interface LoginPageType {
+	heading: HeadingType;
+	formInputs: InputWrapperType[];
+	button: ButtonProps;
+	link: LinkType;
+	onLogin: (e: Event) => Promise<void>;
+}
+
+class LoginPage extends Block<LoginPageType> {
 	validator = new Validator();
 
 	protected getStateFromProps(): void {
 		const onBlur = (e: Event) => {
-			this.validator.validate((e.currentTarget as HTMLInputElement));
+			this.validator.validate(<HTMLInputElement>e.currentTarget);
 		};
 
 		this.state = {
@@ -19,7 +31,7 @@ class LoginPage extends Block {
 					label: "Логин",
 					input:
 						{
-							name: "login",
+							inputName: "login",
 							placeholder: "логин",
 							required: true,
 							type: "text",
@@ -32,7 +44,7 @@ class LoginPage extends Block {
 					label: "Пароль",
 					input:
 						{
-							name: "password",
+							inputName: "password",
 							placeholder: "***********",
 							required: true,
 							type: "password",
@@ -43,8 +55,8 @@ class LoginPage extends Block {
 			],
 			onLogin: async (e: Event) => {
 				e.preventDefault();
-				const form = document.querySelector<HTMLFormElement>("#loginForm");
-				const fields = getFormData(form);
+				const form = document.querySelector("#loginForm");
+				const fields = getFormData(<HTMLFormElement>form);
 				const loginData = {
 					login: fields.login as string,
 					password: fields.password as string
@@ -57,10 +69,6 @@ class LoginPage extends Block {
 					}
 			}
 		};
-	}
-
-	validate(input: HTMLInputElement): void {
-		return this.validator.validate(input);
 	}
 
 	render(): string {
