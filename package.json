@@ -36,6 +36,7 @@
     "eslint": "^7.32.0",
     "handlebars": "^4.7.7",
     "html-webpack-plugin": "^5.5.0",
+    "husky": "^7.0.4",
     "jsdom": "19.0.0",
     "jsdom-global": "3.0.2",
     "mocha": "^9.1.2",
