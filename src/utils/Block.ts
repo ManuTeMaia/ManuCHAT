@@ -4,7 +4,9 @@ import isEqual from "../helpers/isEqual";
 import {BlockConstructable} from "../helpers/regComponent";
 import { nanoid } from "nanoid";
 
-class Block <TProps = any>{
+export type Indexed = { [key: string]: any };
+
+class Block <TProps = any> {
 
 	static EVENTS = {
 		INIT: "init",

@@ -3,5 +3,4 @@ dist
 .cache
 .github
 .DS_Store
-
-
+.husky

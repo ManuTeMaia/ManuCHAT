@@ -1,4 +1,5 @@
 import EventBus from "./EventBus";
+import {Indexed} from "./Block";
 
 export interface Action {
 	type: string;

@@ -67,7 +67,8 @@
     "start": "node ./server.ts",
     "eslint": "eslint ./src",
     "style": "stylelint ./src",
-    "test": "TS_NODE_COMPILER_OPTIONS='{\"module\": \"commonjs\" }' mocha --require ts-node/register src/**/*.spec.ts"
+    "test": "TS_NODE_COMPILER_OPTIONS='{\"module\": \"commonjs\" }' mocha --require ts-node/register src/**/*.spec.ts",
+    "prepare": "husky install"
   },
   "dependencies": {
     "express": "^4.17.1",
