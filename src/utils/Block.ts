@@ -17,8 +17,8 @@ class Block <TProps = any> {
 
 	eventBus = new EventBus();
 	protected readonly _meta: {props: TProps | undefined};
-	protected _element: HTMLElement | undefined;
-	public default: BlockConstructable | undefined;
+	protected _element: HTMLElement;
+	public default: BlockConstructable;
 	public props: TProps;
 	protected state: Partial<TProps>;
 	protected children: {[id: string]: Block<TProps>} = {};
