@@ -3,6 +3,7 @@ import {ChatMessageProps} from "../api/chatAPI";
 import {UserData} from "../api/authAPI.js";
 import {ChatProps} from "../components/modules/chat-list/chat-list";
 import {isArray} from "../helpers/isArray";
+import {Indexed} from "../utils/Block";
 
 const SET_CHATS = "chats/SET";
 const SET_USER_SEARCH = "chats/SET_USER_SEARCH";

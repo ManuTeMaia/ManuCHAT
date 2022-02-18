@@ -1,5 +1,5 @@
 import Store from "../utils/Store";
-import Block from "../utils/Block";
+import Block, {Indexed} from "../utils/Block";
 import user from "./user.store";
 import chats from "./chat.store";
 

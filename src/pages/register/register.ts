@@ -1,4 +1,4 @@
-import Block from "../../utils/Block";
+import Block, {Indexed} from "../../utils/Block";
 import Validator from "../../utils/Validator";
 import AuthController from "../../controllers/auth";
 import { getFormData } from "../../helpers/formActions";

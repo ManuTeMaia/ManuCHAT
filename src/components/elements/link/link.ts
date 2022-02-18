@@ -13,7 +13,7 @@ export type LinkType = {
 
 export class Link extends Block<LinkType>{
     constructor(props: LinkType) {
-        const onClick = (e: MouseEvent) => {
+        const onClick = (e: Event) => {
             const router = new Router();
 
             router.go(this.props.url);

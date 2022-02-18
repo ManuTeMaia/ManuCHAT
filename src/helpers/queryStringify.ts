@@ -1,3 +1,5 @@
+import {Indexed} from "../utils/Block";
+
 function queryStringify(data: Indexed): string | never {
 	if (typeof data !== "object") {
 		throw new Error("Data must be object");

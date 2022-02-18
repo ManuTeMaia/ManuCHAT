@@ -56,7 +56,7 @@ class Router {
 	private readonly _rootQuery: string;
 	private static __instance: InstanceType<new () => Router>;
 	private _errorRoute?: Route;
-	private routes: Route[];
+	private routes: Route[] ;
 	needAuth: boolean;
 	onCheckAuth: checkAuthType | undefined;
 

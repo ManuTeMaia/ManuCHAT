@@ -17,8 +17,8 @@ class Block <TProps = any> {
 
 	eventBus = new EventBus();
 	protected readonly _meta: {props: TProps | undefined};
-	protected _element: HTMLElement;
-	public default: BlockConstructable;
+	protected _element: HTMLElement | undefined;
+	public default: BlockConstructable | undefined;
 	public props: TProps;
 	protected state: Partial<TProps>;
 	protected children: {[id: string]: Block<TProps>} = {};
@@ -68,7 +68,7 @@ class Block <TProps = any> {
 		this.eventBus.emit(Block.EVENTS.FLOW_RENDER);
 	}
 
-	componentDidMount(props: TProps): typeof props | Promise<Indexed | void> {
+	componentDidMount(props: TProps): typeof props | Promise<Indexed | void | typeof props> {
 		return props;
 	}
 
@@ -128,7 +128,7 @@ class Block <TProps = any> {
 		});
 	}
 
-	get element(): Element | null {
+	get element(): Element | undefined {
 		return this._element;
 	}
 
