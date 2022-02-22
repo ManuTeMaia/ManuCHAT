@@ -1,4 +1,3 @@
-import { expect } from "chai";
 import Store, {Action} from "./Store";
 
 describe("Store", () => {
@@ -20,8 +19,8 @@ describe("Store", () => {
 
 		const state = store.getState();
 
-		expect(state.user).is.not.undefined;
-		expect(state.user).is.null;
+		expect(state.user).toBeDefined();
+		expect(state.user).toBeNull();
 	});
 
 	it("should call nested reducer on dispatch", () => {
@@ -41,6 +40,6 @@ describe("Store", () => {
 
 		const state = store.getState();
 
-		expect(state.user).is.deep.eq(user);
+		expect(state.user).toEqual(user);
 	});
 });

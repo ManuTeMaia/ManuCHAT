@@ -1,6 +1,8 @@
+/**
+ * @jest-environment jsdom
+ */
+
 import Block from "./Block";
-import { expect, assert } from "chai";
-import jsdom from "jsdom-global";
 
 interface DummyType {
   test: string;
@@ -17,11 +19,7 @@ class Dummy extends Block<DummyType> {
 }
 
 describe("Test Block", () => {
-	before(function() {
-		this.jsdom = jsdom("<html lang='ru'></html><body><div class='.root'></div></body></html>", {
-			url: "http://localhost"
-		});
-	});
+
 	const createInstance = (props: DummyType) => new Dummy(props);
 
 	it("should have string random id", () => {
@@ -29,14 +27,14 @@ describe("Test Block", () => {
 
 		const instance = createInstance(props);
 
-		expect(typeof instance.id).to.be.a("string");
+		expect(typeof instance.id).toBe("string");
 	});
 
 	it("should have props from constructor", () => {
 		const props = { test: "test" };
 
 		const instance = createInstance(props);
-		expect(instance.props).to.deep.equal(props);
+		expect(instance.props).toEqual(props);
 	});
 
 	it("setProps: should set new props to props", () => {
@@ -46,7 +44,7 @@ describe("Test Block", () => {
 
 		instance.setProps(newProps);
 
-		expect(instance.props).to.deep.equal({ ...props, ...newProps });
+		expect(instance.props).toEqual({ ...props, ...newProps });
 	});
 
 	it("setState: should set new props to props", () => {
@@ -56,7 +54,7 @@ describe("Test Block", () => {
 
 		instance.setState(newState);
 
-		expect(instance.props).to.deep.equal({ ...state, ...newState });
+		expect(instance.props).toEqual({ ...state, ...newState });
 	});
 
 	it("render: should return properly tagname", () => {
@@ -64,16 +62,15 @@ describe("Test Block", () => {
 
 		const instance = createInstance(props);
 
-		assert.equal(instance.element?.tagName, "DIV");
+		expect(instance.element?.tagName).toEqual("DIV");
 	});
 
 	it("render: should return properly element with props", () => {
 		const props = { test: "test" };
 
 		const instance = createInstance(props);
-		console.log(instance.element);
 
-		assert.equal(instance.element?.innerHTML, "test");
+		expect(instance.element?.innerHTML).toEqual("test");
 	});
 
 });

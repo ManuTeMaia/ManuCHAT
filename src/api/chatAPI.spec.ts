@@ -1,6 +1,5 @@
 import {AddUsersData, ChatAPI, ChatTokenData, ChatUsersData, CreateChatData, DeleteChatData} from "./chatAPI";
-import sinon from "sinon";
-import { expect } from "chai";
+import * as sinon from "sinon";
 import { API_URL } from "../common/global-consts";
 
 describe("Chat API", () => {
@@ -27,11 +26,11 @@ describe("Chat API", () => {
 
 		api.create(data);
 
-		expect(requests.length).to.eq(1);
-		expect(requests[0].method).to.eq("Post");
-		expect(requests[0].requestBody).to.eq(JSON.stringify(data));
-		expect(requests[0].respond).to.not.null;
-		expect(requests[0].url).to.eq(`${API_URL}/chats`);
+		expect(requests.length).toEqual(1);
+		expect(requests[0].method).toEqual("Post");
+		expect(requests[0].requestBody).toEqual(JSON.stringify(data));
+		expect(requests[0].respond).not.toBeNull();
+		expect(requests[0].url).toEqual(`${API_URL}/chats`);
 	});
 
 	it("should get available chats", () => {
@@ -39,9 +38,9 @@ describe("Chat API", () => {
 
 		api.read();
 
-		expect(requests.length).to.eq(1);
-		expect(requests[0].method).to.eq("Get");
-		expect(requests[0].url).to.eq(`${API_URL}/chats/`);
+		expect(requests.length).toEqual(1);
+		expect(requests[0].method).toEqual("Get");
+		expect(requests[0].url).toEqual(`${API_URL}/chats/`);
 	});
 
 	it("should delete chat", () => {
@@ -52,9 +51,9 @@ describe("Chat API", () => {
 
 		api.delete(data);
 
-		expect(requests.length).to.eq(1);
-		expect(requests[0].method).to.eq("Delete");
-		expect(requests[0].url).to.eq(`${API_URL}/chats`);
+		expect(requests.length).toEqual(1);
+		expect(requests[0].method).toEqual("Delete");
+		expect(requests[0].url).toEqual(`${API_URL}/chats`);
 	});
 
 	it("should get chat users", () => {
@@ -65,10 +64,10 @@ describe("Chat API", () => {
 
 		api.users(data);
 
-		expect(requests.length).to.eq(1);
-		expect(requests[0].method).to.eq("Get");
-		expect(requests[0].respond).to.not.undefined;
-		expect(requests[0].url).to.eq(`${API_URL}/chats/2/users`);
+		expect(requests.length).toEqual(1);
+		expect(requests[0].method).toEqual("Get");
+		expect(requests[0].respond).toBeDefined();
+		expect(requests[0].url).toEqual(`${API_URL}/chats/2/users`);
 	});
 
 	it("should add multiple users to chat", () => {
@@ -80,9 +79,9 @@ describe("Chat API", () => {
 
 		api.update(data);
 
-		expect(requests.length).to.eq(1);
-		expect(requests[0].method).to.eq("Put");
-		expect(requests[0].url).to.eq(`${API_URL}/chats/users`);
+		expect(requests.length).toEqual(1);
+		expect(requests[0].method).toEqual("Put");
+		expect(requests[0].url).toEqual(`${API_URL}/chats/users`);
 	});
 
 	it("should delete multiple users from chat", () => {
@@ -94,9 +93,9 @@ describe("Chat API", () => {
 
 		api.deleteUsers(data);
 
-		expect(requests.length).to.eq(1);
-		expect(requests[0].method).to.eq("Delete");
-		expect(requests[0].url).to.eq(`${API_URL}/chats/users`);
+		expect(requests.length).toEqual(1);
+		expect(requests[0].method).toEqual("Delete");
+		expect(requests[0].url).toEqual(`${API_URL}/chats/users`);
 	});
 
 	it("should get chat token", () => {
@@ -107,10 +106,10 @@ describe("Chat API", () => {
 
 		api.token(data);
 
-		expect(requests.length).to.eq(1);
-		expect(requests[0].method).to.eq("Post");
-		expect(requests[0].respond).to.not.undefined;
-		expect(requests[0].url).to.eq(`${API_URL}/chats/token/2`);
+		expect(requests.length).toEqual(1);
+		expect(requests[0].method).toEqual("Post");
+		expect(requests[0].respond).toBeDefined();
+		expect(requests[0].url).toEqual(`${API_URL}/chats/token/2`);
 	});
 
 });

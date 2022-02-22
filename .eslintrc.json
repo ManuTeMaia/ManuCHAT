@@ -32,5 +32,5 @@
         ],
         "@typescript-eslint/no-var-requires": 0
     },
-    "ignorePatterns": ["server.ts", "node-moduls","dist"]
+    "ignorePatterns": ["node-modules","dist"]
 }
