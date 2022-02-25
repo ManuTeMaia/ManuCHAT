@@ -20,7 +20,7 @@ export class NewChatPopup extends Block {
 					name: "title",
 					input:
 						{
-							name: "title",
+							inputName: "title",
 							type: "text",
 							placeholder: "Название...",
 							validationType: "notnull",

@@ -1,4 +1,6 @@
 require("babel-polyfill");
+import "/static/images/favicon.ico";
+import "/static/images/noimage.png";
 import "./helpers/hbsHelpers";
 import ChatController from "./controllers/chat";
 import AuthController from "./controllers/auth";

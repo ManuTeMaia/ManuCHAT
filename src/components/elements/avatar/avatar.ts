@@ -10,7 +10,7 @@ export type AvatarProps = {
 }
 
 export class Avatar extends Block<AvatarProps> {
-	constructor({imageSrc="/noimage.png", divClass, imageTitle, onClick}: AvatarProps) {
+	constructor({imageSrc="/assets/noimage.png", divClass, imageTitle, onClick}: AvatarProps) {
 		super({imageSrc, divClass, imageTitle, onClick, events: {click: onClick}});
 	}
 

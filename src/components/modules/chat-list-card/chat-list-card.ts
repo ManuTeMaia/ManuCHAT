@@ -32,7 +32,7 @@ export class ChatListCard extends Block<ChatCardType> {
     protected getStateFromProps(props: ChatCardType): void {
 
         this.state = {
-            avatarSrc: props.chat.avatar !== null ? `${RESOURCE_URL}${props.chat.avatar}` : "/noimage.png",
+            avatarSrc: props.chat.avatar !== null ? `${RESOURCE_URL}${props.chat.avatar}` : "/assets/noimage.png",
         };
     }
 

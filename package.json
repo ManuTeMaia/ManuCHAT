@@ -65,7 +65,7 @@
     "build": "webpack --mode=production --node-env=production",
     "watch": "webpack --watch",
     "serve": "webpack serve",
-    "start": "node ./server.ts",
+    "start": "node server.js",
     "eslint": "eslint ./src",
     "style": "stylelint '**/*{.css,.pcss}'",
     "style:fix": "stylelint '**/*{.css,.pcss}' --fix",

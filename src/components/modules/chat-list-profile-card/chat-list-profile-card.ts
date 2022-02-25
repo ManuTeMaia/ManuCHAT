@@ -25,7 +25,7 @@ export class ChatProfileCard extends Block<ProfileCardType> {
 	getStateFromProps(props: ProfileCardType):void {
 
 		this.state = {
-			avatarSrc: props.user && props.user.avatar !== null ?`${RESOURCE_URL}${props.user.avatar}` : "/noimage.png",
+			avatarSrc: props.user && props.user.avatar !== null ?`${RESOURCE_URL}${props.user.avatar}` : "/assets/noimage.png",
 			onPopupOpen: (e: Event) => {
 			e.preventDefault();
 			const newChat = this.refs.newChat;

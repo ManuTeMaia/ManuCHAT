@@ -17,7 +17,7 @@ class ProfilePage extends Block {
 		this.state = {
 			headingText: props.user.display_name || `${props.user.first_name} ${props.user.second_name}`,
 			imageTitle: props.user.first_name || "Загрузите аватар",
-			avatarSrc: props.user.avatar !== null ?`${RESOURCE_URL}${props.user.avatar}` : "/noimage.png",
+			avatarSrc: props.user.avatar !== null ?`${RESOURCE_URL}${props.user.avatar}` : "/assets/noimage.png",
 			profileFields: [
 				{
 					label: "Email",

@@ -10,6 +10,7 @@ const config = {
     entry: "./src/index.ts",
     output: {
         path: path.resolve(__dirname, "dist"),
+        filename: "chat.bundle.js",
         publicPath: "/",
     },
     devServer: {
@@ -40,8 +41,18 @@ const config = {
                     "postcss-loader"],
             },
             {
-                test: /\.(eot|svg|ttf|woff|woff2|png|jpg|gif)$/i,
-                type: "asset",
+                test: /\.jpe?g$|\.ico$|\.gif$|\.png$/i,
+                type: "asset/resource",
+                generator: {
+                    filename: "assets/[name][ext]"
+                }
+            },
+            {
+                test: /\.(eot|svg|ttf|woff|woff2)$/i,
+                type: "asset/resource",
+                generator: {
+                    filename: "assets/[name][ext]"
+                }
             },
         ],
     },

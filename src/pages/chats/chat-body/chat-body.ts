@@ -41,7 +41,7 @@ export class ChatBodyPage extends Block<ChatBodyProps> {
 		};
 
 		this.state = {
-			avatarSrc: props.chat.avatar!==null ? `https://ya-praktikum.tech/api/v2/resources${props.chat.avatar}` : "/noimage.png",
+			avatarSrc: props.chat.avatar!==null ? `https://ya-praktikum.tech/api/v2/resources${props.chat.avatar}` : "/assets/noimage.png",
 			formInputs:
 				{
 					name: "message",
