@@ -18,9 +18,8 @@ pull request #4:
 ### Команды:
 
 ```
-npm run serve //тестируем Webpack
-npm run build //собираем Webpack
-npm run start // запускаем сервер
+npm run serve //тестируем (Webpack)
+npm run build //собираем (Webpack)
 npm run eslint // ESlint
 npm run styles // StyleLint
 npm run test // запуск тестов Jest
