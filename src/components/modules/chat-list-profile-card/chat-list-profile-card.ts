@@ -1,20 +1,21 @@
 import Block from "../../../utils/Block";
 import "./chat-list-profile-card.pcss";
 import Router from "../../../utils/Router";
-import {AvatarProps} from "../../elements/avatar/avatar";
 import NewChatPopup from "../chat-popup";
 import {TextInputType} from "../../elements/inputs/text-input";
 import {UserData} from "../../../api/authAPI";
 import {RESOURCE_URL} from "../../../common/global-consts";
 
 export type ProfileCardType = {
-	avatar: AvatarProps;
 	newChatPopup?: NewChatPopup;
 	search: TextInputType;
 	user: UserData;
+	avatarSrc: string;
+	onPopupOpen: (e: Event) => void;
+	goProfile: (e: Event) => void;
 };
 
-export class ChatProfileCard extends Block {
+export class ChatProfileCard extends Block<ProfileCardType> {
 	router = new Router();
 
 	constructor(props: ProfileCardType) {
@@ -24,7 +25,7 @@ export class ChatProfileCard extends Block {
 	getStateFromProps(props: ProfileCardType):void {
 
 		this.state = {
-			avatar: props.user && props.user.avatar !== null ?`${RESOURCE_URL}${props.user.avatar}` : "/noimage.png",
+			avatarSrc: props.user && props.user.avatar !== null ?`${RESOURCE_URL}${props.user.avatar}` : "/assets/noimage.png",
 			onPopupOpen: (e: Event) => {
 			e.preventDefault();
 			const newChat = this.refs.newChat;
@@ -44,7 +45,7 @@ export class ChatProfileCard extends Block {
 		return `
 			<div class="chat--list-profile-card-wrap">
 				<div class="chat--list-profile-card-actions">
-					{{{Avatar imageSrc=avatar imageTitle="Изменить данные профиля" divClass="chat-list-profile-card profile-card-avatar" onClick=goProfile}}}
+					{{{Avatar imageSrc=avatarSrc imageTitle="Изменить данные профиля" divClass="chat-list-profile-card profile-card-avatar" onClick=goProfile}}}
 						<div class="chat--list-profile-card-actions card-actions-icons">
 							{{{Button type="button" buttonIcon="ch-chat-new" buttonClass="chat-list-profile-card profile-card-action" onClick=onPopupOpen}}}
                             {{{Button type="button" buttonIcon="ch-cogs" buttonClass="chat-list-profile-card profile-card-action"}}}

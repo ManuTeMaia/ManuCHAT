@@ -2,17 +2,18 @@ import Block from "../../../utils/Block";
 import Router from "../../../utils/Router";
 import "./link.pcss";
 
-type LinkType = {
+export type LinkType = {
     url: string;
     class?: string;
     text: string;
     linkIcon?: string;
     onClick: (e: Event) => void;
+    events: {click: (e: Event) => void};
 }
 
-export class Link extends Block{
+export class Link extends Block<LinkType>{
     constructor(props: LinkType) {
-        const onClick = (e: MouseEvent) => {
+        const onClick = (e: Event) => {
             const router = new Router();
 
             router.go(this.props.url);

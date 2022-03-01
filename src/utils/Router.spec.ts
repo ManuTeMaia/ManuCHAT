@@ -1,6 +1,4 @@
-import "regenerator-runtime/runtime";
-import jsdom from "jsdom-global";
-import { expect } from "chai";
+//import "regenerator-runtime/runtime";
 import Router from "./Router";
 import Block from "./Block";
 
@@ -15,13 +13,6 @@ class Dummy extends Block{
 }
 
 describe("Test Router", () => {
-
-  before(function() {
-    this.jsdom = jsdom("<html lang='ru'></html><body><div class='.root'></div></body></html>", {
-      url: "http://localhost"
-    });
-  });
-
   beforeEach(() => {
     const router = new Router();
     router
@@ -29,13 +20,16 @@ describe("Test Router", () => {
         .start();
 
     window.history.pushState({ name: "Dummy" }, "dummy", "http://localhost/dummy");
+  });
 
+  afterEach(() => {
+    jest.resetModules();
   });
 
   it("should be a singleton",() => {
     const router = new Router();
 
-    expect(new Router()).to.eq(router);
+    expect(new Router()).toEqual(router);
   });
 
   it("use: should return router instance", () => {
@@ -43,7 +37,7 @@ describe("Test Router", () => {
 
     const result = router.use("/", Dummy as any);
 
-    expect(result).to.eq(router);
+    expect(result).toEqual(router);
   });
 
   it("useError: should return router instance", () => {
@@ -51,14 +45,14 @@ describe("Test Router", () => {
 
     const result = router.useError("/", Dummy as any);
 
-    expect(result).to.eq(router);
+    expect(result).toEqual(router);
   });
 
   it("back: should return previos pathname ", done => {
     const expectedResult = "http://localhost/dummy";
     new Router().back();
     window.onpopstate = () => {
-      expect(window.location.href).be.eq(expectedResult);
+      expect(window.location.href).toEqual(expectedResult);
       done();
     };
   });
@@ -67,7 +61,7 @@ describe("Test Router", () => {
     const expectedResult = "/dummy";
     new Router().go(expectedResult);
 
-    expect(window.location.href).be.eq(`http://localhost${expectedResult}`);
+    expect(window.location.href).toEqual(`http://localhost${expectedResult}`);
   });
 });
 

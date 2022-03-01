@@ -1,14 +1,12 @@
 import EventBus from "./EventBus";
 import Handlebars from "handlebars";
-import { nanoid } from "nanoid";
 import isEqual from "../helpers/isEqual";
 import {BlockConstructable} from "../helpers/regComponent";
+import { nanoid } from "nanoid";
 
-export interface BlockMeta<P = any> {
-	props: P;
-}
+export type Indexed = { [key: string]: any };
 
-class Block <P = any> {
+class Block <TProps = any> {
 
 	static EVENTS = {
 		INIT: "init",
@@ -18,17 +16,17 @@ class Block <P = any> {
 	} as const;
 
 	eventBus = new EventBus();
-	protected readonly _meta: BlockMeta;
+	protected readonly _meta: {props: TProps | undefined};
 	protected _element: HTMLElement;
 	public default: BlockConstructable;
-	public props: P | Record<string, unknown>;
-	protected state: P | Record<string, unknown>;
-	protected children: {[id: string]: Block} = {};
+	public props: TProps;
+	protected state: Partial<TProps>;
+	protected children: {[id: string]: Block<TProps>} = {};
 	protected refs: {[key: string]: HTMLElement} = {};
 
 	id = nanoid(6);
 
-	constructor(props?: P) {
+	constructor(props?: TProps | undefined) {
 
 		this._meta = {
 			props,
@@ -36,7 +34,7 @@ class Block <P = any> {
 
 		this.getStateFromProps(props);
 
-		this.props = this._makePropsProxy(props || {} as P);
+		this.props = this._makePropsProxy(props || {} as TProps);
 		this.state = this._makePropsProxy(this.state);
 
 		this._registerEvents(this.eventBus);
@@ -60,21 +58,21 @@ class Block <P = any> {
 		this.eventBus.emit(Block.EVENTS.FLOW_CDM, this.props);
 	}
 
-	protected getStateFromProps(props?:P): void {
+	protected getStateFromProps(props?:TProps): void {
 		this.state = {...props};
 	}
 
 
-	_componentDidMount(props?: P): void {
+	_componentDidMount(props: TProps): void {
 		this.componentDidMount(props);
 		this.eventBus.emit(Block.EVENTS.FLOW_RENDER);
 	}
 
-	componentDidMount(props?: P): typeof props {
+	componentDidMount(props: TProps): typeof props | Promise<Indexed | void | typeof props> {
 		return props;
 	}
 
-	_componentDidUpdate(oldProps: P, newProps: P): void {
+	_componentDidUpdate(oldProps: TProps, newProps: TProps): void {
 		const response = this.componentDidUpdate(oldProps, newProps);
 		if (response) {
 			return;
@@ -82,11 +80,11 @@ class Block <P = any> {
 		this._render();
 	}
 
-	componentDidUpdate(oldProps: P, newProps: P): boolean {
+	componentDidUpdate(oldProps: TProps, newProps: TProps): boolean {
 		return isEqual(oldProps, newProps);
 	}
 
-	setProps(nextProps: unknown) {
+	setProps(nextProps: TProps | unknown): void {
 			if (!nextProps) {
 				return;
 			}
@@ -95,7 +93,7 @@ class Block <P = any> {
 			this.eventBus.emit(Block.EVENTS.FLOW_CDU, oldProps, this.props);
 	}
 
-	setState(nextState: unknown) {
+	setState(nextState: Partial<TProps>): void {
 		if (!nextState) {
 			return;
 		}
@@ -106,7 +104,7 @@ class Block <P = any> {
 	}
 
 	_removeEvents(): void {
-		const events: Record<string, () => void> = (this.props as any).events;
+		const events: Record<string, () => void> = (this.props as Indexed).events;
 
 		if (!events || !this._element) {
 			return;
@@ -119,7 +117,7 @@ class Block <P = any> {
 	}
 
 	_addEvents(): void {
-		const events: Record<string, () => void> = (this.props as any).events;
+		const events: Record<string, () => void> = (this.props as Indexed).events;
 
 		if (!events) {
 			return;
@@ -130,7 +128,7 @@ class Block <P = any> {
 		});
 	}
 
-	get element(): Element | null {
+	get element(): Element | undefined {
 		return this._element;
 	}
 
@@ -173,9 +171,9 @@ class Block <P = any> {
 		return <HTMLElement>this._element;
 	}
 
-	_makePropsProxy(props: any): any {
+	_makePropsProxy(props: TProps | any): TProps {
 		return new Proxy(props, {
-			get(target: Record<string, unknown>, prop: string) {
+			get(target: Indexed, prop: string) {
 				if (prop.toString().indexOf("_") === 0) {
 					throw new Error("Нет прав");
 				} else {
@@ -183,7 +181,7 @@ class Block <P = any> {
 					return typeof value === "function"? value.bind(target) : value;
 				}
 			},
-			set(target: Record<string, unknown>,prop: string, value: unknown): boolean {
+			set(target: Indexed, prop: string, value: unknown): boolean {
 				prop.toString();
 				if (prop.toString().indexOf("_") === 0) {
 					throw new Error("Нет прав");
@@ -194,7 +192,7 @@ class Block <P = any> {
 
 				}
 			},
-			deleteProperty(target: Record<string, unknown>, prop: string): boolean {
+			deleteProperty(target: Indexed, prop: string): boolean {
 				if (prop.indexOf("_") === 0) {
 					throw new Error("Нет прав");
 				} else {

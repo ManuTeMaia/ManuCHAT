@@ -1,7 +1,7 @@
 import Block from "../utils/Block";
 import Handlebars, { HelperOptions } from "handlebars";
 
-export interface BlockConstructable<Props = unknown> {
+export interface BlockConstructable<Props = any> {
 	new (props: Props): Block<Props>;
 	getName: () => string;
 }

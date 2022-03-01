@@ -2,21 +2,25 @@ import Block from "../../../utils/Block";
 import "./input.pcss";
 
 export type TextInputType = {
-    name: string;
+    inputName: string;
     inputClass?: string;
     placeholder?: string;
-    required?: boolean;
     value?: string;
     type: string;
     validationType?: string;
     autoComplete?: string;
     onChange: (e:Event) => void;
     onInput?: () => void;
+    events?: {
+        blur: ((e:Event) => void) | undefined,
+        input: (() => void) | undefined;
+    }
+    required?: boolean;
 };
 
-export class TextInput extends Block{
+export class TextInput extends Block<TextInputType>{
     constructor({ onChange, onInput, ...props}: TextInputType) {
-        super({events: {blur: onChange, input: onInput}, ...props});
+        super({onChange, events: {blur: onChange, input: onInput}, ...props});
     }
 
     static getName(): string {
@@ -31,7 +35,7 @@ export class TextInput extends Block{
                     {{#if inputClass}}
                         class="{{inputClass}}"
                     {{/if}}
-                        name="{{name}}" placeholder="{{placeholder}}" value="{{value}}" autocomplete="{{autoComplete}}"
+                        name="{{inputName}}" placeholder="{{placeholder}}" value="{{value}}" autocomplete="{{autoComplete}}"
                     {{#if validationType}}
                         valtype="{{validationType}}"
                     {{/if}}

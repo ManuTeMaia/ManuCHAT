@@ -5,23 +5,24 @@ Manutemaia Chat
 
 [Дизайн-макет в Figma](https://www.figma.com/file/LTUtHdbBdjjGonMOwMMljk/Manutemaia-Chat?node-id=0%3A1)
 
-[Веб-хостинг в Netify](https://quirky-lumiere-db1dd9.netlify.app)
+[Веб-хостинг в Heroku](https://manuchat.herokuapp.com)
 
 [Репозиторий Спринт #1](https://github.com/ManuTeMaia/middle.messenger.praktikum.yandex/tree/sprint_1)
 
 [Репозиторий Спринт #2](https://github.com/ManuTeMaia/middle.messenger.praktikum.yandex/tree/sprint_2)
 
-pull request #3: https://github.com/ManuTeMaia/middle.messenger.praktikum.yandex/pull/4
+[Репозиторий Спринт #3](https://github.com/ManuTeMaia/middle.messenger.praktikum.yandex/tree/sprint_3)
+
+pull request #4: https://github.com/ManuTeMaia/middle.messenger.praktikum.yandex/pull/5
 
 ### Команды:
 
 ```
-npm run dev //тестируем
-npm run build //собираем
-npm run start // запускаем сервер
+npm run serve //тестируем (Webpack)
+npm run build //собираем (Webpack)
 npm run eslint // ESlint
 npm run styles // StyleLint
-npm run test // запуск тестов
+npm run test // запуск тестов Jest
 
 ```
 
@@ -54,6 +55,14 @@ npm run test // запуск тестов
 11. Работа с API и WS
 12. Тесты Mocha & Chai & Sinon & JSDOM
 13. Установлен Helmet для защиты от XSS
+
+#### Sprint 4
+
+14. Сборка переехала на Webpack 5 
+15. Husky следит за прекоммитом
+16. Тесты переехали на Jest
+17. Проект упакован в Docker
+18. Проект выложен на Heroku
 
 ### Информация для ревью:
 

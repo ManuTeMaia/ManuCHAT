@@ -6,11 +6,12 @@ export type AvatarProps = {
 	divClass?: string;
 	imageTitle?: string;
 	onClick: (e:Event) => void;
+	events: {click: (e:Event) => void };
 }
 
-export class Avatar extends Block {
-	constructor({imageSrc="/noimage.png", divClass, imageTitle, onClick}: AvatarProps) {
-		super({imageSrc, divClass, imageTitle, events: {click: onClick}});
+export class Avatar extends Block<AvatarProps> {
+	constructor({imageSrc="/assets/noimage.png", divClass, imageTitle, onClick}: AvatarProps) {
+		super({imageSrc, divClass, imageTitle, onClick, events: {click: onClick}});
 	}
 
 	static getName(): string {

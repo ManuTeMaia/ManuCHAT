@@ -3,11 +3,12 @@ import "./avatar-popup.pcss";
 import UserController from "../../../controllers/user";
 import ChatController from "../../../controllers/chat";
 
-
 export interface AvatarPopupProps {
 	popUpName: string;
 	popUpTitle: string;
 	chatId?: number;
+	popupClose:  (e: Event) => void;
+	uploadAvatar: (e: Event) => Promise<void>;
 }
 
 export class AvatarPopup extends Block<AvatarPopupProps> {
@@ -15,21 +16,9 @@ export class AvatarPopup extends Block<AvatarPopupProps> {
 		super(props);
 	}
 
-	protected getStateFromProps(props: AvatarPopupProps) {
+	protected getStateFromProps(props: AvatarPopupProps): void {
 
 		this.state = {
-			formInputs:
-				{
-					label: "Загрузка аватара",
-					name: "avatar",
-					input:
-						{
-							type: "file",
-							name: "avatar",
-							class: "avatar-upload-form-input",
-							placeholder: "Загрузите файл..."
-						}
-				},
 
 			popupClose: (e: Event) => {
 				e.preventDefault();
@@ -65,9 +54,9 @@ export class AvatarPopup extends Block<AvatarPopupProps> {
                     <h4>Загрузить аватар</h4>
 					<div class="popup-content uploadAvatar">
                         <form id="avatarUpload"  data-popup={{{popUpName}}} action="" class="file-upload-form" enctype="multipart/form-data">
-		                    {{{InputWrapper input=formInputs.input}}}
+                            {{{TextInput type="file" inputName="avatar" placeholder="Загрузите файл..." class="avatar-upload-form-input"}}}
 	                        {{#if chatId}}
-	                        	{{{TextInput type="hidden" name="chatId" value=chatId}}}
+	                        	{{{TextInput type="hidden" inputName="chatId" value=chatId}}}
             				{{/if}}
 							{{{Button buttonClass="avatar-upload-submit" name="upload-submit" title="Загрузить" onClick=uploadAvatar}}}
 						</form>

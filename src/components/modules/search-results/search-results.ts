@@ -11,7 +11,7 @@ export class SearchResults extends Block<SearchResultsProps> {
 		super({...props});
 	}
 
-	componentDidUpdate(oldProps:SearchResultsProps, newProps:SearchResultsProps): void {
+	componentDidUpdate(oldProps:SearchResultsProps, newProps:SearchResultsProps): boolean {
 		return isEqual(oldProps, newProps);
 	}
 

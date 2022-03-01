@@ -1,8 +1,9 @@
 import {Action} from "../utils/Store";
 import {ChatMessageProps} from "../api/chatAPI";
 import {UserData} from "../api/authAPI.js";
-import {isArray} from "../helpers/isArray";
 import {ChatProps} from "../components/modules/chat-list/chat-list";
+import {isArray} from "../helpers/isArray";
+import {Indexed} from "../utils/Block";
 
 const SET_CHATS = "chats/SET";
 const SET_USER_SEARCH = "chats/SET_USER_SEARCH";
@@ -23,47 +24,47 @@ export interface ChatState {
 	response: string | null;
 }
 
-export const setChats = (chats: ChatProps[]) => ({
+export const setChats = (chats: ChatProps[]): Action => ({
 	type: SET_CHATS,
 	payload: chats,
 });
 
-export const setChat = (chatId: number) => ({
+export const setChat = (chatId: number): Action => ({
 	type: SET_CHAT,
 	payload: chatId,
 });
 
-export const setChatAvatar = (chat: ChatProps ) => ({
+export const setChatAvatar = (chat: ChatProps ): Action => ({
 	type: SET_CHAT_AVATAR,
 	payload: chat.avatar,
 });
 
-export const addChat = (chat: ChatProps) => ({
+export const addChat = (chat: ChatProps): Action => ({
 	type: ADD_CHAT,
 	payload: chat,
 });
 
-export const deleteChat = (chatId: number) => ({
+export const deleteChat = (chatId: number): Action => ({
 	type: DELETE_CHAT,
 	payload: chatId,
 });
 
-export const setUserSearch = (chatUsers: UserData[]) => ({
+export const setUserSearch = (chatUsers: UserData[]): Action => ({
 	type: SET_USER_SEARCH,
 	payload: chatUsers,
 });
 
-export const addMessage = (message: ChatMessageProps | ChatMessageProps[]) => ({
+export const addMessage = (message: ChatMessageProps | ChatMessageProps[]): Action => ({
 	type: ADD_MESSAGE,
 	payload: message,
 });
 
-export const setResponse = (response: { success?: string; error?: string }) => ({
+export const setResponse = (response: { success?: string; error?: string }): Action => ({
 	type: SET_RESPONSE,
 	payload: response,
 });
 
-export default (state = defaultState, action: Action) => {
+export default (state = defaultState, action: Action): Indexed  => {
 	const chatIndex = state.chats.findIndex(({id}) => id === action.payload);
 	const newChats = [...state.chats];
 	const currentChatId = state.chats[chatIndex] as ChatProps;

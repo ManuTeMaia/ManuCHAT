@@ -1,4 +1,5 @@
 import EventBus from "./EventBus";
+import {Indexed} from "./Block";
 
 export interface Action {
 	type: string;
@@ -6,8 +7,6 @@ export interface Action {
 }
 
 type Reducer<S = Indexed> = (state: S, action: Action) => S;
-
-type Indexed = { [key: string]: any };
 
 class Store extends EventBus {
 	private state: Indexed = {};
@@ -21,13 +20,13 @@ class Store extends EventBus {
 		this.dispatch({ type: "@@INIT" });
 	}
 
-	public dispatch(action: Action) {
+	public dispatch(action: Action): void {
 		this.state = this.reducer(this.state, action);
 
 		this.emit("changed");
 	}
 
-	public getState() {
+	public getState(): Indexed {
 		return this.state;
 	}
 

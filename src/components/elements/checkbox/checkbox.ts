@@ -7,11 +7,12 @@ export type CheckboxType = {
     label: string;
     value?: string;
     onChange: (e:Event) => void;
+    events: {checked: (e: Event) => void};
 };
 
-export class CheckboxInput extends Block{
-    constructor({ onChange, ...props}: CheckboxType) {
-        super({events: {checked: onChange}, ...props});
+export class CheckboxInput extends Block<CheckboxType>{
+    constructor({id, name, label, value, onChange}: CheckboxType) {
+        super({id, name, label, value, onChange, events: {checked: onChange}});
     }
 
     static getName(): string {

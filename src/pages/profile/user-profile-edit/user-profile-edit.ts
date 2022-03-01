@@ -23,13 +23,13 @@ import {RESOURCE_URL} from "../../../common/global-consts";
 		this.state = {
 			headingText: props.user.display_name || `${props.user.first_name} ${props.user.second_name}`,
 			imageTitle: props.user.first_name || "Загрузите аватар",
-			avatarSrc: props.user.avatar !== null ? `${RESOURCE_URL}${props.user.avatar}` : "/noimage.png",
+			avatarSrc: props.user.avatar !== null ? `${RESOURCE_URL}${props.user.avatar}` : "/assets/noimage.png",
 			formInputs: [
 				{
 					label: "E-mail",
 					name: "email",
 					input: {
-						name: "email",
+						inputName: "email",
 						type: "email",
 						validationType: "email",
 						placeholder: props.user.email,
@@ -41,7 +41,7 @@ import {RESOURCE_URL} from "../../../common/global-consts";
 					label: "Логин",
 					name: "login",
 					input: {
-						name: "login",
+						inputName: "login",
 						type: "text",
 						validationType: "login",
 						placeholder: props.user.login,
@@ -53,7 +53,7 @@ import {RESOURCE_URL} from "../../../common/global-consts";
 					label: "Имя",
 					name: "first_name",
 					input: {
-						name: "first_name",
+						inputName: "first_name",
 						type: "text",
 						validationType: "name",
 						placeholder: props.user.first_name,
@@ -66,7 +66,7 @@ import {RESOURCE_URL} from "../../../common/global-consts";
 					name: "second_name",
 					input: {
 						type: "text",
-						name: "second_name",
+						inputName: "second_name",
 						validationType: "name",
 						placeholder: props.user.second_name,
 						value: props.user.second_name,
@@ -78,7 +78,7 @@ import {RESOURCE_URL} from "../../../common/global-consts";
 					name: "display_name",
 					input: {
 						type: "text",
-						name: "display_name",
+						inputName: "display_name",
 						placeholder: props.user.display_name,
 						value: props.user.display_name,
 						onChange: onBlur
@@ -89,7 +89,7 @@ import {RESOURCE_URL} from "../../../common/global-consts";
 					name: "phone",
 					input: {
 						type: "tel",
-						name: "phone",
+						inputName: "phone",
 						validationType: "phone",
 						placeholder: props.user.phone,
 						value: props.user.phone,
@@ -100,8 +100,8 @@ import {RESOURCE_URL} from "../../../common/global-consts";
 			onSave: async (e: Event) => {
 				e.preventDefault();
 				const data = {} as UpdateProfileData;
-				const form = document.querySelector<HTMLFormElement>("#editUserForm");
-				const refs = getFormData(form);
+				const form = document.querySelector("#editUserForm");
+				const refs = getFormData(<HTMLFormElement>form);
 				Object.entries(refs as { [key: string]: string }).forEach(([key, input]) => {
 					data[(key as keyof UpdateProfileData)] = input;
 				});

@@ -7,7 +7,7 @@ import "./new-chat-popup.pcss";
 export class NewChatPopup extends Block {
 	validator = new Validator();
 
-	protected getStateFromProps() {
+	protected getStateFromProps(): void {
 		const onBlur = (e: Event) => {
 			console.log(e.currentTarget);
 			this.validator.validate((e.currentTarget as HTMLInputElement));
@@ -20,7 +20,7 @@ export class NewChatPopup extends Block {
 					name: "title",
 					input:
 						{
-							name: "title",
+							inputName: "title",
 							type: "text",
 							placeholder: "Название...",
 							validationType: "notnull",

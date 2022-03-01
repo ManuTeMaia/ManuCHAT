@@ -1,6 +1,6 @@
-type StringIndexed = Record<string, any>;
+import {Indexed} from "../utils/Block";
 
-function queryStringify(data: StringIndexed): string | never {
+function queryStringify(data: Indexed): string | never {
 	if (typeof data !== "object") {
 		throw new Error("Data must be object");
 	}
@@ -11,7 +11,7 @@ function queryStringify(data: StringIndexed): string | never {
 		const endLine = index < keys.length - 1 ? "&" : "";
 
 		if (Array.isArray(value)) {
-			const arrayValue = value.reduce<StringIndexed>(
+			const arrayValue = value.reduce<Indexed>(
 				(result, arrData, index) => ({
 					...result,
 					[`${key}[${index}]`]: arrData
@@ -23,7 +23,7 @@ function queryStringify(data: StringIndexed): string | never {
 		}
 
 		if (typeof value === "object") {
-			const objValue = Object.keys(value || {}).reduce<StringIndexed>(
+			const objValue = Object.keys(value || {}).reduce<Indexed>(
 				(result, objKey) => ({
 					...result,
 					[`${key}[${objKey}]`]: value[objKey]

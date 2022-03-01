@@ -1,6 +1,9 @@
 {
     "extends": "stylelint-config-standard",
     "rules": {
+        "custom-property-pattern": null,
+        "selector-class-pattern": null,
+        "string-quotes": null,
         "color-hex-case": "lower",
         "indentation": 4,
         "property-no-unknown": [
@@ -13,9 +16,10 @@
 
     "ignoreFiles": [
         "dist/*",
-        "*.hbs",
         "*.json",
         "*.html",
-        "*.toml"
+        "*.toml",
+        "*.ts",
+        "*.js"
     ]
 }

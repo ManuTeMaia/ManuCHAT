@@ -1,14 +1,12 @@
-import Error500 from "./pages/error500";
-
 require("babel-polyfill");
+import "/static/images/favicon.ico";
+import "/static/images/noimage.png";
 import "./helpers/hbsHelpers";
-
 import ChatController from "./controllers/chat";
 import AuthController from "./controllers/auth";
 import "./common/common";
 import Router, { checkAuthType } from "./utils/Router";
-import regComponent from "./helpers/regComponent";
-import Block from "./utils/Block";
+import regComponent, {BlockConstructable} from "./helpers/regComponent";
 import LoginPage from "./pages/login";
 import RegistrationPage from "./pages/register";
 import ChatPage from "./pages/chats/chat";
@@ -17,12 +15,17 @@ import ProfilePage from "./pages/profile/user-profile";
 import ProfilePageEdit from "./pages/profile/user-profile-edit";
 import ProfileEditPasswordPage from "./pages/profile/user-profile-password";
 import Error404 from "./pages/error404/";
+import Error500 from "./pages/error500";
 
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const components = require("./components/**/index.ts") as {[key: string]: { default: Block }};
+const contextElements = require.context("./components/elements", true, /index\.ts/ );
+const contextModules = require.context("./components/modules", true, /index\.ts/ );
+
+const componentsEl = contextElements.keys().map(key => contextElements(key));
+const componentsMo = contextModules.keys().map(key => contextModules(key));
+const components = componentsEl.concat(componentsMo);
 
 Object.values(components).forEach((component) => {
-	Object.values(component).forEach(element => regComponent(element.default));
+	regComponent(<BlockConstructable>component.default);
 });
 
 const router = new Router();

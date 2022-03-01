@@ -1,15 +1,32 @@
-import Block from "../../utils/Block";
+import Block, {Indexed} from "../../utils/Block";
 import Validator from "../../utils/Validator";
 import AuthController from "../../controllers/auth";
 import { getFormData } from "../../helpers/formActions";
 import "./register.pcss";
+import {HeadingType} from "../../components/elements/heading/heading";
+import {InputWrapperType} from "../../components/modules/input-wrapper/input-wrapper";
+import {ButtonProps} from "../../components/elements/buttons/button";
+import {LinkType} from "../../components/elements/link/link";
+import {SignupData, UserData} from "../../api/authAPI";
+import Router from "../../utils/Router";
 
-class RegistrationPage extends Block {
+export interface SignInPageType {
+	heading: HeadingType;
+	formInputs: InputWrapperType[];
+	button: ButtonProps;
+	link: LinkType;
+	onRegister: (e: Event) => Promise<void>;
+	user: { profile: UserData };
+	router: Router;
+}
+
+
+class RegistrationPage extends Block<SignInPageType> {
 	validator = new Validator();
 
-	protected getStateFromProps() {
+	protected getStateFromProps(): void {
 		const onBlur = (e: Event) => {
-			this.validator.validate((e.currentTarget as HTMLInputElement));
+			this.validator.validate(<HTMLInputElement>e.currentTarget);
 		};
 
 		this.state = {
@@ -19,8 +36,8 @@ class RegistrationPage extends Block {
 					name: "email",
 					input:
 						{
-							name: "email",
 							type: "email",
+							inputName: "email",
 							placeholder: "email",
 							validationType: "email",
 							required: true,
@@ -33,7 +50,7 @@ class RegistrationPage extends Block {
 					input:
 						{
 							type: "text",
-							name: "login",
+							inputName: "login",
 							placeholder: "логин",
 							validationType: "login",
 							required: true,
@@ -46,7 +63,7 @@ class RegistrationPage extends Block {
 					input:
 						{
 							type: "text",
-							name: "first_name",
+							inputName: "first_name",
 							placeholder: "Ваше имя",
 							validationType: "name",
 							required: true,
@@ -59,7 +76,7 @@ class RegistrationPage extends Block {
 					input:
 						{
 							type: "text",
-							name: "second_name",
+							inputName: "second_name",
 							placeholder: "Ваша фамилия",
 							validationType: "name",
 							required: true,
@@ -72,7 +89,7 @@ class RegistrationPage extends Block {
 					input:
 						{
 							type: "tel",
-							name: "phone",
+							inputName: "phone",
 							placeholder: "+7 (000)-000-00-00",
 							validationType: "phone",
 							required: true,
@@ -85,7 +102,7 @@ class RegistrationPage extends Block {
 					input:
 						{
 							type: "password",
-							name: "password",
+							inputName: "password",
 							placeholder: "***********",
 							validationType: "password",
 							required: true,
@@ -98,7 +115,7 @@ class RegistrationPage extends Block {
 					input:
 						{
 							type: "password",
-							name: "repeat-password",
+							inputName: "repeat-password",
 							placeholder: "***********",
 							validationType: "password",
 							required: true,
@@ -109,9 +126,9 @@ class RegistrationPage extends Block {
 
 			onRegister: async (e: Event) => {
 				e.preventDefault();
-				const data: any = {};
-				const form = document.querySelector<HTMLFormElement>("#regForm");
-				const refs = getFormData(form);
+				const data = {} as SignupData & Indexed;
+				const form = document.querySelector("#regForm");
+				const refs = getFormData(<HTMLFormElement>form);
 				Object.entries(refs as { [key: string]: string }).forEach(([key, input]) => {
 					data[key] = input;
 				});
@@ -124,14 +141,11 @@ class RegistrationPage extends Block {
 		};
 	}
 
-	componentDidMount() {
-		if (this.props.user.profile) {
-			this.props.router.go("/chats");
+	componentDidMount(props: SignInPageType): typeof props{
+		if (props.user.profile) {
+			props.router.go("/chats");
 		}
-	}
-
-	validate(input: HTMLInputElement): void {
-		return this.validator.validate(input);
+		return props;
 	}
 
 	render(): string {

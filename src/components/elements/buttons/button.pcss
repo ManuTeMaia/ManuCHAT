@@ -1,4 +1,4 @@
-button[type=submit] {
+button[type="submit"] {
     background: var(--button--color-background);
     color: var(--button--color-text);
     border: var(--button--border-width) solid transparent;
@@ -14,14 +14,14 @@ button[type=submit] {
     transition: var(--global--transition);
 }
 
-button[type=submit]:focus,
-button[type=submit]:hover {
+button[type="submit"]:focus,
+button[type="submit"]:hover {
     background: var(--button--color-background-active);
     color: var(--button--color-text-active);
     transition: var(--global--transition);
 }
 
-button[type=button] {
+button[type="button"] {
     background: transparent;
     color: var(--global--color-primary);
     border: var(--button--border-width) solid transparent;
@@ -35,19 +35,19 @@ button[type=button] {
     transition: var(--global--transition);
 }
 
-button[type=button]:focus,
-button[type=button]:hover {
+button[type="button"]:focus,
+button[type="button"]:hover {
     color: var(--global--color-secondary);
     transition: var(--global--transition);
 }
 
-button[type=button].aslink {
+button[type="button"].aslink {
     text-decoration: underline;
     text-underline-offset: 3px;
     margin-bottom: var(--global--spacing-unit);
 }
 
-button[type=button].aslink:focus,
-button[type=button].aslink:hover {
+button[type="button"].aslink:focus,
+button[type="button"].aslink:hover {
     text-decoration-style: dotted;
 }

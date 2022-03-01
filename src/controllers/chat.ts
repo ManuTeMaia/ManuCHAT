@@ -21,7 +21,7 @@ class ChatController {
 	async getChatList() {
 		try {
 			const chats = await this.api.read();
-			store.dispatch(setChats(chats as []));
+			store.dispatch(setChats(chats));
 		} catch (e) {
 			console.log(e);
 		}
