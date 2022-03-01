@@ -5,7 +5,7 @@ Manutemaia Chat
 
 [Дизайн-макет в Figma](https://www.figma.com/file/LTUtHdbBdjjGonMOwMMljk/Manutemaia-Chat?node-id=0%3A1)
 
-[Веб-хостинг в Heroku]()
+[Веб-хостинг в Heroku](https://manuchat.herokuapp.com)
 
 [Репозиторий Спринт #1](https://github.com/ManuTeMaia/middle.messenger.praktikum.yandex/tree/sprint_1)
 
